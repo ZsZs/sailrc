@@ -16,10 +16,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sailrc/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@sailrc/shared/authentication": [
-        "libs/shared/authentication/src/index.ts"
-      ],
       "@sailrc/shared/authentication/domain": [
         "libs/shared/authentication/domain/src/index.ts"
       ],

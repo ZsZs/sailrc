@@ -12,13 +12,13 @@
       "tags": []
     },
     "sail-rc": {
-      "tags": []
+      "tags": [type:app]
     },
     "shared-authentication-domain": {
-      "tags": []
+      "tags": [scope:authentication, type:domain]
     },
     "shared-authentication-feature": {
-      "tags": []
+      "tags": [feature]
     }
   }
 }

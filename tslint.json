@@ -55,10 +55,8 @@
       {
         "allow": [],
         "depConstraints": [
-          {
-            "sourceTag": "*",
-            "onlyDependOnLibsWithTags": ["*"]
-          }
+          { "sourceTag": "type:app", "onlyDependOnLibsWithTags": ["type:shared"] },
+          { "sourceTag": "scope:shared", "onlyDependOnLibsWithTags": ["scope:shared"] },
         ]
       }
     ],
