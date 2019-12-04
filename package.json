@@ -6,6 +6,7 @@
     "ng": "ng",
     "nx": "nx",
     "start": "ng serve",
+    "start-c9": "ng serve --host 127.0.0.1 --port 8080 --disableHostCheck",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

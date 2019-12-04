@@ -19,6 +19,15 @@
     },
     "api-interfaces": {
       "tags": []
+    },
+    "shared-authentication": {
+      "tags": []
+    },
+    "shared-authentication-domain": {
+      "tags": []
+    },
+    "shared-authentication-feature": {
+      "tags": []
     }
   }
 }

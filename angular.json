@@ -199,6 +199,74 @@
           }
         }
       }
+    },
+    "shared-authentication-domain": {
+      "projectType": "library",
+      "root": "libs/shared/authentication/domain",
+      "sourceRoot": "libs/shared/authentication/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/authentication/domain/tsconfig.lib.json",
+              "libs/shared/authentication/domain/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/authentication/domain/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/authentication/domain/jest.config.js",
+            "tsConfig": "libs/shared/authentication/domain/tsconfig.spec.json",
+            "setupFile": "libs/shared/authentication/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-authentication-feature": {
+      "projectType": "library",
+      "root": "libs/shared/authentication/feature",
+      "sourceRoot": "libs/shared/authentication/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/authentication/feature/tsconfig.lib.json",
+              "libs/shared/authentication/feature/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/authentication/feature/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/authentication/feature/jest.config.js",
+            "tsConfig": "libs/shared/authentication/feature/tsconfig.spec.json",
+            "setupFile": "libs/shared/authentication/feature/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -16,7 +16,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sailrc/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@sailrc/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@sailrc/shared/authentication": [
+        "libs/shared/authentication/src/index.ts"
+      ],
+      "@sailrc/shared/authentication/domain": [
+        "libs/shared/authentication/domain/src/index.ts"
+      ],
+      "@sailrc/shared/authentication/feature": [
+        "libs/shared/authentication/feature/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
