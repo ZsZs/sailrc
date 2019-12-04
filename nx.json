@@ -20,9 +20,6 @@
     "api-interfaces": {
       "tags": []
     },
-    "shared-authentication": {
-      "tags": []
-    },
     "shared-authentication-domain": {
       "tags": []
     },
