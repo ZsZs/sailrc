@@ -14,12 +14,6 @@
     "sail-rc": {
       "tags": []
     },
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
-    },
     "shared-authentication-domain": {
       "tags": []
     },
