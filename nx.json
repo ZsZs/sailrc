@@ -15,10 +15,10 @@
       "tags": [type:app]
     },
     "shared-authentication-domain": {
-      "tags": [scope:authentication, type:domain]
+      "tags": [scope:shared, type:domain]
     },
     "shared-authentication-feature": {
-      "tags": [feature]
+      "tags": [scope:shared, type:feature]
     }
   }
 }
