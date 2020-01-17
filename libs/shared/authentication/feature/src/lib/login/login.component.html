@@ -10,7 +10,7 @@
     <mat-form-field>
       <input type="password" matInput placeholder="Your password." formControlName="password">
     </mat-form-field>
-    <button *ngIf="!( isLoading | async )" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+    <button *ngIf="( isLoading | async ) === (false || null || undefined)" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
     <mat-spinner *ngIf="( isLoading | async )"></mat-spinner>
   </form>
 </section>

@@ -21,7 +21,10 @@
               "apps/sail-rc/src/favicon.ico",
               "apps/sail-rc/src/assets"
             ],
-            "styles": ["apps/sail-rc/src/styles.css"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/sail-rc/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -188,6 +191,141 @@
           "styleext": "scss"
         }
       }
+    },
+    "shared-widgets": {
+      "projectType": "library",
+      "root": "libs/shared/widgets",
+      "sourceRoot": "libs/shared/widgets/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/widgets/tsconfig.lib.json",
+              "libs/shared/widgets/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/widgets/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/widgets/jest.config.js",
+            "tsConfig": "libs/shared/widgets/tsconfig.spec.json",
+            "setupFile": "libs/shared/widgets/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "log-server": {
+      "root": "apps/log-server",
+      "sourceRoot": "apps/log-server/src",
+      "projectType": "application",
+      "prefix": "log-server",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/log-server",
+            "main": "apps/log-server/src/main.ts",
+            "tsConfig": "apps/log-server/tsconfig.app.json",
+            "assets": ["apps/log-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/log-server/src/environments/environment.ts",
+                  "with": "apps/log-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "log-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/log-server/tsconfig.app.json",
+              "apps/log-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/log-server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/log-server/jest.config.js",
+            "tsConfig": "apps/log-server/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-util": {
+      "projectType": "library",
+      "root": "libs/shared/util",
+      "sourceRoot": "libs/shared/util/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/util/tsconfig.lib.json",
+              "libs/shared/util/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/util/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/util/jest.config.js",
+            "tsConfig": "libs/shared/util/tsconfig.spec.json",
+            "setupFile": "libs/shared/util/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "shared-base": {
+      "projectType": "library",
+      "root": "libs/shared/base",
+      "sourceRoot": "libs/shared/base/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/base/tsconfig.lib.json",
+              "libs/shared/base/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/base/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/base/jest.config.js",
+            "tsConfig": "libs/shared/base/tsconfig.spec.json",
+            "setupFile": "libs/shared/base/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

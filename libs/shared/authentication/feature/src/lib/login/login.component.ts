@@ -1,16 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '../auth.service';
-import { UiService } from '../../shared/ui/ui.service';
-import * as fromAppReducer from '../../app.reducer';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@sailrc/shared/authentication/domain';
+import { SnackBarService, UiState, getIsLoading } from '@sailrc/shared/widgets';
 
 @Component({
-  selector: 'srm-login',
+  selector: 'sailrc-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -19,7 +17,7 @@ export class LoginComponent implements OnInit {
   isLoading: Observable<boolean>;
   private redirectTo: string;
 
-  constructor( private authService: AuthService, private uiService: UiService, private store: Store<fromAppReducer.AppState>, private activatedRoute: ActivatedRoute, private router: Router ) {}
+  constructor( private authService: AuthService, private uiService: SnackBarService, private store: Store<UiState>, private activatedRoute: ActivatedRoute, private router: Router ) {}
 
   ngOnInit() {
     this.subscribeToLoading();
@@ -49,6 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
   private subscribeToLoading() {
-    this.isLoading = this.store.select( fromAppReducer.getIsLoading );
+    this.isLoading = this.store.select( getIsLoading );
   }
 }

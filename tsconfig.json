@@ -21,7 +21,13 @@
       ],
       "@sailrc/shared/authentication/feature": [
         "libs/shared/authentication/feature/src/index.ts"
-      ]
+      ],
+      "@sailrc/shared/widgets/shared-widgets": [
+        "libs/shared/widgets/shared-widgets/src/index.ts"
+      ],
+      "@sailrc/shared/widgets": ["libs/shared/widgets/src/index.ts"],
+      "@sailrc/shared/util": ["libs/shared/util/src/index.ts"],
+      "@sailrc/shared/base": ["libs/shared/base/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

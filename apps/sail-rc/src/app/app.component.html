@@ -1,8 +1,5 @@
 <div style="text-align:center">
   <h1>Welcome to sail-rc!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
+  <mat-checkbox (click)="onToggleSpinner()">Toggle spinner</mat-checkbox>
+  <mat-spinner *ngIf="( isLoading | async )"></mat-spinner>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>

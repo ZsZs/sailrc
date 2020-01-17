@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 
+import { setAuthenticated, setUnauthenticated } from '../store/auth.actions';
+import { SnackBarService, SpinnerService } from '@sailrc/shared/widgets';
 import { AuthData } from './auth-data';
-import { UiService } from '../shared/ui/ui.service';
-import * as fromAppReducer from '../app.reducer';
-import * as UI from '../shared/ui/ui.actions';
-import * as Auth from './auth.actions';
-import { startLoading, stopLoading } from '../shared/ui/ui.actions';
-import { setAuthenticated, setUnauthenticated } from './auth.actions';
+import { AuthState } from '../..';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
   constructor(
      private router: Router,
      private afAuth: AngularFireAuth,
-     private uiService: UiService,
-     private store: Store<fromAppReducer.AppState> ) {}
+     private snackBarService: SnackBarService,
+     private spinnerService: SpinnerService,
+     private store: Store<AuthState>) {}
 
   initAuthListener() {
     this.afAuth.authState.subscribe( user => {
@@ -35,15 +30,15 @@ export class AuthService {
   }
 
   login( authData: AuthData ) {
-    this.store.dispatch( startLoading() );
+    this.spinnerService.startLoading();
     this.afAuth.auth.signInWithEmailAndPassword( authData.email, authData.password )
        .then( result => {
-         this.store.dispatch( stopLoading() );
+         this.spinnerService.stopLoading();
          this.authSuccess();
        })
        .catch( error => {
-         this.store.dispatch( stopLoading() );
-         this.uiService.showSnackbar( error.message, null, 5000 );
+         this.spinnerService.stopLoading();
+         this.snackBarService.showSnackbar( error.message, null, 5000 );
          this.authFailed();
        });
   }
@@ -55,14 +50,14 @@ export class AuthService {
   }
 
   registerUser( authData: AuthData ) {
-    this.store.dispatch( startLoading() );
+    this.spinnerService.startLoading();
     this.afAuth.auth.createUserWithEmailAndPassword( authData.email, authData.password )
        .then( result => {
-         this.store.dispatch( stopLoading() );
+         this.spinnerService.stopLoading();
        })
        .catch( error => {
-         this.store.dispatch( stopLoading() );
-         this.uiService.showSnackbar( error.message, null, 5000 );
+         this.spinnerService.stopLoading();
+         this.snackBarService.showSnackbar( error.message, null, 5000 );
        });
   }
 
