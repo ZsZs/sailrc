@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '@sailrc/shared/authentication/domain';
-import { SnackBarService, UiState, getIsLoading } from '@sailrc/shared/widgets';
+import { SpinnerService, UiState } from '@sailrc/shared/widgets';
+import { AuthFeatureFacade } from '../facade/auth-feature-facade';
 
 @Component({
   selector: 'sailrc-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   isLoading: Observable<boolean>;
   private redirectTo: string;
 
-  constructor( private authService: AuthService, private uiService: SnackBarService, private store: Store<UiState>, private activatedRoute: ActivatedRoute, private router: Router ) {}
+  constructor( private authService: AuthFeatureFacade, private spinnerService: SpinnerService, private store: Store<UiState>, private activatedRoute: ActivatedRoute, private router: Router ) {}
 
   ngOnInit() {
     this.subscribeToLoading();
@@ -47,6 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
   private subscribeToLoading() {
-    this.isLoading = this.store.select( getIsLoading );
+    this.isLoading =  this.spinnerService.isLoading();
   }
 }

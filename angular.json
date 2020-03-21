@@ -124,6 +124,60 @@
         }
       }
     },
+    "boat-feature": {
+      "projectType": "library",
+      "root": "libs/boat/feature",
+      "sourceRoot": "libs/boat/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/boat/feature/tsconfig.lib.json",
+              "libs/boat/feature/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/boat/feature/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/boat/feature/jest.config.js",
+            "tsConfig": "libs/boat/feature/tsconfig.spec.json",
+            "setupFile": "libs/boat/feature/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "boat-domain": {
+      "projectType": "library",
+      "root": "libs/boat/domain",
+      "sourceRoot": "libs/boat/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/boat/domain/tsconfig.lib.json",
+              "libs/boat/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/boat/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/boat/domain/jest.config.js",
+            "tsConfig": "libs/boat/domain/tsconfig.spec.json",
+            "setupFile": "libs/boat/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
     "shared-authentication-domain": {
       "projectType": "library",
       "root": "libs/shared/authentication/domain",

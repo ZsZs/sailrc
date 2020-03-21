@@ -31,6 +31,12 @@
     },
     "log-server": {
       "tags": []
+    },
+    "boat-feature": {
+      "tags": ["type:feature"]
+    },
+    "boat-domain": {
+      "tags": ["type:domain"]
     }
   }
 }

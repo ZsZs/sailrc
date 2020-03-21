@@ -4,14 +4,13 @@ import { Observable, of } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import * as fromAppReducer from '../app.reducer';
-import { authenticateUser } from './auth.actions';
-import { getIsAuthenticated } from './auth.reducer';
+import { authenticateUser } from './store/auth.actions';
+import { AuthState, getIsAuthenticated } from './store/auth.reducer';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
 
-  constructor( private store: Store<fromAppReducer.AppState>, private router: Router ) {}
+  constructor( private store: Store<AuthState>, private router: Router ) {}
 
   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.store.pipe(

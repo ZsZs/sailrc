@@ -1,5 +1,11 @@
-<div style="text-align:center">
-  <h1>Welcome to sail-rc!</h1>
-  <mat-checkbox (click)="onToggleSpinner()">Toggle spinner</mat-checkbox>
-  <mat-spinner *ngIf="( isLoading | async )"></mat-spinner>
-</div>
+<mat-sidenav-container fxFlexFill fxLayout="column" fxLayoutAlign="start none">
+    <mat-sidenav #sidenav role="navigation">
+        <sailrc-sidenav-list (closeSidenav)="sidenav.close()"></sailrc-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill fxLayout="column" fxLayoutAlign="start none">
+        <sailrc-header (sidenavToggle)="sidenav.toggle()"></sailrc-header>
+        <router-outlet></router-outlet>
+        <div fxFlex></div>
+    </mat-sidenav-content>
+    <div fxFlex></div>
+</mat-sidenav-container>

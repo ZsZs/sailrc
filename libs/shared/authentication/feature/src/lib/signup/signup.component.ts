@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 
-import { AuthService } from '@sailrc/shared/authentication/domain';
-import { SnackBarService, UiState, getIsLoading } from '@sailrc/shared/widgets';
+import { SpinnerService } from '@sailrc/shared/widgets';
+import { AuthFeatureFacade } from '../facade/auth-feature-facade';
 
 @Component({
   selector: 'sailrc-signup',
@@ -15,7 +14,7 @@ export class SignupComponent implements OnInit {
   maxDate: Date;
   isLoading: Observable<boolean>;
 
-  constructor( private authService: AuthService, private uiService: SnackBarService, private store: Store<UiState> ) { }
+  constructor( private authFeatureFacade: AuthFeatureFacade, private uiService: SpinnerService ) { }
 
   ngOnInit() {
     this.subscribeToLoading();
@@ -24,7 +23,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit( form: NgForm ) {
-    this.authService.registerUser({
+    this.authFeatureFacade.registerUser({
       email: form.value.email,
       password: form.value.password
     });
@@ -32,6 +31,6 @@ export class SignupComponent implements OnInit {
 
   // protected, private helper methods
   private subscribeToLoading() {
-    this.isLoading = this.store.select( getIsLoading );
+    this.isLoading = this.uiService.isLoading();
   }
 }

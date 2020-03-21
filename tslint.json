@@ -60,6 +60,10 @@
             "onlyDependOnLibsWithTags": ["scope:shared", "type:shell"]
           },
           {
+            "sourceTag": "type:domain",
+            "onlyDependOnLibsWithTags": ["scope:shared", "type:domain", "type:util"]
+          },
+          {
             "sourceTag": "type:shell",
             "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
           },

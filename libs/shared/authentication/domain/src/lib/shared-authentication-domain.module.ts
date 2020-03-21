@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from './infrastructure/auth.service';
+import { AuthService } from './integration/auth.service';
 
 @NgModule({
   imports: [CommonModule]
