@@ -8,7 +8,7 @@
   <a mat-list-item routerLink="/race-execution" (click)="onCloseSidenav()" *ngIf="( isAuth | async )">
     <span class="nav-caption">Race Execution</span>
   </a>
-  <a mat-list-item routerLink="/signup" (click)="onCloseSidenav()" *ngIf="!( isAuth | async )">
+  <a mat-list-item routerLink="/signup" (click)="onCloseSidenav()" *ngIf="( isAuth | async ) === ( false || null || undefined )">
     <mat-icon>face</mat-icon>
     <span class="nav-caption">Signup</span>
   </a>

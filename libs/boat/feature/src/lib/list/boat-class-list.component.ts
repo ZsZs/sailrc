@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { ComponentDestroyService } from '../../shared/component-destroy.service';
+import { ComponentDestroyService } from '@sailrc/shared/util';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { BoatClass } from '../boat-class';
 import { allBoatClassesRequested, deleteBoatClass, setSelectedBoatClasses } from '../boat-class.actions';
 
 @Component({
-  selector: 'srm-boat-class-list',
+  selector: 'sailrc-boat-class-list',
   templateUrl: './boat-class-list.component.html',
   styleUrls: ['./boat-class-list.component.css']
 })

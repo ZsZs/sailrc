@@ -16,14 +16,21 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sailrc/boat/feature": ["libs/boat/feature/src/index.ts"],
       "@sailrc/boat/domain": ["libs/boat/domain/src/index.ts"],
-      "@sailrc/shared/authentication/domain": ["libs/shared/authentication/domain/src/index.ts"],
-      "@sailrc/shared/authentication/feature": ["libs/shared/authentication/feature/src/index.ts"],
+      "@sailrc/boat/feature": ["libs/boat/feature/src/index.ts"],
+      "@sailrc/sailor/domain": ["libs/sailor/domain/src/index.ts"],
+      "@sailrc/shared/authentication/domain": [
+        "libs/shared/authentication/domain/src/index.ts"
+      ],
+      "@sailrc/shared/authentication/feature": [
+        "libs/shared/authentication/feature/src/index.ts"
+      ],
       "@sailrc/shared/widgets": ["libs/shared/widgets/src/index.ts"],
       "@sailrc/shared/util": ["libs/shared/util/src/index.ts"],
-      "@sailrc/shared/base": ["libs/shared/base/src/index.ts"]
+      "@sailrc/shared/base": ["libs/shared/base/src/index.ts"],
+      "@sailrc/sailor/feature": ["libs/sailor/feature/src/index.ts"]
     }
   },
+  "include": ["libs/boat/feature/src/**/*.ts"],
   "exclude": ["node_modules", "tmp"]
 }

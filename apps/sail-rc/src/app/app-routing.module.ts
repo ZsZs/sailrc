@@ -5,7 +5,7 @@ import { AuthGuard } from '@sailrc/shared/authentication/domain';
 
 const appRoutes: Routes = [
   { path: '', component : HomeComponent },
-  { path: 'boat-class', loadChildren: '@sailrc/boat/feature#BoatFeatureModule'}
+  { path: 'boat-class', loadChildren: () => import('@sailrc/boat/feature').then(m => m.BoatFeatureModule ) }
 //  { path: 'race', loadChildren: './race/race.module#RaceModule'},
 //  { path: 'race-analysis', loadChildren: './race/analysis/race-analysis.module#RaceAnalysisModule'},
 //  { path: 'race-execution', loadChildren: './race/execution/race-execution.module#RaceExecutionModule'},

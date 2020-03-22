@@ -37,6 +37,12 @@
     },
     "boat-domain": {
       "tags": ["type:domain"]
+    },
+    "sailor-domain-sailor-domain": {
+      "tags": []
+    },
+    "sailor-feature": {
+      "tags": []
     }
   }
 }

@@ -17,6 +17,7 @@
             "polyfills": "apps/sail-rc/src/polyfills.ts",
             "tsConfig": "apps/sail-rc/tsconfig.app.json",
             "aot": false,
+            "lazyModules": [],
             "assets": [
               "apps/sail-rc/src/favicon.ico",
               "apps/sail-rc/src/assets"
@@ -376,6 +377,62 @@
             "jestConfig": "libs/shared/base/jest.config.js",
             "tsConfig": "libs/shared/base/tsconfig.spec.json",
             "setupFile": "libs/shared/base/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "sailor-domain-sailor-domain": {
+      "projectType": "library",
+      "root": "libs/sailor/domain",
+      "sourceRoot": "libs/sailor/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sailor/domain/tsconfig.lib.json",
+              "libs/sailor/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sailor/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sailor/domain/jest.config.js",
+            "tsConfig": "libs/sailor/domain/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/sailor/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "sailor-feature": {
+      "projectType": "library",
+      "root": "libs/sailor/feature",
+      "sourceRoot": "libs/sailor/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sailor/feature/tsconfig.lib.json",
+              "libs/sailor/feature/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sailor/feature/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sailor/feature/jest.config.js",
+            "tsConfig": "libs/sailor/feature/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/sailor/feature/src/test-setup.ts"
           }
         }
       },

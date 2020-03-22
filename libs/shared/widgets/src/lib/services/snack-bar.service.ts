@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { getIsLoading, UiState } from '../store/ui.reducer';
 import { Store } from '@ngrx/store';
 import { startLoading, stopLoading } from '../store/ui.actions';

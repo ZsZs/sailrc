@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { FormGroupState } from 'ngrx-forms';
 import { select, Store } from '@ngrx/store';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade, BoatClassState } from '@sailrc/boat/domain';
 import { RouterFacade } from '@sailrc/shared/util';
 
 @Component({
@@ -16,9 +16,9 @@ export class BoatClassDetailsComponent implements OnInit {
   submittedValue$: Observable<BoatClass | undefined>;
   isLoading: Observable<boolean>;
 
-  constructor( private boatClassFacade: BoatClassFacade, private routerFacade: RouterFacade ) {
+  constructor( private boatClassFacade: BoatClassFacade, private routerFacade: RouterFacade, private store: Store<BoatClassState> ) {
     this.selectFormState();
-    this.submittedValue$ = boatClass$;
+    this.submittedValue$ = boatClassFacade.current$;
   }
 
   // event handling methods
@@ -34,9 +34,10 @@ export class BoatClassDetailsComponent implements OnInit {
   onSubmit() {
     this.formState$.pipe(
       take(1),
-      tap( () => this.boatClassFacade.deselectAll() )),
+      tap( () => this.boatClassFacade.deselectAll() ),
       map( formState => formState.value ),
-      map(boatClass => addOrUpdateBoatClass( { boatClass, redirectTo: { path: ['/boat-class'] } }))
+      map(boatClass => this.boatClassFacade.replace( boatClass )),
+      tap( () => this.routerFacade.routerGo( ['/boat-class'] ))
     ).subscribe( this.store );
   }
 
