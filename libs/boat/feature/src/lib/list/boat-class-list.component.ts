@@ -4,14 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { ComponentDestroyService } from '@sailrc/shared/util';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { ComponentDestroyService } from '@sailrc/shared/widgets';
 
-import * as fromBoatClassReducer from '../boat-class.reducer';
-import * as fromAppReducer from '../../app.reducer';
-import { BoatClass } from '../boat-class';
-import { allBoatClassesRequested, deleteBoatClass, setSelectedBoatClasses } from '../boat-class.actions';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
+import { RouterFacade } from '@sailrc/shared/util';
 
 @Component({
   selector: 'sailrc-boat-class-list',
@@ -26,7 +22,7 @@ export class BoatClassListComponent implements AfterViewInit, OnDestroy, OnInit 
   selection = new SelectionModel<BoatClass>(true, []);
   isLoading: Observable<boolean>;
 
-  constructor( private subscriptionService: ComponentDestroyService, private store: Store<fromBoatClassReducer.BoatClassManagementState>, private router: Router ) {}
+  constructor( private subscriptionService: ComponentDestroyService, private boatClassFacade: BoatClassFacade, private routerFacade: RouterFacade ) {}
 
   // event handling methods
   ngAfterViewInit(): void {
@@ -39,19 +35,19 @@ export class BoatClassListComponent implements AfterViewInit, OnDestroy, OnInit 
   }
 
   ngOnInit() {
-    this.store.dispatch( allBoatClassesRequested() );
+    this.boatClassFacade.loadAll();
     this.subscribeToBoatClasses();
     this.subscribeToLoading();
   }
 
   onChangeSelection( row?: BoatClass ) {
-    this.store.dispatch( setSelectedBoatClasses( { boatClasses: this.selection.selected }));
+    this.boatClassFacade.selectMany( this.selection.selected );
   }
 
   onRowClick( row: BoatClass ) {
     const boatClasses = [row];
-    this.store.dispatch( setSelectedBoatClasses( { boatClasses }));
-    this.router.navigateByUrl( '/boat-class/' + row.id + '/details' );
+    this.boatClassFacade.selectMany( boatClasses );
+    this.routerFacade.routerGo( ['/boat-class/' + row.id + '/details'] );
   }
 
   // public accessors and mutators
@@ -66,7 +62,7 @@ export class BoatClassListComponent implements AfterViewInit, OnDestroy, OnInit 
   deleteBoatClasses() {
     if ( this.selection.selected.length > 0 ) {
       for ( let i = 0, len = this.selection.selected.length; i < len; i++) {
-        this.store.dispatch( deleteBoatClass({ boatClassId: this.selection.selected[i].id }));
+        this.boatClassFacade.delete( this.selection.selected[i] );
       }
 
       this.selection.clear();
@@ -91,7 +87,7 @@ export class BoatClassListComponent implements AfterViewInit, OnDestroy, OnInit 
   }
 
   newBoatClass() {
-    this.router.navigateByUrl( '/boat-class/new/details' );
+    this.routerFacade.routerGo( ['/boat-class/new/details'] );
   }
 
   // protected, private helper methods
@@ -100,12 +96,12 @@ export class BoatClassListComponent implements AfterViewInit, OnDestroy, OnInit 
   }
 
   private subscribeToBoatClasses() {
-    this.store.select( fromBoatClassReducer.getBoatClasses ).subscribe( ( boatClasses: BoatClass[]) => {
+    this.boatClassFacade.all$.subscribe( ( boatClasses: BoatClass[]) => {
       this.dataSource.data = boatClasses;
     });
   }
 
   private subscribeToLoading() {
-    this.isLoading = this.store.select( fromAppReducer.getIsLoading );
+    this.isLoading = this.boatClassFacade.isLoading$;
   }
 }

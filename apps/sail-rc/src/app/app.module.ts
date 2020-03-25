@@ -11,7 +11,7 @@ import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
 import { SharedWidgetsModule, SnackBarService } from '@sailrc/shared/widgets';
 import { RouteStateService, SharedUtilModule } from '@sailrc/shared/util';
@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { SharedAuthenticationFeatureModule } from '@sailrc/shared/authentication/feature';
 
 export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
@@ -54,6 +55,7 @@ export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
     MatCheckboxModule,
     MatProgressSpinnerModule,
     NgrxFormsModule,
+    SharedAuthenticationFeatureModule,
     SharedUtilModule,
     SharedWidgetsModule,
     StoreModule.forRoot( APP_REDUCER_TOKEN, { metaReducers } ),
@@ -62,6 +64,7 @@ export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
   ],
   providers: [
   { provide: APP_REDUCER_TOKEN, useValue: appReducers },
+  { provide: FirestoreSettingsToken, useValue: {} },
   { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     NGXLogger,
     RouteStateService,

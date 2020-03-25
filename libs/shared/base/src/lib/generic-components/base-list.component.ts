@@ -1,18 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { ComponentDestroyService } from '../component-destroy.service';
-import { Store } from '@ngrx/store';
-import * as fromRaceReducer from '../../race/race.reducer';
-import * as fromAppReducer from '../../app.reducer';
+import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { routerGo } from '../router/router.actions';
-import { FeatureDescriptor } from '../feature-descriptor';
+import { RouterFacade, routerGo } from '@sailrc/shared/util';
 import { BaseEntityInterface } from '../firestore/base-entity.interface';
-import { tabIsActive, tabIsInActive } from '../ui/ui.actions';
+import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild( MatSort, {static: false} ) sort: MatSort;
@@ -20,17 +15,18 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   dataSource = new MatTableDataSource<T>();
   dataSourceSubscription: Subscription;
   selection = new SelectionModel<T>(true, []);
-  isLoading: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   constructor(
-    protected router: Router,
-    protected subscriptionService: ComponentDestroyService,
-    protected store: Store<fromRaceReducer.RaceManagementState>,
-    protected featureDescriptor: FeatureDescriptor ) {}
+    protected entityFacade: IEntityFacade<T>,
+    protected routerFacade: RouterFacade,
+    protected activeTabService: ActiveTabService,
+    protected componentDestroyService: ComponentDestroyService,
+    protected tabName: string ) {}
 
   // public accessors and mutators
   addEntity() {
-    this.store.dispatch( routerGo({ path: [this.detailsRoute( 'new' )] }));
+    this.routerFacade.routerGo( [this.detailsRoute( 'new' )] )
   }
 
   checkboxLabel( row?: T ): string {
@@ -74,12 +70,12 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   ngOnDestroy(): void {
     this.dataSourceSubscription.unsubscribe();
-    this.subscriptionService.unsubscribeComponent$.next();
-    this.store.dispatch( tabIsInActive( { tabName: this.featureDescriptor.tabName }));
+    this.componentDestroyService.unsubscribeComponent$.next();
+    this.activeTabService.tabIsInActive( this.tabName );
   }
 
   ngOnInit() {
-    this.store.dispatch( tabIsActive( { tabName: this.featureDescriptor.tabName }));
+    this.activeTabService.tabIsActive( this.tabName );
     this.dispatchAllEntitiesRequestedAction();
     this.dataSourceSubscription = this.subscribeToSourceData();
     this.subscribeToLoading();
@@ -93,7 +89,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   onRowClick( row: T ) {
     const entities = [row];
     this.dispatchSelectedEntitiesAction( entities );
-    this.store.dispatch( routerGo({ path: [this.detailsRoute( row.id )] }));
+    this.routerFacade.routerGo( [this.detailsRoute( row.id )] )
   }
 
   // protected, private helper methods
@@ -107,11 +103,11 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   protected abstract dispatchSelectedEntitiesAction( entities: T[] );
 
   private subscribeToLoading() {
-    this.isLoading = this.store.select( fromAppReducer.getIsLoading );
+    this.isLoading$ = this.entityFacade.isLoading$;
   }
 
   protected subscribeToSourceData(): Subscription {
-    return this.store.select( this.featureDescriptor.allEntitiesSelector ).subscribe( ( data: T[] ) => {
+    return this.entityFacade.all$.subscribe( ( data: T[] ) => {
       this.dataSource.data = data;
     });
   }

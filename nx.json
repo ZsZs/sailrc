@@ -8,11 +8,23 @@
     "nx.json": "*"
   },
   "projects": {
+    "sail-rc": {
+      "tags": ["type:app"]
+    },
     "sail-rc-e2e": {
       "tags": []
     },
-    "sail-rc": {
-      "tags": ["type:app"]
+    "boat-feature": {
+      "tags": ["type:feature"]
+    },
+    "boat-domain": {
+      "tags": ["type:domain"]
+    },
+    "sailor-domain": {
+      "tags": ["type:domain"]
+    },
+    "sailor-feature": {
+      "tags": ["type:feature"]
     },
     "shared-authentication-domain": {
       "tags": ["scope:shared", "type:domain"]
@@ -30,19 +42,7 @@
       "tags": ["scope:shared", "type:util"]
     },
     "log-server": {
-      "tags": []
-    },
-    "boat-feature": {
-      "tags": ["type:feature"]
-    },
-    "boat-domain": {
-      "tags": ["type:domain"]
-    },
-    "sailor-domain-sailor-domain": {
-      "tags": []
-    },
-    "sailor-feature": {
-      "tags": []
+      "tags": ["type:app"]
     }
   }
 }

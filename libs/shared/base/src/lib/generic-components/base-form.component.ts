@@ -1,12 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import * as fromAppReducer from '../../app.reducer';
-import { ComponentDestroyService } from '../component-destroy.service';
-import { select, Store } from '@ngrx/store';
-import { tabIsActive, tabIsInActive } from '../ui/ui.actions';
+import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
-import { AppState } from '../../app.reducer';
+import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 export abstract class BaseFormComponent<T> implements AfterViewInit, OnDestroy, OnInit {
   isLoading$: Observable<boolean>;
@@ -23,11 +19,10 @@ export abstract class BaseFormComponent<T> implements AfterViewInit, OnDestroy, 
   };
 
   constructor(
-    protected router: Router,
+    protected entityFacade: IEntityFacade<T>,
+    protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected store: Store<AppState>,
-    protected tabName: string,
-    protected formStateSelector: any ) {
+    protected tabName: string ) {
     this.selectFormState();
   }
 
@@ -39,23 +34,21 @@ export abstract class BaseFormComponent<T> implements AfterViewInit, OnDestroy, 
 
   ngOnDestroy(): void {
     this.componentDestroyService.unsubscribeComponent$.next();
-    this.store.dispatch( tabIsInActive( { tabName: this.tabName }));
+    this.activeTabService.tabIsInActive( this.tabName );
   }
 
   public ngOnInit() {
     this.subscribeToLoading();
-    this.store.dispatch( tabIsActive( { tabName: this.tabName }));
+    this.activeTabService.tabIsActive( this.tabName );
   }
 
   public abstract onCancel();
   public abstract onSubmit();
 
   // protected, private helper methods
-  private selectFormState() {
-    this.formState$ = this.store.pipe( select(this.formStateSelector ));
-  }
+  protected abstract selectFormState();
 
   private subscribeToLoading() {
-    this.isLoading$ = this.store.select( fromAppReducer.getIsLoading );
+    this.isLoading$ = this.entityFacade.isLoading$;
   }
 }

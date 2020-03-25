@@ -77,7 +77,7 @@
           },
           {
             "sourceTag": "type:util",
-            "onlyDependOnLibsWithTags": ["type:util"]
+            "onlyDependOnLibsWithTags": ["type:util", "scope:shared"]
           },
           {
             "sourceTag": "scope:shared",

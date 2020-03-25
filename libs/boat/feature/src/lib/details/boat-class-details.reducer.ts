@@ -1,6 +1,6 @@
 import { createFormGroupState, updateGroup, validate } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
-import { BoatClass } from '../boat-class';
+import { BoatClass } from '@sailrc/boat/domain';
 
 const BOAT_CLASS_DETAILS_FORM_ID = 'Race-Details Form';
 

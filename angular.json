@@ -125,6 +125,60 @@
         }
       }
     },
+    "log-server": {
+      "root": "apps/log-server",
+      "sourceRoot": "apps/log-server/src",
+      "projectType": "application",
+      "prefix": "log-server",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/log-server",
+            "main": "apps/log-server/src/main.ts",
+            "tsConfig": "apps/log-server/tsconfig.app.json",
+            "assets": ["apps/log-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/log-server/src/environments/environment.ts",
+                  "with": "apps/log-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "log-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/log-server/tsconfig.app.json",
+              "apps/log-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/log-server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/log-server/jest.config.js",
+            "tsConfig": "apps/log-server/tsconfig.spec.json"
+          }
+        }
+      }
+    },
     "boat-feature": {
       "projectType": "library",
       "root": "libs/boat/feature",
@@ -174,6 +228,62 @@
             "jestConfig": "libs/boat/domain/jest.config.js",
             "tsConfig": "libs/boat/domain/tsconfig.spec.json",
             "setupFile": "libs/boat/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "sailor-domain-sailor-domain": {
+      "projectType": "library",
+      "root": "libs/sailor/domain",
+      "sourceRoot": "libs/sailor/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sailor/domain/tsconfig.lib.json",
+              "libs/sailor/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sailor/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sailor/domain/jest.config.js",
+            "tsConfig": "libs/sailor/domain/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/sailor/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "sailor-feature": {
+      "projectType": "library",
+      "root": "libs/sailor/feature",
+      "sourceRoot": "libs/sailor/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sailor/feature/tsconfig.lib.json",
+              "libs/sailor/feature/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sailor/feature/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sailor/feature/jest.config.js",
+            "tsConfig": "libs/sailor/feature/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/sailor/feature/src/test-setup.ts"
           }
         }
       },
@@ -274,60 +384,6 @@
       },
       "schematics": {}
     },
-    "log-server": {
-      "root": "apps/log-server",
-      "sourceRoot": "apps/log-server/src",
-      "projectType": "application",
-      "prefix": "log-server",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/log-server",
-            "main": "apps/log-server/src/main.ts",
-            "tsConfig": "apps/log-server/tsconfig.app.json",
-            "assets": ["apps/log-server/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/log-server/src/environments/environment.ts",
-                  "with": "apps/log-server/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "log-server:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/log-server/tsconfig.app.json",
-              "apps/log-server/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/log-server/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/log-server/jest.config.js",
-            "tsConfig": "apps/log-server/tsconfig.spec.json"
-          }
-        }
-      }
-    },
     "shared-util": {
       "projectType": "library",
       "root": "libs/shared/util",
@@ -377,62 +433,6 @@
             "jestConfig": "libs/shared/base/jest.config.js",
             "tsConfig": "libs/shared/base/tsconfig.spec.json",
             "setupFile": "libs/shared/base/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {}
-    },
-    "sailor-domain-sailor-domain": {
-      "projectType": "library",
-      "root": "libs/sailor/domain",
-      "sourceRoot": "libs/sailor/domain/src",
-      "prefix": "sailrc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/sailor/domain/tsconfig.lib.json",
-              "libs/sailor/domain/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/sailor/domain/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/sailor/domain/jest.config.js",
-            "tsConfig": "libs/sailor/domain/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/sailor/domain/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {}
-    },
-    "sailor-feature": {
-      "projectType": "library",
-      "root": "libs/sailor/feature",
-      "sourceRoot": "libs/sailor/feature/src",
-      "prefix": "sailrc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/sailor/feature/tsconfig.lib.json",
-              "libs/sailor/feature/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/sailor/feature/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/sailor/feature/jest.config.js",
-            "tsConfig": "libs/sailor/feature/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/sailor/feature/src/test-setup.ts"
           }
         }
       },

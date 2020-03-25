@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { RouterUri } from '../router/router-uri';
+import { RouterUri } from '@sailrc/shared/util';
 
 export let allEntitiesRequested;
 export let allEntitiesLoaded;

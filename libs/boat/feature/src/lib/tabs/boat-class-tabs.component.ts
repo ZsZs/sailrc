@@ -1,24 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { YachtClub } from '../../yacht-club/yacht-club';
-import { AuthService } from '../../authentication/auth.service';
-import { Store } from '@ngrx/store';
-import * as fromAppReducer from '../../app.reducer';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { getSelectedBoatClasses } from '../boat-class.reducer';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
 
 @Component({
-  selector: 'srm-boat-class-tabs',
+  selector: 'sailrc-boat-class-tabs',
   templateUrl: './boat-class-tabs.component.html',
   styleUrls: ['./boat-class-tabs.component.css']
 })
 export class BoatClassTabsComponent implements OnDestroy, OnInit {
-  selectedBoatClasses: Observable<YachtClub[]>;
+  selectedBoatClass: Observable<BoatClass>;
   selectedBoatClassId: string;
   private readonly onDestroy = new Subject<void>();
 
-  constructor( private store: Store<fromAppReducer.AppState>, private router: Router ) {}
+  constructor( private boatClassFacade: BoatClassFacade, private router: Router ) {}
 
   ngOnDestroy(): void {
     this.onDestroy.next();
@@ -34,17 +30,17 @@ export class BoatClassTabsComponent implements OnDestroy, OnInit {
   }
 
   // protected, private helper methods
-  determineSelectedBoatClassId() {
-    this.selectedBoatClasses.pipe( takeUntil( this.onDestroy )).subscribe( boatClasses => {
-      if ( boatClasses.length > 0 ) {
-        this.selectedBoatClassId = boatClasses[0].id;
+  private determineSelectedBoatClassId() {
+    this.selectedBoatClass.pipe( takeUntil( this.onDestroy )).subscribe( boatClass => {
+      if ( boatClass ) {
+        this.selectedBoatClassId = boatClass.id;
       } else {
         this.selectedBoatClassId = undefined;
       }
     });
   }
 
-  retrieveSelectedBoatClassesFromStore() {
-    this.selectedBoatClasses = this.store.select( getSelectedBoatClasses );
+  private retrieveSelectedBoatClassesFromStore() {
+    this.selectedBoatClass = this.boatClassFacade.current$;
   }
 }
