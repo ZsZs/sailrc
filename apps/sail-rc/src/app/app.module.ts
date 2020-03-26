@@ -27,6 +27,10 @@ import { FooterComponent } from './navigation/footer/footer.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SharedAuthenticationFeatureModule } from '@sailrc/shared/authentication/feature';
+import { RacePlanningComponent } from './race-planning/race-planning.component';
+import { RaceExecutionComponent } from './race-execution/race-execution.component';
+import { RaceAnalysisComponent } from './race-analysis/race-analysis.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
@@ -45,6 +49,7 @@ export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     HttpClientModule,
     LoggerModule.forRoot({
       serverLoggingUrl: environment.logger.serverLoggingUrl + '/api/logs',
