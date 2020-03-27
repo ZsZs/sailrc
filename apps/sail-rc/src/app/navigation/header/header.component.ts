@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthDomainFacade } from '@sailrc/shared/authentication/domain';
 import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
 
 @Component({

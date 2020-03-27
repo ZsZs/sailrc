@@ -1,6 +1,5 @@
-import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { authenticateUser, setAuthenticated, setUnauthenticated } from './auth.actions';
-import { UrlSegment } from '@angular/router';
 
 export interface AuthState {
    isAuthenticated: boolean;

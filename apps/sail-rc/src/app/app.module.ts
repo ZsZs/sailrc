@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
 import { SharedWidgetsModule, SnackBarService } from '@sailrc/shared/widgets';
-import { RouteStateService, SharedUtilModule } from '@sailrc/shared/util';
+import { CustomSerializer, RouteStateService, SharedUtilModule } from '@sailrc/shared/util';
 
 import { environment } from '../environments/environment';
 
@@ -27,12 +27,12 @@ import { FooterComponent } from './navigation/footer/footer.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SharedAuthenticationFeatureModule } from '@sailrc/shared/authentication/feature';
-import { RacePlanningComponent } from './race-planning/race-planning.component';
-import { RaceExecutionComponent } from './race-execution/race-execution.component';
-import { RaceAnalysisComponent } from './race-analysis/race-analysis.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { SharedAuthenticationDomainModule } from '@sailrc/shared/authentication/domain';
+import { EffectsModule } from '@ngrx/effects';
 
-export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
+// export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    EffectsModule.forRoot([]),
     FlexLayoutModule,
     HttpClientModule,
     LoggerModule.forRoot({
@@ -60,15 +61,17 @@ export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
     MatCheckboxModule,
     MatProgressSpinnerModule,
     NgrxFormsModule,
+    SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
     SharedWidgetsModule,
-    StoreModule.forRoot( APP_REDUCER_TOKEN, { metaReducers } ),
+//    StoreModule.forRoot( APP_REDUCER_TOKEN, { metaReducers } ),
+    StoreModule.forRoot({}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-//    StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
+    StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
   ],
   providers: [
-  { provide: APP_REDUCER_TOKEN, useValue: appReducers },
+//  { provide: APP_REDUCER_TOKEN, useValue: appReducers },
   { provide: FirestoreSettingsToken, useValue: {} },
   { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     NGXLogger,
