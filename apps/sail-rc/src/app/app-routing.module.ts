@@ -8,7 +8,7 @@ const appRoutes: Routes = [
 //  { path: 'boat-class', loadChildren: () => import('@sailrc/boat/feature').then(m => m.BoatFeatureModule ) }
 //  { path: 'race', loadChildren: './race/race.module#RaceModule'},
   { path: 'race-planning', loadChildren: './race-planning/race-planning.module#RacePlanningModule'},
-  { path: 'race-execution', loadChildren: './race-execution/race-execution.module#RaceExecutionModule'},
+  { path: 'race-conduction', loadChildren: './race-conduction/race-conduction.module#RaceConductionModule'},
   { path: 'race-analysis', loadChildren: './race-analysis/race-analysis.module#RaceAnalysisModule'}
 //  { path: 'sailor', loadChildren: './sailor/sailor.module#SailorModule'},
 //  { path: 'yacht-club', loadChildren: './yacht-club/yacht-club.module#YachtClubModule'}

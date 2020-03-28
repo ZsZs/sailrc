@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { RaceConductionComponent } from './race-conduction.component';
 import { SharedMaterialModule } from '@sailrc/shared/material';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('RaceConductionComponent', () => {
+  let component: RaceConductionComponent;
+  let fixture: ComponentFixture<RaceConductionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [ RaceConductionComponent ],
       imports: [SharedMaterialModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(RaceConductionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

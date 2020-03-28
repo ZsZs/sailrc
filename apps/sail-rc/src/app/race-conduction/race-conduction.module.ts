@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { CommonDependenciesModule } from '../common-dependencies.module';
-import { RaceExecutionComponent } from './race-execution.component';
-import { RaceExecutionRoutingModule } from './race-execution-routing.module';
+import { RaceConductionComponent } from './race-conduction.component';
+import { RaceConductionRoutingModule } from './race-conduction-routing.module';
 
 @NgModule({
   declarations: [
-    RaceExecutionComponent
+    RaceConductionComponent
   ],
   imports: [
     CommonModule,
     NgrxFormsModule,
     CommonDependenciesModule,
-    RaceExecutionRoutingModule
+    RaceConductionRoutingModule
   ]
 })
 
-export class RaceExecutionModule {}
+export class RaceConductionModule {}
