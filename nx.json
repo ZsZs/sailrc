@@ -43,6 +43,9 @@
     },
     "log-server": {
       "tags": ["type:app"]
+    },
+    "shared-material": {
+      "tags": []
     }
   }
 }

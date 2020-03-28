@@ -1,21 +1,15 @@
-import { ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
-import { BaseRouterStoreState, routerReducer, RouterReducerState } from '@ngrx/router-store';
+import { ActionReducer, MetaReducer } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../environments/environment';
-import { uiReducer, UiState } from '@sailrc/shared/widgets';
-import { authReducer, AuthState } from '@sailrc/shared/authentication/domain';
 
-export interface AppState {
-   auth: AuthState;
-   ui: UiState;
-   router: RouterReducerState<BaseRouterStoreState>;
+export function consoleLogReducer( reducer: ActionReducer<any>): ActionReducer<any> {
+   return function( state, action) {
+      console.log( 'state', state) ;
+      console.log( 'action', action );
+
+      return reducer(state, action);
+   };
 }
 
-export const appReducers: ActionReducerMap<AppState> = {
-   auth: authReducer,
-   ui: uiReducer,
-   router: routerReducer
-};
-
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze] : [];
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze, consoleLogReducer] : [];

@@ -1,15 +1,16 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AppMaterialModule } from './app-material.module';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgrxFormsModule } from 'ngrx-forms';
 
+import { SharedMaterialModule } from '@sailrc/shared/material';
+
 @NgModule({
    declarations: [
    ],
    imports: [
-      AppMaterialModule,
+      SharedMaterialModule,
       CommonModule,
       FlexLayoutModule,
       FormsModule,
@@ -17,7 +18,7 @@ import { NgrxFormsModule } from 'ngrx-forms';
       ReactiveFormsModule
    ],
    exports: [
-      AppMaterialModule,
+      SharedMaterialModule,
       CommonModule,
       FlexLayoutModule,
       FormsModule,

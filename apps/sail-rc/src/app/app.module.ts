@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { LoggerModule, NGXLogger } from 'ngx-logger';
@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AngularFireModule } from '@angular/fire';
@@ -19,9 +19,7 @@ import { CustomSerializer, RouteStateService, SharedUtilModule } from '@sailrc/s
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { appReducers, AppState, metaReducers } from './app.reducer';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { HeaderComponent } from './navigation/header/header.component';
@@ -31,8 +29,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { SharedAuthenticationDomainModule } from '@sailrc/shared/authentication/domain';
 import { EffectsModule } from '@ngrx/effects';
-
-// export const APP_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
+import { metaReducers } from './app.reducer';
+import { CommonDependenciesModule } from './common-dependencies.module';
 
 @NgModule({
   declarations: [
@@ -45,12 +43,11 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     AngularFireModule.initializeApp( environment.firebaseConfig ),
     AngularFirestoreModule,
-    AppMaterialModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CommonDependenciesModule,
     EffectsModule.forRoot([]),
-    FlexLayoutModule,
     HttpClientModule,
     LoggerModule.forRoot({
       serverLoggingUrl: environment.logger.serverLoggingUrl + '/api/logs',
@@ -60,13 +57,11 @@ import { EffectsModule } from '@ngrx/effects';
     }),
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    NgrxFormsModule,
     SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
     SharedWidgetsModule,
-//    StoreModule.forRoot( APP_REDUCER_TOKEN, { metaReducers } ),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({}, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
   ],

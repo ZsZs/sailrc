@@ -16,7 +16,9 @@ export const AUTH_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AuthState>
     StoreModule.forFeature('auth', AUTH_REDUCER_TOKEN ),
     EffectsModule.forFeature([AuthEffects])
   ],
-  providers: [{ provide: AUTH_REDUCER_TOKEN, useValue: authReducer }]
+  providers: [
+    { provide: AUTH_REDUCER_TOKEN, useValue: authReducer }
+  ]
 })
 export class SharedAuthenticationDomainModule {
   static forRoot(): ModuleWithProviders {

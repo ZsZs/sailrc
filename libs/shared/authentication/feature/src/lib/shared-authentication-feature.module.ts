@@ -1,27 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SharedAuthenticationDomainModule } from '@sailrc/shared/authentication/domain';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthRoutingModule } from './auth-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedMaterialModule } from '@sailrc/shared/material';
 
 @NgModule({
   declarations: [SignupComponent, LoginComponent],
   imports: [
+    AuthRoutingModule,
     CommonModule,
     FormsModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
-    SharedAuthenticationDomainModule
+    SharedAuthenticationDomainModule,
+    SharedMaterialModule
   ]
 })
 export class SharedAuthenticationFeatureModule {}

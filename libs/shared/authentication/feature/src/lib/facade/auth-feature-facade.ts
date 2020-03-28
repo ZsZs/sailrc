@@ -55,6 +55,7 @@ export class AuthFeatureFacade {
     this.authDomainFacade.createUserWithEmailAndPassword( authData )
       .then( result => {
         this.spinnerService.stopLoading();
+        this.authSuccess();
       })
       .catch( error => {
         this.spinnerService.stopLoading();
@@ -70,5 +71,6 @@ export class AuthFeatureFacade {
 
   private authSuccess() {
     this.authDomainFacade.setAuthenticated();
+    this.router.navigate(['/']);
   }
 }

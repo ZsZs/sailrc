@@ -8,8 +8,8 @@
   <span class="header-spacer"></span>
   <div fxShow="true" fxHide.lt-md="true" fxFlex fxLayout fxLayoutAlign="flex-end">
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li *ngIf="( isAuth | async ) === ( false || null || undefined )"><a routerLink="/signup">Signup</a></li>
-      <li *ngIf="( isAuth | async ) === ( false || null || undefined )"><a routerLink="/login">Login</a></li>
+      <li *ngIf="( isAuth | async ) === false"><a routerLink="/signup">Signup</a></li>
+      <li *ngIf="( isAuth | async ) === false"><a routerLink="/login">Login</a></li>
       <li *ngIf="( isAuth | async )"><a style="cursor: pointer" (click)="onLogout()">Logout</a></li>
     </ul>
   </div>
