@@ -28,8 +28,8 @@ export class AuthDomainFacade {
     return this.store.select( getRedirectTo );
   }
 
-  setAuthenticated() {
-    this.store.dispatch( setAuthenticated() );
+  setAuthenticated( email: string, userId: string ) {
+    this.store.dispatch( setAuthenticated({ email, userId }));
   }
 
   setUnAuthenticated() {

@@ -19,7 +19,7 @@ export class AuthFeatureFacade {
     return this.authDomainFacade.getAuthState().pipe(
       tap( user => {
         if ( user ) {
-          this.authSuccess();
+          this.authSuccess( user.email, user.userId );
         } else {
           this.authFailed();
         }
@@ -33,9 +33,8 @@ export class AuthFeatureFacade {
   login( authData: AuthData ) {
     this.spinnerService.startLoading();
     this.authDomainFacade.signInWithEmailAndPassword( authData )
-      .then( result => {
-        this.spinnerService.stopLoading();
-        this.authSuccess();
+      .then( authResponse => {
+        this.authSuccess( authResponse.user.email, authResponse.user.uid );
       })
       .catch( error => {
         this.spinnerService.stopLoading();
@@ -53,9 +52,8 @@ export class AuthFeatureFacade {
   registerUser( authData: AuthData ) {
     this.spinnerService.startLoading();
     this.authDomainFacade.createUserWithEmailAndPassword( authData )
-      .then( result => {
-        this.spinnerService.stopLoading();
-        this.authSuccess();
+      .then( authResponse => {
+        this.authSuccess( authResponse.user.email, authResponse.user.uid );
       })
       .catch( error => {
         this.spinnerService.stopLoading();
@@ -69,8 +67,9 @@ export class AuthFeatureFacade {
     this.router.navigate(['/login']);
   }
 
-  private authSuccess() {
-    this.authDomainFacade.setAuthenticated();
+  private authSuccess( email: string, userId: string ) {
+    this.spinnerService.stopLoading();
+    this.authDomainFacade.setAuthenticated( email, userId );
     this.router.navigate(['/']);
   }
 }

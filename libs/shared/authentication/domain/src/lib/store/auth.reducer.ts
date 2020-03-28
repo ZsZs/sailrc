@@ -1,14 +1,18 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { authenticateUser, setAuthenticated, setUnauthenticated } from './auth.actions';
+import { User } from '../domain/user';
+import { email } from 'ngrx-forms/validation';
 
 export interface AuthState {
    isAuthenticated: boolean;
    returnTo: string;
+   user: User;
 }
 
 const initialState: AuthState = {
    isAuthenticated: false,
-   returnTo: ''
+   returnTo: '',
+   user: { userId: '', email: '' }
 };
 
 export const authReducer = createReducer(
@@ -17,10 +21,10 @@ export const authReducer = createReducer(
     return { ...state, isAuthenticated: false, returnTo: action.returnTo };
   }),
   on( setAuthenticated, ( state, action ) => {
-     return { ...state, isAuthenticated: true };
+     return { ...state, isAuthenticated: true, user: { email: action.email, userId: action.userId } };
   }),
   on( setUnauthenticated, ( state, action ) => {
-     return { ...state, isAuthenticated: false };
+     return { ...state, isAuthenticated: false, user: { email: '', userId: '' } };
   })
 );
 

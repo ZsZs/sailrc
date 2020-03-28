@@ -57,6 +57,35 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "integration": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/sail-rc/src/environments/environment.ts",
+                  "with": "apps/sail-rc/src/environments/environment.integ.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },

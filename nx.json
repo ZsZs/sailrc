@@ -45,7 +45,7 @@
       "tags": ["type:app"]
     },
     "shared-material": {
-      "tags": []
+      "tags": ["scope:shared", "type:util"]
     }
   }
 }
