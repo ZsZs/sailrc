@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { RouterFacade, routerGo } from '@sailrc/shared/util';
+import { RouterFacade } from '@sailrc/shared/util';
 import { BaseEntityInterface } from '../firestore/base-entity.interface';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 

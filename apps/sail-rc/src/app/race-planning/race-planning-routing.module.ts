@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RacePlanningComponent } from './race-planning.component';
 
 const routes: Routes = [
-  { path: '', component: RacePlanningComponent }
+  { path: '', component: RacePlanningComponent },
+  { path: 'boat-class', loadChildren: () => import( '@sailrc/boat/feature').then( m => m.BoatFeatureModule ) }
 ];
 
 @NgModule({

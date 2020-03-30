@@ -1,21 +1,17 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { BoatClass } from '../domain/boat-class';
+import { BaseEntityInterface } from '@sailrc/shared/base';
 import { IAutoEntityService, IEntityInfo } from '@briebug/ngrx-auto-entity';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
-@Injectable()
-export class BoatClassService  implements IAutoEntityService<BoatClass> {
-  static readonly path = 'boat-classes';
-  protected collection: AngularFirestoreCollection<BoatClass>;
+export abstract class FirestoreAutoEntityService<T extends BaseEntityInterface> implements IAutoEntityService<T> {
+  protected collection: AngularFirestoreCollection<T>;
 
-  constructor( private firestore: AngularFirestore ) {
-    this.collection = this.firestore.collection( BoatClassService.path );
+  constructor( path: string, protected firestore: AngularFirestore ) {
+    this.collection = this.firestore.collection( path );
   }
 
-
-  load(entityInfo: IEntityInfo, id: any, raceId: string ): Observable<BoatClass> {
+  load(entityInfo: IEntityInfo, id: any, raceId: string ): Observable<T> {
     return this.collection.doc<any>(id).snapshotChanges().pipe(
       map( doc => {
         if ( doc.payload.exists ) {
@@ -28,7 +24,7 @@ export class BoatClassService  implements IAutoEntityService<BoatClass> {
     );
   }
 
-  loadAll( entityInfo: IEntityInfo, raceId: string ): Observable<BoatClass[]> {
+  loadAll( entityInfo: IEntityInfo, raceId: string ): Observable<T[]> {
     return this.collection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(a => {
@@ -39,8 +35,8 @@ export class BoatClassService  implements IAutoEntityService<BoatClass> {
     );
   }
 
-  create( entityInfo: IEntityInfo, entity: BoatClass ): Observable<BoatClass> {
-    const promise = new Promise<BoatClass>((resolve, reject ) => {
+  create( entityInfo: IEntityInfo, entity: T ): Observable<T> {
+    const promise = new Promise<T>((resolve, reject ) => {
       this.collection.add( entity ).then( ref => {
         const newItem = {
           id: ref.id,
@@ -53,10 +49,10 @@ export class BoatClassService  implements IAutoEntityService<BoatClass> {
     return from( promise );
   }
 
-  update(entityInfo: IEntityInfo, entity: BoatClass ): Observable<BoatClass> {
-    const promise = new Promise<BoatClass>((resolve, reject) => {
+  update(entityInfo: IEntityInfo, entity: T ): Observable<T> {
+    const promise = new Promise<T>((resolve, reject) => {
       const docRef = this.collection
-        .doc<BoatClass>( entity.id )
+        .doc<T>( entity.id )
         .set( entity )
         .then(() => {
           resolve({
@@ -67,8 +63,9 @@ export class BoatClassService  implements IAutoEntityService<BoatClass> {
     return from( promise );
   }
 
-  delete( entityInfo: IEntityInfo, entity: BoatClass ): Observable<any> {
-    const docRef = this.collection.doc<BoatClass>( entity.id );
+  delete( entityInfo: IEntityInfo, entity: T ): Observable<any> {
+    const docRef = this.collection.doc<T>( entity.id );
     return from( docRef.delete());
   }
+
 }

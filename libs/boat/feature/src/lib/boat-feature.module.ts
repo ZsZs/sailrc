@@ -6,8 +6,7 @@ import { BoatClassListComponent } from './list/boat-class-list.component';
 import { BoatClassTabsComponent } from './tabs/boat-class-tabs.component';
 import { BoatDomainModule } from '@sailrc/boat/domain';
 import { BoatFeatureRoutingModule } from './boat-feature-routing.module';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedMaterialModule } from '@sailrc/shared/material';
 
 @NgModule({
   declarations: [
@@ -17,13 +16,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BoatClassTabsComponent
   ],
   imports: [
-    BoatDomainModule,
+    BoatDomainModule.forFeature(),
     BoatFeatureRoutingModule,
     CommonModule,
-    MatPaginatorModule,
-    MatSortModule
+    SharedMaterialModule
   ],
   exports: [
+  ],
+  providers: [
   ]
 })
 export class BoatFeatureModule {}

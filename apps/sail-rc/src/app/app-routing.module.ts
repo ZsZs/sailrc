@@ -4,14 +4,11 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '@sailrc/shared/authentication/domain';
 
 const appRoutes: Routes = [
-  { path: '', component : HomeComponent },
-//  { path: 'boat-class', loadChildren: () => import('@sailrc/boat/feature').then(m => m.BoatFeatureModule ) }
-//  { path: 'race', loadChildren: './race/race.module#RaceModule'},
-  { path: 'race-planning', loadChildren: './race-planning/race-planning.module#RacePlanningModule'},
-  { path: 'race-conduction', loadChildren: './race-conduction/race-conduction.module#RaceConductionModule'},
-  { path: 'race-analysis', loadChildren: './race-analysis/race-analysis.module#RaceAnalysisModule'}
-//  { path: 'sailor', loadChildren: './sailor/sailor.module#SailorModule'},
-//  { path: 'yacht-club', loadChildren: './yacht-club/yacht-club.module#YachtClubModule'}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component : HomeComponent, data: { breadcrumb: 'Sail Race Control' }},
+  { path: 'race-planning', loadChildren: './race-planning/race-planning.module#RacePlanningModule', data: { breadcrumb: 'Race Planning'}},
+  { path: 'race-conduction', loadChildren: './race-conduction/race-conduction.module#RaceConductionModule', data: { breadcrumb: 'Race Conduction'}},
+  { path: 'race-analysis', loadChildren: './race-analysis/race-analysis.module#RaceAnalysisModule', data: { breadcrumb: 'Race Analysis'}}
 ];
 
 @NgModule({

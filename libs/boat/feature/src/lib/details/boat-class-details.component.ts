@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormGroupState } from 'ngrx-forms';
 import { select, Store } from '@ngrx/store';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
-import { BoatClass, BoatClassFacade, BoatClassState } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
 import { RouterFacade } from '@sailrc/shared/util';
 import { BoatFeatureState } from '../store/boat-feature.reducer';
 import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';

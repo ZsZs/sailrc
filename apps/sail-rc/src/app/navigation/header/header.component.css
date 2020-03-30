@@ -25,3 +25,12 @@ a:hover, a:active {
 .mat-toolbar-row, .mat-toolbar-single-row {
     height: 40px;
 }
+
+.xng-breadcrumb-trail {
+    color: white !important;
+}
+
+.xng-breadcrumb-root {
+    color: white !important;
+}
+
