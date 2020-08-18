@@ -3,7 +3,7 @@ import { AppState } from '../../app.reducer';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Race } from '../../race/domain/race';
-import { BaseEntityInterface } from '../firestore/base-entity.interface';
+import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 
 export abstract class BaseResolver<T> implements Resolve<T> {
 

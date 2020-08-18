@@ -5,10 +5,20 @@
     </button>
   </div>
   <div fxShow="true" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+    <!--
     <button mat-button routerLink="/">
       <mat-icon>home</mat-icon>
     </button>
-    <xng-breadcrumb></xng-breadcrumb>
+    -->
+    <ng-template #iconTemplate>
+      <mat-icon>arrow_right</mat-icon>
+    </ng-template>
+    <xng-breadcrumb class="header-breadcrumb" [separator]="iconTemplate">
+      <ng-container *xngBreadcrumbItem="let breadcrumb; let info = info; let first = first">
+        <mat-icon *ngIf="info">{{ info }}</mat-icon>
+        <ng-container>{{ breadcrumb }}</ng-container>
+      </ng-container>
+    </xng-breadcrumb>
   </div>
   <span class="header-spacer"></span>
   <div fxShow="true" fxHide.lt-md="true" fxFlex fxLayout fxLayoutAlign="flex-end">

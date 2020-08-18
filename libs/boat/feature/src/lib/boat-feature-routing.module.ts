@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: BoatClassComponent, children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: BoatClassListComponent },
-      { path: ':id/details', component: BoatClassDetailsComponent },
+      { path: ':boatClassId/details', component: BoatClassDetailsComponent },
       { path: '**', redirectTo: 'list', pathMatch: 'full' }
     ]}
 ];

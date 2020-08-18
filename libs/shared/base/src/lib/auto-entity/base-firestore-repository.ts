@@ -15,8 +15,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
     return this.collection.doc<any>(id).snapshotChanges().pipe(
       map(doc => {
         if ( doc.payload.exists ) {
-          /* workaround until spread works with generic types */
-          const data = doc.payload.data() as any;
+          const data = doc.payload.data() as T;
           const docId = doc.payload.id;
           return { docId, ...data };
         }
@@ -24,37 +23,41 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
     );
   }
 
-  loadAll( entityInfo: IEntityInfo ): Observable<any[]> {
+  loadAll( entityInfo: IEntityInfo ): Observable<T[]> {
     return this.collection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(a => {
-          const data = a.payload.doc.data() as any;
+          const data = a.payload.doc.data() as T;
+          data.id = a.payload.doc.id;
           return data;
         });
       })
     );
+
   }
 
-  create(entityInfo: IEntityInfo, entity: T ): Observable<any> {
-    const promise = new Promise<T>((resolve, reject ) => {
-      this.collection.doc<T>( String( entity.id ) ).set( { ...entity } ).then( ref => {
+  create(entityInfo: IEntityInfo, entity: T ): Observable<T> {
+    delete entity.id;
+    const promise = new Promise<any>((resolve, reject ) => {
+      this.collection.add( entity ).then( ref => {
         const newEntity = {
-          ...(entity as any)
+          id: ref.id,
+          ...( entity as T)
         };
-        resolve( newEntity );
+        resolve(newEntity);
       });
     });
     return from( promise );
   }
 
-  update(entityInfo: IEntityInfo, entity: T ): Observable<any> {
+  update(entityInfo: IEntityInfo, entity: T ): Observable<T> {
     const promise = new Promise<any>((resolve, reject) => {
       const docRef = this.collection
         .doc<T>( String( entity.id ))
         .set( entity )
         .then(() => {
           resolve({
-            ...( entity as any)
+            ...( entity as T)
           });
         });
     });
@@ -62,7 +65,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
   }
 
   delete(entityInfo: IEntityInfo, entity: T ): Observable<any> {
-    const docRef = this.collection.doc<any>( String( entity.id ));
+    const docRef = this.collection.doc<T>( String( entity.id ));
     return from( docRef.delete());
   }
 

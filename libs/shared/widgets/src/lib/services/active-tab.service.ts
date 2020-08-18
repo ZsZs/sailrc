@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { getActiveTabs, getIsActiveTab, UiState } from '../store/ui.reducer';
+import { getActiveTabs, getCurrentTab, getIsActiveTab, UiState } from '../store/ui.reducer';
 import { tabIsActive, tabIsInActive } from '../store/ui.actions';
 import { Observable } from 'rxjs';
 
@@ -12,6 +12,10 @@ export class ActiveTabService {
 
   activeTabs(): Observable<string[]> {
     return this.store.select( getActiveTabs );
+  }
+
+  currentTab(): Observable<string> {
+    return this.store.select( getCurrentTab );
   }
 
   isTabActive( tabName: string ): Observable<boolean> {

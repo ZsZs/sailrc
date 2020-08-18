@@ -17,15 +17,15 @@ export class AuthService {
   }
 
   signInWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.afAuth.auth.signInWithEmailAndPassword( authData.email, authData.password )
+    return this.afAuth.signInWithEmailAndPassword( authData.email, authData.password )
   }
 
   signOut(): Promise<any> {
-    return this.afAuth.auth.signOut();
+    return this.afAuth.signOut();
   }
 
   createUserWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.afAuth.auth.createUserWithEmailAndPassword( authData.email, authData.password )
+    return this.afAuth.createUserWithEmailAndPassword( authData.email, authData.password )
 
   }
 

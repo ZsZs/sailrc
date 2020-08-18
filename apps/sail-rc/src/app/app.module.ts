@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 
 import { SharedWidgetsModule, SnackBarService } from '@sailrc/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@sailrc/shared/util';
@@ -68,7 +68,7 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
     StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
   ],
   providers: [
-  { provide: FirestoreSettingsToken, useValue: {} },
+  { provide: SETTINGS, useValue: {} },
   { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     NGXLogger,
     RouteStateService,

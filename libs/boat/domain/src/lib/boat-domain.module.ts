@@ -5,7 +5,7 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 
 import { BoatClass } from './domain/boat-class';
 import { BoatClassService } from './integration/boat-class.service';
-import { FEATURE_NAME } from './store/boat-class-state';
+import { DOMAIN_NAME } from './store/boat-domain-state';
 import { BoatClassFacade } from './facade/boat-class-facade';
 import { boatDomainReducer } from './store/boat-domain.state';
 
@@ -13,7 +13,7 @@ import { boatDomainReducer } from './store/boat-domain.state';
   imports: [
     CommonModule,
     NgrxAutoEntityModule.forFeature(),
-    StoreModule.forFeature( FEATURE_NAME, boatDomainReducer )
+    StoreModule.forFeature( DOMAIN_NAME, boatDomainReducer )
   ],
   providers: [
     { provide: BoatClass, useClass: BoatClassService }
@@ -21,7 +21,7 @@ import { boatDomainReducer } from './store/boat-domain.state';
 })
 
 export class BoatDomainModule {
-  static forFeature(): ModuleWithProviders {
+  static forFeature(): ModuleWithProviders<BoatDomainModule> {
     return {
       ngModule:  BoatDomainModule,
       providers: [BoatClassFacade]

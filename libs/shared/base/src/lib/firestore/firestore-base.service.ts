@@ -1,7 +1,7 @@
 import { FirestoreBaseServiceInterface } from './firestore-base.interface';
 import { NGXLogger } from 'ngx-logger';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { BaseEntityInterface } from './base-entity.interface';
+import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

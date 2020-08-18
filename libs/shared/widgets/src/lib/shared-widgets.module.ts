@@ -18,7 +18,7 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
   ]
 })
 export class SharedWidgetsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedWidgetsModule> {
     return {
       ngModule: SharedWidgetsModule,
       providers: [SnackBarService]

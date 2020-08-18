@@ -1,4 +1,4 @@
-import { BaseEntityInterface } from '../firestore/base-entity.interface';
+import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';

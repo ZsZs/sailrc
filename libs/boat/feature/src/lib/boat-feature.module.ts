@@ -7,6 +7,9 @@ import { BoatClassTabsComponent } from './tabs/boat-class-tabs.component';
 import { BoatDomainModule } from '@sailrc/boat/domain';
 import { BoatFeatureRoutingModule } from './boat-feature-routing.module';
 import { SharedMaterialModule } from '@sailrc/shared/material';
+import { boatFeatureReducer, FEATURE_NAME } from './store/boat-feature.reducer';
+import { StoreModule } from '@ngrx/store';
+import { NgrxFormsModule } from 'ngrx-forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { SharedMaterialModule } from '@sailrc/shared/material';
     BoatDomainModule.forFeature(),
     BoatFeatureRoutingModule,
     CommonModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+    StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer ),
+    NgrxFormsModule
   ],
   exports: [
   ],

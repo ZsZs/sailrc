@@ -1,36 +1,44 @@
-import { disable, FormGroupState, onNgrxForms, onNgrxFormsAction, setValue, SetValueAction, updateGroup, wrapReducerWithFormStateUpdate } from 'ngrx-forms';
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
+
+import { BaseFormStateFactory, IEntityFormState } from '@sailrc/shared/base';
 import { BoatClass } from '@sailrc/boat/domain';
-import { INITIAL_BOAT_CLASS_DETAILS_FORM_VALUE, validateBoatClassDetailsForm } from '../details/boat-class-details.reducer';
-import { editBoatClass } from './boat-class.actions';
+import { validateBoatClassDetailsForm } from '../details/boat-class-details.reducer';
 
-export interface BoatFeatureState {
-  boatClassDetailsForm: FormGroupState<BoatClass>;
-}
-
-export const INITIAL_BOAT_FEATURE_STATE: BoatFeatureState = {
-  boatClassDetailsForm: INITIAL_BOAT_CLASS_DETAILS_FORM_VALUE
-};
-
-const rawReducer = createReducer(
-  INITIAL_BOAT_FEATURE_STATE,
-  onNgrxForms(),
-  onNgrxFormsAction( SetValueAction, ( state, action ) => {
-    return state;
-  }),
-  on( editBoatClass, ( state, action ) => {
-    let formState = setValue<BoatClass>( INITIAL_BOAT_CLASS_DETAILS_FORM_VALUE, { ...action.boatClass });
-    formState = updateGroup(formState, { id: disable });
-    formState = validateBoatClassDetailsForm( formState );
-    return { ...state, boatClassDetailsForm: formState };
-  })
+export const FEATURE_NAME = 'boatFeature';
+const factory = new BaseFormStateFactory(
+  BoatClass,
+  {
+    id: undefined,
+    name: '',
+    yardstick: undefined
+  },
+  FEATURE_NAME
 );
+const featureSelector = createFeatureSelector<IBoatFeatureState>( FEATURE_NAME );
+const { initialState, rawReducer } = factory.buildFeatureFormState();
 
-export const boatFeatureReducer = wrapReducerWithFormStateUpdate(
+export const boatClassFormReducer = wrapReducerWithFormStateUpdate(
   rawReducer,
-  state => state.boatClassDetailsForm,
+  state => state.entityForm,
   validateBoatClassDetailsForm
 );
 
-export const getBoatClassManagementState = createFeatureSelector<BoatFeatureState>('boatFeature');
-export const getDetailsForm = createSelector( getBoatClassManagementState, ( state: BoatFeatureState ) => state.boatClassDetailsForm );
+export interface IBoatFeatureState {
+  detailsForm: IEntityFormState<BoatClass>
+}
+
+const INITIAL_BOAT_FEATURE_STATE : IBoatFeatureState = {
+  detailsForm : initialState
+}
+
+function boatFeatureState( state = INITIAL_BOAT_FEATURE_STATE ): IBoatFeatureState {
+  return state;
+}
+
+export const boatFeatureReducer: ActionReducerMap<IBoatFeatureState> = {
+  detailsForm: boatClassFormReducer
+}
+
+export const getBoatClassManagementState = createFeatureSelector<IBoatFeatureState>( FEATURE_NAME );
+export const getDetailsForm = createSelector( getBoatClassManagementState, ( state: IBoatFeatureState ) => state.detailsForm.entityForm );

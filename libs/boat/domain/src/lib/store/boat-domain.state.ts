@@ -1,8 +1,8 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { boatClassState, IBoatClassState } from './boat-class-state';
+import { boatDomainState, IBoatClassState } from './boat-domain-state';
 
 export type BoatClassState = IBoatClassState;
 
 export const boatDomainReducer: ActionReducerMap<BoatClassState> = {
-  boatClass: boatClassState,
+  boatClass: boatDomainState
 };

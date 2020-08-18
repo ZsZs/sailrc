@@ -13,3 +13,12 @@ body {
 .mat-toolbar-row, .mat-toolbar-single-row {
     height: 40px;
 }
+
+.header-breadcrumb {
+    margin-top: 5px;
+    color: white !important;
+}
+
+.xng-breadcrumb-trail {
+    color: white !important;
+}

@@ -21,7 +21,7 @@ export const AUTH_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AuthState>
   ]
 })
 export class SharedAuthenticationDomainModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedAuthenticationDomainModule> {
     return {
       ngModule: SharedAuthenticationDomainModule,
       providers: [AuthService]

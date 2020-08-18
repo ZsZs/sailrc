@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { routeChange, routerBack, routerForward, routerGo } from './router.actions';
 
 @Injectable({ providedIn: 'root'} )
 export class RouterFacade {
 
-  constructor( private store: Store<any>) {}
+  constructor( private store: Store<any> ) {}
 
   routerBack() {
     this.store.dispatch( routerBack() );

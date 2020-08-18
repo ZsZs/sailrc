@@ -13,7 +13,7 @@ import { RouterFacade } from './router/router.facade';
   ]
 })
 export class SharedUtilModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedUtilModule> {
     return {
       ngModule: SharedUtilModule,
       providers: [RouterFacade, RouteStateService]

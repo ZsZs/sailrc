@@ -6,12 +6,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { RouterFacade } from '@sailrc/shared/util';
-import { BaseEntityInterface } from '../firestore/base-entity.interface';
+import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
+import { BaseUrlSegments } from './base-url-segments';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
-  @ViewChild( MatSort, {static: false} ) sort: MatSort;
-  @ViewChild( MatPaginator, {static: false} ) paginator: MatPaginator;
+  @ViewChild( MatSort, {static: true} ) sort: MatSort;
+  @ViewChild( MatPaginator, {static: true} ) paginator: MatPaginator;
   dataSource = new MatTableDataSource<T>();
   dataSourceSubscription: Subscription;
   selection = new SelectionModel<T>(true, []);
@@ -22,11 +24,12 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     protected routerFacade: RouterFacade,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected tabName: string ) {}
+    protected route: ActivatedRoute,
+    protected readonly tabName: string ) {}
 
   // public accessors and mutators
   addEntity() {
-    this.routerFacade.routerGo( [this.detailsRoute( 'new' )] )
+    this.routerFacade.routerGo( [this.detailsRoute( BaseUrlSegments.NewEntity )], {}, { relativeTo: this.route } )
   }
 
   checkboxLabel( row?: T ): string {
@@ -39,7 +42,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   deleteEntities() {
     if ( this.selection.selected.length > 0 ) {
       for ( let i = 0, len = this.selection.selected.length; i < len; i++) {
-        this.dispatchDeleteEntityAction( this.selection.selected[i] );
+        this.entityFacade.delete( this.selection.selected[i] );
       }
 
       this.selection.clear();
@@ -54,6 +57,10 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
+  }
+
+  isSelected( row: T ) {
+    return this.selection.isSelected( row );
   }
 
   masterToggle() {
@@ -76,20 +83,27 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   ngOnInit() {
     this.activeTabService.tabIsActive( this.tabName );
-    this.dispatchAllEntitiesRequestedAction();
+    this.entityFacade.loadAll();
     this.dataSourceSubscription = this.subscribeToSourceData();
     this.subscribeToLoading();
   }
 
   onChangeSelection( row?: T ) {
-    const entities = [row];
-    this.dispatchSelectedEntitiesAction( entities );
+    if ( this.isSelected( row ) ) {
+      this.entityFacade.selectMore( [row] );
+    } else {
+      this.entityFacade.deselectMany( [row] );
+    }
+    if ( this.selection.selected.length === 1 ) {
+      this.entityFacade.select( this.selection.selected[0] );
+    } else {
+      this.entityFacade.deselect();
+    }
   }
 
   onRowClick( row: T ) {
-    const entities = [row];
-    this.dispatchSelectedEntitiesAction( entities );
-    this.routerFacade.routerGo( [this.detailsRoute( row.id )] )
+    this.entityFacade.select( row );
+    this.navigateToDetailsForm( row );
   }
 
   // protected, private helper methods
@@ -97,10 +111,13 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     this.selection.clear();
   }
 
-  protected abstract detailsRoute( entityId: string ): string;
-  protected abstract dispatchAllEntitiesRequestedAction();
-  protected abstract dispatchDeleteEntityAction( entity: T );
-  protected abstract dispatchSelectedEntitiesAction( entities: T[] );
+  protected detailsRoute( entityId: string ): string {
+    return '../' + entityId + '/' + BaseUrlSegments.DetailsForm;
+  };
+
+  private navigateToDetailsForm( entity: T ) {
+    this.routerFacade.routerGo( [this.detailsRoute( entity.id )], {}, { relativeTo: this.route } )
+  }
 
   private subscribeToLoading() {
     this.isLoading$ = this.entityFacade.isLoading$;
