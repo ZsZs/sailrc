@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
 import { MatSort } from '@angular/material/sort';
@@ -6,10 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { RouterFacade } from '@sailrc/shared/util';
-import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
+import { BaseEntityInterface } from '../..';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 import { BaseUrlSegments } from './base-url-segments';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild( MatSort, {static: true} ) sort: MatSort;
@@ -19,7 +19,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   selection = new SelectionModel<T>(true, []);
   isLoading$: Observable<boolean>;
 
-  constructor(
+  protected constructor(
     protected entityFacade: IEntityFacade<T>,
     protected routerFacade: RouterFacade,
     protected activeTabService: ActiveTabService,

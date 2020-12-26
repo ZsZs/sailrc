@@ -3,7 +3,7 @@ export { BaseEntityContainerComponent } from './lib/generic-components/base-enti
 export { BaseEntityInterface } from './lib/auto-entity/base-entity.interface';
 export { BaseEntityFacade } from './lib/facade/base-entity.facade';
 export { BaseFirestoreRepository } from './lib/auto-entity/base-firestore-repository';
-export { BaseFormStateFactory, IEntityFormState } from './lib/auto-entity-form/base-form.state';
+export { FormModelStateFactory, IEntityFormState } from './lib/auto-entity-form/auto-entity-form.state';
 export { BaseFormComponent } from './lib/generic-components/base-form.component';
 export { BaseListComponent } from './lib/generic-components/base-list.component';
 export { BaseTabsComponent } from './lib/generic-components/base-tabs.component';

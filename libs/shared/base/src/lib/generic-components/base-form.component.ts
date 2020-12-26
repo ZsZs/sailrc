@@ -59,6 +59,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
     this.subscribeToLoading();
     this.notifyActiveTab();
     this.setCurrentEntity();
+    this.dispatchEditOrNewEvent();
   }
 
   onCancel() {
@@ -79,6 +80,10 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   // protected, private helper methods
   private determineEntityIdFromRoute(): void {
     this.entityId = this.route.snapshot.paramMap.get( this.entityFacade.entityIdPathVariable );
+  }
+
+  private dispatchEditOrNewEvent() {
+
   }
 
   private notifyActiveTab() {

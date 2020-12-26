@@ -1,12 +1,12 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
 
-import { BaseFormStateFactory, IEntityFormState } from '@sailrc/shared/base';
+import { FormModelStateFactory, IEntityFormState } from '@sailrc/shared/base';
 import { BoatClass } from '@sailrc/boat/domain';
 import { validateBoatClassDetailsForm } from '../details/boat-class-details.reducer';
 
 export const FEATURE_NAME = 'boatFeature';
-const factory = new BaseFormStateFactory(
+const factory = new FormModelStateFactory(
   BoatClass,
   {
     id: undefined,
@@ -16,7 +16,7 @@ const factory = new BaseFormStateFactory(
   FEATURE_NAME
 );
 const featureSelector = createFeatureSelector<IBoatFeatureState>( FEATURE_NAME );
-const { initialState, rawReducer } = factory.buildFeatureFormState();
+const { initialFormState, rawReducer } = factory.buildFeatureFormState();
 
 export const boatClassFormReducer = wrapReducerWithFormStateUpdate(
   rawReducer,
@@ -29,7 +29,7 @@ export interface IBoatFeatureState {
 }
 
 const INITIAL_BOAT_FEATURE_STATE : IBoatFeatureState = {
-  detailsForm : initialState
+  detailsForm : initialFormState
 }
 
 function boatFeatureState( state = INITIAL_BOAT_FEATURE_STATE ): IBoatFeatureState {

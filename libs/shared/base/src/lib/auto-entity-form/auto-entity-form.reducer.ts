@@ -1,8 +1,6 @@
-import { ActionReducer } from '@ngrx/store';
 import { camelCase } from './case';
-import { FEATURE_AFFINITY } from './base-form.state';
-import { EntityFormActions, EntityFormActionTypes, IEntityFormAction } from './base-form.actions';
-import { disable, formGroupReducer, setValue, updateGroup } from 'ngrx-forms';
+import { FEATURE_AFFINITY } from './auto-entity-form.state';
+import { IEntityFormAction } from './auto-entity-form.actions';
 
 export function stateNameFromAction(action: IEntityFormAction): string {
   return camelCase(action.info.modelName);
