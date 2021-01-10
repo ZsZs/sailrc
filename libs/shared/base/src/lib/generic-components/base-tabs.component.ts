@@ -4,9 +4,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { RouterFacade } from '@sailrc/shared/util';
 import { ActiveTabService } from '@sailrc/shared/widgets';
-import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
-import { BaseUrlSegments } from './base-url-segments';
+import { BaseEntityInterface } from '@sailrc/shared/base';
+import { BaseUrlSegments } from '@sailrc/shared/util';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
+import { ActivatedRoute } from '@angular/router';
 
 export abstract class BaseTabsComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
   currentTab: Observable<string>;
@@ -14,7 +15,12 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   selectedEntityId: string;
   private readonly onDestroy = new Subject<void>();
 
-  constructor( protected entityFacade: IEntityFacade<T>, protected activeTabService: ActiveTabService, protected routerFacade: RouterFacade ) {}
+  constructor(
+    protected entityFacade: IEntityFacade<T>,
+    protected activeTabService: ActiveTabService,
+    protected routerFacade: RouterFacade,
+    protected route: ActivatedRoute
+  ) {}
 
   ngOnDestroy(): void {
     this.onDestroy.next();
@@ -27,7 +33,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   }
 
   showDetails() {
-    this.routerFacade.routerGo( ['/race-planning/boat-class/' + this.selectedEntityId + '/' + BaseUrlSegments.DetailsForm] );
+    this.routerFacade.routerGo( [this.selectedEntityId + '/' + BaseUrlSegments.DetailsForm], {}, { relativeTo: this.route } )
   }
 
   // protected, private helper methods
@@ -44,6 +50,11 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   retrieveActiveTabsFromStore() {
     this.currentTab = this.activeTabService.currentTab();
   }
+
+  // protected, private helper methods
+  protected detailsRoute( entityId: string ): string {
+    return '../' + entityId + '/' + BaseUrlSegments.DetailsForm;
+  };
 
   private retrieveSelectedBoatClassesFromStore() {
     this.selectedEntity = this.entityFacade.current$;

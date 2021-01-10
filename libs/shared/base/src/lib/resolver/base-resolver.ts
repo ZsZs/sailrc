@@ -1,13 +1,11 @@
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Race } from '../../race/domain/race';
-import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
+import { BaseEntityInterface, IEntityFormState } from '@sailrc/shared/base';
 
 export abstract class BaseResolver<T> implements Resolve<T> {
 
-  constructor( protected parameterName: string, protected store: Store<AppState> ) {}
+  constructor( protected parameterName: string, protected store: Store<IEntityFormState<BaseEntityInterface>> ) {}
 
   resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): Observable<T> {
     const idParameter = this.resolveParameter( route, this.parameterName );

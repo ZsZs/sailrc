@@ -8,7 +8,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { RouterFacade } from '@sailrc/shared/util';
 import { BaseEntityInterface } from '../..';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
-import { BaseUrlSegments } from './base-url-segments';
+
+import { BaseUrlSegments } from '@sailrc/shared/util';
 import { ActivatedRoute } from '@angular/router';
 
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
@@ -22,14 +23,14 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   protected constructor(
     protected entityFacade: IEntityFacade<T>,
     protected routerFacade: RouterFacade,
+    protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected route: ActivatedRoute,
     protected readonly tabName: string ) {}
 
   // public accessors and mutators
   addEntity() {
-    this.routerFacade.routerGo( [this.detailsRoute( BaseUrlSegments.NewEntity )], {}, { relativeTo: this.route } )
+    this.navigateToDetailsForm( BaseUrlSegments.NewEntity );
   }
 
   checkboxLabel( row?: T ): string {
@@ -103,7 +104,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   onRowClick( row: T ) {
     this.entityFacade.select( row );
-    this.navigateToDetailsForm( row );
+    this.navigateToDetailsForm( row.id );
   }
 
   // protected, private helper methods
@@ -111,12 +112,8 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     this.selection.clear();
   }
 
-  protected detailsRoute( entityId: string ): string {
-    return '../' + entityId + '/' + BaseUrlSegments.DetailsForm;
-  };
-
-  private navigateToDetailsForm( entity: T ) {
-    this.routerFacade.routerGo( [this.detailsRoute( entity.id )], {}, { relativeTo: this.route } )
+  private navigateToDetailsForm( entityId: string ) {
+    this.routerFacade.routerGo( ['../' + entityId + '/' + BaseUrlSegments.DetailsForm], {}, { relativeTo: this.route } )
   }
 
   private subscribeToLoading() {

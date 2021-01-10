@@ -1,9 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
-import { BaseTabsComponent, BaseUrlSegments } from '@sailrc/shared/base';
+import { BaseTabsComponent } from '@sailrc/shared/base';
 import { RouterFacade } from '@sailrc/shared/util';
 import { ActiveTabService } from '@sailrc/shared/widgets';
 
@@ -14,8 +12,12 @@ import { ActiveTabService } from '@sailrc/shared/widgets';
 })
 export class BoatClassTabsComponent extends BaseTabsComponent<BoatClass> {
 
-  constructor( protected boatClassFacade: BoatClassFacade, protected routerFacade: RouterFacade, protected activeTabService: ActiveTabService ) {
-    super( boatClassFacade, activeTabService, routerFacade );
+  constructor(
+    protected boatClassFacade: BoatClassFacade,
+    protected routerFacade: RouterFacade,
+    protected activeTabService: ActiveTabService,
+    protected route: ActivatedRoute ) {
+    super( boatClassFacade, activeTabService, routerFacade, route );
   }
 
   // protected, private helper methods

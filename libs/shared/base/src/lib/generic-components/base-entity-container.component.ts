@@ -3,8 +3,7 @@ import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { RouterFacade, RouteStateService } from '@sailrc/shared/util';
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { Observable, of, Subject } from 'rxjs';
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
-import { BaseUrlSegments } from './base-url-segments';
+import { BaseUrlSegments } from '../../../../util/src/lib/router/base-url-segments';
 import { ActivatedRoute } from '@angular/router';
 import { BaseEntityFacade } from '../..';
 

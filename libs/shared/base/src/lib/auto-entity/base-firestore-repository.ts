@@ -1,6 +1,6 @@
 import { IAutoEntityService, IEntityInfo } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@sailrc/shared/base';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,13 +11,14 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
     this.collection = this.firestore.collection( path );
   }
 
-  load(entityInfo: IEntityInfo, id: any ): Observable<T> {
-    return this.collection.doc<any>(id).snapshotChanges().pipe(
+  load(entityInfo: IEntityInfo, keys: any ): Observable<T> {
+    const document = this.collection.doc<any>(keys.id);
+    return document.snapshotChanges().pipe(
       map(doc => {
         if ( doc.payload.exists ) {
           const data = doc.payload.data() as T;
           const docId = doc.payload.id;
-          return { docId, ...data };
+          return { id: docId, ...data };
         }
       })
     );

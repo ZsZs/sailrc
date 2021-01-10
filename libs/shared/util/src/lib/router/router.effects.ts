@@ -16,7 +16,9 @@ export class RouterEffects {
   @Effect({ dispatch: false })
   navigate$ = this.actions$.pipe(
     ofType( routerGo ),
-    tap(({ path, queryParams, extras }) => this.router.navigate( path, { queryParams, ...extras }))
+    tap(({ path, queryParams, extras }) => {
+      this.router.navigate( path, { queryParams, ...extras })
+    })
   );
 
   @Effect({ dispatch: false })

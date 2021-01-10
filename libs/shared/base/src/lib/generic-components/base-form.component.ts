@@ -1,15 +1,14 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
-import { Store } from '@ngrx/store';
 
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
-import { BaseUrlSegments } from '../generic-components/base-url-segments';
 import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
-import { RouterFacade } from '@sailrc/shared/util';
-import { BaseEntityFacade } from '../..';
+import { BaseUrlSegments, RouterFacade } from '@sailrc/shared/util';
+import { BaseEntityFacade, IEntityFormFacade } from '../..';
+import { ActivatedRoute } from '@angular/router';
+import { MemoizedSelector, Selector } from '@ngrx/store';
 
 export abstract class BaseFormComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
   isLoading$: Observable<boolean>;
@@ -31,12 +30,12 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
 
   constructor(
     protected entityFacade: BaseEntityFacade<T>,
+    protected entityFormFacade: IEntityFormFacade<T>,
+    protected entityFormSelector: MemoizedSelector<any, any>,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected store: Store<any>,
-    protected formStateSelector: any,
     protected tabName: string )
   {
     this.submittedValue$ = entityFacade.current$;
@@ -64,7 +63,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
 
   onCancel() {
     this.entityFacade.deselect();
-    this.routerFacade.routerGo(  ['../../'], {}, { relativeTo: this.route } )
+    this.closeFormAndNavigateBack();
   }
 
   onSubmit() {
@@ -73,17 +72,20 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
       tap( () => this.entityFacade.deselect() ),
       map( formState => formState.value ),
       map(entity => this.entityId === BaseUrlSegments.NewEntity ? this.entityFacade.create( entity ) : this.entityFacade.update( entity )),
-      tap( () => this.routerFacade.routerGo( ['../../'], {}, { relativeTo: this.route } ))
+      tap( () => this.closeFormAndNavigateBack())
     ).subscribe();
   }
 
   // protected, private helper methods
+  private closeFormAndNavigateBack() {
+    this.routerFacade.routerGo( ['../../'], {}, { relativeTo: this.route } )
+  }
+
   private determineEntityIdFromRoute(): void {
     this.entityId = this.route.snapshot.paramMap.get( this.entityFacade.entityIdPathVariable );
   }
 
   private dispatchEditOrNewEvent() {
-
   }
 
   private notifyActiveTab() {
@@ -91,7 +93,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   protected selectFormState() {
-    this.formState$ = this.store.select( this.formStateSelector );
+    this.formState$ = this.entityFormFacade.getFormState( this.entityFormSelector );
   }
 
   private setCurrentEntity() {

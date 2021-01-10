@@ -5,9 +5,8 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 
 import { BoatClass } from './domain/boat-class';
 import { BoatClassService } from './integration/boat-class.service';
-import { DOMAIN_NAME } from './store/boat-domain-state';
+import { DOMAIN_NAME, boatDomainReducer } from './store/boat-domain.state';
 import { BoatClassFacade } from './facade/boat-class-facade';
-import { boatDomainReducer } from './store/boat-domain.state';
 
 @NgModule({
   imports: [

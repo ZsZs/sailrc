@@ -67,8 +67,11 @@ export class DeleteEntity<TModel> extends EntityFormAction<TModel> {
 }
 
 export class EditEntity<TModel> extends EntityFormAction<TModel> {
-  constructor( type: new () => TModel ) {
+  public entity: TModel;
+
+  constructor( type: new () => TModel, entity: TModel ) {
     super( type, EntityFormActionTypes.EditEntity );
+    this.entity = entity;
   }
 }
 

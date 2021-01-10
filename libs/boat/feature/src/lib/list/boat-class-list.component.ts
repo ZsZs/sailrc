@@ -21,7 +21,7 @@ export class BoatClassListComponent extends BaseListComponent<BoatClass> {
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, routerFacade, activeTabService, subscriptionService, route, BoatClassListComponent.tabName );
+    super( boatClassFacade, routerFacade, route, activeTabService, subscriptionService, BoatClassListComponent.tabName );
   }
 
   // event handling methods

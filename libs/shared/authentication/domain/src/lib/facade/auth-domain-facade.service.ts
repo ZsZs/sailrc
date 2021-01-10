@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { AuthState, getIsAuthenticated, getRedirectTo } from '../store/auth.reducer';
 import { setAuthenticated, setUnauthenticated } from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { User } from 'firebase';
 import { AuthService } from '../integration/auth.service';
 import { AuthData } from '../domain/auth-data';
+import firebase from 'firebase';
+import User = firebase.User;
 
 @Injectable({ providedIn: 'root'})
 export class AuthDomainFacade {
