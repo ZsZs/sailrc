@@ -7,6 +7,10 @@ import { validateBoatClassDetailsForm } from '../details/boat-class-details.redu
 
 export const FEATURE_NAME = 'boatFeature';
 
+export interface IBoatFeatureState {
+  boatClass: IEntityFormState<BoatClass>
+}
+
 export const getBoatClassManagementState = createFeatureSelector<IBoatFeatureState>( FEATURE_NAME );
 
 export const { initialFormState, selectors, rawReducer, formFacade: BoatClassFeatureFacadeBase } = buildAutoFormFeatureState(
@@ -27,22 +31,10 @@ export const boatClassFormReducer = wrapReducerWithFormStateUpdate(
   validateBoatClassDetailsForm
 );
 
-export interface IBoatFeatureState {
-  detailsForm: IEntityFormState<BoatClass>
-}
-
-const INITIAL_BOAT_FEATURE_STATE : IBoatFeatureState = {
-  detailsForm : initialFormState
-}
-
 export const BOAT_CLASS_FEATURE_SELECTORS = selectors;
 
-function boatFeatureState( state = INITIAL_BOAT_FEATURE_STATE ): IBoatFeatureState {
-  return state;
-}
-
 export const boatFeatureReducer: ActionReducerMap<IBoatFeatureState> = {
-  detailsForm: boatClassFormReducer
+  boatClass: boatClassFormReducer
 }
 
-export const getDetailsForm = createSelector( getBoatClassManagementState, ( state: IBoatFeatureState ) => state.detailsForm.entityForm );
+export const getDetailsForm = createSelector( getBoatClassManagementState, ( state: IBoatFeatureState ) => state.boatClass.entityForm );

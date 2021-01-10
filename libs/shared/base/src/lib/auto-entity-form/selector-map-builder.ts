@@ -3,9 +3,12 @@
 import { IEntityFormState } from '@sailrc/shared/base';
 import { createSelector, MemoizedSelector, Selector } from '@ngrx/store';
 import { ISelectorMap } from './selector-map';
+import { FormGroupState } from 'ngrx-forms';
 
 export const mapToEntityForm =
-  <TState extends IEntityFormState<TModel>, TModel, TExtra>(state: TState & TExtra): TModel | null => !state || !state.entityForm ? null : state.entityForm.value;
+  <TState extends IEntityFormState<TModel>, TModel, TExtra>(state: TState & TExtra): FormGroupState<TModel> | null => {
+  return !state || !state.entityForm ? null : state.entityForm;
+}
 
 // prettier-ignore
 export const buildSelectorMap = <TParentState, TState extends IEntityFormState<TModel>, TModel, TExtra>(

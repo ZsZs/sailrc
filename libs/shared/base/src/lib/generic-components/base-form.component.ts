@@ -8,15 +8,12 @@ import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widget
 import { BaseUrlSegments, RouterFacade } from '@sailrc/shared/util';
 import { BaseEntityFacade, IEntityFormFacade } from '../..';
 import { ActivatedRoute } from '@angular/router';
-import { MemoizedSelector, Selector } from '@ngrx/store';
 
 export abstract class BaseFormComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
   isLoading$: Observable<boolean>;
   formState$: Observable<FormGroupState<T>>;
   submittedValue$: Observable<T | undefined>;
   private entityId: string;
-  private entityName: string;
-  private pathVariableName: string;
   dateValueConverter: NgrxValueConverter<Date | null, string | null> = {
     convertViewToStateValue(value) {
       if (value === null) { return null; }
@@ -31,7 +28,6 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   constructor(
     protected entityFacade: BaseEntityFacade<T>,
     protected entityFormFacade: IEntityFormFacade<T>,
-    protected entityFormSelector: MemoizedSelector<any, any>,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
@@ -93,7 +89,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   protected selectFormState() {
-    this.formState$ = this.entityFormFacade.getFormState( this.entityFormSelector );
+    this.formState$ = this.entityFormFacade.getFormState();
   }
 
   private setCurrentEntity() {
