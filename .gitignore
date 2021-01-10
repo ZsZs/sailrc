@@ -16,7 +16,7 @@
 *.launch
 .settings/
 *.sublime-workspace
-.ldb
+*.ldb
 
 # IDE - VSCode
 .vscode/*
