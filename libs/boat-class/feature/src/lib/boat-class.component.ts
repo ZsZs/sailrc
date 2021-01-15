@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseEntityContainerComponent } from '@sailrc/shared/base';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { RouterFacade } from '@sailrc/shared/util';
 import { ActivatedRoute } from '@angular/router';
 

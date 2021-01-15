@@ -2,7 +2,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
 
 import { buildAutoFormFeatureState, IEntityFormState } from '@sailrc/shared/base';
-import { BoatClass } from '@sailrc/boat/domain';
+import { BoatClass } from '@sailrc/boat-class/domain';
 import { validateBoatClassDetailsForm } from '../details/boat-class-details.reducer';
 
 export const FEATURE_NAME = 'boatFeature';

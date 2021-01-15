@@ -9,43 +9,73 @@
   },
   "projects": {
     "sail-rc": {
-      "tags": ["type:app"]
+      "tags": [
+        "type:app"
+      ]
     },
     "sail-rc-e2e": {
       "tags": []
     },
-    "boat-feature": {
-      "tags": ["type:feature"]
-    },
-    "boat-domain": {
-      "tags": ["type:domain"]
-    },
     "sailor-domain": {
-      "tags": ["type:domain"]
+      "tags": [
+        "type:domain"
+      ]
     },
     "sailor-feature": {
-      "tags": ["type:feature"]
+      "tags": [
+        "type:feature"
+      ]
     },
     "shared-authentication-domain": {
-      "tags": ["scope:shared", "type:domain"]
+      "tags": [
+        "scope:shared",
+        "type:domain"
+      ]
     },
     "shared-authentication-feature": {
-      "tags": ["scope:shared", "type:feature"]
+      "tags": [
+        "scope:shared",
+        "type:feature"
+      ]
     },
     "shared-widgets": {
-      "tags": ["scope:shared", "type:feature"]
+      "tags": [
+        "scope:shared",
+        "type:feature"
+      ]
     },
     "shared-util": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": [
+        "scope:shared",
+        "type:util"
+      ]
     },
     "shared-base": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": [
+        "scope:shared",
+        "type:util"
+      ]
     },
     "log-server": {
-      "tags": ["type:app"]
+      "tags": [
+        "type:app"
+      ]
     },
     "shared-material": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": [
+        "scope:shared",
+        "type:util"
+      ]
+    },
+    "boat-class-domain": {
+      "tags": [
+        "type:domain"
+      ]
+    },
+    "boat-class-feature": {
+      "tags": [
+        "type:feature"
+      ]
     }
   }
 }

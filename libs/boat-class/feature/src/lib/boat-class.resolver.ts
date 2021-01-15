@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';
-import { BoatClass, BoatClassFacade, getBoatClassById } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade, getBoatClassById } from '@sailrc/boat-class/domain';
 import { IBoatFeatureState } from './store/boat-feature.reducer';
 import { EditEntity } from '@sailrc/shared/base';
 

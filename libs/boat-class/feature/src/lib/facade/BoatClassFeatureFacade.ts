@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BoatClass } from '@sailrc/boat/domain';
+import { BoatClass } from '@sailrc/boat-class/domain';
 import { BoatClassFeatureFacadeBase } from '../store/boat-feature.reducer';
 import { IEntityFormFacade } from '@sailrc/shared/base';
 

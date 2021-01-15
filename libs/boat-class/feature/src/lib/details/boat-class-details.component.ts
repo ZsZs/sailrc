@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { RouterFacade } from '@sailrc/shared/util';
 import { IBoatFeatureState } from '../store/boat-feature.reducer';
 import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';

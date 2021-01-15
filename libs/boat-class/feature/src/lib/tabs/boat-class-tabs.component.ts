@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { BaseTabsComponent } from '@sailrc/shared/base';
 import { RouterFacade } from '@sailrc/shared/util';
 import { ActiveTabService } from '@sailrc/shared/widgets';

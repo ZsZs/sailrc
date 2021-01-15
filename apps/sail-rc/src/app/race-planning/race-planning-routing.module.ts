@@ -4,7 +4,7 @@ import { RacePlanningComponent } from './race-planning.component';
 
 const routes: Routes = [
   { path: '', component: RacePlanningComponent },
-  { path: 'boat-class', loadChildren: () => import( '@sailrc/boat/feature').then( m => m.BoatFeatureModule ) }
+  { path: 'boat-class', loadChildren: () => import( '@sailrc/boat-class/feature').then( m => m.BoatFeatureModule ) }
 ];
 
 @NgModule({

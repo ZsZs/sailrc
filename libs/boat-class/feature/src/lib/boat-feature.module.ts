@@ -4,7 +4,7 @@ import { BoatClassComponent } from './boat-class.component';
 import { BoatClassDetailsComponent } from './details/boat-class-details.component';
 import { BoatClassListComponent } from './list/boat-class-list.component';
 import { BoatClassTabsComponent } from './tabs/boat-class-tabs.component';
-import { BoatDomainModule } from '@sailrc/boat/domain';
+import { BoatDomainModule } from '@sailrc/boat-class/domain';
 import { BoatFeatureRoutingModule } from './boat-feature-routing.module';
 import { SharedMaterialModule } from '@sailrc/shared/material';
 import { boatFeatureReducer, FEATURE_NAME } from './store/boat-feature.reducer';

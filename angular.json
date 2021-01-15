@@ -114,7 +114,10 @@
               "apps/sail-rc/tsconfig.app.json",
               "apps/sail-rc/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/sail-rc/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/sail-rc/**"
+            ]
           }
         },
         "test": {
@@ -148,8 +151,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/sail-rc-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/sail-rc-e2e/**"]
+            "tsConfig": [
+              "apps/sail-rc-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/sail-rc-e2e/**"
+            ]
           }
         }
       }
@@ -167,7 +175,9 @@
             "outputPath": "dist/apps/log-server",
             "main": "apps/log-server/src/main.ts",
             "tsConfig": "apps/log-server/tsconfig.app.json",
-            "assets": ["apps/log-server/src/assets"]
+            "assets": [
+              "apps/log-server/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -196,7 +206,10 @@
               "apps/log-server/tsconfig.app.json",
               "apps/log-server/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/log-server/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/log-server/**"
+            ]
           }
         },
         "test": {
@@ -207,60 +220,6 @@
           }
         }
       }
-    },
-    "boat-feature": {
-      "projectType": "library",
-      "root": "libs/boat/feature",
-      "sourceRoot": "libs/boat/feature/src",
-      "prefix": "sailrc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/boat/feature/tsconfig.lib.json",
-              "libs/boat/feature/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/boat/feature/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/boat/feature/jest.config.js",
-            "tsConfig": "libs/boat/feature/tsconfig.spec.json",
-            "setupFile": "libs/boat/feature/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {}
-    },
-    "boat-domain": {
-      "projectType": "library",
-      "root": "libs/boat/domain",
-      "sourceRoot": "libs/boat/domain/src",
-      "prefix": "sailrc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/boat/domain/tsconfig.lib.json",
-              "libs/boat/domain/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/boat/domain/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/boat/domain/jest.config.js",
-            "tsConfig": "libs/boat/domain/tsconfig.spec.json",
-            "setupFile": "libs/boat/domain/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {}
     },
     "sailor-domain": {
       "projectType": "library",
@@ -275,7 +234,10 @@
               "libs/sailor/domain/tsconfig.lib.json",
               "libs/sailor/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/sailor/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/sailor/domain/**"
+            ]
           }
         },
         "test": {
@@ -303,7 +265,10 @@
               "libs/sailor/feature/tsconfig.lib.json",
               "libs/sailor/feature/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/sailor/feature/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/sailor/feature/**"
+            ]
           }
         },
         "test": {
@@ -399,7 +364,10 @@
               "libs/shared/widgets/tsconfig.lib.json",
               "libs/shared/widgets/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/widgets/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/widgets/**"
+            ]
           }
         },
         "test": {
@@ -426,7 +394,10 @@
               "libs/shared/util/tsconfig.lib.json",
               "libs/shared/util/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/util/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/util/**"
+            ]
           }
         },
         "test": {
@@ -453,7 +424,10 @@
               "libs/shared/base/tsconfig.lib.json",
               "libs/shared/base/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/base/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/base/**"
+            ]
           }
         },
         "test": {
@@ -480,7 +454,10 @@
               "libs/shared/material/tsconfig.lib.json",
               "libs/shared/material/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/material/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/material/**"
+            ]
           }
         },
         "test": {
@@ -490,6 +467,66 @@
             "tsConfig": "libs/shared/material/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/shared/material/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "boat-class-domain": {
+      "projectType": "library",
+      "root": "libs/boat-class/domain",
+      "sourceRoot": "libs/boat-class/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/boat-class/domain/tsconfig.lib.json",
+              "libs/boat-class/domain/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/boat-class/domain/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/boat-class/domain/jest.config.js",
+            "tsConfig": "libs/boat-class/domain/tsconfig.spec.json",
+            "setupFile": "libs/boat-class/domain/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "boat-class-feature": {
+      "projectType": "library",
+      "root": "libs/boat-class/feature",
+      "sourceRoot": "libs/boat-class/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/boat-class/feature/tsconfig.lib.json",
+              "libs/boat-class/feature/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/boat-class/feature/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/boat-class/feature/jest.config.js",
+            "tsConfig": "libs/boat-class/feature/tsconfig.spec.json",
+            "setupFile": "libs/boat-class/feature/src/test-setup.ts"
           }
         }
       },
