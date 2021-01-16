@@ -1,10 +1,22 @@
 module.exports = {
-  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
-  transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest'
-  },
-  resolver: '@nrwl/jest/plugins/resolver',
-  moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageReporters: ['html'],
-  passWithNoTests: true
+  projects: [
+    '<rootDir>/apps/sail-rc',
+    '<rootDir>/libs/boat-class/feature',
+    '<rootDir>/libs/boat-class/domain',
+    '<rootDir>/libs/boat/domain',
+    '<rootDir>/libs/boat/feature',
+    '<rootDir>/libs/yacht-club/domain',
+    '<rootDir>/libs/yacht-club/feature',
+    '<rootDir>/libs/race/feature',
+    '<rootDir>/libs/race/domain',
+    '<rootDir>/libs/shared/authentication/domain',
+    '<rootDir>/libs/shared/authentication/feature',
+    '<rootDir>/libs/shared/base/base',
+    '<rootDir>/libs/shared/material',
+    '<rootDir>/libs/shared/base',
+    '<rootDir>/libs/shared/util',
+    '<rootDir>/libs/shared/widgets',
+    '<rootDir>/libs/sailor/domain',
+    '<rootDir>/libs/sailor/feature',
+  ],
 };

@@ -4,9 +4,9 @@ import { BoatClassListComponent } from './boat-class-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
+import { AuthFeatureFacade } from '@processpuzzle/shared/authentication/feature';
 import { Observable, of } from 'rxjs';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
 

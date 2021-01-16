@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { Observable, of } from 'rxjs';
-import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
+import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -11,7 +11,7 @@ describe('HeaderComponent', () => {
 
   const authFeatureFacadeStub = {
     isAuthenticated(): Observable<boolean> { return of( false ); },
-    logout() {}
+    logout() { console.log( "logout" )}
   };
 
   beforeEach(async(() => {

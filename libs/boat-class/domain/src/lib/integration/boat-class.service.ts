@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BoatClass } from '../domain/boat-class';
-import { BaseFirestoreRepository } from '@sailrc/shared/base';
+import { BaseFirestoreRepository } from '@processpuzzle/shared/base';
 
 @Injectable()
 export class BoatClassService extends BaseFirestoreRepository<BoatClass> {

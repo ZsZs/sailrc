@@ -1,0 +1,4 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link [routerLink]="['list']" [active]="(currentTab | async) === 'boat-list'">Boat List</a>
+  <a mat-tab-link [disabled]="(selectedEntity | async) === null || undefined" (click)="showDetails()" [active]="(currentTab | async) === 'boat-details'">Boat Details</a>
+</nav>

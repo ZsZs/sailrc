@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RacePlanningComponent } from './race-planning.component';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 
 describe('RacePlanningComponent', () => {
   let component: RacePlanningComponent;

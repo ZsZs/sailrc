@@ -1,10 +1,13 @@
-import { getHeader } from '../support/app.po';
+import { getGreeting } from '../support/app.po';
 
 describe('sail-rc', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display the main page structure', () => {
-    // tslint:disable-next-line:no-unused-expression
-    expect( getHeader() ).to.not.be.null;
+  it('should display welcome message', () => {
+    // Custom command example, see `../support/commands.ts` file
+    cy.login('my-email@something.com', 'myPassword');
+
+    // Function helper example, see `../support/app.po.ts` file
+    getGreeting().contains('Welcome to sail-rc!');
   });
 });

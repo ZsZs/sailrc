@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BaseEntityContainerComponent } from '@sailrc/shared/base';
+import { BaseEntityContainerComponent } from '@processpuzzle/shared/base';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
-import { RouterFacade } from '@sailrc/shared/util';
+import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

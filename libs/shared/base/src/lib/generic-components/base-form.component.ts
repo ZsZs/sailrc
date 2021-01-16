@@ -1,15 +1,16 @@
-import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
 
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
-import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
-import { BaseUrlSegments, RouterFacade } from '@sailrc/shared/util';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { BaseUrlSegments, RouterFacade } from '@processpuzzle/shared/util';
 import { BaseEntityFacade, IEntityFormFacade } from '../..';
 import { ActivatedRoute } from '@angular/router';
 
-export abstract class BaseFormComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
+@Component({template: ''})
+export abstract class BaseFormComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
   isLoading$: Observable<boolean>;
   formState$: Observable<FormGroupState<T>>;
   submittedValue$: Observable<T | undefined>;
@@ -26,13 +27,13 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   };
 
   constructor(
-    protected entityFacade: BaseEntityFacade<T>,
-    protected entityFormFacade: IEntityFormFacade<T>,
+    @Inject('entityFacade') protected entityFacade: BaseEntityFacade<T>,
+    @Inject('entityFormFacade') protected entityFormFacade: IEntityFormFacade<T>,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected tabName: string )
+    @Inject(String) protected tabName: string )
   {
     this.submittedValue$ = entityFacade.current$;
     this.selectFormState();
@@ -41,9 +42,6 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   // public accessors and mutators
 
   // life cycle hooks, event handling
-  ngAfterViewInit(): void {
-  }
-
   ngOnDestroy(): void {
     this.componentDestroyService.unsubscribeComponent$.next();
     this.activeTabService.tabIsInActive( this.tabName );
@@ -54,7 +52,6 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
     this.subscribeToLoading();
     this.notifyActiveTab();
     this.setCurrentEntity();
-    this.dispatchEditOrNewEvent();
   }
 
   onCancel() {
@@ -67,7 +64,9 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
       take(1),
       tap( () => this.entityFacade.deselect() ),
       map( formState => formState.value ),
-      map(entity => this.entityId === BaseUrlSegments.NewEntity ? this.entityFacade.create( entity ) : this.entityFacade.update( entity )),
+      map(entity => {
+        this.entityId === BaseUrlSegments.NewEntity ? this.entityFacade.create( entity ) : this.entityFacade.update( entity )
+      }),
       tap( () => this.closeFormAndNavigateBack())
     ).subscribe();
   }
@@ -79,9 +78,6 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
 
   private determineEntityIdFromRoute(): void {
     this.entityId = this.route.snapshot.paramMap.get( this.entityFacade.entityIdPathVariable );
-  }
-
-  private dispatchEditOrNewEvent() {
   }
 
   private notifyActiveTab() {

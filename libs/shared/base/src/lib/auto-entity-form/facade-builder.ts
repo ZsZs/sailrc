@@ -5,7 +5,7 @@ import { FormGroupState } from 'ngrx-forms';
 import { IEntityFormFacade } from './facade';
 import { ISelectorMap } from './selector-map';
 import { EditEntity } from './actions';
-import { Injectable } from '@angular/core';
+import { forwardRef, Injectable } from '@angular/core';
 
 let selectorsVariable: ISelectorMap<any, any>;
 
@@ -18,8 +18,8 @@ export const buildFacade = <TModel, TParentState>(selectors: ISelectorMap<TParen
   return BaseFormFacade;
 };
 
-@Injectable()
-export class BaseFormFacade<TModel> implements IEntityFormFacade<TModel> {
+@Injectable({providedIn: "root", useClass: forwardRef( () => DefaultFormFacade )})
+export abstract class BaseFormFacade<TModel> implements IEntityFormFacade<TModel> {
   modelType: new () => TModel;
   store: Store<any>;
 
@@ -31,14 +31,8 @@ export class BaseFormFacade<TModel> implements IEntityFormFacade<TModel> {
     this.store = store;
   }
 
-  delete(): void {
-  }
-
   edit( entity: Partial<TModel> ): void {
     this.store.dispatch( new EditEntity( this.modelType, entity ) );
-  }
-
-  save(): void {
   }
 
   getFormState(): Observable<FormGroupState<TModel>>{
@@ -46,3 +40,6 @@ export class BaseFormFacade<TModel> implements IEntityFormFacade<TModel> {
   }
 }
 
+class DefaultFormFacade<TModel> extends BaseFormFacade<TModel>{
+
+}

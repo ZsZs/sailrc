@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Sailor } from '../domain/sailor';
-import { FirestoreAutoEntityService } from '@sailrc/shared/base';
+import { FirestoreAutoEntityService } from '@processpuzzle/shared/base';
 
 @Injectable()
 export class SailorService extends FirestoreAutoEntityService<Sailor> {

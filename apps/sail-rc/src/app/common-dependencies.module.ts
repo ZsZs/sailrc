@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgrxFormsModule } from 'ngrx-forms';
 
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 
 @NgModule({
    declarations: [

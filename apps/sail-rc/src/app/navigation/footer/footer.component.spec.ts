@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;

@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BaseEntityInterface, IEntityFormState } from '@sailrc/shared/base';
+import { BaseEntityInterface, IEntityFormState } from '@processpuzzle/shared/base';
 
 export abstract class BaseResolver<T> implements Resolve<T> {
 

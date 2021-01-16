@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { SpinnerService } from '@sailrc/shared/widgets';
+import { SpinnerService } from '@processpuzzle/shared/widgets';
 import { AuthFeatureFacade } from '../facade/auth-feature-facade';
 
 @Component({

@@ -1,14 +1,15 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { RouterFacade } from '@sailrc/shared/util';
-import { ActiveTabService } from '@sailrc/shared/widgets';
-import { BaseEntityInterface } from '@sailrc/shared/base';
-import { BaseUrlSegments } from '@sailrc/shared/util';
+import { RouterFacade } from '@processpuzzle/shared/util';
+import { ActiveTabService } from '@processpuzzle/shared/widgets';
+import { BaseEntityInterface } from '@processpuzzle/shared/base';
+import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 import { ActivatedRoute } from '@angular/router';
 
+@Component({template: ''})
 export abstract class BaseTabsComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
   currentTab: Observable<string>;
   selectedEntity: Observable<T>;
@@ -16,7 +17,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   private readonly onDestroy = new Subject<void>();
 
   constructor(
-    protected entityFacade: IEntityFacade<T>,
+    @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
     protected activeTabService: ActiveTabService,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute

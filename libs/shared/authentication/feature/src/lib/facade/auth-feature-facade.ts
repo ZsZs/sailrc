@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { SnackBarService, SpinnerService } from '@sailrc/shared/widgets';
-import { AuthData, AuthDomainFacade } from '@sailrc/shared/authentication/domain';
+import { SnackBarService, SpinnerService } from '@processpuzzle/shared/widgets';
+import { AuthData, AuthDomainFacade } from '@processpuzzle/authentication/domain';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

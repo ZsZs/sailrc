@@ -1,5 +1,5 @@
 import { Key } from '@briebug/ngrx-auto-entity';
-import { BaseEntityInterface } from '@sailrc/shared/base';
+import { BaseEntityInterface } from '@processpuzzle/shared/base';
 
 export class Sailor implements BaseEntityInterface {
   @Key id: string;

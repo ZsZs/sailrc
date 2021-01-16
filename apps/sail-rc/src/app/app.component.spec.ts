@@ -4,19 +4,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
-import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
+import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 
 describe('AppComponent', () => {
   let store: MockStore;
   const initialState = { loggedIn: false };
   const authFeatureFacadeStub = {
     isAuthenticated(): Observable<boolean> { return of( false ); },
-    logout() {}
+    logout() { console.log("log out")}
   };
 
   beforeEach(async(() => {

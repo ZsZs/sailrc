@@ -3,10 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SignupComponent } from './signup.component';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
+import { AuthFeatureFacade } from '@processpuzzle/shared/authentication/feature';
 import { Observable, of } from 'rxjs';
 
 describe('SignupComponent', () => {

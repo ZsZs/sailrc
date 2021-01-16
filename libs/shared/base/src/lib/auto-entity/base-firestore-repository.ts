@@ -1,5 +1,5 @@
 import { IAutoEntityService, IEntityInfo } from '@briebug/ngrx-auto-entity';
-import { BaseEntityInterface } from '@sailrc/shared/base';
+import { BaseEntityInterface } from '@processpuzzle/shared/base';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

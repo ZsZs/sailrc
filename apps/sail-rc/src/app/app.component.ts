@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sailrc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'Sail Race Management';
-  constructor(
-  ) {
-  }
 
-  ngOnInit(): void {
-  }
+export class AppComponent {
+  title = 'Sail Race Management';
+
 }

@@ -4,6 +4,7 @@ export { BaseEntityInterface } from './lib/auto-entity/base-entity.interface';
 export { BaseEntityFacade } from './lib/auto-entity/base-entity.facade';
 export { BaseFirestoreRepository } from './lib/auto-entity/base-firestore-repository';
 export { BaseFormComponent } from './lib/generic-components/base-form.component';
+export { BaseFormFacade } from './lib/auto-entity-form/facade-builder';
 export { BaseListComponent } from './lib/generic-components/base-list.component';
 export { BaseTabsComponent } from './lib/generic-components/base-tabs.component';
 export { EntityService } from './lib/firestore/entity.service';

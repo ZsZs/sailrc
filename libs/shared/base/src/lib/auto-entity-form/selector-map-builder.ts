@@ -1,6 +1,6 @@
 
 // prettier-ignore
-import { IEntityFormState } from '@sailrc/shared/base';
+import { IEntityFormState } from '@processpuzzle/shared/base';
 import { createSelector, MemoizedSelector, Selector } from '@ngrx/store';
 import { ISelectorMap } from './selector-map';
 import { FormGroupState } from 'ngrx-forms';

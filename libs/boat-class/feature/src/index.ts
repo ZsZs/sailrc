@@ -1,1 +1,1 @@
-export * from './lib/boat-feature.module';
+export * from './lib/boat-class-feature.module';

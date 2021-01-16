@@ -1,17 +1,21 @@
-import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { RouterFacade } from '@sailrc/shared/util';
+import { RouterFacade } from '@processpuzzle/shared/util';
 import { BaseEntityInterface } from '../..';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
-import { BaseUrlSegments } from '@sailrc/shared/util';
+import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
 
+@Component({
+  template: '',
+  styleUrls: ['./base-list.component.css']
+})
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild( MatSort, {static: true} ) sort: MatSort;
   @ViewChild( MatPaginator, {static: true} ) paginator: MatPaginator;
@@ -21,12 +25,12 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   isLoading$: Observable<boolean>;
 
   protected constructor(
-    protected entityFacade: IEntityFacade<T>,
+    @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
-    protected readonly tabName: string ) {}
+    @Inject(String) protected readonly tabName: string ) {}
 
   // public accessors and mutators
   addEntity() {

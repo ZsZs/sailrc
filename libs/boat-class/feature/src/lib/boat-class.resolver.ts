@@ -4,12 +4,12 @@ import { select, Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';
 import { BoatClass, BoatClassFacade, getBoatClassById } from '@sailrc/boat-class/domain';
-import { IBoatFeatureState } from './store/boat-feature.reducer';
-import { EditEntity } from '@sailrc/shared/base';
+import { IBoatClassFeatureState } from './store/boat-class-feature.reducer';
+import { EditEntity } from '@processpuzzle/shared/base';
 
 @Injectable() export class BoatClassResolver implements Resolve<BoatClass> {
 
-  constructor( private boatClassFacade: BoatClassFacade, private store: Store<IBoatFeatureState> ) {}
+  constructor( private boatClassFacade: BoatClassFacade, private store: Store<IBoatClassFeatureState> ) {}
 
   resolve( route: ActivatedRouteSnapshot ): Observable<BoatClass> {
     const idParam = 'boatClassId';

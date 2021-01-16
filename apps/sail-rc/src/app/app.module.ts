@@ -12,8 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 
-import { SharedWidgetsModule, SnackBarService } from '@sailrc/shared/widgets';
-import { CustomSerializer, RouteStateService, SharedUtilModule } from '@sailrc/shared/util';
+import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
+import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
 
 import { environment } from '../environments/environment';
 
@@ -23,9 +23,9 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { SharedAuthenticationFeatureModule } from '@sailrc/shared/authentication/feature';
+import { SharedAuthenticationFeatureModule } from '@processpuzzle/authentication/feature';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { SharedAuthenticationDomainModule } from '@sailrc/shared/authentication/domain';
+import { SharedAuthenticationDomainModule } from '@processpuzzle/authentication/domain';
 import { EffectsModule } from '@ngrx/effects';
 import { metaReducers } from './app.reducer';
 import { CommonDependenciesModule } from './common-dependencies.module';

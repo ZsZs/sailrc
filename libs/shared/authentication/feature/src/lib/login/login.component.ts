@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { SpinnerService, UiState } from '@sailrc/shared/widgets';
+import { SpinnerService, UiState } from '@processpuzzle/shared/widgets';
 import { AuthFeatureFacade } from '../facade/auth-feature-facade';
 
 @Component({

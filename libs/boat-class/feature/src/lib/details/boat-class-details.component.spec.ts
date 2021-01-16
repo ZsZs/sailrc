@@ -7,7 +7,7 @@ import { BoatClass, BoatClassFacade } from '@sailrc/boat/domain';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SharedMaterialModule } from '@sailrc/shared/material';
+import { SharedMaterialModule } from '@processpuzzle/shared/material';
 
 describe('BoatClassDetailsComponent', () => {
   let component: BoatClassDetailsComponent;

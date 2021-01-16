@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
-import { RouterFacade } from '@sailrc/shared/util';
-import { BaseListComponent } from '@sailrc/shared/base';
-import { ActiveTabService, ComponentDestroyService } from '@sailrc/shared/widgets';
+import { RouterFacade } from '@processpuzzle/shared/util';
+import { BaseListComponent } from '@processpuzzle/shared/base';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

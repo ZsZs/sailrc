@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthFeatureFacade } from '@sailrc/shared/authentication/feature';
+import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 
 
 @Component({
