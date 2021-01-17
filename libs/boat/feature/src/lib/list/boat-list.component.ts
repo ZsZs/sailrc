@@ -7,7 +7,7 @@ import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'sailrc-boat-detail',
+  selector: 'sailrc-boat-list',
   templateUrl: './boat-list.component.html',
   styleUrls: ['./boat-list.component.css'],
   encapsulation: ViewEncapsulation.Emulated

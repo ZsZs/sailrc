@@ -25,5 +25,4 @@ export class BoatDomainModule {
       providers: [BoatFacade]
     }
   }
-
 }
