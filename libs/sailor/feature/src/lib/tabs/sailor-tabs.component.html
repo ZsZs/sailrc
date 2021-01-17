@@ -1,5 +1,4 @@
 <nav mat-tab-nav-bar>
-    <a mat-tab-link [routerLink]="['list']" routerLinkActive #list="routerLinkActive" [active]="list.isActive">Sailor List</a>
-    <a mat-tab-link [disabled]="(selectedSailors | async).length != 1" (click)="showDetails()" routerLinkActive #details="routerLinkActive" [active]="details.isActive">Sailor Details</a>
-    <a mat-tab-link [disabled]="(selectedSailors | async).length != 1" (click)="showRegistrations()" routerLinkActive #reg="routerLinkActive" [active]="reg.isActive">Sailor Boats</a>
+    <a mat-tab-link [routerLink]="['list']" [active]="(currentTab | async) === 'sailor-list'">Sailor List</a>
+    <a mat-tab-link [disabled]="(selectedEntity | async) === null || undefined" (click)="showDetails()" [active]="(currentTab | async) === 'sailor-details'">Sailor Details</a>
 </nav>

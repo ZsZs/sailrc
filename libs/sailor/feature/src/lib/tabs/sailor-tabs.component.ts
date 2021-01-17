@@ -1,54 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { AuthService } from '../../authentication/auth.service';
-import { Store } from '@ngrx/store';
-import * as fromAppReducer from '../../app.reducer';
-import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { Sailor } from '../sailor';
-import { getSelectedSailors } from '../sailor.reducer';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Sailor, SailorFacade } from '@sailrc/sailor/domain';
+import { RouterFacade } from '@processpuzzle/shared/util';
+import { ActiveTabService } from '@processpuzzle/shared/widgets';
+import { BaseTabsComponent } from '@processpuzzle/shared/base';
 
 @Component({
-  selector: 'srm-sailor-tabs',
+  selector: 'sailrc-sailor-tabs',
   templateUrl: './sailor-tabs.component.html',
   styleUrls: ['./sailor-tabs.component.css']
 })
-export class SailorTabsComponent implements OnDestroy, OnInit {
-  selectedSailors: Observable<Sailor[]>;
-  selectedSailorId: string;
-  private readonly onDestroy = new Subject<void>();
-
-  constructor( private authService: AuthService, private store: Store<fromAppReducer.AppState>, private router: Router ) {}
-
-  ngOnDestroy(): void {
-    this.onDestroy.next();
-  }
-
-  ngOnInit() {
-    this.retrieveSelectedSailorsFromStore();
-    this.determineSelectedSailorId();
-  }
-
-  showDetails() {
-    this.router.navigateByUrl( '/sailor/' + this.selectedSailorId + '/details' );
-  }
-
-  showRegistrations() {
-    this.router.navigateByUrl( '/sailor/' + this.selectedSailorId + '/addBoat' );
+export class SailorTabsComponent extends BaseTabsComponent<Sailor>{
+  constructor(
+    protected sailorFacade: SailorFacade,
+    protected routerFacade: RouterFacade,
+    protected activeTabService: ActiveTabService,
+    protected route: ActivatedRoute ) {
+    super( sailorFacade, activeTabService, routerFacade, route );
   }
 
   // protected, private helper methods
-  determineSelectedSailorId() {
-    this.selectedSailors.pipe( takeUntil( this.onDestroy )).subscribe( sailors => {
-      if ( sailors.length > 0 ) {
-        this.selectedSailorId = sailors[0].id;
-      } else {
-        this.selectedSailorId = undefined;
-      }
-    });
-  }
-
-  retrieveSelectedSailorsFromStore() {
-    this.selectedSailors = this.store.select( getSelectedSailors );
-  }
 }

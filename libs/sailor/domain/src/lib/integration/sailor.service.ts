@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Sailor } from '../domain/sailor';
-import { FirestoreAutoEntityService } from '@processpuzzle/shared/base';
+import { BaseFirestoreRepository } from '@processpuzzle/shared/base';
 
 @Injectable()
-export class SailorService extends FirestoreAutoEntityService<Sailor> {
+export class SailorService extends BaseFirestoreRepository<Sailor> {
   static readonly path = 'sailors';
 
   constructor( firestore: AngularFirestore ) {

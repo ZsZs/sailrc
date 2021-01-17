@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BoatFacade } from '@sailrc/boat/domain';
 
 @Component({
-  selector: 'sailrc-boat-detail',
+  selector: 'sailrc-boat-feature',
   templateUrl: './boat.component.html',
   styleUrls: ['./boat.component.css'],
   encapsulation: ViewEncapsulation.Emulated
