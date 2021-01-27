@@ -10,12 +10,12 @@ export interface ISailorFeatureState {
   sailor: IEntityFormState<Sailor>
 }
 
-export const getBoatManagementState = createFeatureSelector<ISailorFeatureState>( FEATURE_NAME );
+export const getSailorManagementState = createFeatureSelector<ISailorFeatureState>( FEATURE_NAME );
 
 export const { initialFormState, selectors, rawReducer, formFacade: BoatFeatureFacadeBase } = buildAutoFormFeatureState(
   Sailor,
   FEATURE_NAME,
-  getBoatManagementState,
+  getSailorManagementState,
   {
     id: undefined,
     firstName: '',
@@ -35,4 +35,4 @@ export const sailorFeatureReducer: ActionReducerMap<ISailorFeatureState> = {
   sailor: sailorFormReducer
 }
 
-export const getDetailsForm = createSelector( getBoatManagementState, ( state: ISailorFeatureState ) => state.sailor.entityForm );
+export const getDetailsForm = createSelector( getSailorManagementState, ( state: ISailorFeatureState ) => state.sailor.entityForm );

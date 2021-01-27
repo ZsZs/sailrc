@@ -14,7 +14,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   currentTab: Observable<string>;
   selectedEntity: Observable<T>;
   selectedEntityId: string;
-  private readonly onDestroy = new Subject<void>();
+  protected readonly onDestroy = new Subject<void>();
 
   constructor(
     @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,

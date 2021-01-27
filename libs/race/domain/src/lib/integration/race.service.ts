@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Sailor } from '../domain/sailor';
+
 import { BaseFirestoreRepository } from '@processpuzzle/shared/base';
+import { Race } from '../domain/race';
 
 @Injectable()
-export class SailorService extends BaseFirestoreRepository<Sailor> {
+export class RaceService extends BaseFirestoreRepository<Race> {
 
   constructor( firestore: AngularFirestore ) {
     super( firestore );

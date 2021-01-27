@@ -1,0 +1,7 @@
+<mat-toolbar *ngIf="(selectedRace | async)">
+    <div fxShow="true" fxFlex fxLayout fxLayoutAlign="flex-left">
+        <span>{{( selectedRace | async ).title}}: &nbsp;</span>
+        <span>{{( selectedRace | async ).fromDate | date: 'dd/MM/yyyy' }} &nbsp;- &nbsp;</span>
+        <span>{{( selectedRace | async ).toDate | date: 'dd/MM/yyyy' }}</span>
+    </div>
+</mat-toolbar>

@@ -14,6 +14,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   isLoading$: Observable<boolean>;
   formState$: Observable<FormGroupState<T>>;
   submittedValue$: Observable<T | undefined>;
+  protected defaultCriteria: string;
   private entityId: string;
   dateValueConverter: NgrxValueConverter<Date | null, string | null> = {
     convertViewToStateValue(value) {
@@ -65,7 +66,9 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
       tap( () => this.entityFacade.deselect() ),
       map( formState => formState.value ),
       map(entity => {
-        this.entityId === BaseUrlSegments.NewEntity ? this.entityFacade.create( entity ) : this.entityFacade.update( entity )
+        this.entityId === BaseUrlSegments.NewEntity ?
+          this.entityFacade.create( entity, this.defaultCriteria ) :
+          this.entityFacade.update( entity, this.defaultCriteria )
       }),
       tap( () => this.closeFormAndNavigateBack())
     ).subscribe();

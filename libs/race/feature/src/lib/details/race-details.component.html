@@ -1,0 +1,45 @@
+<div class="basic-container">
+  <mat-card>
+    <form [ngrxFormState]="(formState$ | async)">
+      <mat-card-title>Sail Race</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" >
+          <mat-form-field fxFlex='calc(100% - 25px'>
+            <input type="Title" matInput placeholder="Title" [ngrxFormControlState]="(formState$ | async).controls.title">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" >
+          <mat-form-field fxFlex='calc(50% - 25px'>
+            <mat-select placeholder="Country" [ngrxFormControlState]="(formState$ | async).controls.country">
+              <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field fxFlex='calc(50%-25px'>
+            <input type="Place" matInput placeholder="Place" [ngrxFormControlState]="(formState$ | async).controls.place">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" layout-margin>
+          <mat-form-field fxFlex='calc(50% - 25px'>
+            <input matInput [matDatepicker]="fromDatePicker" placeholder="Date from" [ngrxFormControlState]="(formState$ | async).controls.fromDate" [ngrxValueConverter]="dateValueConverter">
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field fxFlex='calc(50% - 25px'>
+            <input matInput [matDatepicker]="toDatePicker" placeholder="Date to" [ngrxFormControlState]="(formState$ | async).controls.toDate" [ngrxValueConverter]="dateValueConverter">
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >
+        <button *ngIf="( isLoading$ | async ) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
+        <button *ngIf="( isLoading$ | async ) === false" type="submit" mat-raised-button color="primary" [disabled]="!(formState$ | async).isValid" (click)="onSubmit()">Save</button>
+        <mat-spinner *ngIf="( isLoading$ | async )"></mat-spinner>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

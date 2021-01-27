@@ -88,7 +88,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   ngOnInit() {
     this.activeTabService.tabIsActive( this.tabName );
-    this.entityFacade.loadAll();
+    this.loadAllEntities();
     this.dataSourceSubscription = this.subscribeToSourceData();
     this.subscribeToLoading();
   }
@@ -114,6 +114,10 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   // protected, private helper methods
   private cancelSelections() {
     this.selection.clear();
+  }
+
+  protected loadAllEntities() {
+    this.entityFacade.loadAll();
   }
 
   private navigateToDetailsForm( entityId: string ) {

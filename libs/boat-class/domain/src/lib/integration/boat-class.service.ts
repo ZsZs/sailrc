@@ -5,9 +5,8 @@ import { BaseFirestoreRepository } from '@processpuzzle/shared/base';
 
 @Injectable()
 export class BoatClassService extends BaseFirestoreRepository<BoatClass> {
-  static readonly path = 'boat-classes';
 
   constructor( protected firestore: AngularFirestore ) {
-    super( BoatClassService.path, firestore );
+    super( firestore );
   }
 }

@@ -1,0 +1,35 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Race, RaceFacade } from '@sailrc/race/domain';
+import { BaseFormComponent } from '@processpuzzle/shared/base';
+import { RouterFacade } from '@processpuzzle/shared/util';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { RaceFeatureFacade } from '../race-feature.facade';
+import { IRaceFeatureState } from '../store/race-feature.reducer';
+
+@Component({
+  selector: 'sailrc-race-details',
+  templateUrl: './race-details.component.html',
+  styleUrls: ['./race-details.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class RaceDetailsComponent extends BaseFormComponent<Race> {
+  countries = ['England', 'Germany', 'Hungary', 'United States'];
+
+  constructor(
+    protected sailorFacade: RaceFacade,
+    protected raceFeatureFacade: RaceFeatureFacade,
+    protected routerFacade: RouterFacade,
+    protected route: ActivatedRoute,
+    protected activeTabService: ActiveTabService,
+    protected componentDestroyService: ComponentDestroyService,
+    protected store: Store<IRaceFeatureState>,
+  ) {
+    super( sailorFacade, raceFeatureFacade, routerFacade, route, activeTabService, componentDestroyService, 'race-details' );
+  }
+
+  // public accessors and mutators
+
+  // protected, private helper methods
+}

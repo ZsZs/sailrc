@@ -21,19 +21,21 @@ import { NgrxMatSelectViewAdapter } from './mat-select-view-adapter';
 import { CustomErrorStateMatcherDirective } from './error-state-matcher';
 import { MatListOptionFixDirective } from './mat-list-option-fix';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -52,12 +54,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatFormFieldModule,
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
+    MatNativeDateModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
