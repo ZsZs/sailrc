@@ -42,13 +42,13 @@ export class RaceTabsComponent extends BaseTabsComponent<Race> {
 
   // protected, private helper methods
   determineSelectedRaceId() {
-    this.raceFacade.current$.pipe( takeUntil( this.onDestroy )).subscribe( race => {
+    this.raceFacade.current$.pipe( takeUntil( this.onDestroy$ )).subscribe( race => {
       race ? this.selectedRaceId = race.id : undefined;
     });
   }
 
   private determineSelectedRegistrationId() {
-    this.registrationFacade.current$.pipe( takeUntil( this.onDestroy )).subscribe( registration => {
+    this.registrationFacade.current$.pipe( takeUntil( this.onDestroy$ )).subscribe( registration => {
       registration ? this.selectedRegistrationId = registration.id : undefined;
     });
   }

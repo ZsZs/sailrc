@@ -11,10 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({template: ''})
 export abstract class BaseTabsComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
-  currentTab: Observable<string>;
-  selectedEntity: Observable<T>;
+  currentTab$: Observable<string>;
+  selectedEntity$: Observable<T>;
   selectedEntityId: string;
-  protected readonly onDestroy = new Subject<void>();
+  protected readonly onDestroy$ = new Subject<void>();
 
   constructor(
     @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
@@ -24,7 +24,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   ) {}
 
   ngOnDestroy(): void {
-    this.onDestroy.next();
+    this.onDestroy$.next();
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
 
   // protected, private helper methods
   private determineSelectedEntityId() {
-    this.selectedEntity.pipe( takeUntil( this.onDestroy )).subscribe( entity => {
+    this.selectedEntity$.pipe( takeUntil( this.onDestroy$ )).subscribe( entity => {
       if ( entity ) {
         this.selectedEntityId = entity.id;
       } else {
@@ -49,7 +49,7 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   }
 
   retrieveActiveTabsFromStore() {
-    this.currentTab = this.activeTabService.currentTab();
+    this.currentTab$ = this.activeTabService.currentTab();
   }
 
   // protected, private helper methods
@@ -58,6 +58,6 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   };
 
   private retrieveSelectedBoatClassesFromStore() {
-    this.selectedEntity = this.entityFacade.current$;
+    this.selectedEntity$ = this.entityFacade.current$;
   }
 }

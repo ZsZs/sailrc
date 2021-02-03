@@ -17,6 +17,7 @@ import { RaceResolver } from './race.resolver';
 import { RegistrationListComponent } from './registration/list/registration-list.component';
 import { RegistrationDetailsComponent } from './registration/details/registration-details.component';
 import { RegistrationResolver } from './registration/registration.resolver';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RegistrationResolver } from './registration/registration.resolver';
     SailorDomainModule.forFeature(),
     SharedMaterialModule,
     StoreModule.forFeature( FEATURE_NAME, raceFeatureReducer ),
-    YachtClubDomainModule.forFeature()
+    YachtClubDomainModule.forFeature(),
+    FlexModule
   ],
   providers: [
     RaceResolver,

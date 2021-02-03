@@ -2,26 +2,24 @@
   <mat-card>
     <form [ngrxFormState]="(formState$ | async)">
       <mat-card-title>Sail Race</mat-card-title>
-      <mat-card-content>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" >
+      <mat-card-content fxLayout='column'>
           <mat-form-field fxFlex='calc(100% - 25px'>
             <input type="Title" matInput placeholder="Title" [ngrxFormControlState]="(formState$ | async).controls.title">
           </mat-form-field>
-        </div>
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" >
-          <mat-form-field fxFlex='calc(50% - 25px'>
+        <div fxLayout="row wrap"  fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap="25px" fxLayoutAlign="left" >
+          <mat-form-field fxFlex='calc(30% - 25px'>
             <mat-select placeholder="Country" [ngrxFormControlState]="(formState$ | async).controls.country">
               <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field fxFlex='calc(50%-25px'>
+          <mat-form-field fxFlex='calc(30%-25px'>
             <input type="Place" matInput placeholder="Place" [ngrxFormControlState]="(formState$ | async).controls.place">
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px" fxLayoutAlign="left" layout-margin>
+        <div fxLayout="row wrap"  fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap="25px" fxLayoutAlign="left">
           <mat-form-field fxFlex='calc(50% - 25px'>
             <input matInput [matDatepicker]="fromDatePicker" placeholder="Date from" [ngrxFormControlState]="(formState$ | async).controls.fromDate" [ngrxValueConverter]="dateValueConverter">
             <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>

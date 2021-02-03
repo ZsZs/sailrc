@@ -1,16 +1,16 @@
-<mat-toolbar>
+<mat-toolbar fxLayout='row wrap' fxLayoutAlign='flex-start'>
     <div fxLayoutAlign="center center">
-        <mat-form-field fxFlex="50%">
+        <mat-form-field fxFlex="70%">
             <input matInput type="text" (keyup)="doFilter( $event.target.value )" placeholder="Filter">
         </mat-form-field>
     </div>
 
-    <div fxShow="true" fxHide.lt-md="true" fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="20px">
+    <div fxShow="true" fxHide.lt-md="true" fxFlex>
         <button mat-button (click)="addEntity()"><mat-icon>add</mat-icon> New</button>
         <button mat-button [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete</button>
     </div>
 
-    <div fxShow="true" fxHide.gt-sm="true" fxFlex fxLayout fxLayoutAlign="flex-end">
+    <div fxShow="true" fxHide.gt-sm="true" fxFlex>
         <button mat-button [matMenuTriggerFor]="beforeMenu"><mat-icon>menu</mat-icon> Choose action</button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
             <button mat-menu-item (click)="addEntity()"><mat-icon>add</mat-icon> New sailor</button>

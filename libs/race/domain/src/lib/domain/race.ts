@@ -12,7 +12,6 @@ export class Race implements BaseEntityInterface {
   place: string;
   organizer: string;
   state?: 'planned' | 'completed' | 'cancelled' | null;
-  registrations: Registration[];
 }
 
 export const INITIAL_RACE_VALUE: Race = {
@@ -23,6 +22,5 @@ export const INITIAL_RACE_VALUE: Race = {
   country: 'Germany',
   place: '',
   organizer: '',
-  state: 'planned',
-  registrations: []
+  state: 'planned'
 };

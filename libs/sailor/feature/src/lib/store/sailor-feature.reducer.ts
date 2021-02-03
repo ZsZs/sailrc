@@ -1,4 +1,4 @@
-import { Sailor } from '@sailrc/sailor/domain';
+import { INITIAL_SAILOR_VALUE, Sailor } from '@sailrc/sailor/domain';
 import { buildAutoFormFeatureState, IEntityFormState } from '@processpuzzle/shared/base';
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
@@ -16,12 +16,7 @@ export const { initialFormState, selectors, rawReducer, formFacade: BoatFeatureF
   Sailor,
   FEATURE_NAME,
   getSailorManagementState,
-  {
-    id: undefined,
-    firstName: '',
-    lastName: '',
-    yachtClub: ''
-  },
+  INITIAL_SAILOR_VALUE,
   validateSailorDetailsForm
 );
 

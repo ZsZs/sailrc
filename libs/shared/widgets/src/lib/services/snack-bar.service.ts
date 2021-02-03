@@ -1,9 +1,8 @@
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { getIsLoading, UiState } from '../store/ui.reducer';
+import { UiState } from '../store/ui.reducer';
 import { Store } from '@ngrx/store';
-import { startLoading, stopLoading } from '../store/ui.actions';
 
 @Injectable({ providedIn: 'root' })
 export class SnackBarService {

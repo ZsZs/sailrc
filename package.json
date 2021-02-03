@@ -49,6 +49,8 @@
     "firebase": "^8.2.3",
     "ngrx-forms": "^6.3.3",
     "ngx-logger": "^4.1.9",
+    "ngx-material-file-input": "^2.1.1",
+    "ngx-webcam": "^0.3.2",
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
     "xng-breadcrumb": "^6.5.0",

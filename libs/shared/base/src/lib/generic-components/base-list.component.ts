@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,6 +11,7 @@ import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   template: '',
@@ -23,6 +24,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   dataSourceSubscription: Subscription;
   selection = new SelectionModel<T>(true, []);
   isLoading$: Observable<boolean>;
+  protected readonly onDestroy$ = new Subject<void>();
 
   protected constructor(
     @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
@@ -84,6 +86,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     this.dataSourceSubscription.unsubscribe();
     this.componentDestroyService.unsubscribeComponent$.next();
     this.activeTabService.tabIsInActive( this.tabName );
+    this.onDestroy$.next();
   }
 
   ngOnInit() {
@@ -129,7 +132,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   }
 
   protected subscribeToSourceData(): Subscription {
-    return this.entityFacade.all$.subscribe( ( data: T[] ) => {
+    return this.entityFacade.all$.pipe( takeUntil( this.onDestroy$ )).subscribe( ( data: T[] ) => {
       this.dataSource.data = data;
     });
   }

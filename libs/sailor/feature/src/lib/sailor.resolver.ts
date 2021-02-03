@@ -5,7 +5,7 @@ import { from, Observable } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';
 
 import { EditEntity } from '@processpuzzle/shared/base';
-import { getSailorById, Sailor, SailorFacade } from '@sailrc/sailor/domain';
+import { getSailorById, INITIAL_SAILOR_VALUE, Sailor, SailorFacade } from '@sailrc/sailor/domain';
 import { ISailorFeatureState } from './store/sailor-feature.reducer';
 
 @Injectable() export class SailorResolver implements Resolve<Sailor> {
@@ -16,12 +16,7 @@ import { ISailorFeatureState } from './store/sailor-feature.reducer';
     const idParam = 'sailorId';
     const sailorId = route.params[ idParam ];
     if ( sailorId === 'new' ) {
-      const sailor: Sailor = {
-        id: undefined,
-        firstName: '',
-        lastName: '',
-        yachtClub: ''
-      };
+      const sailor: Sailor = INITIAL_SAILOR_VALUE;
       this.store.dispatch( new EditEntity<Sailor>( Sailor, sailor ));
       return from( [sailor]);
     } else {

@@ -1,0 +1,32 @@
+<form [formGroup]="imageForm" class="post-form">
+  <div class='photo-actions'>
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Image" class="preview-image">
+    <button mat-icon-button [color]='menuButtonColor' (mouseover)="onMenuButtonMouseOver()" (mouseout)="onMenuButtonMouseOut()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)='onFileUpload()'>
+        <mat-icon>upload</mat-icon>
+        <span>Upload from computer</span>
+      </button>
+      <button mat-menu-item (click)='onCameraUpload()'>
+        <mat-icon>photo_camera</mat-icon>
+        <span>Take a photo</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div id='fileUploadControl' *ngIf='showFileUpload' fxLayout='row'>
+    <mat-progress-bar *ngIf="imageSubmitted" [value]="imageUploadProgress$ | async" mode="determinate"></mat-progress-bar>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Photo:</mat-label>
+      <ngx-mat-file-input accept="image/*" placeholder="Basic outline placeholder" formControlName="image"></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="postImage()">
+      <mat-icon>file_upload</mat-icon>
+    </button>
+    <mat-error *ngIf="imageForm.controls['image'].hasError('image')">That doesn't look like a image</mat-error>
+  </div>
+  <div id='webcamControl' *ngIf='showCameraUpload'>
+  </div>
+</form>

@@ -1,5 +1,5 @@
 <nav mat-tab-nav-bar>
-  <a mat-tab-link [routerLink]="['list']" [active]="(currentTab | async) === 'boat-list'">Yacht Club List</a>
-  <a mat-tab-link [disabled]="(selectedEntity | async) === null || undefined" (click)="showDetails()" [active]="(currentTab | async) === 'yacht-club-details'">Yacht Club Details</a>
+  <a mat-tab-link [routerLink]="['list']" [active]="(currentTab$ | async) === 'boat-list'">Yacht Club List</a>
+  <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showDetails()" [active]="(currentTab$ | async) === 'yacht-club-details'">Yacht Club Details</a>
 </nav>
 

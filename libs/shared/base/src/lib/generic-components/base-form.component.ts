@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
 
@@ -11,11 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({template: ''})
 export abstract class BaseFormComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
-  isLoading$: Observable<boolean>;
-  formState$: Observable<FormGroupState<T>>;
-  submittedValue$: Observable<T | undefined>;
   protected defaultCriteria: string;
   private entityId: string;
+  public formState$: Observable<FormGroupState<T>>;
+  public isLoading$: Observable<boolean>;
+  protected readonly onDestroy$ = new Subject<void>();
+  public submittedValue$: Observable<T | undefined>;
   dateValueConverter: NgrxValueConverter<Date | null, string | null> = {
     convertViewToStateValue(value) {
       if (value === null) { return null; }
@@ -46,6 +47,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   ngOnDestroy(): void {
     this.componentDestroyService.unsubscribeComponent$.next();
     this.activeTabService.tabIsInActive( this.tabName );
+    this.onDestroy$.next();
   }
 
   public ngOnInit() {

@@ -13,6 +13,10 @@ import { sailorFeatureReducer, FEATURE_NAME } from './store/sailor-feature.reduc
 import { SailorFeatureFacade } from './sailor-feature.facade';
 import { SailorFeatureRoutingModule } from './sailor-feature-routing.module';
 import { SailorResolver } from './sailor.resolver';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SharedBaseModule } from '@processpuzzle/shared/base';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,12 +27,16 @@ import { SailorResolver } from './sailor.resolver';
   ],
   imports: [
     CommonModule,
+    MaterialFileInputModule,
     NgrxFormsModule,
     SailorDomainModule.forFeature(),
     SailorFeatureRoutingModule,
+    SharedBaseModule,
     SharedMaterialModule,
     StoreModule.forFeature( FEATURE_NAME, sailorFeatureReducer ),
-    YachtClubDomainModule.forFeature()
+    YachtClubDomainModule.forFeature(),
+    MatProgressBarModule,
+    FlexModule
   ],
   providers: [SailorFacade, SailorFeatureFacade, SailorResolver]
 })

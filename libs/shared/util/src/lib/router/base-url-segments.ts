@@ -1,6 +1,7 @@
 export enum BaseUrlSegments {
   DetailsForm = 'details',
-  NewEntity ='new',
+  Feed = 'feed',
   ListForm = 'list',
+  NewEntity ='new',
   UnknownEntity = 'unknown'
 }

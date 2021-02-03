@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header fxLayout='row' fxLayoutAlign='left' mat-dialog-header cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <h5>{{title}}</h5>
+  </mat-card-header>
+  <mat-card-content fxLayout='column' fxLayoutAlign='center center'>
+    <webcam
+      [height]='webcamHeight'
+      [width]='webcamWidth'
+      [imageQuality]="1"
+      [trigger]="triggerObservable"
+      (initError)="handleInitError($event)"
+      (imageCapture)="handleImage($event)">
+    </webcam>
+    <br/>
+
+    <button mat-icon-button color="primary" (click)="triggerSnapshot();">
+      <mat-icon>camera</mat-icon>
+    </button>
+
+    <div class="snapshot" *ngIf="webcamImage">
+      <h2>Nice one!</h2>
+      <img mat-card-image [src]="webcamImage.imageAsDataUrl"/>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="secondary" (click)="onCancel()">No Thanks</button>
+    <button mat-raised-button type='submit' color='primary' [disabled]='!webcamImage' cdkFocusInitial (click)='onSave()'>Upload</button>
+  </mat-card-actions>
+
+  <mat-card-footer>
+    <h4 *ngIf="errors.length > 0">Messages:</h4>
+    <ul *ngFor="let error of errors">
+      <li>{{error | json}}</li>
+    </ul>
+  </mat-card-footer>
+</mat-card>

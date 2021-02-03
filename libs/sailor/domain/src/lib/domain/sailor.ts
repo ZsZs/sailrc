@@ -7,4 +7,13 @@ export class Sailor implements BaseEntityInterface {
   firstName: string;
   lastName: string;
   yachtClub: string;
+  photoUrl: string;
+}
+
+export const INITIAL_SAILOR_VALUE: Sailor = {
+  id: undefined,
+  firstName: '',
+  lastName: '',
+  yachtClub: undefined,
+  photoUrl: undefined
 }
