@@ -78,7 +78,9 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
 
   // protected, private helper methods
   private closeFormAndNavigateBack() {
-    this.routerFacade.routerGo( ['../../'], {}, { relativeTo: this.route } )
+    const currentUrl = this.route.snapshot['_routerState'].url;
+    const goToUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/')).substring(0, currentUrl.lastIndexOf('/'));
+    this.entityFormFacade.navigateBack( goToUrl );
   }
 
   private determineEntityIdFromRoute(): void {
@@ -90,7 +92,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   protected selectFormState() {
-    this.formState$ = this.entityFormFacade.getFormState();
+    this.formState$ = this.entityFormFacade.formState$;
   }
 
   private setCurrentEntity() {

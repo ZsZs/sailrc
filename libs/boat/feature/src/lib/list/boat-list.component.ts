@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { Boat } from '@sailrc/boat/domain';
 import { BoatFacade } from '@sailrc/boat/domain';
-import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
+import { BoatFeatureFacade } from '../boat-feature.facade';
 
 @Component({
   selector: 'sailrc-boat-list',
@@ -18,11 +18,11 @@ export class BoatListComponent extends BaseListComponent<Boat>{
 
   constructor(
     protected boatClassFacade: BoatFacade,
-    protected routerFacade: RouterFacade,
+    protected boatFeatureFacade: BoatFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, routerFacade, route, activeTabService, subscriptionService, BoatListComponent.tabName );
+    super( boatClassFacade, boatFeatureFacade, route, activeTabService, subscriptionService, BoatListComponent.tabName );
   }
 
   // event handling methods

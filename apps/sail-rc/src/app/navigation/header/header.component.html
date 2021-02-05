@@ -4,12 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  <div fxShow="true" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-start">
-    <!--
-    <button mat-button routerLink="/">
-      <mat-icon>home</mat-icon>
-    </button>
-    -->
+  <div fxShow="true" fxHide.lt-sm="true" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-start">
     <ng-template #iconTemplate>
       <mat-icon>arrow_right</mat-icon>
     </ng-template>

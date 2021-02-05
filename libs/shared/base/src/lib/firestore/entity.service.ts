@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAutoEntityService, IEntityInfo } from '@briebug/ngrx-auto-entity';
+import { IAutoEntityService, IEntityInfo, makeEntity } from '@briebug/ngrx-auto-entity';
 import { from, Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';

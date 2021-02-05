@@ -11,11 +11,19 @@ export const mapToEntityForm =
 }
 
 // prettier-ignore
+export const mapToReturnTo =
+  <TState extends IEntityFormState<TModel>, TModel, TExtra>(state: TState & TExtra): string =>
+    (!state ? '' : state.returnTo);
+
+
+// prettier-ignore
 export const buildSelectorMap = <TParentState, TState extends IEntityFormState<TModel>, TModel, TExtra>(
   getState: Selector<TParentState, TState & TExtra> | MemoizedSelector<object | TParentState, TState & TExtra>
 ): ISelectorMap<TParentState, TModel> => {
   const selectEntityForm = createSelector(getState, mapToEntityForm);
+  const selectReturnTo = createSelector(getState, mapToReturnTo);
   return {
-    selectEntityForm
+    selectEntityForm,
+    selectReturnTo
   } as ISelectorMap<TParentState, TModel>;
 };

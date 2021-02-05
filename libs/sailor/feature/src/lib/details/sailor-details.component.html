@@ -1,8 +1,8 @@
 <div class="basic-container">
-    <form [ngrxFormState]="(formState$ | async)">
-        <mat-card>
+    <mat-card>
+        <form [ngrxFormState]="(formState$ | async)">
             <mat-card-header fxLayout='row' fxLayoutAlign='left'>
-                <div mat-card-avatar>
+                <div mat-card-avatar (click)='onAvatar()'>
                     <img mat-card-avatar [src]="(formState$ | async).controls.photoUrl.value" />
                 </div>
                 <mat-card-title>{{ (formState$ | async).controls.lastName.value }}, {{ (formState$ | async).controls.firstName.value }}</mat-card-title>
@@ -28,20 +28,33 @@
                                     <mat-option *ngFor="let yachtClub of yachtClubs$ | async" [value]="yachtClub.name">{{yachtClub.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <button mat-icon-button matTooltip='Add your yacht club...' (click)='onAddYacthClub()'>
+                                <mat-icon>add_link</mat-icon>
+                            </button>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+                            <mat-form-field fxFlex>
+                                <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.boat">
+                                    <mat-option *ngFor="let boat of boats$ | async" [value]="boat.sailNumber">{{boat.sailNumber}} {{boat.boatClass}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button mat-icon-button matTooltip='Add your boat...' (click)='onAddBoat()'>
+                                <mat-icon>add_link</mat-icon>
+                            </button>
                         </div>
                     </div>
                     <div>
-                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+                        <div *ngIf='showProfilePicture' fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
                             <sailrc-image-upload [folder]='photoFolder' [ngrxFormControlState]="(formState$ | async).controls.photoUrl"></sailrc-image-upload>
                         </div>
                     </div>
                 </div>
             </mat-card-content>
-            <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >
+            <mat-card-actions fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" >
                 <button *ngIf="( isLoading$ | async ) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
                 <button *ngIf="( isLoading$ | async ) === false" type="submit" mat-raised-button color="primary" [disabled]="!(formState$ | async).isValid" (click)="onSubmit()">Save</button>
                 <mat-spinner *ngIf="( isLoading$ | async )"></mat-spinner>
             </mat-card-actions>
-        </mat-card>
-    </form>
+        </form>
+    </mat-card>
 </div>

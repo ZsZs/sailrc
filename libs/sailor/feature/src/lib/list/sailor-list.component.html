@@ -55,6 +55,14 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="boat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Boat</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">Boat:</span>
+                {{element.boat }}
+            </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick( row )" class="row-hover"></mat-row>
     </mat-table>

@@ -17,6 +17,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
 import { FlexModule } from '@angular/flex-layout';
+import { BoatDomainModule, BoatFacade } from '@sailrc/boat/domain';
+import { YachtClubFeatureFacade } from '@sailrc/yacht-club/feature';
+import { BoatFeatureFacade } from '@sailrc/boat/feature';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { FlexModule } from '@angular/flex-layout';
     SailorTabsComponent
   ],
   imports: [
+    BoatDomainModule.forFeature(),
     CommonModule,
     MaterialFileInputModule,
     NgrxFormsModule,
@@ -38,7 +42,14 @@ import { FlexModule } from '@angular/flex-layout';
     MatProgressBarModule,
     FlexModule
   ],
-  providers: [SailorFacade, SailorFeatureFacade, SailorResolver]
+  providers: [
+    BoatFacade,
+    BoatFeatureFacade,
+    SailorFacade,
+    SailorFeatureFacade,
+    SailorResolver,
+    YachtClubFeatureFacade
+  ]
 })
 export class SailorFeatureModule {
   static forFeature(): ModuleWithProviders<SailorFeatureModule> {

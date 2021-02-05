@@ -6,6 +6,6 @@ import { FormGroupState } from 'ngrx-forms';
  * be used to retrieve state managed by Auto-Entity
  */
 export interface ISelectorMap<TParentState, TModel> {
-//  selectForm: MemoizedSelector<object | TParentState, FormGroupState<TModel> | null>;
   selectEntityForm: MemoizedSelector<object | TParentState, FormGroupState<TModel> | null>;
+  selectReturnTo: MemoizedSelector<object | TParentState, string>;
 }

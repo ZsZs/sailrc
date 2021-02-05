@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { RouterFacade } from '@processpuzzle/shared/util';
-import { BaseEntityInterface } from '../..';
+import { BaseEntityInterface, IEntityFormFacade } from '../..';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 import { BaseUrlSegments } from '@processpuzzle/shared/util';
@@ -28,7 +28,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   protected constructor(
     @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
-    protected routerFacade: RouterFacade,
+    @Inject('entityFormFacade') protected entityFormFacade: IEntityFormFacade<T>,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
@@ -124,7 +124,8 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   }
 
   private navigateToDetailsForm( entityId: string ) {
-    this.routerFacade.routerGo( ['../' + entityId + '/' + BaseUrlSegments.DetailsForm], {}, { relativeTo: this.route } )
+    const currentUrl = this.route.snapshot['_routerState'].url;
+    this.entityFormFacade.navigateToDetails( entityId, currentUrl );
   }
 
   private subscribeToLoading() {

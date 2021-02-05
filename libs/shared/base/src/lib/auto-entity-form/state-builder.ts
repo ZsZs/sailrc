@@ -7,7 +7,7 @@ import { IFormModelState, IModelClass } from './model.state';
 import { camelCase } from './case';
 import { buildSelectorMap } from './selector-map-builder';
 import { buildFacade } from './facade-builder';
-import { EditEntity, EntityFormAction, EntityFormActionTypes } from './actions';
+import { EditEntity, EntityFormAction, EntityFormActionTypes, NavigateToDetails, NavigateToList } from './actions';
 import { FormValidatorFunction } from './form-state';
 
 export const FEATURE_AFFINITY = '__ngrxae_feature_form_affinity';
@@ -23,6 +23,7 @@ export const FEATURE_AFFINITY = '__ngrxae_feature_form_affinity';
 export const buildAutoFormFeatureState = <TState extends IEntityFormState<TModel>, TParentState extends any, TModel, TExtra>(
   type: IModelClass<TModel>,
   featureStateName: NonNullable<string>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   selectParentState: MemoizedSelector<object, TParentState>,
   initialFormValue: TModel,
   formValidator: FormValidatorFunction<TModel>,
@@ -60,6 +61,7 @@ export interface FeatureState {
 
   const initialFormState = {
     entityForm: createFormGroupState<TModel>( opts.modelName + 'Form', initialFormValue ),
+    returnTo: '',
     ...extraInitialState
   } as TState & TExtra;
 
@@ -81,6 +83,15 @@ export interface FeatureState {
           entityForm = setValue<TModel>( state.entityForm, {...(<EditEntity<TModel>>action).entity }) as FormGroupState<TModel>;
           entityForm = formValidator( entityForm );
           return { ...state, entityForm: entityForm };
+
+        case EntityFormActionTypes.NavigateBack:
+          return { ...state, returnTo: '' };
+
+        case EntityFormActionTypes.NavigateToDetails:
+          return { ...state, returnTo: (<NavigateToDetails<TModel>>action).returnTo };
+
+        case EntityFormActionTypes.NavigateToList:
+          return {  ...state, returnTo: (<NavigateToList<TModel>>action).returnTo };
 
         default: {
           return state;

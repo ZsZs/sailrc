@@ -1,7 +1,9 @@
 <div class="basic-container">
     <mat-card>
         <form [ngrxFormState]="(formState$ | async)">
-            <mat-card-title>Boat Class</mat-card-title>
+            <mat-card-header>
+                <mat-card-title>Boat Class</mat-card-title>
+            </mat-card-header>
             <mat-card-content>
                 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
                     <mat-form-field fxFlex>
@@ -14,7 +16,7 @@
                     </mat-form-field>
                 </div>
             </mat-card-content>
-            <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >
+            <mat-card-actions fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" >
                 <button *ngIf="( isLoading$ | async ) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
                 <button *ngIf="( isLoading$ | async ) === false" type="submit" mat-raised-button color="primary" [disabled]="!(formState$ | async).isValid" (click)="onSubmit()">Save</button>
                 <mat-spinner *ngIf="( isLoading$ | async )"></mat-spinner>

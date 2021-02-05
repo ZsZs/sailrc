@@ -15,6 +15,9 @@ import { ISailorFeatureState } from '../store/sailor-feature.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthDomainFacade } from '@processpuzzle/authentication/domain';
 import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
+import { Boat, BoatFacade } from '@sailrc/boat/domain';
+import { BoatFeatureFacade } from '@sailrc/boat/feature';
+import { YachtClubFeatureFacade } from '@sailrc/yacht-club/feature';
 
 @Component({
   selector: 'sailrc-sailor-details',
@@ -22,19 +25,24 @@ import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
   styleUrls: ['./sailor-details.component.css']
 })
 export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements OnInit {
+  boats$: Observable<Boat[]>;
+  showProfilePicture = false;
   photoFolder: any;
   yachtClubs$: Observable<YachtClub[]>;
   user: User;
 
   constructor(
     protected sailorFacade: SailorFacade,
-    private yachtClubFacade: YachtClubFacade,
     protected sailorFeatureFacade: SailorFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<ISailorFeatureState>,
+    private yachtClubFacade: YachtClubFacade,
+    private yachtClubFeatureFacade: YachtClubFeatureFacade,
+    private boatFacade: BoatFacade,
+    private boatFeatureFacade: BoatFeatureFacade,
     private authFacade: AuthDomainFacade,
     private readonly snackBar: MatSnackBar
   ) {
@@ -46,11 +54,24 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
     super.ngOnInit();
     this.yachtClubFacade.loadAll();
     this.yachtClubs$ = this.yachtClubFacade.all$;
+    this.boatFacade.loadAll();
+    this.boats$ = this.boatFacade.all$;
     this.subscribeToUser();
     this.determinePhotoFolder();
   }
 
   // region event handling methods
+  onAddYacthClub() {
+    this.yachtClubFeatureFacade.navigateToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+  }
+
+  onAddBoat() {
+    this.boatFeatureFacade.navigateToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+  }
+
+  onAvatar() {
+    this.showProfilePicture = true;
+  }
   // endregion
 
   // region protected, private helper methods
@@ -60,7 +81,7 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
   }
 
   private subscribeToUser() {
-    this.authFacade.getAuthState().pipe( takeUntil( this.onDestroy$ ) ).subscribe( ( user ) => (this.user = user) );
+    this.authFacade.getAuthState().pipe( takeUntil( this.onDestroy$ ) ).subscribe( ( user ) => ( this.user = user) );
   }
   // endregion
 }

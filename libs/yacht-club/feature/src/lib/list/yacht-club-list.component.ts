@@ -4,6 +4,7 @@ import { BaseListComponent } from '@processpuzzle/shared/base';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
+import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
 
 @Component({
   selector: 'sailrc-yacht-club-list',
@@ -17,11 +18,11 @@ export class YachtClubListComponent extends BaseListComponent<YachtClub>{
 
   constructor(
     protected boatClassFacade: YachtClubFacade,
-    protected routerFacade: RouterFacade,
+    protected yachtClubFeatureFacade: YachtClubFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, routerFacade, route, activeTabService, subscriptionService, YachtClubListComponent.tabName );
+    super( boatClassFacade, yachtClubFeatureFacade, route, activeTabService, subscriptionService, YachtClubListComponent.tabName );
   }
 
   // event handling methods

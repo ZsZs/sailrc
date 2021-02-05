@@ -1,7 +1,7 @@
-import { IAutoEntityService, IEntityInfo } from '@briebug/ngrx-auto-entity';
+import { IAutoEntityService, IEntityInfo, makeEntity } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> implements IAutoEntityService<T> {
@@ -18,7 +18,8 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
         if ( doc.payload.exists ) {
           const data = doc.payload.data() as T;
           const docId = doc.payload.id;
-          return { id: docId, ...data };
+          const entity = makeEntity( entityInfo.modelType )({ id: docId, ...data });
+          return entity;
         }
       })
     );
@@ -30,12 +31,12 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
       map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as T;
-          data.id = a.payload.doc.id;
-          return data;
+          const docId = a.payload.doc.id;
+          const entity = makeEntity( entityInfo.modelType )({ id: docId, ...data });
+          return entity;
         });
       })
     );
-
   }
 
   create(entityInfo: IEntityInfo, entity: T, criteria?: any ): Observable<T> {

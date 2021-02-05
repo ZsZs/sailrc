@@ -5,6 +5,7 @@ import { Race, RaceFacade } from '@sailrc/race/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { RaceFeatureFacade } from '../race-feature.facade';
 
 @Component({
   selector: 'sailrc-race-list',
@@ -17,12 +18,12 @@ export class RaceListComponent extends BaseListComponent<Race>{
 
   constructor(
     protected raceFacade: RaceFacade,
-    protected routerFacade: RouterFacade,
+    protected raceFeatureFacade: RaceFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private router: Router,
     private subscriptionService: ComponentDestroyService ) {
-    super( raceFacade, routerFacade, route, activeTabService, subscriptionService, RaceListComponent.tabName );
+    super( raceFacade, raceFeatureFacade, route, activeTabService, subscriptionService, RaceListComponent.tabName );
   }
 
   // event handling methods

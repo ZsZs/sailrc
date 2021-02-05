@@ -1,9 +1,4 @@
-import { createFormGroupState, disable, formGroupReducer, FormGroupState, setValue, StateUpdateFns, updateGroup } from 'ngrx-forms';
-import { Action, ActionReducer, Store } from '@ngrx/store';
-import { camelCase } from './case';
-import { EditEntity, EntityFormAction, EntityFormActionTypes } from './actions';
-import { Observable } from 'rxjs';
-import { Edit } from '@briebug/ngrx-auto-entity';
+import { FormGroupState } from 'ngrx-forms';
 
 /**
  * Structure for how forms are stored, including useful computed properties
@@ -11,6 +6,7 @@ import { Edit } from '@briebug/ngrx-auto-entity';
  */
 export interface IEntityFormState<TModel> {
   entityForm: FormGroupState<TModel>;
+  returnTo: string;
 }
 
 export type FormValidatorFunction<TModel> = (t: FormGroupState<TModel>) => FormGroupState<TModel>;

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { Sailor, SailorFacade } from '@sailrc/sailor/domain';
 import { Component } from '@angular/core';
+import { SailorFeatureFacade } from '../sailor-feature.facade';
 
 @Component({
   selector: 'sailrc-sailor-list',
@@ -13,15 +14,15 @@ import { Component } from '@angular/core';
 })
 export class SailorListComponent extends BaseListComponent<Sailor>{
   protected static readonly tabName = 'sailor-list';
-  displayedColumns = ['select', 'firstName', 'lastName', 'yachtClub'];
+  displayedColumns = ['select', 'firstName', 'lastName', 'yachtClub', 'boat'];
 
   constructor(
     protected sailorFacade: SailorFacade,
-    protected routerFacade: RouterFacade,
+    protected sailorFeatureFacade: SailorFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( sailorFacade, routerFacade, route, activeTabService, subscriptionService, SailorListComponent.tabName );
+    super( sailorFacade, sailorFeatureFacade, route, activeTabService, subscriptionService, SailorListComponent.tabName );
   }
 
   // event handling methods

@@ -6,6 +6,9 @@ export enum EntityFormActionTypes {
   DeleteEntity = '[Entity] (Generic feature) Delete entity',
   EditEntity = '[Entity] (Generic feature) Edit entity',
   EntityAPIError = '[Entity] (Generic feature) entity API error',
+  NavigateBack = '[Entity] (Generic feature) navigate back',
+  NavigateToDetails = '[Entity] (Generic feature) navigate to entity details form',
+  NavigateToList = '[Entity] (Generic feature) navigate to entity list',
 }
 
 export type TNew<TModel> = new () => TModel;
@@ -78,6 +81,30 @@ export class EditEntity<TModel> extends EntityFormAction<TModel> {
 export class EntityAPIError<TModel> extends EntityFormAction<TModel> {
   constructor( type: new () => TModel ) {
     super( type, EntityFormActionTypes.EntityAPIError );
+  }
+}
+
+export class NavigateBack<TModel> extends EntityFormAction<TModel> {
+  constructor( type: new () => TModel ) {
+    super( type, EntityFormActionTypes.NavigateBack );
+  }
+}
+
+export class NavigateToDetails<TModel> extends EntityFormAction<TModel> {
+  returnTo: string;
+
+  constructor( type: new () => TModel, returnTo?: string ) {
+    super( type, EntityFormActionTypes.NavigateToDetails );
+    this.returnTo = returnTo;
+  }
+}
+
+export class NavigateToList<TModel> extends EntityFormAction<TModel> {
+  returnTo: string;
+
+  constructor( type: new () => TModel, returnTo?: string ) {
+    super( type, EntityFormActionTypes.NavigateToList );
+    this.returnTo = returnTo;
   }
 }
 
