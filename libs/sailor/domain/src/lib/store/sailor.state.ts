@@ -19,4 +19,4 @@ export const sailorDomainReducer: ActionReducerMap<ISailorState> = {
 };
 
 export const getSailorDomainState = createFeatureSelector<ISailorState>( DOMAIN_NAME );
-export const getSailorById = ( id: number ) => createSelector( getSailorDomainState, state => state.sailor.entities[id] );
+export const getSailorById = ( id: string ) => createSelector( getSailorDomainState, state => state.sailor.entities[id] );

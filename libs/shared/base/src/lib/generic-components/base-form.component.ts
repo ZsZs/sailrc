@@ -6,17 +6,20 @@ import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-fo
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseUrlSegments, RouterFacade } from '@processpuzzle/shared/util';
-import { BaseEntityFacade, IEntityFormFacade } from '../..';
+import { IEntityFormFacade } from '../..';
 import { ActivatedRoute } from '@angular/router';
+import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 @Component({template: ''})
 export abstract class BaseFormComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
+  formState$: Observable<FormGroupState<T>>;
+  isLoading$: Observable<boolean>;
+  submittedValue$: Observable<T | undefined>;
   protected defaultCriteria: string;
-  private entityId: string;
-  public formState$: Observable<FormGroupState<T>>;
-  public isLoading$: Observable<boolean>;
+  protected entityFacade: IEntityFacade<T>;
+  protected entityId: string;
   protected readonly onDestroy$ = new Subject<void>();
-  public submittedValue$: Observable<T | undefined>;
+  protected readonly tabName: string
   dateValueConverter: NgrxValueConverter<Date | null, string | null> = {
     convertViewToStateValue(value) {
       if (value === null) { return null; }
@@ -28,17 +31,17 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
     convertStateToViewValue: NgrxValueConverters.dateToISOString.convertStateToViewValue,
   };
 
-  constructor(
-    @Inject('entityFacade') protected entityFacade: BaseEntityFacade<T>,
+  protected constructor(
     @Inject('entityFormFacade') protected entityFormFacade: IEntityFormFacade<T>,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
-    protected componentDestroyService: ComponentDestroyService,
-    @Inject(String) protected tabName: string )
-  {
-    this.submittedValue$ = entityFacade.current$;
+    protected componentDestroyService: ComponentDestroyService
+  ) {
+    this.entityFacade = this.entityFormFacade.entityFacade;
+    this.submittedValue$ = this.entityFacade.current$;
     this.selectFormState();
+    this.tabName = this.entityFormFacade.info.modelName + '-details';
   }
 
   // public accessors and mutators
@@ -84,7 +87,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   private determineEntityIdFromRoute(): void {
-    this.entityId = this.route.snapshot.paramMap.get( this.entityFacade.entityIdPathVariable );
+    this.entityId = this.route.snapshot.paramMap.get( this.entityFormFacade.info.modelName + 'Id' );
   }
 
   private notifyActiveTab() {

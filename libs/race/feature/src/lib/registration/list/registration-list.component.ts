@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Registration, RegistrationFacade } from '@sailrc/race/domain';
-import { RouterFacade } from '@processpuzzle/shared/util';
+import { Registration } from '@sailrc/race/domain';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { RegistrationFeatureFacade } from '../registration-feature.facade';
@@ -13,21 +12,26 @@ import { RegistrationFeatureFacade } from '../registration-feature.facade';
 })
 
 export class RegistrationListComponent extends BaseListComponent<Registration> implements OnDestroy, OnInit {
-  protected static readonly tabName = 'registration-list';
-  displayedColumns = ['sailNumber', 'boatName', 'boatType', 'skipper'];
+  private _displayedColumns = ['sailNumber', 'boatName', 'boatType', 'skipper'];
 
   constructor(
-    protected registrationFacade: RegistrationFacade,
     protected registrationFeatureFacade: RegistrationFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
-    private subscriptionService: ComponentDestroyService ) {
-    super( registrationFacade, registrationFeatureFacade, route, activeTabService, subscriptionService, RegistrationListComponent.tabName );
+    private subscriptionService: ComponentDestroyService
+  ) {
+    super( registrationFeatureFacade, route, activeTabService, subscriptionService );
   }
 
   // protected, private helper methods
   protected loadAllEntities() {
     const raceId = this.route.snapshot.params[ 'raceId' ];
-    this.registrationFacade.loadAll( raceId );
+    this.entityFacade.loadAll( raceId );
   }
+
+  // region properties
+  get displayedColumns() {
+    return this._displayedColumns;
+  }
+  // endregion
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: YachtClubComponent, children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: YachtClubListComponent },
-      { path: ':yachtClubId/details', component: YachtClubDetailsComponent, resolve: { yachtClub: YachtClubResolver }},
+      { path: ':YachtClubId/details', component: YachtClubDetailsComponent, resolve: { yachtClub: YachtClubResolver }},
       { path: '**', redirectTo: 'list', pathMatch: 'full' }
     ]}
 ];

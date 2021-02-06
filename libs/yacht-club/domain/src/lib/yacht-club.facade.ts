@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { MemoizedSelector, Store } from '@ngrx/store';
 
-import { BaseEntityFacade } from '@processpuzzle/shared/base';
+import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
 import { YachtClub } from './yacht-club';
-import { IYachtClubState, YachtClubFacadeBase } from './yacht-club.state';
+import { getYachtClubById, IYachtClubState, YachtClubFacadeBase } from './yacht-club.state';
+import { IEntityInfo } from '@briebug/ngrx-auto-entity';
+import { Sailor } from '@sailrc/sailor/domain';
 
 
 @Injectable({ providedIn: 'root' })
-export class YachtClubFacade extends YachtClubFacadeBase implements BaseEntityFacade<YachtClub>{
-  entityIdPathVariable: string;
-  entityName: string;
+export class YachtClubFacade extends YachtClubFacadeBase implements IBaseEntityFacade<YachtClub>{
+  readonly entityIdPathVariable: string;
+  readonly entityInfo: IEntityInfo;
 
   constructor( protected store: Store<IYachtClubState> ) {
     super( YachtClub, store );
-    this.entityIdPathVariable = 'yachtClubId';
-    this.entityName = 'yachtClub';
+    this.entityInfo = getEntityInfo( YachtClub );
+    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
+  }
+
+  getEntityById( id: string ): MemoizedSelector<object | YachtClub, YachtClub> {
+    return getYachtClubById( id );
   }
 }

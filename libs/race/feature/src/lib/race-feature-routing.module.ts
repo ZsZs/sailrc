@@ -12,9 +12,9 @@ const routes: Routes = [
   { path: '', component: RaceFeatureComponent, children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: RaceListComponent },
-      { path: ':raceId/details', component: RaceDetailsComponent, resolve: { race: RaceResolver } },
-      { path: ':raceId/registration/list', component: RegistrationListComponent, resolve: { race: RaceResolver } },
-      { path: ':raceId/registration/:registrationId/details', component: RegistrationDetailsComponent,
+      { path: ':RaceId/details', component: RaceDetailsComponent, resolve: { race: RaceResolver } },
+      { path: ':RaceId/registration/list', component: RegistrationListComponent, resolve: { race: RaceResolver } },
+      { path: ':RaceId/registration/:RegistrationId/details', component: RegistrationDetailsComponent,
         resolve: { race: RaceResolver, registration: RegistrationResolver } },
       { path: '**', redirectTo: 'list', pathMatch: 'full' }
     ]}

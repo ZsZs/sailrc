@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
-import { RouterFacade } from '@processpuzzle/shared/util';
+import { BoatClass } from '@sailrc/boat-class/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
@@ -13,19 +12,21 @@ import { BoatClassFeatureFacade } from '../facade/boat-class-feature.facade';
   styleUrls: ['./boat-class-list.component.css']
 })
 export class BoatClassListComponent extends BaseListComponent<BoatClass> {
-  protected static readonly tabName = 'boat-class-list';
-  displayedColumns = ['select', 'name', 'yardstick'];
+  private _displayedColumns = ['select', 'name', 'yardstick'];
 
   constructor(
-    protected boatClassFacade: BoatClassFacade,
     protected boatClassFeatureFacade: BoatClassFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, boatClassFeatureFacade, route, activeTabService, subscriptionService, BoatClassListComponent.tabName );
+    super( boatClassFeatureFacade, route, activeTabService, subscriptionService );
   }
 
   // event handling methods
 
-  // protected, private helper methods
+  // region protected, private helper methods
+  get displayedColumns(): string[] {
+    return this._displayedColumns;
+  }
+  // endregion
 }

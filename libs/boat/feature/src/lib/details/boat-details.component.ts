@@ -6,11 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { Store } from '@ngrx/store';
 import { BoatFeatureFacade } from '../boat-feature.facade';
-import { BoatFacade } from '@sailrc/boat/domain';
 import { IBoatFeatureState } from '../boat-feature.reducer';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { Observable } from 'rxjs';
-import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'sailrc-boat-detail',
@@ -22,7 +20,6 @@ export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnI
   boatClasses$: Observable<BoatClass[]>;
 
   constructor(
-    protected boatFacade: BoatFacade,
     private boatClassFacade: BoatClassFacade,
     protected boatFormFacade: BoatFeatureFacade,
     protected routerFacade: RouterFacade,
@@ -31,7 +28,7 @@ export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnI
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IBoatFeatureState>,
 ) {
-  super( boatFacade, boatFormFacade, routerFacade, route, activeTabService, componentDestroyService, 'boat-details' );
+  super( boatFormFacade, routerFacade, route, activeTabService, componentDestroyService );
 }
 
   // event handling methods

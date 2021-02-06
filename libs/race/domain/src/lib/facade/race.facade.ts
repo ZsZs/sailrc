@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { MemoizedSelector, Store } from '@ngrx/store';
 
-import { BaseEntityFacade } from '@processpuzzle/shared/base';
+import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
 import { Race } from '../domain/race';
-import { IRaceDomainState, RaceFacadeBase } from '../store/race.state';
+import { getRaceById, IRaceDomainState, RaceFacadeBase } from '../store/race.state';
+import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
 @Injectable({ providedIn: 'root' })
-export class RaceFacade extends RaceFacadeBase implements BaseEntityFacade<Race>{
-  entityIdPathVariable: string;
-  entityName: string;
+export class RaceFacade extends RaceFacadeBase implements IBaseEntityFacade<Race>{
+  readonly entityIdPathVariable: string;
+  readonly entityInfo: IEntityInfo;
 
   constructor( protected store: Store<IRaceDomainState> ) {
     super( Race, store );
-    this.entityIdPathVariable = 'raceId';
-    this.entityName = 'race';
+    this.entityInfo = getEntityInfo( Race );
+    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
+  }
+
+  getEntityById( id: string ): MemoizedSelector<object | Race, Race> {
+    return getRaceById( id );
   }
 }

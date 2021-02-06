@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { Boat } from '@sailrc/boat/domain';
-import { BoatFacade } from '@sailrc/boat/domain';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
 import { BoatFeatureFacade } from '../boat-feature.facade';
@@ -17,12 +16,11 @@ export class BoatListComponent extends BaseListComponent<Boat>{
   displayedColumns = ['select', 'sailNumber', 'boatClass', 'name'];
 
   constructor(
-    protected boatClassFacade: BoatFacade,
     protected boatFeatureFacade: BoatFeatureFacade,
-    protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
-    private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, boatFeatureFacade, route, activeTabService, subscriptionService, BoatListComponent.tabName );
+    protected activeTabService: ActiveTabService,
+    protected componentDestroyService: ComponentDestroyService ) {
+    super( boatFeatureFacade, route, activeTabService, componentDestroyService );
   }
 
   // event handling methods

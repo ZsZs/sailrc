@@ -20,4 +20,4 @@ export const boatClassDomainReducer: ActionReducerMap<IBoatClassState> = {
 };
 
 export const getBoatClassDomainState = createFeatureSelector<IBoatClassState>( DOMAIN_NAME );
-export const getBoatClassById = ( id: number ) => createSelector( getBoatClassDomainState, state => state.boatClass.entities[id] );
+export const getBoatClassById = ( id: string ) => createSelector( getBoatClassDomainState, state => state.boatClass.entities[id] );

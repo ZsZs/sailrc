@@ -18,7 +18,6 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
   private raceId: string;
 
   constructor(
-    protected registrationFacade: RegistrationFacade,
     protected registrationFeatureFacade: RegistrationFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
@@ -26,7 +25,7 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IRaceFeatureState>,
   ) {
-    super( registrationFacade, registrationFeatureFacade, routerFacade, route, activeTabService, componentDestroyService, 'registration-details' );
+    super( registrationFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
   }
 
   // life cycle hooks, event handling

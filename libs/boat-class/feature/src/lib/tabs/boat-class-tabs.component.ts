@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
+import { BoatClass } from '@sailrc/boat-class/domain';
 import { BaseTabsComponent } from '@processpuzzle/shared/base';
-import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService } from '@processpuzzle/shared/widgets';
+import { BoatClassFeatureFacade } from '../facade/boat-class-feature.facade';
 
 @Component({
   selector: 'sailrc-boat-class-tabs',
@@ -13,11 +13,10 @@ import { ActiveTabService } from '@processpuzzle/shared/widgets';
 export class BoatClassTabsComponent extends BaseTabsComponent<BoatClass> {
 
   constructor(
-    protected boatClassFacade: BoatClassFacade,
-    protected routerFacade: RouterFacade,
+    protected boatClassFeatureFacade: BoatClassFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute ) {
-    super( boatClassFacade, activeTabService, routerFacade, route );
+    super( boatClassFeatureFacade, activeTabService, route );
   }
 
   // protected, private helper methods

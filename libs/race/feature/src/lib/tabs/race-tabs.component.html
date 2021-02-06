@@ -1,6 +1,6 @@
 <nav mat-tab-nav-bar>
-    <a mat-tab-link [routerLink]="['list']" routerLinkActive #list="routerLinkActive" [active]="list.isActive">Race List</a>
-    <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showDetails()" [active]="(currentTab$ | async) === 'race-details'">Race Details</a>
-    <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showRegistrations()" [active]="(currentTab$ | async) === 'registration-list'">Registrations</a>
-    <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showRegistrationDetails()" [active]="(currentTab$ | async) === 'registration-details'">Registration Details</a>
+    <a mat-tab-link (click)="showList()">Race List</a>
+    <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showDetails()" [active]="(currentTab$ | async) === detailsTabName">Race Details</a>
+    <a mat-tab-link [disabled]="(selectedEntity$ | async) === null || undefined" (click)="showRegistrations()" [active]="(currentTab$ | async) === registrationListTabName">Registrations</a>
+    <a mat-tab-link [disabled]="(selectedRegistration$ | async) === null || undefined" (click)="showRegistrationDetails()" [active]="(currentTab$ | async) === registrationDetailsTabName">Registration Details</a>
 </nav>

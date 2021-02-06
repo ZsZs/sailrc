@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { YachtClub, YachtClubFacade } from '@sailrc/yacht-club/domain';
+import { YachtClub } from '@sailrc/yacht-club/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
-import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
 import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
@@ -13,16 +12,14 @@ import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
 })
 
 export class YachtClubListComponent extends BaseListComponent<YachtClub>{
-  protected static readonly tabName = 'yacht-club-list';
   displayedColumns = ['select', 'name'];
 
   constructor(
-    protected boatClassFacade: YachtClubFacade,
     protected yachtClubFeatureFacade: YachtClubFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
     private subscriptionService: ComponentDestroyService ) {
-    super( boatClassFacade, yachtClubFeatureFacade, route, activeTabService, subscriptionService, YachtClubListComponent.tabName );
+    super( yachtClubFeatureFacade, route, activeTabService, subscriptionService );
   }
 
   // event handling methods

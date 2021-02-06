@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BaseEntityFacade } from '@processpuzzle/shared/base';
-import { Store } from '@ngrx/store';
+import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
+import { MemoizedSelector, Store } from '@ngrx/store';
 import { Registration } from '../domain/registration';
-import { IRaceDomainState, RegistrationFacadeBase } from '../store/race.state';
+import { getRegistrationById, IRaceDomainState, RegistrationFacadeBase } from '../store/race.state';
+import { IEntityInfo } from '@briebug/ngrx-auto-entity';
+import { Sailor } from '@sailrc/sailor/domain';
 
 @Injectable({ providedIn: 'root' })
-export class RegistrationFacade extends RegistrationFacadeBase implements BaseEntityFacade<Registration>{
-  entityIdPathVariable: string;
-  entityName: string;
+export class RegistrationFacade extends RegistrationFacadeBase implements IBaseEntityFacade<Registration>{
+  readonly entityIdPathVariable: string;
+  readonly entityInfo: IEntityInfo;
 
   constructor( protected store: Store<IRaceDomainState> ) {
     super( Registration, store );
-    this.entityIdPathVariable = 'registrationId';
-    this.entityName = 'registration';
+    this.entityInfo = getEntityInfo( Registration );
+    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
   }
 
+  getEntityById( id: string ): MemoizedSelector<object | Registration, Registration> {
+    return getRegistrationById( id );
+  }
 }

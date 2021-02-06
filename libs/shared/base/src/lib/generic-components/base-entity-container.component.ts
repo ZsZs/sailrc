@@ -5,7 +5,7 @@ import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { Observable, Subject } from 'rxjs';
 import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
-import { BaseEntityFacade } from '../..';
+import { IBaseEntityFacade } from '../..';
 
 @Component({template: ''})
 export abstract class BaseEntityContainerComponent<T extends BaseEntityInterface>  implements OnDestroy, OnInit {
@@ -13,7 +13,7 @@ export abstract class BaseEntityContainerComponent<T extends BaseEntityInterface
   protected entityId: string;
   private readonly onDestroy = new Subject<void>();
 
-  constructor( @Inject('entityFacade') protected entityFacade: BaseEntityFacade<T>,
+  constructor( @Inject('entityFacade') protected entityFacade: IBaseEntityFacade<T>,
                protected routerFacade: RouterFacade,
                protected route: ActivatedRoute ) {
   }
@@ -26,12 +26,6 @@ export abstract class BaseEntityContainerComponent<T extends BaseEntityInterface
   ngOnInit() {
     this.entityFacade.loadAll();
     this.subscribeToLoading();
-  }
-
-  showDetailsView(): void {
-  }
-
-  showListView(): void {
   }
 
   // protected, private helper methods

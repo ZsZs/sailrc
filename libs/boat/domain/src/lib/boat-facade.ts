@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { MemoizedSelector, Store } from '@ngrx/store';
 
-import { BaseEntityFacade } from '@processpuzzle/shared/base';
+import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
 import { Boat } from './boat';
-import { BoatFacadeBase, IBoatState } from './boat-state';
+import { BoatFacadeBase, getBoatById, IBoatState } from './boat-state';
+import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
 @Injectable({ providedIn: 'root' })
-export class BoatFacade extends BoatFacadeBase implements BaseEntityFacade<Boat>{
-  entityIdPathVariable: string;
-  entityName: string;
+export class BoatFacade extends BoatFacadeBase implements IBaseEntityFacade<Boat>{
+  readonly entityIdPathVariable: string;
+  readonly entityInfo: IEntityInfo;
 
   constructor( protected store: Store<IBoatState> ) {
     super( Boat, store );
-    this.entityIdPathVariable = 'boatId';
-    this.entityName = 'boat';
+    this.entityInfo = getEntityInfo( Boat );
+    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
+  }
+
+
+  getEntityById( id: string ): MemoizedSelector<object | Boat, Boat> {
+    return getBoatById( id );
   }
 }

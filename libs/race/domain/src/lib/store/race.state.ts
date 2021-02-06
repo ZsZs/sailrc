@@ -30,7 +30,7 @@ export const raceDomainReducer: ActionReducerMap<IRaceDomainState> = {
 };
 
 export const getRaceDomainState = createFeatureSelector<IRaceDomainState>( 'raceDomain' );
-export const getRaceById = ( id: number ) => createSelector( getRaceDomainState, state => {
+export const getRaceById = ( id: string ) => createSelector( getRaceDomainState, state => {
   return state.race.entities[id]
 });
 export const getRegistrationById = ( id: string ) => createSelector( getRaceDomainState, state => {

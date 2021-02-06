@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Race, RaceFacade } from '@sailrc/race/domain';
+import { ActivatedRoute } from '@angular/router';
+import { Race } from '@sailrc/race/domain';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
@@ -18,7 +18,6 @@ export class RaceDetailsComponent extends BaseFormComponent<Race> {
   countries = ['England', 'Germany', 'Hungary', 'United States'];
 
   constructor(
-    protected sailorFacade: RaceFacade,
     protected raceFeatureFacade: RaceFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
@@ -26,7 +25,7 @@ export class RaceDetailsComponent extends BaseFormComponent<Race> {
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IRaceFeatureState>,
   ) {
-    super( sailorFacade, raceFeatureFacade, routerFacade, route, activeTabService, componentDestroyService, 'race-details' );
+    super( raceFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
   }
 
   // public accessors and mutators

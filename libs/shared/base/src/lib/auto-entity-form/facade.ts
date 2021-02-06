@@ -1,13 +1,15 @@
 import { Observable } from 'rxjs';
 import { FormGroupState } from 'ngrx-forms';
-import { UrlSegment } from '@angular/router';
+import { IEntityFacade, IEntityInfo } from '@briebug/ngrx-auto-entity';
 
 /**
  * The definition of an Auto-Entity facade class
  */
 export interface IEntityFormFacade<TModel> {
-  returnTo$: Observable<string>;
+  entityFacade: IEntityFacade<TModel>;
   formState$: Observable<FormGroupState<TModel>>;
+  info: IEntityInfo;
+  returnTo$: Observable<string>;
 
   edit(entity: Partial<TModel>): void;
   navigateBack( defaultUrl?: string ): void;

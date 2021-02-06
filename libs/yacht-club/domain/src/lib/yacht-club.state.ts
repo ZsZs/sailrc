@@ -19,4 +19,4 @@ export const yachtClubDomainReducer: ActionReducerMap<IYachtClubState> = {
 };
 
 export const getYachtClubDomainState = createFeatureSelector<IYachtClubState>( DOMAIN_NAME );
-export const getYachtClubById = ( id: number ) => createSelector( getYachtClubDomainState, state => state.yachtClub.entities[id] );
+export const getYachtClubById = ( id: string ) => createSelector( getYachtClubDomainState, state => state.yachtClub.entities[id] );

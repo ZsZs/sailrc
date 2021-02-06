@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
+import { BoatClass } from '@sailrc/boat-class/domain';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
@@ -16,7 +16,6 @@ import { IBoatClassFeatureState } from '../store/boat-class-feature.reducer';
 export class BoatClassDetailsComponent extends BaseFormComponent<BoatClass> {
 
   constructor(
-    protected boatClassFacade: BoatClassFacade,
     protected boatClassFormFacade: BoatClassFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
@@ -24,7 +23,7 @@ export class BoatClassDetailsComponent extends BaseFormComponent<BoatClass> {
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IBoatClassFeatureState>,
   ) {
-    super( boatClassFacade, boatClassFormFacade, routerFacade, route, activeTabService, componentDestroyService, 'boat-class-details' );
+    super( boatClassFormFacade, routerFacade, route, activeTabService, componentDestroyService );
   }
 
   // event handling methods

@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { Store } from '@ngrx/store';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
-import { Sailor, SailorFacade } from '@sailrc/sailor/domain';
+import { Sailor } from '@sailrc/sailor/domain';
 import { Component, OnInit } from '@angular/core';
 import { YachtClub, YachtClubFacade } from '@sailrc/yacht-club/domain';
 import { SailorFeatureFacade } from '../sailor-feature.facade';
@@ -32,7 +32,6 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
   user: User;
 
   constructor(
-    protected sailorFacade: SailorFacade,
     protected sailorFeatureFacade: SailorFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
@@ -46,7 +45,7 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
     private authFacade: AuthDomainFacade,
     private readonly snackBar: MatSnackBar
   ) {
-    super( sailorFacade, sailorFeatureFacade, routerFacade, route, activeTabService, componentDestroyService, 'sailor-details' );
+    super( sailorFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
   }
 
   // angular lifecycle hooks

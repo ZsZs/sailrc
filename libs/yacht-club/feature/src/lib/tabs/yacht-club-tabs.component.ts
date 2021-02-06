@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService } from '@processpuzzle/shared/widgets';
 import { BaseTabsComponent } from '@processpuzzle/shared/base';
-import { YachtClub, YachtClubFacade } from '@sailrc/yacht-club/domain';
+import { YachtClub } from '@sailrc/yacht-club/domain';
+import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
 
 @Component({
   selector: 'sailrc-yacht-club-tabs',
@@ -13,11 +14,11 @@ import { YachtClub, YachtClubFacade } from '@sailrc/yacht-club/domain';
 })
 export class YachtClubTabsComponent extends BaseTabsComponent<YachtClub>{
   constructor(
-    protected yachtClubFacade: YachtClubFacade,
-    protected routerFacade: RouterFacade,
+    protected yachtClubFeatureFacade: YachtClubFeatureFacade,
     protected activeTabService: ActiveTabService,
-    protected route: ActivatedRoute ) {
-    super( yachtClubFacade, activeTabService, routerFacade, route );
+    protected route: ActivatedRoute
+  ) {
+    super( yachtClubFeatureFacade, activeTabService, route );
   }
 
   // protected, private helper methods

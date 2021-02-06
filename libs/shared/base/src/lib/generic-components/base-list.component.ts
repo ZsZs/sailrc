@@ -1,17 +1,16 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { RouterFacade } from '@processpuzzle/shared/util';
 import { BaseEntityInterface, IEntityFormFacade } from '../..';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   template: '',
@@ -24,15 +23,19 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
   dataSourceSubscription: Subscription;
   selection = new SelectionModel<T>(true, []);
   isLoading$: Observable<boolean>;
+  protected entityFacade: IEntityFacade<T>;
   protected readonly onDestroy$ = new Subject<void>();
+  protected readonly tabName: string
 
   protected constructor(
-    @Inject('entityFacade') protected entityFacade: IEntityFacade<T>,
     @Inject('entityFormFacade') protected entityFormFacade: IEntityFormFacade<T>,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
-    protected componentDestroyService: ComponentDestroyService,
-    @Inject(String) protected readonly tabName: string ) {}
+    protected componentDestroyService: ComponentDestroyService
+  ) {
+    this.entityFacade = this.entityFormFacade.entityFacade;
+    this.tabName = this.entityFormFacade.info.modelName + '-list';
+  }
 
   // public accessors and mutators
   addEntity() {
