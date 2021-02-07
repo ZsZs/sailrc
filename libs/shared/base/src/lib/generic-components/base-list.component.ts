@@ -128,7 +128,8 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
 
   private navigateToDetailsForm( entityId: string ) {
     const currentUrl = this.route.snapshot['_routerState'].url;
-    this.entityFormFacade.navigateToDetails( entityId, currentUrl );
+    const detailsFormPath = currentUrl.substring(0, currentUrl.lastIndexOf('/')) + '/' + entityId + '/details';
+    this.entityFormFacade.navigateToDetails( detailsFormPath, currentUrl );
   }
 
   private subscribeToLoading() {

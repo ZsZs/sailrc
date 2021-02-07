@@ -12,6 +12,8 @@ import { boatClassFeatureReducer, FEATURE_NAME } from './store/boat-class-featur
 import { NgrxFormsModule } from 'ngrx-forms';
 import { BoatClassFeatureFacade } from './facade/boat-class-feature.facade';
 import { BoatClassResolver } from './boat-class.resolver';
+import { FlexModule } from '@angular/flex-layout';
+import { SharedBaseModule } from '@processpuzzle/shared/base';
 
 
 @NgModule({
@@ -25,9 +27,11 @@ import { BoatClassResolver } from './boat-class.resolver';
     BoatClassDomainModule.forFeature(),
     BoatClassFeatureRoutingModule,
     CommonModule,
+    FlexModule,
+    NgrxFormsModule,
+    SharedBaseModule,
     SharedMaterialModule,
-    StoreModule.forFeature( FEATURE_NAME, boatClassFeatureReducer ),
-    NgrxFormsModule
+    StoreModule.forFeature( FEATURE_NAME, boatClassFeatureReducer )
   ],
   exports: [],
   providers: [BoatClassFeatureFacade, BoatClassResolver]

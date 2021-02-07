@@ -13,7 +13,7 @@ export class YachtClubFeatureFacade extends BaseFormFacade<YachtClub> implements
     super( YachtClub, store, router, yachtClubFacade );
   }
 
-  navigateToDetails( id: string, returnTo?: string ) {
-    super.navigateToDetails(`/race-planning/yacht-club/${id}/details`, returnTo );
+  jumpToDetails( id: string, returnTo: string ) {
+    this.navigateToDetails( `/race-planning/yacht-club/${id}/details`, returnTo )
   }
 }

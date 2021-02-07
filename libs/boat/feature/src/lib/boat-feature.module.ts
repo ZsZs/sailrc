@@ -14,6 +14,8 @@ import { BoatListComponent } from './list/boat-list.component';
 import { BoatTabsComponent } from './tabs/boat-tabs.component';
 import { BoatComponent } from './boat.component';
 import { BoatClassDomainModule, BoatClassFacade } from '@sailrc/boat-class/domain';
+import { FlexModule } from '@angular/flex-layout';
+import { SharedBaseModule } from '@processpuzzle/shared/base';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { BoatClassDomainModule, BoatClassFacade } from '@sailrc/boat-class/domai
     BoatClassDomainModule.forFeature(),
     BoatFeatureRoutingModule,
     CommonModule,
+    FlexModule,
+    NgrxFormsModule,
+    SharedBaseModule,
     SharedMaterialModule,
-    StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer ),
-    NgrxFormsModule
+    StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer )
   ],
   exports: [],
   providers: [BoatClassFacade, BoatFeatureFacade, BoatResolver]

@@ -22,6 +22,8 @@ import { CustomErrorStateMatcherDirective } from './error-state-matcher';
 import { MatListOptionFixDirective } from './mat-list-option-fix';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -30,6 +32,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
+    MaterialFileInputModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -37,6 +40,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatMenuModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,
@@ -56,6 +60,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
+    MaterialFileInputModule,
     MatFormFieldModule,
     MatIconModule,
     MatListModule,
@@ -63,6 +68,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatNativeDateModule,
     MatInputModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,

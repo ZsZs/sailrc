@@ -12,7 +12,7 @@ export class BoatClassFeatureFacade extends BaseFormFacade<BoatClass> implements
     super( BoatClass, store, router, boatClassFacade );
   }
 
-  public navigateToDetails( id: string, returnTo?: string ) {
-    super.navigateToDetails(`/race-planning/boat-class/${id}/details`, returnTo );
+  jumpToDetails( id: string, returnTo: string ) {
+    this.navigateToDetails( `/race-planning/boat-class/${id}/details`, returnTo )
   }
 }

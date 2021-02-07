@@ -1,12 +1,26 @@
 <div class="basic-container">
   <mat-card>
     <form [ngrxFormState]="(formState$ | async)">
-      <mat-card-title>Yacht Club</mat-card-title>
+      <mat-card-header fxLayout='row' fxLayoutAlign='left'>
+        <div mat-card-avatar (click)='onLogo()'>
+          <img mat-card-avatar [src]="(formState$ | async).controls.logoUrl.value" />
+        </div>
+        <mat-card-title>{{ (formState$ | async).controls.name.value }}</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-          <mat-form-field fxFlex>
-            <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
-          </mat-form-field>
+        <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap='25px' fxLayoutAlign="left">
+          <div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <mat-form-field fxFlex>
+                <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <div *ngIf='showLogo' fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <sailrc-image-upload [folder]='logoFolder' [ngrxFormControlState]="(formState$ | async).controls.logoUrl"></sailrc-image-upload>
+            </div>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >

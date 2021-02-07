@@ -9,8 +9,4 @@ export class SailorFeatureFacade extends BaseFormFacade<Sailor> implements IEnti
   constructor( protected store: Store<never>, protected router: Router, sailorFacade: SailorFacade ) {
     super( Sailor, store, router, sailorFacade );
   }
-
-  public navigateToDetails( id: string, returnTo?: string ) {
-    super.navigateToDetails(`/race-planning/sailor/${id}/details`, returnTo );
-  }
 }

@@ -18,7 +18,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
         if ( doc.payload.exists ) {
           const data = doc.payload.data() as T;
           const docId = doc.payload.id;
-          const entity = makeEntity( entityInfo.modelType )({ id: docId, ...data });
+          const entity = makeEntity( entityInfo.modelType )({id: docId, ...data });
           return entity;
         }
       })

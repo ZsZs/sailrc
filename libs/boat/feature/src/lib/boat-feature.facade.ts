@@ -11,7 +11,7 @@ export class BoatFeatureFacade extends BaseFormFacade<Boat> implements IEntityFo
     super( Boat, store, router, boatFacade );
   }
 
-  public navigateToDetails( id: string, returnTo?: string ) {
-    super.navigateToDetails(`/race-planning/boat/${id}/details`, returnTo );
+  jumpToDetails( id: string, returnTo: string ) {
+    this.navigateToDetails( `/race-planning/boat/${id}/details`, returnTo )
   }
 }

@@ -14,13 +14,22 @@ import { FEATURE_NAME, yachtClubFeatureReducer } from './yacht-club.reducer';
 import { YachtClubFeatureRoutingModule } from './yacht-club-feature.routing';
 import { YachtClubFeatureFacade } from './yacht-club-feature.facade';
 import { YachtClubResolver } from './yacht-club.resolver';
+import { FlexModule } from '@angular/flex-layout';
+import { SharedBaseModule } from '@processpuzzle/shared/base';
 
 
 @NgModule({
-  declarations: [YachtClubComponent, YachtClubDetailsComponent, YachtClubListComponent, YachtClubTabsComponent],
+  declarations: [
+    YachtClubComponent,
+    YachtClubDetailsComponent,
+    YachtClubListComponent,
+    YachtClubTabsComponent
+  ],
   imports: [
     CommonModule,
+    FlexModule,
     NgrxFormsModule,
+    SharedBaseModule,
     SharedMaterialModule,
     StoreModule.forFeature( FEATURE_NAME, yachtClubFeatureReducer ),
     YachtClubDomainModule.forFeature(),

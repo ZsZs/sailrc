@@ -1,20 +1,32 @@
 <div class="basic-container">
     <mat-card>
         <form [ngrxFormState]="(formState$ | async)">
-            <mat-card-header>
-                <mat-card-title>Boat Class</mat-card-title>
+            <mat-card-header fxLayout='row' fxLayoutAlign='left'>
+                <div mat-card-avatar (click)='onSymbol()'>
+                    <img mat-card-avatar [src]="(formState$ | async).controls.classSymbolUrl.value" />
+                </div>
+                <mat-card-title>{{ (formState$ | async).controls.name.value }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-                    <mat-form-field fxFlex>
-                        <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-                    <mat-form-field fxFlex>
-                        <input type="Yardstick" matInput placeholder="Yardstick" [ngrxFormControlState]="(formState$ | async).controls.yardstick">
-                    </mat-form-field>
-                </div>
+                <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap='25px' fxLayoutAlign="left">
+                    <div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+                            <mat-form-field fxFlex>
+                                <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+                            <mat-form-field fxFlex>
+                                <input type="Yardstick" matInput placeholder="Yardstick" [ngrxFormControlState]="(formState$ | async).controls.yardstick">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div>
+                        <div *ngIf='showClassSymbol' fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+                            <sailrc-image-upload [folder]='classSymbolFolder' [ngrxFormControlState]="(formState$ | async).controls.classSymbolUrl"></sailrc-image-upload>
+                        </div>
+                    </div>
+                 </div>
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" >
                 <button *ngIf="( isLoading$ | async ) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>

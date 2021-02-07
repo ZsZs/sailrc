@@ -5,7 +5,7 @@ import { SailorDetailsComponent } from './details/sailor-details.component';
 import { SailorListComponent } from './list/sailor-list.component';
 import { SailorTabsComponent } from './tabs/sailor-tabs.component';
 import { SailorDomainModule, SailorFacade } from '@sailrc/sailor/domain';
-import { YachtClubDomainModule, YachtClubFacade } from '@sailrc/yacht-club/domain';
+import { YachtClubDomainModule } from '@sailrc/yacht-club/domain';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { StoreModule } from '@ngrx/store';
 import { NgrxFormsModule } from 'ngrx-forms';
@@ -13,8 +13,6 @@ import { sailorFeatureReducer, FEATURE_NAME } from './store/sailor-feature.reduc
 import { SailorFeatureFacade } from './sailor-feature.facade';
 import { SailorFeatureRoutingModule } from './sailor-feature-routing.module';
 import { SailorResolver } from './sailor.resolver';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
 import { FlexModule } from '@angular/flex-layout';
 import { BoatDomainModule, BoatFacade } from '@sailrc/boat/domain';
@@ -31,16 +29,14 @@ import { BoatFeatureFacade } from '@sailrc/boat/feature';
   imports: [
     BoatDomainModule.forFeature(),
     CommonModule,
-    MaterialFileInputModule,
+    FlexModule,
     NgrxFormsModule,
     SailorDomainModule.forFeature(),
     SailorFeatureRoutingModule,
     SharedBaseModule,
     SharedMaterialModule,
     StoreModule.forFeature( FEATURE_NAME, sailorFeatureReducer ),
-    YachtClubDomainModule.forFeature(),
-    MatProgressBarModule,
-    FlexModule
+    YachtClubDomainModule.forFeature()
   ],
   providers: [
     BoatFacade,

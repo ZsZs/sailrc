@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MemoizedSelector, Store } from '@ngrx/store';
 
 import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
-import { Boat } from './boat';
+import { Boat, INITIAL_BOAT_VALUE } from './boat';
 import { BoatFacadeBase, getBoatById, IBoatState } from './boat-state';
 import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
@@ -10,11 +10,13 @@ import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 export class BoatFacade extends BoatFacadeBase implements IBaseEntityFacade<Boat>{
   readonly entityIdPathVariable: string;
   readonly entityInfo: IEntityInfo;
+  readonly initialEntityState: Boat;
 
   constructor( protected store: Store<IBoatState> ) {
     super( Boat, store );
     this.entityInfo = getEntityInfo( Boat );
     this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
+    this.initialEntityState = INITIAL_BOAT_VALUE;
   }
 
 

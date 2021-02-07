@@ -4,6 +4,7 @@ import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
 
 import { YachtClub } from '@sailrc/yacht-club/domain';
 import { validateYachtClubDetailsForm } from './details/yacht-club-details.reducer';
+import { INITIAL_YACHT_CLUB_VALUE } from '../../../domain/src/lib/yacht-club';
 
 export const FEATURE_NAME = 'yachtClubFeature';
 
@@ -17,10 +18,7 @@ export const { initialFormState, selectors, rawReducer, formFacade: YachtClubFea
   YachtClub,
   FEATURE_NAME,
   getYachtClubManagementState,
-  {
-    id: undefined,
-    name: ''
-  },
+  INITIAL_YACHT_CLUB_VALUE,
   validateYachtClubDetailsForm
 );
 

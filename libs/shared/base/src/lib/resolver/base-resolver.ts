@@ -4,7 +4,6 @@ import { from, Observable } from 'rxjs';
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { EditEntity } from '../auto-entity-form/actions';
 import { IBaseEntityFacade } from '../auto-entity/i-base-entity.facade';
-import { IEntityFormState } from '../auto-entity-form/form-state';
 import { filter, first, tap } from 'rxjs/operators';
 import { makeEntity } from '@briebug/ngrx-auto-entity';
 
@@ -30,7 +29,8 @@ export abstract class BaseResolver<T extends BaseEntityInterface> implements Res
 
   // region protected, private helper methods
   protected resolveNewEntity( route: ActivatedRouteSnapshot ): Observable<T> {
-    const entity = makeEntity<T>( this.entityFacade.entityInfo.modelType ) as any;
+    const initialEntityState = this.entityFacade.initialEntityState;
+    const entity = makeEntity<T>( this.entityFacade.entityInfo.modelType )( initialEntityState ) as T;
     this.store.dispatch( new EditEntity<T>( this.entityFacade.entityInfo.modelType, entity ));
     return from( [entity]);
   }

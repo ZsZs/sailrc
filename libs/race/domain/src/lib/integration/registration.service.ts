@@ -13,7 +13,7 @@ export class RegistrationService extends BaseFirestoreRepository<Registration> {
 
   // protected, private helper methods
   protected determineCollection( entityInfo: IEntityInfo, criteria?: any ) {
-    const path = entityInfo.uriName.replace( ':raceId', criteria );
+    const path = entityInfo.uriName.replace( ':RaceId', criteria );
     this.collection = this.firestore.collection( path );
   }
 }

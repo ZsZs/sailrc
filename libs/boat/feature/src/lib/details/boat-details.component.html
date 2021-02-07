@@ -1,25 +1,42 @@
 <div class="basic-container">
   <mat-card>
     <form [ngrxFormState]="(formState$ | async)">
-      <mat-card-title>Boat</mat-card-title>
+      <mat-card-header fxLayout='row' fxLayoutAlign='left'>
+        <div mat-card-avatar (click)='onAvatar()'>
+          <img mat-card-avatar [src]="(formState$ | async).controls.photoUrl.value" />
+        </div>
+        <mat-card-title>{{ (formState$ | async).controls.name.value }}</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-          <mat-form-field fxFlex>
-            <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-          <mat-form-field fxFlex>
-            <input type="SailNumber" matInput placeholder="Sail number" [ngrxFormControlState]="(formState$ | async).controls.sailNumber">
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-          <mat-form-field fxFlex>
-            <mat-label>Boat Class</mat-label>
-            <mat-select placeholder="Boat Class" [ngrxFormControlState]="(formState$ | async).controls.boatClass">
-              <mat-option *ngFor="let boatClass of boatClasses$ | async" [value]="boatClass.name">{{boatClass.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap='25px' fxLayoutAlign="left">
+          <div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <mat-form-field fxFlex>
+                <input type="Name" matInput placeholder="Name" [ngrxFormControlState]="(formState$ | async).controls.name">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <mat-form-field fxFlex>
+                <input type="SailNumber" matInput placeholder="Sail number" [ngrxFormControlState]="(formState$ | async).controls.sailNumber">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <mat-form-field fxFlex>
+                <mat-label>Boat Class</mat-label>
+                <mat-select placeholder="Boat Class" [ngrxFormControlState]="(formState$ | async).controls.boatClass">
+                  <mat-option *ngFor="let boatClass of boatClasses$ | async" [value]="boatClass.name">{{boatClass.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-icon-button matTooltip='Add your boat class...' (click)='onAddBoatClass()'>
+                <mat-icon>add_link</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div *ngIf='showBoatPicture' fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
+              <sailrc-image-upload [folder]='photoFolder' [ngrxFormControlState]="(formState$ | async).controls.photoUrl"></sailrc-image-upload>
+            </div>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >

@@ -9,6 +9,12 @@ import { BoatFeatureFacade } from '../boat-feature.facade';
 import { IBoatFeatureState } from '../boat-feature.reducer';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { Observable } from 'rxjs';
+import firebase from 'firebase';
+import User = firebase.User;
+import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
+import { takeUntil } from 'rxjs/operators';
+import { AuthDomainFacade } from '@processpuzzle/authentication/domain';
+import { BoatClassFeatureFacade } from '../../../../../boat-class/feature/src/lib/facade/boat-class-feature.facade';
 
 @Component({
   selector: 'sailrc-boat-detail',
@@ -18,27 +24,53 @@ import { Observable } from 'rxjs';
 })
 export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnInit{
   boatClasses$: Observable<BoatClass[]>;
+  photoFolder: string;
+  showBoatPicture = false;
+  user: User;
 
   constructor(
     private boatClassFacade: BoatClassFacade,
-    protected boatFormFacade: BoatFeatureFacade,
+    protected boatFeatureFacade: BoatFeatureFacade,
     protected routerFacade: RouterFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IBoatFeatureState>,
+    private boatClassFeatureFacade: BoatClassFeatureFacade,
+    private authFacade: AuthDomainFacade
 ) {
-  super( boatFormFacade, routerFacade, route, activeTabService, componentDestroyService );
+  super( boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
 }
 
-  // event handling methods
+  // region angular lifecycle hooks
   ngOnInit() {
     super.ngOnInit();
     this.boatClassFacade.loadAll();
     this.boatClasses$ = this.boatClassFacade.all$;
+    this.subscribeToUser();
+    this.determinePhotoFolder();
+  }
+  // endregion
+
+  // region event handling methods
+  onAddBoatClass() {
+    this.boatClassFeatureFacade.jumpToDetails( 'new', this.boatFeatureFacade.currentUrl() );
+  }
+
+  onAvatar() {
+    this.showBoatPicture = true;
   }
 
   // public accessors and mutators
 
-  // protected, private helper methods
+  // region protected, private helper methods
+  private determinePhotoFolder() {
+    const email = this.user ? this.user.email : 'test@sailrc.com';
+    this.photoFolder = uriNameOfEntity( Boat ) + '/' + email;
+  }
+
+  private subscribeToUser() {
+    this.authFacade.getAuthState().pipe( takeUntil( this.onDestroy$ ) ).subscribe( ( user ) => ( this.user = user) );
+  }
+  // endregion
 }

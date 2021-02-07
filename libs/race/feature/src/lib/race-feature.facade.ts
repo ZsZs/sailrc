@@ -11,8 +11,4 @@ export class RaceFeatureFacade extends BaseFormFacade<Race> implements IEntityFo
   ) {
     super( Race, store, router, raceFacade );
   }
-
-  public navigateToDetails( id: string, returnTo?: string ) {
-    super.navigateToDetails(`/race-planning/race/${id}/details`, returnTo );
-  }
 }

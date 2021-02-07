@@ -5,6 +5,7 @@ import { buildAutoFormFeatureState, IEntityFormState } from '@processpuzzle/shar
 
 import { Boat } from '@sailrc/boat/domain';
 import { validateBoatDetailsForm } from './details/boat-details.reducer';
+import { INITIAL_BOAT_VALUE } from '@sailrc/boat/domain';
 
 export const FEATURE_NAME = 'boatFeature';
 
@@ -18,12 +19,7 @@ export const { initialFormState, selectors, rawReducer, formFacade: BoatFeatureF
   Boat,
   FEATURE_NAME,
   getBoatManagementState,
-  {
-    id: undefined,
-    name: '',
-    sailNumber: '',
-    boatClass: '',
-  },
+  INITIAL_BOAT_VALUE,
   validateBoatDetailsForm
 );
 

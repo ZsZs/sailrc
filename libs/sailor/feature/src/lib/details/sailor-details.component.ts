@@ -27,7 +27,7 @@ import { YachtClubFeatureFacade } from '@sailrc/yacht-club/feature';
 export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements OnInit {
   boats$: Observable<Boat[]>;
   showProfilePicture = false;
-  photoFolder: any;
+  photoFolder: string;
   yachtClubs$: Observable<YachtClub[]>;
   user: User;
 
@@ -42,13 +42,12 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
     private yachtClubFeatureFacade: YachtClubFeatureFacade,
     private boatFacade: BoatFacade,
     private boatFeatureFacade: BoatFeatureFacade,
-    private authFacade: AuthDomainFacade,
-    private readonly snackBar: MatSnackBar
+    private authFacade: AuthDomainFacade
   ) {
     super( sailorFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
   }
 
-  // angular lifecycle hooks
+  // region angular lifecycle hooks
   ngOnInit() {
     super.ngOnInit();
     this.yachtClubFacade.loadAll();
@@ -58,14 +57,15 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
     this.subscribeToUser();
     this.determinePhotoFolder();
   }
+  // endregion
 
   // region event handling methods
   onAddYacthClub() {
-    this.yachtClubFeatureFacade.navigateToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+    this.yachtClubFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
   }
 
   onAddBoat() {
-    this.boatFeatureFacade.navigateToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+    this.boatFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
   }
 
   onAvatar() {

@@ -1,7 +1,11 @@
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
 import { Entity, Key } from '@briebug/ngrx-auto-entity';
 
-@Entity({modelName: 'Registration', pluralName: 'registrations', uriName: 'races/:raceId/registrations'})
+export const initializeRegistration = {
+  fromServer: (data: any): Registration => ({...INITIAL_REGISTRATION_VALUE, ...data})
+}
+
+@Entity({modelName: 'Registration', pluralName: 'registrations', uriName: 'races/:RaceId/registrations', transform: [initializeRegistration]})
 export class Registration implements BaseEntityInterface {
   @Key id: string;
   raceId: string;

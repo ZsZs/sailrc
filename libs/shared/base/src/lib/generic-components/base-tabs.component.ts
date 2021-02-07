@@ -39,8 +39,10 @@ export abstract class BaseTabsComponent<T extends BaseEntityInterface> implement
   }
 
   showDetails() {
+    const entityName = this.entityFormFacade.info.modelName.charAt(0).toLowerCase() + this.entityFormFacade.info.modelName.slice(1);
     const currentUrl = this.route.snapshot['_routerState'].url;
-    this.entityFormFacade.navigateToDetails( this.selectedEntityId, currentUrl );
+    const detailsFormPath = currentUrl.substring(0, currentUrl.lastIndexOf( entityName )) + entityName + '/' + this.selectedEntityId + '/details';
+    this.entityFormFacade.navigateToDetails( detailsFormPath, currentUrl );
   }
 
   showList() {

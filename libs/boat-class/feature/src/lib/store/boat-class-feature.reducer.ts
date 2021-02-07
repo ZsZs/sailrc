@@ -2,7 +2,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import { wrapReducerWithFormStateUpdate } from 'ngrx-forms';
 
 import { buildAutoFormFeatureState, IEntityFormState } from '@processpuzzle/shared/base';
-import { BoatClass } from '@sailrc/boat-class/domain';
+import { BoatClass, INITIAL_BOAT_CLASS_VALUE } from '@sailrc/boat-class/domain';
 import { validateBoatClassDetailsForm } from '../details/boat-class-details.reducer';
 
 export const FEATURE_NAME = 'boatClassFeature';
@@ -17,11 +17,7 @@ export const { initialFormState, selectors, rawReducer, formFacade: BoatClassFea
   BoatClass,
   FEATURE_NAME,
   getBoatClassManagementState,
-  {
-    id: undefined,
-    name: '',
-    yardstick: undefined
-  },
+  INITIAL_BOAT_CLASS_VALUE,
   validateBoatClassDetailsForm
 );
 

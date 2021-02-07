@@ -5,5 +5,7 @@ import { MemoizedSelector } from '@ngrx/store';
 export interface IBaseEntityFacade<T extends BaseEntityInterface> extends IEntityFacade<T>{
   readonly entityInfo: IEntityInfo;
   readonly entityIdPathVariable: string;
+  readonly initialEntityState: T;
+
   getEntityById( id: string ): MemoizedSelector<object | T, T>
 }

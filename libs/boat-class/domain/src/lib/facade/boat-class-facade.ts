@@ -3,7 +3,7 @@ import { MemoizedSelector, Store } from '@ngrx/store';
 
 import { getEntityInfo, IBaseEntityFacade } from '@processpuzzle/shared/base';
 
-import { BoatClass } from '../domain/boat-class';
+import { BoatClass, INITIAL_BOAT_CLASS_VALUE } from '../domain/boat-class';
 import { BoatClassFacadeBase, getBoatClassById, IBoatClassState } from '../store/boat-class-domain.state';
 import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
@@ -11,11 +11,13 @@ import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 export class BoatClassFacade extends BoatClassFacadeBase implements IBaseEntityFacade<BoatClass>{
   readonly entityIdPathVariable: string;
   readonly entityInfo: IEntityInfo;
+  readonly initialEntityState: BoatClass;
 
   constructor( protected store: Store<IBoatClassState> ) {
     super( BoatClass, store );
-    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
     this.entityInfo = getEntityInfo( BoatClass );
+    this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
+    this.initialEntityState = INITIAL_BOAT_CLASS_VALUE;
   }
 
   getEntityById( id: string ): MemoizedSelector<object | BoatClass, BoatClass> {

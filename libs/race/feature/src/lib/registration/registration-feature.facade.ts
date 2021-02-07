@@ -6,8 +6,14 @@ import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class RegistrationFeatureFacade extends BaseFormFacade<Registration> implements IEntityFormFacade<Registration> {
+  private readonly _raceIdPathVariable;
 
   constructor( protected store: Store<never>, protected router: Router, registrationFacade: RegistrationFacade ) {
     super( Registration, store, router, registrationFacade );
+    this._raceIdPathVariable = registrationFacade.raceIdPathVariable;
+  }
+
+  get raceIdPathVariable(): string {
+    return this._raceIdPathVariable;
   }
 }
