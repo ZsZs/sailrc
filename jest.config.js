@@ -18,5 +18,7 @@ module.exports = {
     '<rootDir>/libs/shared/widgets',
     '<rootDir>/libs/sailor/domain',
     '<rootDir>/libs/sailor/feature',
+    '<rootDir>/libs/sailing-place/domain',
+    '<rootDir>/libs/sailing-place/feature',
   ],
 };

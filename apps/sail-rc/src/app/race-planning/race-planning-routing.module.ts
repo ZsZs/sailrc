@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'boat-class', loadChildren: () => import( '@sailrc/boat-class/feature').then( m => m.BoatClassFeatureModule ) },
   { path: 'race', loadChildren: () => import( '@sailrc/race/feature').then( m => m.RaceFeatureModule ) },
   { path: 'sailor', loadChildren: () => import( '@sailrc/sailor/feature').then( m => m.SailorFeatureModule ) },
+  { path: 'sailing-place', loadChildren: () => import( '@sailrc/sailing-place/feature').then( m => m.SailingPlaceFeatureModule ) },
   { path: 'yacht-club', loadChildren: () => import( '@sailrc/yacht-club/feature').then( m => m.YachtClubFeatureModule ) }
 ];
 

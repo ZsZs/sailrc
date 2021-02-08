@@ -38,6 +38,8 @@
     "shared-util": { "tags": ["type:util", "scope:shared"] },
     "shared-widgets": { "tags": ["type:ui", "scope:shared"] },
     "sailor-domain": { "tags": ["type:domain"] },
-    "sailor-feature": { "tags": ["type:feature"] }
+    "sailor-feature": { "tags": ["type:feature"] },
+    "sailing-place-domain": { "tags": [] },
+    "sailing-place-feature": { "tags": [] }
   }
 }

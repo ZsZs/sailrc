@@ -1,20 +1,21 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BaseFormComponent } from '@processpuzzle/shared/base';
-import { Boat } from '@sailrc/boat/domain';
-import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
-import { Store } from '@ngrx/store';
-import { BoatFeatureFacade } from '../boat-feature.facade';
-import { IBoatFeatureState } from '../boat-feature.reducer';
-import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import firebase from 'firebase';
 import User = firebase.User;
 import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
-import { takeUntil } from 'rxjs/operators';
+
+import { BaseFormComponent } from '@processpuzzle/shared/base';
+import { Boat } from '@sailrc/boat/domain';
+import { RouterFacade } from '@processpuzzle/shared/util';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { BoatFeatureFacade } from '../boat-feature.facade';
+import { IBoatFeatureState } from '../boat-feature.reducer';
+import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { AuthDomainFacade } from '@processpuzzle/authentication/domain';
-import { BoatClassFeatureFacade } from '../../../../../boat-class/feature/src/lib/facade/boat-class-feature.facade';
+import { BoatClassFeatureFacade } from '@sailrc/boat-class/feature';
 
 @Component({
   selector: 'sailrc-boat-detail',

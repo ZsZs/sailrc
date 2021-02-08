@@ -19,6 +19,4 @@ export class BoatTabsComponent extends BaseTabsComponent<Boat>{
     protected route: ActivatedRoute ) {
     super( boatFeatureFacade, activeTabService, route );
   }
-
-  // protected, private helper methods
 }

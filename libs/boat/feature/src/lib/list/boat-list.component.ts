@@ -12,7 +12,6 @@ import { BoatFeatureFacade } from '../boat-feature.facade';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class BoatListComponent extends BaseListComponent<Boat>{
-  protected static readonly tabName = 'boat-list';
   displayedColumns = ['select', 'sailNumber', 'boatClass', 'name'];
 
   constructor(

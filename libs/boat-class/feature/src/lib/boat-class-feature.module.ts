@@ -8,12 +8,12 @@ import { BoatClassDomainModule } from '@sailrc/boat-class/domain';
 import { BoatClassFeatureRoutingModule } from './boat-class-feature-routing.module';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { StoreModule } from '@ngrx/store';
-import { boatClassFeatureReducer, FEATURE_NAME } from './store/boat-class-feature.reducer';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { BoatClassFeatureFacade } from './facade/boat-class-feature.facade';
 import { BoatClassResolver } from './boat-class.resolver';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
+import { boatClassFeatureReducer, FEATURE_NAME } from './store/boat-class-feature.reducer';
 
 
 @NgModule({

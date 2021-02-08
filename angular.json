@@ -532,6 +532,50 @@
           }
         }
       }
+    },
+    "sailing-place-domain": {
+      "projectType": "library",
+      "root": "libs/sailing-place/domain",
+      "sourceRoot": "libs/sailing-place/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/sailing-place/domain/src/**/*.ts", "libs/sailing-place/domain/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sailing-place/domain"],
+          "options": {
+            "jestConfig": "libs/sailing-place/domain/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sailing-place-feature": {
+      "projectType": "library",
+      "root": "libs/sailing-place/feature",
+      "sourceRoot": "libs/sailing-place/feature/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/sailing-place/feature/src/**/*.ts", "libs/sailing-place/feature/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sailing-place/feature"],
+          "options": {
+            "jestConfig": "libs/sailing-place/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

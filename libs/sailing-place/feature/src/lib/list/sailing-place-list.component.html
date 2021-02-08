@@ -13,13 +13,13 @@
   <div fxShow="true" fxHide.gt-sm="true" fxFlex fxLayout fxLayoutAlign="flex-end">
     <button mat-button [matMenuTriggerFor]="beforeMenu"><mat-icon>menu</mat-icon> Choose action</button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="addEntity()"><mat-icon>add</mat-icon> New yacht club</button>
-      <button mat-menu-item [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete yacht club</button>
+      <button mat-menu-item (click)="addEntity()"><mat-icon>add</mat-icon> New boat class</button>
+      <button mat-menu-item [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete boat</button>
     </mat-menu>
   </div>
 </mat-toolbar>
 
-<div class="yacht-club-list-container mat-elevation-z8">
+<div class="boat-list-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
