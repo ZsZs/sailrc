@@ -35,6 +35,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/apps/sail-rc/src/environments
+.env
 
 # System Files
 .DS_Store

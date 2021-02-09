@@ -14,6 +14,7 @@ import { SailingPlaceResolver } from './sailing-place.resolver';
 import { SailingPlaceDomainModule } from '@sailrc/sailing-place/domain';
 import { SailingPlaceFeatureRoutingModule } from './sailing-place-feature-routing.module';
 import { SailingPlaceFeatureFacade } from './sailing-place-feature.facade';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SailingPlaceFeatureFacade } from './sailing-place-feature.facade';
     SailingPlaceFeatureRoutingModule,
     SharedBaseModule,
     SharedMaterialModule,
+    SharedWidgetsModule,
     StoreModule.forFeature( FEATURE_NAME, sailingPlaceFeatureReducer )
   ],
   exports: [],
