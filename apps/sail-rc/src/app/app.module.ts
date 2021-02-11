@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { LoggerModule, NGXLogger } from 'ngx-logger';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -15,6 +15,8 @@ import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { metaReducers } from './app.reducer';
 import { CommonDependenciesModule } from './common-dependencies.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
+import { AppInitService } from './app-init.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
     CommonDependenciesModule,
     EffectsModule.forRoot([]),
     HttpClientModule,
+    HttpClientJsonpModule,
     LoggerModule.forRoot({
       serverLoggingUrl: environment.logger.serverLoggingUrl + '/api/logs',
       level: environment.logger.level,
@@ -68,8 +72,9 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
     StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
   ],
   providers: [
-  { provide: SETTINGS, useValue: {} },
-  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    { provide : APP_INITIALIZER, multi : true, deps : [AppInitService], useFactory : (startupClass : AppInitService) => () => startupClass.init() },
+    { provide: SETTINGS, useValue: {} },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     NGXLogger,
     RouteStateService,
     SnackBarService

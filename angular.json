@@ -53,7 +53,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sail-rc:build"
+            "browserTarget": "sail-rc:build",
+            "proxyConfig": "apps/sail-rc/src/proxy.conf.json"
           },
           "configurations": {
             "production": {

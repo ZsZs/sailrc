@@ -11,10 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { FlexModule } from '@angular/flex-layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapSelectComponent } from './map-select/map-select.component';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from '../../../../../apps/sail-rc/src/environments/environment';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('ui reducer');
 
@@ -28,15 +26,15 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
     MapSelectComponent
   ],
   imports: [
-    AgmCoreModule.forRoot( environment.googleCloudPlatform ),
     CommonModule,
     DragDropModule,
+    GoogleMapsModule,
     MatCardModule,
     SharedMaterialModule,
     StoreModule.forFeature( 'ui', UI_REDUCER_TOKEN ),
     WebcamModule,
     MatDialogModule,
-    FlexModule
+    FlexModule,
   ],
   providers: [
     { provide: UI_REDUCER_TOKEN, useValue: uiReducer }

@@ -40,8 +40,8 @@ const isTest = environment === 'test';
 const isProduction = environment === 'prod';
 
 // choose the correct targetPath based on the environment chosen
-let targetPath = isProduction ? './apps/sail-rc/src/environments/environment.prod.ts' : './apps/sail-rc/src/environments/environment.ts';
-targetPath = isTest ? './apps/sail-rc/src/environments/environment.test.ts' : './apps/sail-rc/src/environments/environment.ts';
+const targetPath = isProduction ? './apps/sail-rc/src/environments/environment.prod.ts' : './apps/sail-rc/src/environments/environment.ts';
+// targetPath = isTest ? './apps/sail-rc/src/environments/environment.test.ts' : './apps/sail-rc/src/environments/environment.ts';
 
 //actual content to be compiled dynamically and pasted into respective environment files
 const environmentFileContent = `

@@ -1,0 +1,9 @@
+{
+  "/google/maps/api": {
+    "target": "https://maps.googleapis.com/maps/api",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/google/maps/api": "" },
+    "logLevel": "debug"
+  }
+}

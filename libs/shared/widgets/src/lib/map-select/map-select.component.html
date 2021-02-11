@@ -1,5 +1,9 @@
 <div>
-  <agm-map [latitude]="latitude" [longitude]="longitude">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
+  <google-map [options]="mapOptions"
+              [center]="center"
+              [zoom]="zoom"
+              (mapClick)="onMapClick($event)"
+              (mapMousemove)="move($event)"></google-map>
+  <div>Latitude: {{display?.lat}}</div>
+  <div>Longitude: {{display?.lng}}</div>
 </div>

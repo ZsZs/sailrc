@@ -7,8 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "nx": "nx",
     "config-env": "ts-node ./apps/sail-rc/src/assets/setEnv.ts",
-    "start": "npm run config-env --environment=dev && ng serve",
-    "build": "npm run config-env --environment=test && ng build --prod",
+    "start": "npm run config-env -- --environment=dev && ng serve",
+    "build": "npm run config-env -- --environment=prod && ng build --prod",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
@@ -29,7 +29,6 @@
     "help": "nx help"
   },
   "dependencies": {
-    "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "^11.0.9",
     "@angular/cdk": "~11.0.3",
     "@angular/common": "^11.0.9",
@@ -38,6 +37,7 @@
     "@angular/fire": "^6.1.4",
     "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "^11.0.9",
+    "@angular/google-maps": "^11.1.2",
     "@angular/material": "^11.0.3",
     "@angular/platform-browser": "^11.0.9",
     "@angular/platform-browser-dynamic": "^11.0.9",
