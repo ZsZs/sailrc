@@ -1,9 +1,11 @@
-<div>
+<div *ngIf='apiLoaded | async'>
   <google-map [options]="mapOptions"
               [center]="center"
               [zoom]="zoom"
               (mapClick)="onMapClick($event)"
-              (mapMousemove)="move($event)"></google-map>
+              (mapMousemove)="move($event)">
+    <map-marker [position]="markerPosition" [options]="markerOptions"></map-marker>
+  </google-map>
   <div>Latitude: {{display?.lat}}</div>
   <div>Longitude: {{display?.lng}}</div>
 </div>

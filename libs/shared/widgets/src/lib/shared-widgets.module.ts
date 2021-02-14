@@ -11,8 +11,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { FlexModule } from '@angular/flex-layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MapSelectComponent } from './map-select/map-select.component';
+import { GOOGLE_API_KEY_TOKEN, MapSelectComponent } from './map-select/map-select.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MapSelectViewAdapter } from './map-select/map-select-view-adapter';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../../../../apps/sail-rc/src/environments/environment';
 
 export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('ui reducer');
 
@@ -20,15 +23,19 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
   declarations: [
     CameraUploadComponent,
     MapSelectComponent,
+    MapSelectViewAdapter,
     VarDirective
   ],
   exports: [
-    MapSelectComponent
+    MapSelectComponent,
+    MapSelectViewAdapter,
   ],
   imports: [
     CommonModule,
     DragDropModule,
     GoogleMapsModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
     MatCardModule,
     SharedMaterialModule,
     StoreModule.forFeature( 'ui', UI_REDUCER_TOKEN ),
@@ -41,10 +48,13 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
   ]
 })
 export class SharedWidgetsModule {
-  static forRoot(): ModuleWithProviders<SharedWidgetsModule> {
+  static forRoot( googleApiKey: string ): ModuleWithProviders<SharedWidgetsModule> {
     return {
       ngModule: SharedWidgetsModule,
-      providers: [SnackBarService]
+      providers: [
+        { provide: GOOGLE_API_KEY_TOKEN, useValue: googleApiKey },
+        SnackBarService
+      ]
     }
   }
 

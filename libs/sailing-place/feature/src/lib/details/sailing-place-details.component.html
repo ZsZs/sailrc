@@ -14,7 +14,7 @@
             </div>
           </div>
           <div>
-            <sailrc-map-select></sailrc-map-select>
+            <sailrc-map-select [ngrxFormControlState]="(formState$ | async).controls.coordinates"></sailrc-map-select>
           </div>
         </div>
       </mat-card-content>

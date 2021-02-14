@@ -1,26 +1,26 @@
-import { FormViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { AfterViewInit, Directive, forwardRef, OnDestroy } from '@angular/core';
+import { FormViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { Subscription } from 'rxjs';
-import { ImageUploadComponent } from './image-upload.component';
+import { MapSelectComponent } from './map-select.component';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: 'sailrc-image-upload[ngrxFormControlState]',
+  selector: 'sailrc-map-select[ngrxFormControlState]',
   providers: [{
     provide: NGRX_FORM_VIEW_ADAPTER,
-    useExisting: forwardRef(() => ImageUploadViewAdapter ),
+    useExisting: forwardRef(() => MapSelectViewAdapter ),
     multi: true,
   }],
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class ImageUploadViewAdapter implements FormViewAdapter, AfterViewInit, OnDestroy {
+export class MapSelectViewAdapter implements FormViewAdapter, AfterViewInit, OnDestroy {
   private value: any;
   private subscriptions: Subscription[] = [];
 
-  constructor(private imageUpload: ImageUploadComponent ) {}
+  constructor(private mapSelect: MapSelectComponent ) {}
 
   ngAfterViewInit() {
-    console.log('image-upload: ngAfterViewInit');
+    console.log('map-select: ngAfterViewInit');
   }
 
   ngOnDestroy() {
@@ -30,21 +30,24 @@ export class ImageUploadViewAdapter implements FormViewAdapter, AfterViewInit, O
   setViewValue(value: any) {
     this.value = value;
 
-    Promise.resolve().then(() => this.imageUpload.imageUrl = value);
+    Promise.resolve().then(() => {
+      this.mapSelect.center = value;
+      this.mapSelect.markerPosition = value;
+    });
   }
 
   setOnChangeCallback(fn: any) {
-    this.imageUpload.registerOnChange(value => {
+    this.mapSelect.registerOnChange(value => {
       this.value = value;
       fn(value);
     });
   }
 
   setOnTouchedCallback(fn: any) {
-    console.log('image-upload: setOnTouchedCallback = ' + fn );
+    console.log('map-select: setOnTouchedCallback = ' + fn );
   }
 
   setIsDisabled(isDisabled: boolean) {
-    console.log('image-upload: setIsDisabled');
+    console.log('map-select setIsDisabled');
   }
 }

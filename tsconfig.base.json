@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": ["apps/default/src/environments/*"],
       "@sailrc/boat-class/feature": ["libs/boat-class/feature/src/index.ts"],
       "@sailrc/boat-class/domain": ["libs/boat-class/domain/src/index.ts"],
       "@sailrc/boat/domain": ["libs/boat/domain/src/index.ts"],

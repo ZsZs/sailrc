@@ -12,7 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 
-import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
+import { GOOGLE_API_KEY_TOKEN, SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -66,7 +66,7 @@ import { AppInitService } from './app-init.service';
     SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
-    SharedWidgetsModule,
+    SharedWidgetsModule.forRoot( environment.googleCloudPlatform.apiKey ),
     StoreModule.forRoot( {}, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )

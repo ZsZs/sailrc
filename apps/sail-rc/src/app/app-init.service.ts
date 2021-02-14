@@ -13,9 +13,9 @@ export class AppInitService {
     const apiKey = environment.googleCloudPlatform.apiKey;
     const mapsAPIUrl =`/google/maps/api/js?key=${apiKey}`;
 
-    this.httpClient.jsonp( mapsAPIUrl, 'callback' ).subscribe( async x => {
-      await new Promise( resolve => setTimeout( resolve, 5000 ));
-      console.log( 'Google Maps API loaded.');
-    });
+    // return this.httpClient.jsonp( mapsAPIUrl, 'callback' ).toPromise().then( async x => {
+    //   await new Promise( resolve => setTimeout( resolve, 5000 ));
+    //   console.log( 'Google Maps API loaded.');
+    // });
   }
 }

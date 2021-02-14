@@ -9,13 +9,17 @@ export const initializeSailingPlace = {
 export class SailingPlace implements BaseEntityInterface {
   @Key id: string;
   name: string;
-  lattitude: number;
-  longitude: number;
+  coordinates: {
+    lat: number;
+    lng: number;
+  }
 }
 
 export const INITIAL_SAILING_PLACE_VALUE : SailingPlace = {
   id: undefined,
   name: '',
-  lattitude: 51.678418,
-  longitude: 7.809007
+  coordinates: {
+    lat: 51.678418,
+    lng: 7.809007
+  }
 }
