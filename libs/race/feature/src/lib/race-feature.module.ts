@@ -18,6 +18,7 @@ import { RegistrationListComponent } from './registration/list/registration-list
 import { RegistrationDetailsComponent } from './registration/details/registration-details.component';
 import { RegistrationResolver } from './registration/registration.resolver';
 import { FlexModule } from '@angular/flex-layout';
+import { RaceSelectComponent } from './select/race-select.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FlexModule } from '@angular/flex-layout';
     RaceFeatureComponent,
     RaceListComponent,
     RaceStatusbarComponent,
+    RaceSelectComponent,
     RaceTabsComponent,
     RegistrationDetailsComponent,
     RegistrationListComponent

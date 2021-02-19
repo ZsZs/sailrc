@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, take, takeUntil, tap } from 'rxjs/operators';
 import firebase from 'firebase';
 import User = firebase.User;
 import { RouterFacade } from '@processpuzzle/shared/util';
@@ -60,16 +60,34 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
   // endregion
 
   // region event handling methods
-  onAddYacthClub() {
-    this.yachtClubFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
-  }
-
   onAddBoat() {
     this.boatFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
   }
 
+  onAddYacthClub() {
+    this.yachtClubFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+  }
+
   onAvatar() {
     this.showProfilePicture = true;
+  }
+
+  onGoToBoat() {
+    this.formState$.pipe(
+      map( formState => formState.controls.boatId.value ),
+      take( 1 )
+    ).subscribe( boatId => {
+      this.boatFeatureFacade.jumpToDetails( boatId, this.sailorFeatureFacade.currentUrl() );
+    })
+  }
+
+  onGoToYacthClub() {
+    this.formState$.pipe(
+      map( formState => formState.controls.yachtClubId.value ),
+      take( 1 )
+    ).subscribe( yachtClubId => {
+      this.yachtClubFeatureFacade.jumpToDetails( yachtClubId, this.sailorFeatureFacade.currentUrl() );
+    })
   }
   // endregion
 

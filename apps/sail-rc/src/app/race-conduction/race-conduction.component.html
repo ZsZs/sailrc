@@ -1,1 +1,37 @@
-<p>race-condction works!</p>
+<div class="race-conduction-home" fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+  <mat-card fxFlex="0 1 calc(33.3% - 30px)" fxFlex.lt-md="0 1 calc(50% - 30px)" fxFlex.lt-sm="100%">
+    <mat-card-title><a routerLink="/race-conduction/participant">Participants</a></mat-card-title>
+    <mat-card-content>Record participants.</mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>Read more...</button>
+      <button color="primary" mat-raised-button routerLink="/race-conduction/participant">Go...</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card fxFlex="0 1 calc(33.3% - 30px)" fxFlex.lt-md="0 1 calc(50% - 30px)" fxFlex.lt-sm="100%">
+    <mat-card-title><a routerLink="/race-conduction/field">Race Field</a></mat-card-title>
+    <mat-card-content>Mark race field</mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>Read more...</button>
+      <button color="primary" mat-raised-button routerLink="/race-conduction/field">Go...</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card fxFlex="0 1 calc(33.3% - 30px)" fxFlex.lt-md="0 1 calc(50% - 30px)" fxFlex.lt-sm="100%">
+    <mat-card-title><a routerLink="/race-conduction">Start</a></mat-card-title>
+    <mat-card-content>Start</mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>Read more...</button>
+      <button color="primary" mat-raised-button routerLink="/race-conduction">Go...</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card fxFlex="0 1 calc(33.3% - 30px)" fxFlex.lt-md="0 1 calc(50% - 30px)" fxFlex.lt-sm="100%">
+    <mat-card-title><a routerLink="/race-conduction">Finish</a></mat-card-title>
+    <mat-card-content>Finish</mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>Read more...</button>
+      <button color="primary" mat-raised-button routerLink="/race-conduction">Go...</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

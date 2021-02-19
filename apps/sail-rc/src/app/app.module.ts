@@ -12,7 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 
-import { GOOGLE_API_KEY_TOKEN, SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
+import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

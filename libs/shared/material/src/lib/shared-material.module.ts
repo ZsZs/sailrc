@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatSortModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   declarations: [
     NgrxMatSelectViewAdapter,
@@ -55,6 +57,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatListOptionFixDirective,
   ],
   exports: [
+    CustomErrorStateMatcherDirective,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -63,10 +66,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MaterialFileInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatNativeDateModule,
-    MatInputModule,
+    MatListOptionFixDirective,
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
@@ -77,9 +80,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    NgrxMatSelectViewAdapter,
-    CustomErrorStateMatcherDirective,
-    MatListOptionFixDirective
+    MatTooltipModule,
+    NgrxMatSelectViewAdapter
   ]
 })
 export class SharedMaterialModule {}

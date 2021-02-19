@@ -24,20 +24,26 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
                             <mat-form-field fxFlex>
                                 <mat-label>Yacht Club</mat-label>
-                                <mat-select placeholder="Yacht Club" [ngrxFormControlState]="(formState$ | async).controls.yachtClub">
-                                    <mat-option *ngFor="let yachtClub of yachtClubs$ | async" [value]="yachtClub.name">{{yachtClub.name}}</mat-option>
+                                <mat-select placeholder="Yacht Club" [ngrxFormControlState]="(formState$ | async).controls.yachtClubId">
+                                    <mat-option *ngFor="let yachtClub of yachtClubs$ | async" [value]="yachtClub.id">{{yachtClub.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <button mat-icon-button matTooltip='Go to your yacht club...' (click)='onGoToYacthClub()'>
+                                <mat-icon>link</mat-icon>
+                            </button>
                             <button mat-icon-button matTooltip='Add your yacht club...' (click)='onAddYacthClub()'>
                                 <mat-icon>add_link</mat-icon>
                             </button>
                         </div>
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
                             <mat-form-field fxFlex>
-                                <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.boat">
-                                    <mat-option *ngFor="let boat of boats$ | async" [value]="boat.sailNumber">{{boat.sailNumber}} {{boat.boatClass}}</mat-option>
+                                <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.boatId">
+                                    <mat-option *ngFor="let boat of boats$ | async" [value]="boat.id">{{boat.sailNumber}} {{boat.boatClass}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <button mat-icon-button matTooltip='Go to your boat...' (click)='onGoToBoat()'>
+                                <mat-icon>link</mat-icon>
+                            </button>
                             <button mat-icon-button matTooltip='Add your boat...' (click)='onAddBoat()'>
                                 <mat-icon>add_link</mat-icon>
                             </button>

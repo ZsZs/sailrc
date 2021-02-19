@@ -8,6 +8,7 @@ export { BaseFormComponent } from './lib/generic-components/base-form.component'
 export { BaseFormFacade } from './lib/auto-entity-form/facade-builder';
 export { BaseListComponent } from './lib/generic-components/base-list.component';
 export { BaseTabsComponent } from './lib/generic-components/base-tabs.component';
+export { EntityCrossReference } from './lib/auto-entity/entity-cross-reference';
 export { EntityService } from './lib/firestore/entity.service';
 export { FileUploadMetadata, StorageService } from './lib/firestore/storage.service';
 export { FirestoreBaseServiceInterface } from './lib/firestore/firestore-base.interface';
