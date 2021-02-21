@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Race } from '@sailrc/race/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { SelectionModel } from '@angular/cdk/collections';
 import { RaceFeatureFacade } from '../race-feature.facade';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'sailrc-race-select',
@@ -21,13 +20,14 @@ export class RaceSelectComponent extends BaseListComponent<Race> {
     protected raceFeatureFacade: RaceFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
-    private subscriptionService: ComponentDestroyService
+    private subscriptionService: ComponentDestroyService,
+    private router: Router
   ) {
     super( raceFeatureFacade, route, activeTabService, subscriptionService  );
     this.selection = new SelectionModel<Race>(false, []);
   }
 
-  // event handling methods
+  // region event handling methods
   onCancel(): void {
     this.router.navigateByUrl( '/' );
   }
@@ -40,10 +40,9 @@ export class RaceSelectComponent extends BaseListComponent<Race> {
     this.onCloseRaceSelect();
     this.navigateToExecutionTab( this.selection.selected[0].id );
   }
+  // endregion
 
-  // action methods
-
-  // protected, private helper methods
+  // region protected, private helper methods
   protected detailsRoute( entityId: string ): string {
     this.onCloseRaceSelect();
     return this.determineExecutionTabUri( entityId );
@@ -53,19 +52,8 @@ export class RaceSelectComponent extends BaseListComponent<Race> {
     return 'race-execution/' + raceId + '/lap/unknown/participants';
   }
 
-  protected dispatchAllEntitiesRequestedAction() {
-    this.store.dispatch( allRacesRequested() );
-  }
-
-  protected dispatchDeleteEntityAction( entity: Race ) {
-    // This dialog, doesn't delete races
-  }
-
-  protected dispatchSelectedEntitiesAction( entities: Race[] ) {
-    this.store.dispatch( setSelectedRaces({ races: entities } ));
-  }
-
   private navigateToExecutionTab( raceId: string ) {
     this.router.navigateByUrl( this.determineExecutionTabUri( raceId ));
   }
+  // endregion
 }
