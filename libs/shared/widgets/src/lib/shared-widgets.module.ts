@@ -15,7 +15,6 @@ import { GOOGLE_API_KEY_TOKEN, MapSelectComponent } from './map-select/map-selec
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapSelectViewAdapter } from './map-select/map-select-view-adapter';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { environment } from '../../../../../apps/sail-rc/src/environments/environment';
 
 export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('ui reducer');
 

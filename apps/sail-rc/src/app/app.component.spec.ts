@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
@@ -12,7 +12,6 @@ import { Observable, of } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 
 describe('AppComponent', () => {
-  let store: MockStore;
   const initialState = { loggedIn: false };
   const authFeatureFacadeStub = {
     isAuthenticated(): Observable<boolean> { return of( false ); },
@@ -29,7 +28,6 @@ describe('AppComponent', () => {
       ]
     }).compileComponents();
 
-    store = TestBed.inject( MockStore );
   }));
 
   it('should create the app', () => {

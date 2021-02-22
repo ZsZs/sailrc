@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ZsZs/sailrc.svg?branch=develop)](https://travis-ci.org/ZsZs/sailrc)
 # Sail Race Control
 This application facilitates conducting a sail race. The main features are as follows:
 ## Race Planning

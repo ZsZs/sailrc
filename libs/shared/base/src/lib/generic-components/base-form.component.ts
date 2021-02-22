@@ -102,7 +102,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
     this.entityFacade.selectByKey( this.entityId );
   }
 
-  private subscribeToLoading() {
+  protected subscribeToLoading() {
     this.isLoading$ = this.entityFacade.isLoading$;
   }
 }
