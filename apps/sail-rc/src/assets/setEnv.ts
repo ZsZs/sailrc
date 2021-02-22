@@ -36,7 +36,7 @@ writeFileUsingFS('./apps/sail-rc/src/environments/environment.ts', '');
 
 
 // Checks whether command line argument of `prod` was provided signifying production mode
-const isTest = environment === 'test';
+//const isTest = environment === 'test';
 const isProduction = environment === 'prod';
 
 // choose the correct targetPath based on the environment chosen
