@@ -23,6 +23,7 @@ cache:
     - "./node_modules"
 before_script:
 - npm install -g @angular/cli
+- npm run config-env --environment=prod
 script:
 - npm install
 - ng lint
