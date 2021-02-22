@@ -8,6 +8,19 @@ branches:
   - master
   - develop
   - /feature\//
+addons:
+  sonarcloud:
+    organization: processpuzzle
+    token:
+      secure: "$SONAR_TOKEN"
+    branches:
+      - development
+      - master
+      - /feature\//
+cache:
+  directories:
+    - "$HOME/.sonar/cache"
+    - "./node_modules"
 before_script:
 - npm install -g @angular/cli
 script:
