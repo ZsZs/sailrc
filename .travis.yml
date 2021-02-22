@@ -31,6 +31,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: firebase
+  script: firebase use default
   token:
     secure: "$FIREBASE_TOKEN"
   on:
