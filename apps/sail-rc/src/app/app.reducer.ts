@@ -3,7 +3,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../environments/environment';
 
-export function consoleLogReducer( reducer: ActionReducer<never>): ActionReducer<never> {
+export function consoleLogReducer( reducer: ActionReducer<any>): ActionReducer<any> {
    return function( state, action) {
       console.log( 'state', state) ;
       console.log( 'action', action );
@@ -12,4 +12,4 @@ export function consoleLogReducer( reducer: ActionReducer<never>): ActionReducer
    };
 }
 
-export const metaReducers: MetaReducer<never>[] = !environment.production ? [storeFreeze, consoleLogReducer] : [];
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze, consoleLogReducer] : [];
