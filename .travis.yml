@@ -7,7 +7,7 @@ branches:
   only:
   - release
   - develop
-  - /feature\//
+  - "/feature\\//"
 addons:
   chrome: stable
   sonarcloud:
@@ -15,13 +15,13 @@ addons:
     token:
       secure: "$SONAR_TOKEN"
     branches:
-      - development
-      - release
-      - /feature\//
+    - development
+    - release
+    - "/feature\\//"
 cache:
   directories:
-    - "$HOME/.sonar/cache"
-    - "./node_modules"
+  - "$HOME/.sonar/cache"
+  - "./node_modules"
 before_script:
 - npm install -g --silent @angular/cli
 - npm run config-env --environment=prod
@@ -33,11 +33,8 @@ script:
 deploy:
   skip_cleanup: true
   provider: firebase
-  project: "sailrc-test"
-  token:
-    secure: "$FIREBASE_TOKEN"
+  project: sailrc-test
   on:
     branch: develop
-env:
-  global:
-    secure: PxfdZXECrC0dGNwWQQ5qi93xTDMRoLTSiZtrCXcSirD/uBBFCMReg+7rcdjNDvq39xceD/2aNIkxzO1iB5J6gz/KbmmymLa+DBysGlmDEIGl2m9FIuTEZ2z17UQ8gW4PS1nbFvYnHS1ATNQ9AMnDk/TmPwH15CNctnIr/MjofStKBmkgE852WY8WeWsJmG3zBTpCJtKXGF4Gy92b9ixRpJYVvLeercLkxois5JJfLd+wQ3RxMK4k3dzGWVycHW8taE0p5qJHa/mTs0DkpQMDhbuF3KL2Ccg7Gv2mSPQWoTB3lfpoP2yEcYKFJ08JZfFFrHSgUm8OeSQDlsNeVAwgFf8A0Bfp7wpw3jWLrSvCNMbwvIlaAnXeYgaha8Z1ouHCuAgOn1aM2ZA8rtseHAkZftToMprbKSE45F/qyTDkuifKS+S2Yu8cDhtjj/RyiPlQ0X+78VFulwFN7yCcT3qvhzdeg3GEX13zVON8pm/H6HSImQfBXWLDyQHpfBxfqa77PHkK2sPaEkUisBTKSzB22xxyu1N3Yb3Li1Ewl7mSNTsc2PCWCa3X80I9j7B3klcoPqwsSCGX97mLKAWsOFsTiGQ6zMrqeaAU0FJY8uKSlcxA607DHj0++G6cgcLHxOrY8vOzMcHkkYakAgSNje7jcHiPgT4zgWiuOMJXSX1n75U=
+  token:
+    secure: OWogt+FrlxZfQcSOC6sDyPrPRhiyOy96zuObgkw5iRrbNERTj6av0vcDVqFkrXl9LimJqaT1fNwdqOT9RNnaPJK0P8ghmQjJXPk5ezrNnI7ECRB9qZv4ofIBTlqt7/VMaB4C3WWkWLWs8PZ0bIUvgN8TC/uRFvOM5oUzhRFRfUa/3mh9sxHpHiMOFr3N24V/+68PWpu5lJTcDiDHkVAXWPw/DmpLvKYDtstkRD37yqZNd4sryp8xtHeGcQFA1NTFb7wQ0wNjESiNVw+9EKfxJEBxfyQZ8RPrfccT5SuCtABuvEPctIWd550YuQEQU/bPmvQqh6vfWASYIWck1AdWiJBDuUS6ubHcE7LSHTFL8GEOoiU3s4NOGNO2IU0HxXrdYwX8Zi2s6CJ/FAsyYAffq6ggIN9f1mqba4PI9+4Nv6evXZWnAvUYJe23vJMiBBLJyqCOJnCHTP5NI73lxiT7fOfxxE8ai95g/XNI3Af+QbbKJRCxLF8IMR8Cml89TPIiabs6rRuk7XhYkSzBeXFz9FnVPGw82pwKc2W8+04cSlXbDUMlXy9FedFzxeLvpP1L2Z1hnuWRjn5MW/5YFUuD7ZtxGm1ct14uJv/aJ16BqbPACZ0E54kgVcrUdZyceSX8d2xKS1CfkJQZUBnFsG2oTf6XQJsYyYRGBx4G9f/fB+Y=
