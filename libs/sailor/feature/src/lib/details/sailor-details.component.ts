@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
-import { map, take, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { map, take, takeUntil } from 'rxjs/operators';
 import firebase from 'firebase';
 import User = firebase.User;
 import { RouterFacade } from '@processpuzzle/shared/util';
@@ -12,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
 import { YachtClub, YachtClubFacade } from '@sailrc/yacht-club/domain';
 import { SailorFeatureFacade } from '../sailor-feature.facade';
 import { ISailorFeatureState } from '../store/sailor-feature.reducer';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthDomainFacade } from '@processpuzzle/authentication/domain';
 import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
 import { Boat, BoatFacade } from '@sailrc/boat/domain';
@@ -95,6 +94,13 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
   private determinePhotoFolder() {
     const email = this.user ? this.user.email : 'test@sailrc.com';
     this.photoFolder = uriNameOfEntity( Sailor ) + '/' + email;
+  }
+
+
+  protected subscribeToLoading() {
+    this.isLoading$ = combineLatest( this.entityFacade.isLoading$, this.yachtClubFacade.isLoading$, this.boatFacade.isLoading$ ).pipe(
+      map( ([sailorIsLoading, yachtClubIsLoading, boatIsLoading]) => sailorIsLoading || yachtClubIsLoading || boatIsLoading )
+    );
   }
 
   private subscribeToUser() {
