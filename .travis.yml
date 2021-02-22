@@ -15,7 +15,7 @@ addons:
     token:
       secure: "$SONAR_TOKEN"
     branches:
-    - development
+    - develop
     - release
     - "/feature\\//"
 cache:
@@ -24,7 +24,6 @@ cache:
   - "./node_modules"
 before_script:
 - npm install -g --silent @angular/cli
-- npm run config-env --environment=prod
 script:
 - npm install
 - ng lint
@@ -37,4 +36,4 @@ deploy:
   on:
     branch: develop
   token:
-    secure: OWogt+FrlxZfQcSOC6sDyPrPRhiyOy96zuObgkw5iRrbNERTj6av0vcDVqFkrXl9LimJqaT1fNwdqOT9RNnaPJK0P8ghmQjJXPk5ezrNnI7ECRB9qZv4ofIBTlqt7/VMaB4C3WWkWLWs8PZ0bIUvgN8TC/uRFvOM5oUzhRFRfUa/3mh9sxHpHiMOFr3N24V/+68PWpu5lJTcDiDHkVAXWPw/DmpLvKYDtstkRD37yqZNd4sryp8xtHeGcQFA1NTFb7wQ0wNjESiNVw+9EKfxJEBxfyQZ8RPrfccT5SuCtABuvEPctIWd550YuQEQU/bPmvQqh6vfWASYIWck1AdWiJBDuUS6ubHcE7LSHTFL8GEOoiU3s4NOGNO2IU0HxXrdYwX8Zi2s6CJ/FAsyYAffq6ggIN9f1mqba4PI9+4Nv6evXZWnAvUYJe23vJMiBBLJyqCOJnCHTP5NI73lxiT7fOfxxE8ai95g/XNI3Af+QbbKJRCxLF8IMR8Cml89TPIiabs6rRuk7XhYkSzBeXFz9FnVPGw82pwKc2W8+04cSlXbDUMlXy9FedFzxeLvpP1L2Z1hnuWRjn5MW/5YFUuD7ZtxGm1ct14uJv/aJ16BqbPACZ0E54kgVcrUdZyceSX8d2xKS1CfkJQZUBnFsG2oTf6XQJsYyYRGBx4G9f/fB+Y=
+    secure: VVUNLJ6jqIsJj2A7+QRxwmGuBAnpmlYW1w3t/naMTE6cQBVVFEieTgeBWxzDx1g0i/fTHat9rbL/wzxg8bp/PN5BJbSegwD82a4P7D28ApGlYTMrbNyMqzr52SIVgNBsZPvy7x1nUVxQnq5U0rmsL2uDFTsEu0bVuQ7YNl1XG8eZGPaZS/+Vnx2Ok1+zsxW+sUaGxF6ZVLt1RgYP5CYIzc4hEdZbv+yGHIBIsG8VI+AEHds24/mNXm28oPwec/HDPRd2RsHiZlY0X9CnR5ByvLHN2v3SyfmFF1B0Dig0eowCtVhAIEdYgqsGJ/CFuKRFO7S7PdMxv1FjUpUcXQqvC7wkWCBe2OKQ+xVUNm+oMbugC/Kl9XZ5Kvm5V3OQlW4aCthj32++bwq8V5S38JIuBbK6xqj2A5W0VZNHgUsJwMJd3xMnWOeRkWJM0iTg9cQAuTGDtwh/z0zK0NV0jxf+1++lowJybDilAJWhOOyEbxXANAY+LvIVExLy9aPH30dSQoJxoBlAi+wFvWr9ruqoDQqhXtxkZTr7soczAuk2ItyNvfVBuvhyD9+AbyGC8EFhVMcKf3P3x+nUa2rQv8chnVODiaGTdPh6PPDCVo7EkxiSyeJ8K4rlj3yogsoPw5Df6xNfdVXG7fMuiKj2b1RQk7Q/XO19/fLX5rqRBXOz3/0=
