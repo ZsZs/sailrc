@@ -5,28 +5,31 @@ dist: trusty
 sudo: required
 branches:
   only:
-  - master
+  - release
   - develop
   - /feature\//
 addons:
+  chrome: stable
   sonarcloud:
     organization: processpuzzle
     token:
       secure: "$SONAR_TOKEN"
     branches:
       - development
-      - master
+      - release
       - /feature\//
 cache:
   directories:
     - "$HOME/.sonar/cache"
     - "./node_modules"
 before_script:
-- npm install -g @angular/cli
+- npm install -g --silent @angular/cli
 - npm run config-env --environment=prod
+- firebase use default
 script:
 - npm install
 - ng lint
+- sonar-scanner
 - ng build --base-href https://test.sailrc.de/
 deploy:
   skip_cleanup: true
