@@ -25,7 +25,6 @@ cache:
 before_script:
 - npm install -g --silent @angular/cli
 - npm run config-env --environment=prod
-- firebase use default
 script:
 - npm install
 - ng lint
@@ -34,7 +33,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: firebase
-  script: firebase use default
+  project: "sailrc-test"
   token:
     secure: "$FIREBASE_TOKEN"
   on:
