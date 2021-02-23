@@ -1,9 +1,7 @@
 language: node_js
 node_js:
   - '15'
-jdk:
-  - openjdk11
-dist: trusty
+dist: xenial
 sudo: required
 branches:
   only:
@@ -24,8 +22,11 @@ cache:
   directories:
   - "$HOME/.sonar/cache"
   - "./node_modules"
+git:
+  depth: false
 before_script:
 - npm install -g --silent @angular/cli
+- npm run config-env --environment=prod
 script:
 - npm install
 - ng lint
