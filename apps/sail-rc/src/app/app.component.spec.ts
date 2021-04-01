@@ -10,6 +10,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 describe('AppComponent', () => {
   const initialState = { loggedIn: false };
@@ -21,7 +22,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent, HeaderComponent, SidenavListComponent],
-      imports: [BrowserAnimationsModule, HttpClientModule, RouterTestingModule, SharedMaterialModule],
+      imports: [BreadcrumbModule, BrowserAnimationsModule, HttpClientModule, RouterTestingModule, SharedMaterialModule],
       providers: [
         provideMockStore({ initialState }),
         { provide: AuthFeatureFacade, useValue: authFeatureFacadeStub }
