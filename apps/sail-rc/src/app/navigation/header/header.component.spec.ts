@@ -4,6 +4,8 @@ import { HeaderComponent } from './header.component';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { Observable, of } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
+import { BreadcrumbModule } from 'xng-breadcrumb';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,7 +19,7 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
-      imports: [SharedMaterialModule],
+      imports: [BreadcrumbModule, RouterTestingModule, SharedMaterialModule],
       providers:    [{ provide: AuthFeatureFacade, useValue: authFeatureFacadeStub } ]
     })
     .compileComponents();

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RaceAnalysisComponent } from './race-analysis.component';
+import { CommonDependenciesModule } from '../common-dependencies.module';
 
 describe('RaceAnalysisComponent', () => {
   let component: RaceAnalysisComponent;
@@ -8,9 +9,9 @@ describe('RaceAnalysisComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [CommonDependenciesModule],
       declarations: [ RaceAnalysisComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

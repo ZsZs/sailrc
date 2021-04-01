@@ -5,7 +5,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "excludedFiles": ["jest.test.js", "package.json"],
+      "excludedFiles": ["jest.test.js", "package.json", "apps/sail-rc/jest.config.js"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
