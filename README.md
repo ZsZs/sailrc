@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ZsZs/sailrc.svg?branch=develop)](https://travis-ci.org/ZsZs/sailrc)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sail-rc&metric=alert_status)](https://sonarcloud.io/dashboard?id=sail-rc)
 # Sail Race Control
 This application facilitates conducting a sail race. The main features are as follows:
 ## Race Planning
