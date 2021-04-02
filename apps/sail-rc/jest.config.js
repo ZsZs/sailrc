@@ -23,5 +23,5 @@ module.exports = {
     'jest-preset-angular/build/AngularSnapshotSerializer.js',
     'jest-preset-angular/build/HTMLCommentSerializer.js',
   ],
-  testPathIgnorePatterns: ["<rootDir>/src/environments"]
+  testPathIgnorePatterns: ["<rootDir>/src/environments", "<rootDir>/src/assets"]
 };
