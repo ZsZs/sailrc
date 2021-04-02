@@ -14,11 +14,14 @@ module.exports = {
       },
     },
   },
+  collectCoverage: true,
   coverageDirectory: '../../coverage/apps/sail-rc',
+  coverageReporters: ['html','json','text','cobertura','lcov'],
+  reporters: [ 'default', 'jest-junit' ],
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',
     'jest-preset-angular/build/HTMLCommentSerializer.js',
   ],
-  testPathIgnorePatterns: ["<rootDir>/src/environments"]
+  testPathIgnorePatterns: ["<rootDir>/src/environments", "<rootDir>/src/assets"]
 };

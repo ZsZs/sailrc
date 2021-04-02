@@ -29,19 +29,30 @@ if (!existsSync(envDirectory)) {
   mkdirSync(envDirectory);
 }
 
-//creates the `environment.prod.ts` and `environment.ts` file if it does not exist
-writeFileUsingFS('./apps/sail-rc/src/environments/environment.test.ts', '');
+//creates the `environment.prod.ts`, `environment.test.ts` and `environment.ts` file if it does not exist
 writeFileUsingFS('./apps/sail-rc/src/environments/environment.prod.ts', '');
+writeFileUsingFS('./apps/sail-rc/src/environments/environment.test.ts', '');
 writeFileUsingFS('./apps/sail-rc/src/environments/environment.ts', '');
 
-
-// Checks whether command line argument of `prod` was provided signifying production mode
-//const isTest = environment === 'test';
-const isProduction = environment === 'prod';
-
 // choose the correct targetPath based on the environment chosen
-const targetPath = isProduction ? './apps/sail-rc/src/environments/environment.prod.ts' : './apps/sail-rc/src/environments/environment.ts';
-// targetPath = isTest ? './apps/sail-rc/src/environments/environment.test.ts' : './apps/sail-rc/src/environments/environment.ts';
+let targetPath: string;
+let isProduction = false;
+let projectId = 'sailrc-test';
+
+switch( environment ) {
+  case 'test':
+    targetPath = './apps/sail-rc/src/environments/environment.test.ts';
+    isProduction = true;
+    break;
+  case 'prod':
+    targetPath = './apps/sail-rc/src/environments/environment.prod.ts';
+    projectId = 'sailrc';
+    isProduction = true;
+    break;
+  default:
+    targetPath = './apps/sail-rc/src/environments/environment.ts';
+    break;
+}
 
 //actual content to be compiled dynamically and pasted into respective environment files
 const environmentFileContent = `
@@ -58,12 +69,12 @@ const environmentFileContent = `
     },
     firebaseConfig : {
       apiKey: '${process.env.FIREBASE_API_KEY}',
-      authDomain: "sailrc-test.firebaseapp.com",
-      databaseURL: "https://sailrc-test.firebaseio.com",
-      projectId: "sailrc-test",
-      storageBucket: "sailrc-test.appspot.com",
-      messagingSenderId: "230076715051",
-      appId: "1:230076715051:web:f4c58ea0b6617707711a6e"
+      authDomain: '${projectId}.firebaseapp.com',
+      databaseURL: 'https://${projectId}.firebaseio.com',
+      projectId: '${projectId}',
+      storageBucket: '${projectId}.appspot.com',
+      messagingSenderId: '230076715051',
+      appId: '1:230076715051:web:f4c58ea0b6617707711a6e'
     },
     
     googleCloudPlatform: {
