@@ -32,8 +32,8 @@ before_script:
 script:
 - npm install
 - ng lint
-- sonar-scanner
 - npm run test
+- sonar-scanner
 - npm run build-test
 deploy:
   skip_cleanup: true
