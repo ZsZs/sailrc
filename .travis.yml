@@ -18,6 +18,7 @@ addons:
     - develop
     - release
     - "/feature\\//"
+    - "/hotfix\\//"
 cache:
   directories:
   - "$HOME/.sonar/cache"
@@ -31,7 +32,7 @@ script:
 - npm install
 - ng lint
 - sonar-scanner
-- ng build --base-href https://test.sailrc.de/
+- npm run build-test
 deploy:
   skip_cleanup: true
   provider: firebase
