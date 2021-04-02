@@ -8,6 +8,7 @@ branches:
   - release
   - develop
   - "/feature\\//"
+  - "/hotfix\\//"
 addons:
   chrome: stable
   sonarcloud:
