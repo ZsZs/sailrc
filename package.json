@@ -12,6 +12,7 @@
     "config-env": "ts-node ./apps/sail-rc/src/assets/setEnv.ts",
     "start": "npm run config-env -- --environment=dev && ng serve",
     "build": "npm run config-env -- --environment=prod && ng build --prod --base-href https://sailrc.de",
+    "build-dev": "npm run config-env -- --environment=dev && ng build",
     "build-test": "npm run config-env -- --environment=test && ng build --configuration=test --base-href https://test.sailrc.de",
     "deploy": "npm run build && firebase deploy",
     "test": "nx test sail-rc --coverage",
