@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Race } from '@sailrc/race/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
-import { RaceFeatureFacade } from '../race-feature.facade';
+import { RaceFeatureFacade } from '@sailrc/race/shared';
 
 @Component({
   selector: 'sailrc-race-list',

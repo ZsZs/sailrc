@@ -13,7 +13,9 @@ export class RegistrationFeatureFacade extends BaseFormFacade<Registration> impl
     this._raceIdPathVariable = registrationFacade.raceIdPathVariable;
   }
 
+  // region properties
   get raceIdPathVariable(): string {
     return this._raceIdPathVariable;
   }
+  // endregion
 }

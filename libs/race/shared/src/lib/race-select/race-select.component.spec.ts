@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RaceSelectComponent } from './race-select.component';
+import { RaceSelectComponent } from '@sailrc/race/shared';
 
 describe('RaceSelectComponent', () => {
   let component: RaceSelectComponent;

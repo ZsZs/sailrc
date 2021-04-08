@@ -1,0 +1,5 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link (click)="showList()" [active]="(currentTab$ | async) === listTabName">Participants</a>
+  <a mat-tab-link (click)="onRecognizeBoat()" [active]="(currentTab$ | async) === 'Participant-capture'">Recognize</a>
+  <a mat-tab-link (click)="onRegistrationSource()" [active]="(currentTab$ | async) === 'Registration-list'">Registrations</a>
+</nav>

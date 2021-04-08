@@ -71,7 +71,8 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
       tap( () => this.entityFacade.deselect() ),
       map( formState => formState.value ),
       map(entity => {
-        this.entityId === BaseUrlSegments.NewEntity ?
+        entity = this.adjustEntity( entity );
+        (this.entityId === BaseUrlSegments.NewEntity === undefined) || (this.entityId === BaseUrlSegments.NewEntity) ?
           this.entityFacade.create( entity, this.defaultCriteria ) :
           this.entityFacade.update( entity, this.defaultCriteria )
       }),
@@ -80,6 +81,10 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   // protected, private helper methods
+  protected adjustEntity( entity: T ) {
+    return entity;
+  }
+
   private closeFormAndNavigateBack() {
     const currentUrl = this.route.snapshot['_routerState'].url;
     const goToUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/')).substring(0, currentUrl.lastIndexOf('/'));

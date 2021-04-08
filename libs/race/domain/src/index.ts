@@ -1,8 +1,12 @@
 export * from './lib/race-domain.module';
-export { Lap } from './lib/domain/lap';
-export { Participant } from './lib/domain/participant';
+export { INITIAL_LAP_VALUE, Lap } from './lib/domain/lap';
+export { LapFacade } from './lib/facade/lap.facade';
+export { INITIAL_PARTICIPANT_VALUE, Participant } from './lib/domain/participant';
+export { ParticipantFacade } from './lib/facade/participant.facade';
+export { ParticipantService } from './lib/integration/participant.service';
 export { INITIAL_RACE_VALUE, Race } from './lib/domain/race';
-export { INITIAL_REGISTRATION_VALUE, Registration } from './lib/domain/registration';
 export { RaceFacade } from './lib/facade/race.facade';
-export { getRaceById, getRegistrationById } from './lib/store/race.state';
+export { INITIAL_REGISTRATION_VALUE, Registration } from './lib/domain/registration';
 export { RegistrationFacade } from './lib/facade/registration.facade';
+export { RegistrationService } from './lib/integration/registration.service';
+export { getLapById, getRaceById, getRegistrationById } from './lib/store/race.state';

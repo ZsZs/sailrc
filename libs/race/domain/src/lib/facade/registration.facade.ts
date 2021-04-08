@@ -4,7 +4,6 @@ import { MemoizedSelector, Store } from '@ngrx/store';
 import { INITIAL_REGISTRATION_VALUE, Registration } from '../domain/registration';
 import { getRegistrationById, IRaceDomainState, RegistrationFacadeBase } from '../store/race.state';
 import { IEntityInfo } from '@briebug/ngrx-auto-entity';
-import { Sailor } from '@sailrc/sailor/domain';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationFacade extends RegistrationFacadeBase implements IBaseEntityFacade<Registration>{

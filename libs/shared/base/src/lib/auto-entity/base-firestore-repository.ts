@@ -1,7 +1,7 @@
 import { IAutoEntityService, IEntityInfo, makeEntity } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { from, Observable, of } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> implements IAutoEntityService<T> {
@@ -27,6 +27,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
 
   loadAll( entityInfo: IEntityInfo, criteria?: any ): Observable<T[]> {
     this.determineCollection( entityInfo, criteria );
+
     return this.collection.snapshotChanges().pipe(
       map(changes => {
         return changes.map(a => {
@@ -42,7 +43,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
   create(entityInfo: IEntityInfo, entity: T, criteria?: any ): Observable<T> {
     this.determineCollection( entityInfo, criteria );
     delete entity.id;
-    const promise = new Promise<any>((resolve, reject ) => {
+    const promise = new Promise<any>((resolve ) => {
       this.collection.add( entity ).then( ref => {
         const newEntity = {
           id: ref.id,
@@ -56,7 +57,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
 
   update(entityInfo: IEntityInfo, entity: T, criteria?: any ): Observable<T> {
     this.determineCollection( entityInfo, criteria );
-    const promise = new Promise<any>((resolve, reject) => {
+    const promise = new Promise<any>((resolve) => {
       const docRef = this.collection
         .doc<T>( String( entity.id ))
         .set( entity )
