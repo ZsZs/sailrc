@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Registration } from '@sailrc/race/domain';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseListComponent } from '@processpuzzle/shared/base';
-import { RegistrationFeatureFacade } from '@sailrc/race/feature';
+import { RegistrationFeatureFacade } from '../registration-feature.facade';
 
 @Component({
   selector: 'sailrc-race-registration',

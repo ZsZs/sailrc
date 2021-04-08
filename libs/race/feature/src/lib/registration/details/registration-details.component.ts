@@ -6,11 +6,11 @@ import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { IRaceFeatureState } from '../../store/race-feature.reducer';
-import { RegistrationFeatureFacade } from '@sailrc/race/feature';
+import { RegistrationFeatureFacade } from '../registration-feature.facade';
 import { Observable } from 'rxjs';
 import { Boat, BoatFacade } from '@sailrc/boat/domain';
 import { Sailor, SailorFacade } from '@sailrc/sailor/domain';
-import { filter, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { BoatFeatureFacade } from '@sailrc/boat/feature';
 import { SailorFeatureFacade } from '@sailrc/sailor/feature';
 
