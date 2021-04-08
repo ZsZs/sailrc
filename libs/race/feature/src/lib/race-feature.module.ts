@@ -11,36 +11,38 @@ import { RaceListComponent } from './list/race-list.component';
 import { RaceTabsComponent } from './tabs/race-tabs.component';
 import { RaceDetailsComponent } from './details/race-details.component';
 import { RaceFeatureRoutingModule } from './race-feature-routing.module';
-import { RaceStatusbarComponent } from './statusbar/race-statusbar.component';
 import { RaceDomainModule } from '@sailrc/race/domain';
 import { RaceResolver } from './race.resolver';
 import { RegistrationListComponent } from './registration/list/registration-list.component';
 import { RegistrationDetailsComponent } from './registration/details/registration-details.component';
 import { RegistrationResolver } from './registration/registration.resolver';
 import { FlexModule } from '@angular/flex-layout';
-import { RaceSelectComponent } from './select/race-select.component';
+import { RaceSharedModule } from '@sailrc/race/shared';
+import { BoatDomainModule } from '@sailrc/boat/domain';
+import { SailorFeatureModule } from '@sailrc/sailor/feature';
 
 @NgModule({
   declarations: [
     RaceDetailsComponent,
     RaceFeatureComponent,
     RaceListComponent,
-    RaceStatusbarComponent,
-    RaceSelectComponent,
     RaceTabsComponent,
     RegistrationDetailsComponent,
     RegistrationListComponent
   ],
   imports: [
+    BoatDomainModule.forFeature(),
     CommonModule,
+    FlexModule,
     NgrxFormsModule,
     RaceDomainModule.forFeature(),
     RaceFeatureRoutingModule,
+    RaceSharedModule,
     SailorDomainModule.forFeature(),
+    SailorFeatureModule.forFeature(),
     SharedMaterialModule,
     StoreModule.forFeature( FEATURE_NAME, raceFeatureReducer ),
-    YachtClubDomainModule.forFeature(),
-    FlexModule
+    YachtClubDomainModule.forFeature()
   ],
   providers: [
     RaceResolver,

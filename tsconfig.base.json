@@ -24,6 +24,8 @@
       "@sailrc/yacht-club/feature": ["libs/yacht-club/feature/src/index.ts"],
       "@sailrc/race/feature": ["libs/race/feature/src/index.ts"],
       "@sailrc/race/domain": ["libs/race/domain/src/index.ts"],
+      "@sailrc/race/participant/feature": ["libs/race/participant/src/index.ts"],
+      "@sailrc/race/shared": ["libs/race/shared/src/index.ts"],
       "@sailrc/sailing-place/domain": ["libs/sailing-place/domain/src/index.ts"],
       "@sailrc/sailing-place/feature": ["libs/sailing-place/feature/src/index.ts"],
       "@sailrc/sailor/domain": ["libs/sailor/domain/src/index.ts"],

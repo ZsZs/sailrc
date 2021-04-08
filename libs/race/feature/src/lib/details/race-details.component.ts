@@ -5,8 +5,8 @@ import { Race } from '@sailrc/race/domain';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
-import { RaceFeatureFacade } from '../race-feature.facade';
 import { IRaceFeatureState } from '../store/race-feature.reducer';
+import { RaceFeatureFacade } from '@sailrc/race/shared';
 
 @Component({
   selector: 'sailrc-race-details',

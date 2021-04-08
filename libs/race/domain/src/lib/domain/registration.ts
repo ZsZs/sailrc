@@ -9,17 +9,22 @@ export const initializeRegistration = {
 export class Registration implements BaseEntityInterface {
   @Key id: string;
   raceId: string;
-  sailNumber: string;
+  boatId: string;
   boatName: string;
-  boatClass: string;
+  boatType: string;
+  sailorId: string;
+  sailNumber: string;
   skipper: string;
+  isParticipant?: boolean;
 }
 
 export const INITIAL_REGISTRATION_VALUE: Registration = {
   id: undefined,
   raceId: undefined,
-  sailNumber: ``,
-  boatName: 'Cheerio',
-  boatClass: 'Flying Dutchman',
-  skipper: 'Zsolt Zsuffa'
+  boatId: undefined,
+  boatName: '',
+  boatType: undefined,
+  sailNumber: '',
+  sailorId: undefined,
+  skipper: ''
 };

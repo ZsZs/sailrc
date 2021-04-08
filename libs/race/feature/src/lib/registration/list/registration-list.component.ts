@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RaceFacade, Registration, RegistrationFacade } from '@sailrc/race/domain';
+import { Registration } from '@sailrc/race/domain';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { RegistrationFeatureFacade } from '../registration-feature.facade';
@@ -23,12 +23,13 @@ export class RegistrationListComponent extends BaseListComponent<Registration> i
     super( registrationFeatureFacade, route, activeTabService, subscriptionService );
   }
 
-  // protected, private helper methods
+  // region protected, private helper methods
   protected loadAllEntities() {
     const raceIdPathVariable = this.registrationFeatureFacade.raceIdPathVariable;
     const raceId = this.route.snapshot.params[ raceIdPathVariable ];
     this.entityFacade.loadAll( raceId );
   }
+  // endregion
 
   // region properties
   get displayedColumns() {

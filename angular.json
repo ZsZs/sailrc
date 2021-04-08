@@ -313,6 +313,50 @@
         }
       }
     },
+    "race-participant": {
+      "projectType": "library",
+      "root": "libs/race/participant",
+      "sourceRoot": "libs/race/participant/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/participant/src/**/*.ts", "libs/race/participant/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/participant"],
+          "options": {
+            "jestConfig": "libs/race/participant/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "race-shared": {
+      "projectType": "library",
+      "root": "libs/race/shared",
+      "sourceRoot": "libs/race/shared/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/shared/src/**/*.ts", "libs/race/shared/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/shared"],
+          "options": {
+            "jestConfig": "libs/race/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "shared-authentication-feature": {
       "projectType": "library",
       "root": "libs/shared/authentication/feature",

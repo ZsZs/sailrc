@@ -5,8 +5,8 @@ import { BaseTabsComponent } from '@processpuzzle/shared/base';
 import { BaseUrlSegments, RouterFacade } from '@processpuzzle/shared/util';
 import { ActiveTabService } from '@processpuzzle/shared/widgets';
 import { takeUntil } from 'rxjs/operators';
-import { RaceFeatureFacade } from '../race-feature.facade';
 import { Observable } from 'rxjs';
+import { RaceFeatureFacade } from '@sailrc/race/shared';
 
 @Component({
   selector: 'sailrc-race-tabs',
@@ -22,8 +22,8 @@ export class RaceTabsComponent extends BaseTabsComponent<Race> implements OnInit
 
   constructor(
     private registrationFacade: RegistrationFacade,
+    private routerFacade: RouterFacade,
     protected raceFeatureFacade: RaceFeatureFacade,
-    protected routerFacade: RouterFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute
   ) {

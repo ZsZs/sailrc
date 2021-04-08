@@ -59,7 +59,8 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     }
   }
 
-  doFilter( filterValue: string ) {
+  doFilter( event: Event ) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
   }
 
@@ -126,7 +127,7 @@ export abstract class BaseListComponent<T extends BaseEntityInterface> implement
     this.entityFacade.loadAll();
   }
 
-  private navigateToDetailsForm( entityId: string ) {
+  protected navigateToDetailsForm( entityId: string ) {
     const currentUrl = this.route.snapshot['_routerState'].url;
     const detailsFormPath = currentUrl.substring(0, currentUrl.lastIndexOf('/')) + '/' + entityId + '/details';
     this.entityFormFacade.navigateToDetails( detailsFormPath, currentUrl );

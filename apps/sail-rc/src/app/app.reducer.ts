@@ -7,9 +7,9 @@ export function consoleLogReducer( reducer: ActionReducer<any>): ActionReducer<a
    return function( state, action) {
       console.log( 'state', state) ;
       console.log( 'action', action );
-
       return reducer(state, action);
    };
 }
 
-export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze, consoleLogReducer] : [];
+// export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze, consoleLogReducer] : [];
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];

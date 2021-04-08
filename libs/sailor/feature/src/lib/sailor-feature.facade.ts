@@ -9,4 +9,9 @@ export class SailorFeatureFacade extends BaseFormFacade<Sailor> implements IEnti
   constructor( protected store: Store<never>, protected router: Router, sailorFacade: SailorFacade ) {
     super( Sailor, store, router, sailorFacade );
   }
+
+
+  jumpToDetails( id: string, returnTo: string ) {
+    this.navigateToDetails( `/race-planning/sailor/${id}/details`, returnTo )
+  }
 }

@@ -1,9 +1,7 @@
 <mat-toolbar>
-    <span>Registrations</span>
-
     <div fxLayoutAlign="center center">
         <mat-form-field fxFlex="50%">
-            <input matInput type="text" (keyup)="doFilter( $event.target.value )" placeholder="Filter">
+            <input matInput type="text" (keyup)="doFilter( $event )" placeholder="Filter">
         </mat-form-field>
     </div>
 
