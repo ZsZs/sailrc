@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 @Component({
@@ -9,6 +9,13 @@ import { MediaObserver } from '@angular/flex-layout';
 })
 export class RaceLapToolbarComponent {
   @Input() lastUrlSegment: string;
+  @Output() sidenavToggle = new EventEmitter<void>();
 
   constructor( public mediaObserver: MediaObserver ) {}
+
+  // region component event handling
+  showRaceSelect() {
+    this.sidenavToggle.emit();
+  }
+  // endregion
 }

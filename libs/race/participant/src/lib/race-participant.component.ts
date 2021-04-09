@@ -1,8 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
-import { Lap, LapFacade, Race, RaceFacade } from '@sailrc/race/domain';
-import { filter } from 'rxjs/operators';
-import { RouteStateService } from '@processpuzzle/shared/util';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sailrc-race-participant',
@@ -10,38 +6,14 @@ import { RouteStateService } from '@processpuzzle/shared/util';
   styleUrls: ['./race-participant.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class RaceParticipantComponent implements OnDestroy, OnInit {
-  selectedLap$: Observable<Lap>;
-  selectedRace$: Observable<Race>;
-  lastUrlSegment$: Observable<string>;
-  private lastUrlSegmentSubscription: Subscription;
-
-  constructor( private raceFacade: RaceFacade, private lapFacade: LapFacade, private routeState: RouteStateService ) {
-  }
+export class RaceParticipantComponent {
 
   // region angular lifecycle hooks
-  ngOnDestroy() {
-    this.lastUrlSegmentSubscription.unsubscribe();
-  }
+  // endregion
 
-  ngOnInit(): void {
-    this.selectedRace$ = this.raceFacade.current$;
-    this.selectedLap$ = this.lapFacade.current$;
-    this.subscribeToLastUrlSegment();
-  }
+  // region component event hooks
   // endregion
 
   // protected, private helper methods
-  private subscribeToLastUrlSegment() {
-    this.lastUrlSegmentSubscription = this.routeState.urlSegment.pipe(
-      filter( urlSegment => {
-        return !!urlSegment;
-      } )
-    ).subscribe(
-      urlSegment => {
-        return this.lastUrlSegment$ = of( urlSegment );
-      }
-    );
-  }
   // endregion
 }

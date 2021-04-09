@@ -7,11 +7,11 @@ import { RaceFeatureFacade } from '../race-feature.facade';
 
 @Component({
   selector: 'sailrc-race-select',
-  templateUrl: './race-select.component.html',
-  styleUrls: ['./race-select.component.css']
+  templateUrl: './race-selector.component.html',
+  styleUrls: ['./race-selector.component.css']
 })
 
-export class RaceSelectComponent extends BaseListComponent<Race> implements OnInit{
+export class RaceSelectorComponent extends BaseListComponent<Race> implements OnInit{
   @Output() closeRaceSelect = new EventEmitter<void>();
   displayedColumns = ['title', 'date', 'country', 'place'];
 
@@ -45,12 +45,12 @@ export class RaceSelectComponent extends BaseListComponent<Race> implements OnIn
   // region protected, private helper methods
   protected detailsRoute( entityId: string ): string {
     this.onCloseRaceSelect();
-    return RaceSelectComponent.determineExecutionTabUri( entityId );
+    return RaceSelectorComponent.determineExecutionTabUri( entityId );
   }
 
   protected navigateToDetailsForm( raceId: string ) {
     this.onCloseRaceSelect();
-    this.router.navigate( [RaceSelectComponent.determineExecutionTabUri( raceId )], {relativeTo: this.route });
+    this.router.navigate( [RaceSelectorComponent.determineExecutionTabUri( raceId )], {relativeTo: this.route });
   }
   // endregion
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RaceSelectComponent } from '@sailrc/race/shared';
+import { RaceSelectorComponent } from '@sailrc/race/shared';
 
 describe('RaceSelectComponent', () => {
-  let component: RaceSelectComponent;
-  let fixture: ComponentFixture<RaceSelectComponent>;
+  let component: RaceSelectorComponent;
+  let fixture: ComponentFixture<RaceSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RaceSelectComponent ]
+      declarations: [ RaceSelectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RaceSelectComponent);
+    fixture = TestBed.createComponent(RaceSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
