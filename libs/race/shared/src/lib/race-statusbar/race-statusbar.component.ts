@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Race, RaceFacade } from '@sailrc/race/domain';
 
@@ -9,15 +9,25 @@ import { Race, RaceFacade } from '@sailrc/race/domain';
 })
 export class RaceStatusbarComponent implements OnInit {
   selectedRace: Observable<Race>;
+  @Output() sidenavToggle = new EventEmitter<void>();
 
   constructor( private raceFacade: RaceFacade ) { }
 
+  // region angular lifecycle hooks
   ngOnInit() {
     this.retrieveSelectedRacesFromStore();
   }
+  // endregion
 
-  // protected, private helper methods
+  // region component event handling
+  showRaceSelect() {
+    this.sidenavToggle.emit();
+  }
+  // endregion
+
+  // region protected, private helper methods
   retrieveSelectedRacesFromStore() {
     this.selectedRace = this.raceFacade.current$;
   }
+  // endregion
 }
