@@ -6,6 +6,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./race-participant.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
+
 export class RaceParticipantComponent {
 
   // region angular lifecycle hooks
