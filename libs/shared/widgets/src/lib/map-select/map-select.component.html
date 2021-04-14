@@ -1,4 +1,4 @@
-<div>
+<div *ngIf='apiLoaded'>
   <google-map #googleMap [options]="mapOptions"
               [center]="center"
               [zoom]="zoom"

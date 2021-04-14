@@ -1,9 +1,8 @@
-import { Component, Inject, InjectionToken, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Component, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-export const GOOGLE_API_KEY_TOKEN = new InjectionToken<string>('googleAPIKey' );
+import { GoogleMapsService } from '../services/google-maps-service';
+import { filter } from 'rxjs/operators';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'sailrc-map-select',
@@ -11,12 +10,12 @@ export const GOOGLE_API_KEY_TOKEN = new InjectionToken<string>('googleAPIKey' );
   styleUrls: ['./map-select.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class MapSelectComponent implements OnChanges {
-  apiLoaded: Observable<boolean>;
-  center: google.maps.LatLngLiteral = {lat: 49, lng: 10 };
+export class MapSelectComponent implements OnChanges, OnInit {
+  apiLoaded: boolean;
+  center: {lat: 49, lng: 10 };
   @Input() disableAddMarker = false;
   display: any;
-  @ViewChild('googleMap') googleMap: google.maps.Map;
+  @ViewChild('googleMap') googleMap: GoogleMap;
   mapOptions: google.maps.MapOptions = { center: { lat: 49, lng: 10.11 }, zoom: 4 };
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   @Input() mapMarkers: google.maps.Marker[];
@@ -24,13 +23,17 @@ export class MapSelectComponent implements OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private _onChange: (value: any) => void = () => {};
 
-  constructor( @Inject(GOOGLE_API_KEY_TOKEN) googleAPIKey: string, private httpClient: HttpClient ) {
-//    this.loadGoogleMapsAPI( googleAPIKey );
-  }
+  constructor( private googleMapsService: GoogleMapsService, private httpClient: HttpClient ) {}
 
   // region Angular lifecycle event hooks
   ngOnChanges(): void {
     this.calculateCenter();
+  }
+
+  ngOnInit() {
+    this.googleMapsService.loadGoogleMapsAPI().pipe(
+      filter( isLoaded => isLoaded )
+    ).subscribe( () => this.apiLoaded = true );
   }
   // endregion
 
@@ -65,15 +68,6 @@ export class MapSelectComponent implements OnChanges {
       });
       this.googleMap.fitBounds(bounds);
     }
-  }
-
-  private loadGoogleMapsAPI( googleAPIKey: string ) {
-    const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=${googleAPIKey}`;
-
-    this.apiLoaded = this.httpClient.jsonp( mapsAPIUrl, 'callback' ).pipe(
-      map( () => true ),
-      catchError( () => of( false ) )
-    );
   }
   // endregion
 }

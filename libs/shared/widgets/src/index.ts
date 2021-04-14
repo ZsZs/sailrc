@@ -6,7 +6,8 @@ export { startLoading, stopLoading, tabIsActive, tabIsInActive } from './lib/sto
 export { uiReducer, UiState } from './lib/store/ui.reducer';
 export { CameraUploadComponent } from './lib/camera-upload/camera-upload.component';
 export { ComponentDestroyService } from './lib/services/component-destroy.service';
-export { GOOGLE_API_KEY_TOKEN, MapSelectComponent } from './lib/map-select/map-select.component';
+export { GoogleMapsService, GOOGLE_API_KEY_TOKEN } from './lib/services/google-maps-service';
+export { MapSelectComponent } from './lib/map-select/map-select.component';
 export { ICoordinates } from './lib/map-select/coordinates';
 export { MapSelectViewAdapter } from './lib/map-select/map-select-view-adapter';
 export { SnackBarService } from './lib/services/snack-bar.service';

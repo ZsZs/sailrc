@@ -23,5 +23,6 @@ module.exports = {
     '<rootDir>/libs/race/participant',
     '<rootDir>/libs/race/shared',
     '<rootDir>/libs/race/field',
+    '<rootDir>/libs/shared/test-util',
   ],
 };

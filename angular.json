@@ -670,6 +670,28 @@
           }
         }
       }
+    },
+    "shared-test-util": {
+      "projectType": "library",
+      "root": "libs/shared/test-util",
+      "sourceRoot": "libs/shared/test-util/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/test-util/src/**/*.ts", "libs/shared/test-util/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/test-util"],
+          "options": {
+            "jestConfig": "libs/shared/test-util/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

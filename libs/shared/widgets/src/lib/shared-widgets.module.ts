@@ -11,10 +11,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { FlexModule } from '@angular/flex-layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { GOOGLE_API_KEY_TOKEN, MapSelectComponent } from './map-select/map-select.component';
+import { MapSelectComponent } from './map-select/map-select.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapSelectViewAdapter } from './map-select/map-select-view-adapter';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { GOOGLE_API_KEY_TOKEN } from './services/google-maps-service';
 
 export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('ui reducer');
 
@@ -47,7 +48,7 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
   ]
 })
 export class SharedWidgetsModule {
-  static forRoot( googleApiKey: string ): ModuleWithProviders<SharedWidgetsModule> {
+  static forFeature( googleApiKey: string ): ModuleWithProviders<SharedWidgetsModule> {
     return {
       ngModule: SharedWidgetsModule,
       providers: [

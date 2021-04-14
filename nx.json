@@ -43,6 +43,7 @@
     "sailing-place-feature": { "tags": ["type:feature"] },
     "race-participant": { "tags": ["type:feature"] },
     "race-shared": { "tags": [] },
-    "race-field": { "tags": [] }
+    "race-field": { "tags": [] },
+    "shared-test-util": { "tags": [] }
   }
 }
