@@ -1,10 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BaseListContainerComponent } from './base-list-container.component';
+import { BaseEntityInterface } from '@processpuzzle/shared/base';
+import { Key } from '@briebug/ngrx-auto-entity';
+
+class TestEntity implements BaseEntityInterface {
+  @Key id: string;
+}
 
 describe('BaseListContainerComponent', () => {
-  let component: BaseListContainerComponent;
-  let fixture: ComponentFixture<BaseListContainerComponent>;
+  let component: BaseListContainerComponent<TestEntity>;
+  let fixture: ComponentFixture<BaseListContainerComponent<TestEntity>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
