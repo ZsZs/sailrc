@@ -66,7 +66,7 @@ import { AppInitService } from './app-init.service';
     SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
-    SharedWidgetsModule.forRoot( environment.googleCloudPlatform.apiKey ),
+    SharedWidgetsModule.forFeature( environment.googleCloudPlatform.apiKey ),
     StoreModule.forRoot( { }, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
