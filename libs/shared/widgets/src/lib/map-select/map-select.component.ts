@@ -1,4 +1,4 @@
-import { Component, Inject, InjectionToken, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, InjectionToken, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -11,29 +11,37 @@ export const GOOGLE_API_KEY_TOKEN = new InjectionToken<string>('googleAPIKey' );
   styleUrls: ['./map-select.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class MapSelectComponent {
+export class MapSelectComponent implements OnChanges {
   apiLoaded: Observable<boolean>;
-  center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
+  center: google.maps.LatLngLiteral = {lat: 49, lng: 10 };
+  @Input() disableAddMarker = false;
   display: any;
-  mapOptions: google.maps.MapOptions = { center: { lat: 40, lng: -20 }, zoom: 4 };
+  @ViewChild('googleMap') googleMap: google.maps.Map;
+  mapOptions: google.maps.MapOptions = { center: { lat: 49, lng: 10.11 }, zoom: 4 };
   markerOptions: google.maps.MarkerOptions = { draggable: false };
-  markerPosition: google.maps.LatLngLiteral;
-  zoom = 11;
+  @Input() mapMarkers: google.maps.Marker[];
+  zoom = 4;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private _onChange: (value: any) => void = () => {};
 
   constructor( @Inject(GOOGLE_API_KEY_TOKEN) googleAPIKey: string, private httpClient: HttpClient ) {
-    this.loadGoogleMapsAPI( googleAPIKey );
+//    this.loadGoogleMapsAPI( googleAPIKey );
   }
 
   // region Angular lifecycle event hooks
+  ngOnChanges(): void {
+    this.calculateCenter();
+  }
   // endregion
 
   // region event handling methods
   onMapClick( event: google.maps.MapMouseEvent) {
-    this.center = (event.latLng.toJSON());
-    this.markerPosition = this.center;
-    this._onChange( this.center );
+    if( !this.disableAddMarker ) {
+      const marker = new google.maps.Marker({ position: event.latLng.toJSON() });
+      this.mapMarkers.push( marker );
+      this.calculateCenter();
+      this._onChange( marker );
+    }
   }
 
   move(event: google.maps.MapMouseEvent) {
@@ -48,6 +56,17 @@ export class MapSelectComponent {
   // endregion
 
   // region protected, private helper methods
+  private calculateCenter() {
+    if( this.googleMap && this.mapMarkers && this.mapMarkers.length > 0 ) {
+      const bounds = new google.maps.LatLngBounds();
+      this.mapMarkers.forEach( markerPosition => {
+        const position = new google.maps.LatLng( markerPosition.getPosition().lat(), markerPosition.getPosition().lng() );
+        bounds.extend( position );
+      });
+      this.googleMap.fitBounds(bounds);
+    }
+  }
+
   private loadGoogleMapsAPI( googleAPIKey: string ) {
     const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=${googleAPIKey}`;
 

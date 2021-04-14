@@ -6,6 +6,8 @@ export { ParticipantFacade } from './lib/facade/participant.facade';
 export { ParticipantService } from './lib/integration/participant.service';
 export { INITIAL_RACE_VALUE, Race } from './lib/domain/race';
 export { RaceFacade } from './lib/facade/race.facade';
+export { INITIAL_MARK_VALUE, RaceFieldMark } from './lib/domain/race-field-mark';
+export { RaceFieldMarkFacade } from './lib/facade/race-field-mark.facade';
 export { INITIAL_REGISTRATION_VALUE, Registration } from './lib/domain/registration';
 export { RegistrationFacade } from './lib/facade/registration.facade';
 export { RegistrationService } from './lib/integration/registration.service';

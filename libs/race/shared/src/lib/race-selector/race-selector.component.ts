@@ -6,7 +6,7 @@ import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared
 import { RaceFeatureFacade } from '../race-feature.facade';
 
 @Component({
-  selector: 'sailrc-race-select',
+  selector: 'sailrc-race-selector',
   templateUrl: './race-selector.component.html',
   styleUrls: ['./race-selector.component.css']
 })

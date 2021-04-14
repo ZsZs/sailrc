@@ -32,7 +32,8 @@ export class MapSelectViewAdapter implements FormViewAdapter, AfterViewInit, OnD
 
     Promise.resolve().then(() => {
       this.mapSelect.center = value;
-      this.mapSelect.markerPosition = value;
+      if( !this.mapSelect.mapMarkers ) this.mapSelect.mapMarkers = [];
+      this.mapSelect.mapMarkers.push( value );
     });
   }
 

@@ -6,14 +6,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BaseEntityInterface, IEntityFormFacade } from '../..';
+import { BaseEntityInterface, IEntityFormFacade } from '@processpuzzle/shared/base';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
 import { BaseUrlSegments } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  template: '',
+  templateUrl: 'base-list.component.html',
   styleUrls: ['./base-list.component.css']
 })
 export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {

@@ -5,6 +5,7 @@ import { RaceConductionComponent } from './race-conduction.component';
 const routes: Routes = [
   { path: '', component: RaceConductionComponent },
   { path: 'participant', loadChildren: () => import( '@sailrc/race/participant/feature').then( m => m.RaceParticipantModule )},
+  { path: 'field', loadChildren: () => import( '@sailrc/race/field').then( m => m.RaceFieldModule )},
 ];
 
 @NgModule({

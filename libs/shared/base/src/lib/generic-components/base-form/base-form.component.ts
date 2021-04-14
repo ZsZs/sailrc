@@ -3,10 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
 
-import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
+import { BaseEntityInterface } from '../../auto-entity/base-entity.interface';
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { BaseUrlSegments, RouterFacade } from '@processpuzzle/shared/util';
-import { IEntityFormFacade } from '../..';
+import { IEntityFormFacade } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
@@ -80,7 +80,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
     ).subscribe();
   }
 
-  // protected, private helper methods
+  // region protected, private helper methods
   protected adjustEntity( entity: T ) {
     return entity;
   }
@@ -110,4 +110,5 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   protected subscribeToLoading() {
     this.isLoading$ = this.entityFacade.isLoading$;
   }
+  // endregion
 }

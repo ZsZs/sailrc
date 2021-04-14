@@ -648,6 +648,28 @@
           }
         }
       }
+    },
+    "race-field": {
+      "projectType": "library",
+      "root": "libs/race/field",
+      "sourceRoot": "libs/race/field/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/field/src/**/*.ts", "libs/race/field/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/field"],
+          "options": {
+            "jestConfig": "libs/race/field/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

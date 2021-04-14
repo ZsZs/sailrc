@@ -35,7 +35,8 @@
       "@processpuzzle/shared/base": ["libs/shared/base/src/index.ts"],
       "@processpuzzle/shared/material": ["libs/shared/material/src/index.ts"],
       "@processpuzzle/shared/util": ["libs/shared/util/src/index.ts"],
-      "@processpuzzle/shared/widgets": ["libs/shared/widgets/src/index.ts"]
+      "@processpuzzle/shared/widgets": ["libs/shared/widgets/src/index.ts"],
+      "@sailrc/race/field": ["libs/race/field/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

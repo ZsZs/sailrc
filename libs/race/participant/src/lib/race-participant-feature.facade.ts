@@ -9,8 +9,7 @@ export class RaceParticipantFeatureFacade extends BaseFormFacade<Participant> im
   private readonly _lapIdPathVariable;
   private readonly _raceIdPathVariable;
 
-  constructor( protected store: Store<any>, protected router: Router, participantFacade: ParticipantFacade
-  ) {
+  constructor( protected store: Store<any>, protected router: Router, participantFacade: ParticipantFacade  ) {
     super( Participant, store, router, participantFacade );
     this._lapIdPathVariable = participantFacade.lapIdPathVariable;
     this._raceIdPathVariable = participantFacade.raceIdPathVariable;

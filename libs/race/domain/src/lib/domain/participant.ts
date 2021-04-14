@@ -2,7 +2,7 @@ import { Entity, Key } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
 
 export const initializeParticipant = {
-  fromServer: (data: any): Participant => ({...INITIAL_PARTICIPANT_VALUE, ...data})
+  fromServer: (data: Participant): Participant => ({...INITIAL_PARTICIPANT_VALUE, ...data})
 }
 
 @Entity({modelName: 'Participant', pluralName: 'participants', uriName: 'races/:RaceId/laps/:LapId/participants', transform: [initializeParticipant]})

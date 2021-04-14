@@ -22,5 +22,6 @@ module.exports = {
     '<rootDir>/libs/sailing-place/feature',
     '<rootDir>/libs/race/participant',
     '<rootDir>/libs/race/shared',
+    '<rootDir>/libs/race/field',
   ],
 };

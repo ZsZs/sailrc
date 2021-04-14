@@ -70,10 +70,16 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
     return from( promise );
   }
 
-  delete(entityInfo: IEntityInfo, entity: T, criteria?: any ): Observable<any> {
+  delete(entityInfo: IEntityInfo, entity: T, criteria?: any ): Observable<T> {
     this.determineCollection( entityInfo, criteria );
     const docRef = this.collection.doc<T>( String( entity.id ));
-    return from( docRef.delete());
+    return from( docRef.delete()
+      .then( () => {
+      return entity;
+    }).catch( (error) => {
+        console.log( error );
+        return entity;
+      }));
   }
 
   // protected, private helper methods

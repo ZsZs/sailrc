@@ -1,10 +1,10 @@
-<div *ngIf='apiLoaded | async'>
-  <google-map [options]="mapOptions"
+<div>
+  <google-map #googleMap [options]="mapOptions"
               [center]="center"
               [zoom]="zoom"
               (mapClick)="onMapClick($event)"
               (mapMousemove)="move($event)">
-    <map-marker [position]="markerPosition" [options]="markerOptions"></map-marker>
+    <map-marker *ngFor="let mapMarker of mapMarkers" [position]="mapMarker.getPosition()" [title]='mapMarker.getTitle()' [options]="markerOptions"></map-marker>
   </google-map>
   <div>Latitude: {{display?.lat}}</div>
   <div>Longitude: {{display?.lng}}</div>
