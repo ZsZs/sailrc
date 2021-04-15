@@ -1,5 +1,6 @@
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
 import { Entity, Key } from '@briebug/ngrx-auto-entity';
+import { ICoordinates } from '@processpuzzle/shared/widgets';
 
 export const initializeSailingPlace = {
   fromServer: (data: any): SailingPlace => ({ ...INITIAL_SAILING_PLACE_VALUE, ...data})
@@ -9,10 +10,7 @@ export const initializeSailingPlace = {
 export class SailingPlace implements BaseEntityInterface {
   @Key id: string;
   name: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  }
+  coordinates: ICoordinates;
 }
 
 export const INITIAL_SAILING_PLACE_VALUE : SailingPlace = {

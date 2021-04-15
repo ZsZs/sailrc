@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Lap, LapFacade, RaceFieldMark, RaceFieldMarkFacade } from '@sailrc/race/domain';
 import { RaceFieldFeatureFacade } from '../race-field-feature.facade';
 import { BaseListColumnDefinition, BaseListContainerComponent } from '@processpuzzle/shared/base';
@@ -13,7 +13,7 @@ import { ICoordinates } from '@processpuzzle/shared/widgets';
   styleUrls: ['./mark-list.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class MarkListComponent {
+export class MarkListComponent implements OnDestroy, OnInit{
   @ViewChild('baseListContainer') baseListContainer: BaseListContainerComponent<RaceFieldMark>
   formState$: Observable<FormGroupState<RaceFieldMark>>;
   isLoading$: Observable<boolean>;

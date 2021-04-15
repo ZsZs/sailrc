@@ -7,7 +7,7 @@ import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -22,7 +22,7 @@ describe('AppComponent', () => {
     logout() { console.log("log out")}
   };
   const googleMapsServiceStub: Partial<GoogleMapsService> = {
-    loadGoogleMapsAPI: (): Observable<boolean> => of(false)
+    loadGoogleMapsAPI: (): Promise<boolean> => Promise.resolve(false )
   }
   let app: AppComponent;
   let googleMapsService: GoogleMapsService;

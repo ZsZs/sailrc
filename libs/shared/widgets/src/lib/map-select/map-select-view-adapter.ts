@@ -1,7 +1,9 @@
-import { AfterViewInit, Directive, forwardRef, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { FormViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { Subscription } from 'rxjs';
 import { MapSelectComponent } from './map-select.component';
+import { ICoordinates } from './coordinates';
+import { GoogleMapsService } from '../services/google-maps-service';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -13,28 +15,25 @@ import { MapSelectComponent } from './map-select.component';
   }],
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class MapSelectViewAdapter implements FormViewAdapter, AfterViewInit, OnDestroy {
-  private value: any;
+export class MapSelectViewAdapter implements FormViewAdapter, OnDestroy {
+  private apiLoaded: boolean;
   private subscriptions: Subscription[] = [];
+  private value: ICoordinates;
 
-  constructor(private mapSelect: MapSelectComponent ) {}
+  constructor( private googleMapsService: GoogleMapsService, private mapSelect: MapSelectComponent ) {}
 
-  ngAfterViewInit() {
-    console.log('map-select: ngAfterViewInit');
-  }
-
+  // region angular lifecycle hooks
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
+  // endregion
 
-  setViewValue(value: any) {
+  // region overloaded methods
+  setViewValue( value: ICoordinates ) {
     this.value = value;
-
-    Promise.resolve().then(() => {
-      this.mapSelect.center = value;
-      if( !this.mapSelect.mapMarkers ) this.mapSelect.mapMarkers = [];
-      this.mapSelect.mapMarkers.push( value );
-    });
+      Promise.resolve().then(() => {
+        this.mapSelect.addMarker( value );
+      });
   }
 
   setOnChangeCallback(fn: any) {
@@ -45,10 +44,9 @@ export class MapSelectViewAdapter implements FormViewAdapter, AfterViewInit, OnD
   }
 
   setOnTouchedCallback(fn: any) {
-    console.log('map-select: setOnTouchedCallback = ' + fn );
+//    console.log('map-select: setOnTouchedCallback = ' + fn );
   }
 
-  setIsDisabled(isDisabled: boolean) {
-    console.log('map-select setIsDisabled');
-  }
+  // region protected, private helper methods
+  // endregion
 }
