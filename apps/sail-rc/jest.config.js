@@ -16,7 +16,7 @@ module.exports = {
   },
   collectCoverage: true,
   coverageDirectory: '../../coverage/apps/sail-rc',
-  coverageReporters: ['html','json','text','cobertura','lcov'],
+  coverageReporters: ['html','json','text','cobertura',['lcov', {"projectRoot": "../"}]],
   reporters: [ 'default', 'jest-junit' ],
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
