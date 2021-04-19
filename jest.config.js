@@ -24,5 +24,7 @@ module.exports = {
     '<rootDir>/libs/race/shared',
     '<rootDir>/libs/race/field',
     '<rootDir>/libs/shared/test-util',
+    '<rootDir>/libs/race/start',
+    '<rootDir>/libs/race/finish',
   ],
 };

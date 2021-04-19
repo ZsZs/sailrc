@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap='25px' fxLayoutAlign="left">
-        <sailrc-map-select [mapMarkers]='mapMarkers$ | async' [disableAddMarker]='true'></sailrc-map-select>
+      <sailrc-map-select [mapMarkers]='mapMarkers$ | async' [disableAddMarker]='true'></sailrc-map-select>
       <sailrc-base-list-container
         #baseListContainer
         [displayedColumns]='displayedColumns'

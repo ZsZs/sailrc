@@ -26,6 +26,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   imports: [
@@ -44,9 +46,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
@@ -75,9 +80,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,

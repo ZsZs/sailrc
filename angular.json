@@ -269,6 +269,28 @@
         }
       }
     },
+    "race-domain": {
+      "projectType": "library",
+      "root": "libs/race/domain",
+      "sourceRoot": "libs/race/domain/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/domain/src/**/*.ts", "libs/race/domain/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/domain"],
+          "options": {
+            "jestConfig": "libs/race/domain/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "race-feature": {
       "projectType": "library",
       "root": "libs/race/feature",
@@ -291,23 +313,45 @@
         }
       }
     },
-    "race-domain": {
+    "race-field": {
       "projectType": "library",
-      "root": "libs/race/domain",
-      "sourceRoot": "libs/race/domain/src",
+      "root": "libs/race/field",
+      "sourceRoot": "libs/race/field/src",
       "prefix": "sailrc",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/race/domain/src/**/*.ts", "libs/race/domain/src/**/*.html"]
+            "lintFilePatterns": ["libs/race/field/src/**/*.ts", "libs/race/field/src/**/*.html"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/race/domain"],
+          "outputs": ["coverage/libs/race/field"],
           "options": {
-            "jestConfig": "libs/race/domain/jest.config.js",
+            "jestConfig": "libs/race/field/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "race-finish": {
+      "projectType": "library",
+      "root": "libs/race/finish",
+      "sourceRoot": "libs/race/finish/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/finish/src/**/*.ts", "libs/race/finish/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/finish"],
+          "options": {
+            "jestConfig": "libs/race/finish/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -352,6 +396,28 @@
           "outputs": ["coverage/libs/race/shared"],
           "options": {
             "jestConfig": "libs/race/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "race-start": {
+      "projectType": "library",
+      "root": "libs/race/start",
+      "sourceRoot": "libs/race/start/src",
+      "prefix": "sailrc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/race/start/src/**/*.ts", "libs/race/start/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/race/start"],
+          "options": {
+            "jestConfig": "libs/race/start/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -644,28 +710,6 @@
           "outputs": ["coverage/libs/sailing-place/feature"],
           "options": {
             "jestConfig": "libs/sailing-place/feature/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "race-field": {
-      "projectType": "library",
-      "root": "libs/race/field",
-      "sourceRoot": "libs/race/field/src",
-      "prefix": "sailrc",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/race/field/src/**/*.ts", "libs/race/field/src/**/*.html"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/race/field"],
-          "options": {
-            "jestConfig": "libs/race/field/jest.config.js",
             "passWithNoTests": true
           }
         }

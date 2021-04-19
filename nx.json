@@ -44,6 +44,8 @@
     "race-participant": { "tags": ["type:feature"] },
     "race-shared": { "tags": [] },
     "race-field": { "tags": [] },
-    "shared-test-util": { "tags": [] }
+    "shared-test-util": { "tags": [] },
+    "race-start": { "tags": [] },
+    "race-finish": { "tags": [] }
   }
 }

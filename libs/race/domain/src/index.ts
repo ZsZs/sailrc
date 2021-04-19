@@ -1,5 +1,5 @@
 export * from './lib/race-domain.module';
-export { INITIAL_LAP_VALUE, Lap } from './lib/domain/lap';
+export { INITIAL_LAP_VALUE, Lap, LapState } from './lib/domain/lap';
 export { LapFacade } from './lib/facade/lap.facade';
 export { INITIAL_PARTICIPANT_VALUE, Participant } from './lib/domain/participant';
 export { ParticipantFacade } from './lib/facade/participant.facade';

@@ -24,14 +24,14 @@ export class RaceParticipantCaptureComponent implements OnDestroy, OnInit {
   }
 
   // region angular lifecycle hooks
-  ngOnInit(): void {
-    this.activeTabService.tabIsActive( this.tabName );
-  }
-
   ngOnDestroy(): void {
     this.routeState.unsubscribeFromRouteSegments( RaceParticipantCaptureComponent.name );
     this.activeTabService.tabIsInActive( this.tabName );
     this.onDestroy$.next();
+  }
+
+  ngOnInit(): void {
+    this.activeTabService.tabIsActive( this.tabName );
   }
   // endregion
 }

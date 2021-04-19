@@ -37,7 +37,6 @@ export class MarkListComponent implements OnDestroy, OnInit{
 
   // region angular lifecycle hooks
   ngOnDestroy(): void {
-    console.log( 'About to destroy' );
     this.onDestroy$.next();
   }
 

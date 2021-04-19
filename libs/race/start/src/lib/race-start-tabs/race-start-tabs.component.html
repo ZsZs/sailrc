@@ -1,0 +1,4 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link (click)="onCountdown()" [active]="(currentTab$ | async) === 'start-countdown'">Countdown</a>
+  <a mat-tab-link (click)="onCapture()" [active]="(currentTab$ | async) === 'start-capture'">Capture</a>
+</nav>

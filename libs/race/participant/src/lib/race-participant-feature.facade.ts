@@ -15,10 +15,12 @@ export class RaceParticipantFeatureFacade extends BaseFormFacade<Participant> im
     this._raceIdPathVariable = participantFacade.raceIdPathVariable;
   }
 
+  // region public accessors and mutators
   navigateToRecognize( detailsFormPath: string, returnTo?: string ) {
     if( !returnTo ) { returnTo = this.router.url; }
     this.router.navigateByUrl( detailsFormPath );
   }
+  // endregion
 
   // region properties
   get lapIdPathVariable(): string {
