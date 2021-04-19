@@ -1,12 +1,12 @@
 <mat-sidenav-container class="race-lap-container" (backdropClick)="closeRaceSelector()">
   <mat-sidenav #raceSelect mode="side" (keydown.escape)="closeRaceSelector()">
-    <sailrc-race-select (closeRaceSelect)="raceSelect.close()"></sailrc-race-select>
+    <sailrc-race-selector (closeRaceSelect)="raceSelect.close()"></sailrc-race-selector>
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="{selectedRace: selectedRace$ | async, selectedLap: selectedLap$ | async} as executionData">
       <button *ngIf="!executionData.selectedRace" mat-raised-button color="primary" (click)="raceSelect.open()" class="race-select-button">Please select a race!</button>
-      <ng-content *ngIf="executionData.selectedRace"></ng-content>
       <sailrc-race-lap-toolbar *ngIf="executionData.selectedRace" [lastUrlSegment]="lastUrlSegment$ | async" (sidenavToggle)="raceSelect.toggle()"></sailrc-race-lap-toolbar>
+      <ng-content *ngIf="executionData.selectedRace"></ng-content>
     </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

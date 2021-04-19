@@ -4,6 +4,7 @@ import { Race } from '../domain/race';
 import { Registration } from '../domain/registration';
 import { Lap } from '../domain/lap';
 import { Participant } from '../domain/participant';
+import { RaceFieldMark } from '../domain/race-field-mark';
 
 export const DOMAIN_NAME = 'raceDomain';
 
@@ -12,6 +13,7 @@ export interface IRaceDomainState {
   registration: IEntityState<Registration>;
   lap: IEntityState<Lap>;
   participant: IEntityState<Participant>;
+  raceFieldMark: IEntityState<RaceFieldMark>;
 }
 
 const domainSelector = createFeatureSelector<IRaceDomainState>( DOMAIN_NAME );
@@ -36,11 +38,17 @@ export function participantEntityState( state = initialParticipantState ): IEnti
   return state;
 }
 
+export const { initialState: initialRaceFieldMarkState, facade: RaceFieldMarkFacadeBase } = buildFeatureState( RaceFieldMark, DOMAIN_NAME, domainSelector );
+export function raceFieldMarkEntityState( state = initialRaceFieldMarkState ): IEntityState<RaceFieldMark> {
+  return state;
+}
+
 export const raceDomainReducer: ActionReducerMap<IRaceDomainState> = {
   race: raceEntityState,
   registration: registrationEntityState,
   lap: lapEntityState,
-  participant: participantEntityState
+  participant: participantEntityState,
+  raceFieldMark: raceFieldMarkEntityState
 };
 
 export const getRaceDomainState = createFeatureSelector<IRaceDomainState>( 'raceDomain' );
@@ -49,3 +57,4 @@ export const getRaceById = ( id: string ) => createSelector( getRaceDomainState,
 export const getRegistrationById = ( id: string ) => createSelector( getRaceDomainState, state => state.registration.entities[id]);
 export const getLapById = ( id: string ) => createSelector( getRaceDomainState, state => state.lap.entities[id]);
 export const getParticipantById = ( id: string ) => createSelector( getRaceDomainState, state => state.participant.entities[id]);
+export const getRaceFieldMarkById = ( id: string ) => createSelector( getRaceDomainState, state => state.raceFieldMark.entities[id]);

@@ -11,21 +11,36 @@ import { ImageUploadViewAdapter } from './image-upload/image-upload-view-adapter
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BaseListContainerComponent } from './generic-components/base-list-container/base-list-container.component';
+import { BaseFormContainerComponent } from './generic-components/base-form-container/base-form-container.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations:[ImageUploadComponent, ImageUploadViewAdapter],
-  exports: [ImageUploadComponent, ImageUploadViewAdapter],
+  declarations:[ImageUploadComponent, ImageUploadViewAdapter, BaseListContainerComponent, BaseFormContainerComponent],
+  exports: [ImageUploadComponent, ImageUploadViewAdapter, BaseListContainerComponent, BaseFormContainerComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
     MatIconModule,
     MaterialFileInputModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatToolbarModule,
     NgrxFormsModule,
     MatButtonModule,
     MatMenuModule,
-    FlexModule
+    FlexModule,
   ]
 })
 export class SharedBaseModule {}

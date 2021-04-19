@@ -4,7 +4,7 @@ import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared
 import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { LapFacade, Participant, ParticipantFacade } from '@sailrc/race/domain';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RouteStateService } from '@processpuzzle/shared/util';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -18,7 +18,6 @@ import { takeUntil, tap } from 'rxjs/operators';
 export class RaceParticipantListComponent extends BaseListComponent<Participant> implements OnDestroy, OnInit {
   private _displayedColumns = ['sailNumber', 'boatName', 'boatType'];
   private lastRouteSegment: Observable<string>;
-  private routeSegmentsSubscription: Subscription;
 
   constructor(
     protected participantFeatureFacade: RaceParticipantFeatureFacade,

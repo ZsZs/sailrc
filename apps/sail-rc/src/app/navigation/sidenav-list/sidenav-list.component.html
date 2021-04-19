@@ -2,11 +2,14 @@
   <a mat-list-item routerLink="/" (click)="onCloseSidenav()">
     <span class="nav-caption">Home</span>
   </a>
-  <a mat-list-item routerLink="/race" (click)="onCloseSidenav()">
-    <span class="nav-caption">Race Management</span>
+  <a mat-list-item routerLink="/race-planning" (click)="onCloseSidenav()">
+    <span class="nav-caption">Plan Race</span>
   </a>
-  <a mat-list-item routerLink="/race-execution" (click)="onCloseSidenav()" *ngIf="( isAuth | async )">
-    <span class="nav-caption">Race Execution</span>
+  <a mat-list-item routerLink="/race-conduction" (click)="onCloseSidenav()">
+    <span class="nav-caption">Conduct Race</span>
+  </a>
+  <a mat-list-item routerLink="/race-analysis" (click)="onCloseSidenav()">
+    <span class="nav-caption">Analyse Race</span>
   </a>
   <a mat-list-item routerLink="/signup" (click)="onCloseSidenav()" *ngIf="( isAuth | async ) === false">
     <mat-icon>face</mat-icon>

@@ -15,6 +15,8 @@ import { Lap } from './domain/lap';
 import { Participant } from './domain/participant';
 import { ParticipantService } from './integration/participant.service';
 import { ParticipantFacade } from './facade/participant.facade';
+import { RaceFieldMark } from './domain/race-field-mark';
+import { RaceFieldMarkService } from './integration/race-field-mark.service';
 
 @NgModule({
   imports: [
@@ -26,6 +28,7 @@ import { ParticipantFacade } from './facade/participant.facade';
     { provide: Lap, useClass: LapService },
     { provide: Participant, useClass: ParticipantService },
     { provide: Race, useClass: RaceService },
+    { provide: RaceFieldMark, useClass: RaceFieldMarkService },
     { provide: Registration, useClass: RegistrationService }
   ]
 })
