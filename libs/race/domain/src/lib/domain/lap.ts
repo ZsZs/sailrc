@@ -2,13 +2,14 @@ import { Participant } from './participant';
 import { Entity, Key } from '@briebug/ngrx-auto-entity';
 
 export const initializeLap = {
-  fromServer: (data: any): Lap => ({...INITIAL_LAP_VALUE, ...data})
+  fromServer: (data: any): Lap => ({...INITIAL_LAP_VALUE, ...data, startTime: data.startTime ? data.startTime.toDate() : undefined })
 }
 
 export enum LapState {
   Planned,
   Initialized,
   Starting,
+  Started,
   Running,
   Finished,
   Cancelled

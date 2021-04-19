@@ -11,20 +11,6 @@ import { Lap, LapFacade, LapState } from '@sailrc/race/domain';
 import { ActiveTabService } from '@processpuzzle/shared/widgets';
 import { RouteStateService } from '@processpuzzle/shared/util';
 
-enum CounterStates {
-  Uninitialized,
-  Initialized,
-  Counting,
-  Done,
-  Frozen
-}
-
-interface StartNotification {
-  name: string;
-  leftTime: number;
-  Message: string;
-}
-
 enum StartSignals {
   WarnSignal = 300,
   PreparatorySignalI = 240,
@@ -44,9 +30,10 @@ enum TimeSelectOptions {
   encapsulation: ViewEncapsulation.Emulated
 })
 export class RaceStartTimerComponent implements OnDestroy, OnInit {
+  // region attributes
   countdownConfig: CountdownConfig;
   @ViewChild('countdownComponent', { static: false }) private countdownComponent: CountdownComponent;
-  counterState : CounterStates = 0;
+  counterState : LapState;
   currentTime: string;
   durationInSeconds = 5;
   leftTime = 10;
@@ -58,7 +45,9 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
   private lastRouteSegment: Observable<string>;
   private readonly onDestroy$ = new Subject<void>();
   private readonly tabName: string
+  // endregion
 
+  // region constructors
   constructor(
     private lapFacade: LapFacade,
     private _snackBar: MatSnackBar,
@@ -68,6 +57,7 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
     this.tabName = 'start-countdown';
     this.lastRouteSegment = this.routeState.subscribeToRouteSegments( RaceStartTimerComponent.name, this.route );
   }
+  // endregion
 
   // region angular lifecycle hooks
   ngOnDestroy(): void {
@@ -84,7 +74,7 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
   }
   // endregion
 
-  // event handling methods
+  // region event handling methods
   onCountdownEvent( $event: CountdownEvent ) {
     switch( $event.action ) {
       case 'notify':
@@ -104,7 +94,7 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
         }
         break;
       case 'done':
-        if( $event.left == 0 && this.counterState == CounterStates.Counting ) {
+        if( $event.left == 0 && this.counterState == LapState.Starting ) {
           this.startSignal();
         }
         break;
@@ -119,21 +109,21 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
   onRecall() {
     if( confirm( 'Are you sure to stop the race? ' )) {
       this.countdownComponent.stop();
-      this.counterState = CounterStates.Uninitialized;
+      this.counterState = LapState.Planned;
       this.startProgress = 0;
     }
   }
 
   onStartCountdown() {
     this.countdownComponent.begin();
-    this.counterState = CounterStates.Counting;
+    this.counterState = LapState.Starting;
   }
 
   onStopCountdown() {
     if( confirm( 'Are you sure to stop counting down? ' )) {
       this.startProgress = 0;
       this.countdownComponent.stop();
-      this.counterState = CounterStates.Uninitialized;
+      this.counterState = LapState.Planned;
     }
   }
 
@@ -177,7 +167,7 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
   }
 
   private setTimer() {
-    if( this.counterState != CounterStates.Counting ){
+    if( this.counterState != LapState.Starting ){
       switch( this.timeSelectMode ){
         case TimeSelectOptions.LeftTime:
           this.countdownConfig = {...this.countdownConfig, stopTime: undefined, leftTime: this.leftTime };
@@ -186,55 +176,34 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
           this.countdownConfig = {...this.countdownConfig, stopTime: this.stopTime, leftTime: undefined };
           break;
       }
-      this.counterState = CounterStates.Initialized;
-      this.updateCurrentLap();
+      this.counterState = LapState.Initialized;
+      this.updateLapFromComponent();
     }
   }
 
   private startSignal() {
     this.startProgress = 5;
     this.startSignName = 'Start';
-    this.counterState = CounterStates.Done;
+    this.counterState = LapState.Started;
     this.notifyUser('Start signal.', '0 Minutes');
-    timer( 60000 ).subscribe( () => this.counterState = CounterStates.Frozen );
+    timer( 60000 ).subscribe( () => this.counterState = LapState.Running );
   }
 
   private subscribeToCurrentLapChanges() {
     this.lapFacade.current$.pipe(
       takeUntil( this.onDestroy$ ),
       map( lap => {
-        switch( lap.state ) {
-          case LapState.Planned:
-            this.startProgress = 0;
-            this.leftTime = 0;
-            this.stopTime = 0;
-            this.counterState = CounterStates.Uninitialized;
-            break;
-          case LapState.Starting:
-            this.leftTime = 0;
-            this.stopTime = lap.startTime.getTime();
-            this.timeSelectMode = TimeSelectOptions.StopTime;
-            this.setTimer();
-            break;
-          case LapState.Running:
-            this.startProgress = 0;
-            this.leftTime = 0;
-            this.stopTime = 0;
-            this.counterState = CounterStates.Done;
-            break;
-          case LapState.Finished:
-          case LapState.Cancelled:
-            this.startProgress = 0;
-            this.leftTime = 0;
-            this.stopTime = 0;
-            this.counterState = CounterStates.Frozen;
-            break;
-        }
+        this.updateComponentFromLap( lap );
       })
     ).subscribe();
   }
 
-  private updateCurrentLap() {
+  private updateComponentFromLap( lap: Lap ) {
+    this.counterState = lap.state;
+    this.stopTime = lap.startTime ? lap.startTime.getTime() : undefined;
+  }
+
+  private updateLapFromComponent() {
     this.lapFacade.current$.pipe(
       take( 1 ),
       tap( lap => {
@@ -247,20 +216,7 @@ export class RaceStartTimerComponent implements OnDestroy, OnInit {
           lap.startTime = startTime;
         }
 
-        switch( this.counterState ) {
-          case CounterStates.Uninitialized:
-          case CounterStates.Initialized:
-            lap.state = LapState.Planned;
-            break;
-          case CounterStates.Counting:
-            lap.state = LapState.Starting;
-            break;
-          case CounterStates.Done:
-            lap.state = LapState.Running;
-            break;
-          case CounterStates.Frozen:
-            lap.state = LapState.Finished;
-        }
+        lap.state = this.counterState;
         this.lapFacade.update( lap, lap.raceId );
       })
     ).subscribe();
