@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { SailingPlace } from '@sailrc/sailing-place/domain';
 import { ActivatedRoute } from '@angular/router';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { SailingPlaceFeatureFacade } from '../sailing-place-feature.facade';
 
 @Component({

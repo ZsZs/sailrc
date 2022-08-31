@@ -1,4 +1,4 @@
-import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { startLoading, stopLoading, tabIsActive, tabIsInActive } from './ui.actions';
 
 export interface UiState {

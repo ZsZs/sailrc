@@ -11,4 +11,5 @@ export { RaceFieldMarkFacade } from './lib/facade/race-field-mark.facade';
 export { INITIAL_REGISTRATION_VALUE, Registration } from './lib/domain/registration';
 export { RegistrationFacade } from './lib/facade/registration.facade';
 export { RegistrationService } from './lib/integration/registration.service';
+export { StartSignals } from './lib/domain/start-signals';
 export { getLapById, getRaceById, getRegistrationById } from './lib/store/race.state';

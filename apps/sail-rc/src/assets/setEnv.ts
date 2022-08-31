@@ -8,7 +8,6 @@ const { argv } = require('yargs');
 require('dotenv').config();
 const environment = argv.environment;
 
-
 function writeFileUsingFS(targetPath, environmentFileContent) {
   writeFile(targetPath, environmentFileContent, function (err) {
     if (err) {
@@ -19,7 +18,6 @@ function writeFileUsingFS(targetPath, environmentFileContent) {
     }
   });
 }
-
 
 // Providing path to the `environments` directory
 const envDirectory = './apps/sail-rc/src/environments';
@@ -39,7 +37,7 @@ let targetPath: string;
 let isProduction = false;
 let projectId = 'sailrc-test';
 
-switch( environment ) {
+switch (environment) {
   case 'test':
     targetPath = './apps/sail-rc/src/environments/environment.test.ts';
     isProduction = true;

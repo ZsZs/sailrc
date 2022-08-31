@@ -7,7 +7,7 @@ import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -18,42 +18,33 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('AppComponent', () => {
   const initialState = { loggedIn: false };
   const authFeatureFacadeStub = {
-    isAuthenticated(): Observable<boolean> { return of( false ); },
-    logout() { console.log("log out")}
+    isAuthenticated(): Observable<boolean> {
+      return of(false);
+    },
+    logout() {
+      console.log('log out');
+    },
   };
   const googleMapsServiceStub: Partial<GoogleMapsService> = {
-    loadGoogleMapsAPI: (): Promise<boolean> => Promise.resolve(false )
-  }
+    loadGoogleMapsAPI: (): Promise<boolean> => Promise.resolve(false),
+  };
   let app: AppComponent;
   let googleMapsService: GoogleMapsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent, HeaderComponent, SidenavListComponent],
-      imports: [
-        BreadcrumbModule,
-        BrowserAnimationsModule,
-        GoogleMapsModule,
-        HttpClientTestingModule,
-        RouterTestingModule,
-        SharedMaterialModule,
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: AuthFeatureFacade, useValue: authFeatureFacadeStub },
-        { provide: GoogleMapsService, useValue: googleMapsServiceStub }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [BreadcrumbModule, BrowserAnimationsModule, GoogleMapsModule, HttpClientTestingModule, RouterTestingModule, SharedMaterialModule],
+      providers: [provideMockStore({ initialState }), { provide: AuthFeatureFacade, useValue: authFeatureFacadeStub }, { provide: GoogleMapsService, useValue: googleMapsServiceStub }],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-
   }));
 
-  beforeEach( () => {
+  beforeEach(() => {
     const fixture = TestBed.createComponent(AppComponent);
     app = fixture.debugElement.componentInstance;
-    googleMapsService = TestBed.inject( GoogleMapsService );
-
-  })
+    googleMapsService = TestBed.inject(GoogleMapsService);
+  });
 
   it('should create the app', () => {
     expect(app).toBeTruthy();

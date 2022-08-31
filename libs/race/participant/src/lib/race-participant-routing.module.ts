@@ -8,16 +8,20 @@ import { RegistrationSourceListComponent } from './registration-source-list/regi
 import { LapResolver } from '@sailrc/race/shared';
 
 const routes: Routes = [
-  { path: '', component: RaceParticipantComponent, children: [
-    { path: 'race/:RaceId/lap/:LapId', redirectTo: 'race/:RaceId/lap/:LapId/list', pathMatch: 'full' },
-    { path: 'race/:RaceId/lap/:LapId/list', component: RaceParticipantListComponent, resolve: { race: RaceResolver, lap: LapResolver } },
-    { path: 'race/:RaceId/lap/:LapId/capture', component: RaceParticipantCaptureComponent, resolve: { race: RaceResolver, lap: LapResolver } },
-    { path: 'race/:RaceId/lap/:LapId/registrations', component: RegistrationSourceListComponent, resolve: { race: RaceResolver, lap: LapResolver } },
-  ]}
+  {
+    path: '',
+    component: RaceParticipantComponent,
+    children: [
+      { path: 'race/:RaceId/lap/:LapId', redirectTo: 'race/:RaceId/lap/:LapId/list', pathMatch: 'full' },
+      { path: 'race/:RaceId/lap/:LapId/list', component: RaceParticipantListComponent, resolve: { race: RaceResolver, lap: LapResolver } },
+      { path: 'race/:RaceId/lap/:LapId/capture', component: RaceParticipantCaptureComponent, resolve: { race: RaceResolver, lap: LapResolver } },
+      { path: 'race/:RaceId/lap/:LapId/registrations', component: RegistrationSourceListComponent, resolve: { race: RaceResolver, lap: LapResolver } },
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild( routes )],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class RaceParticipantRoutingModule {}

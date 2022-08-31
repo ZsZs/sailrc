@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseTabsComponent } from '@processpuzzle/shared/base';
 import { Boat } from '@sailrc/boat/domain';
-import { ActiveTabService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { BoatFeatureFacade } from '../boat-feature.facade';
 

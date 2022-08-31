@@ -1,0 +1,18 @@
+<span fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px grid" aria-label="Select an option">
+  <mat-radio-group [(ngModel)]="timeSelectMode" fxLayout="column" fxLayoutGap="10px grid">
+    <mat-radio-button class="counterOption" value="LeftTime">Set by remaining time:</mat-radio-button>
+    <mat-radio-button class="counterOption" value="StopTime">Set by day time:</mat-radio-button>
+    <button mat-raised-button color="primary" [disabled]="!leftTime && !stopTime" (click)="onSetStartTime()">Set start time</button>
+  </mat-radio-group>
+  <span fxLayout="column" fxLayoutGap="10px grid">
+    <span class="counterOption">
+      <input matInput [disabled]="timeSelectMode == 'StopTime' || lapState == 2" (change)="onLeftTimeSet($event)" type="number" step="10" placeholder="10" />
+    </span>
+    <span class="counterOption" fxLayout="row">
+      <input [ngxMatTimepicker]="picker" [disabled]="timeSelectMode == 'LeftTime' || lapState == 2" [format]="24" [min]="currentTime">
+      <mat-icon matSuffix (click)="picker.open()">watch_later</mat-icon>
+      <ngx-mat-timepicker #picker (timeSet)="onTimePicked($event)"></ngx-mat-timepicker>
+    </span>
+  </span>
+</span>
+

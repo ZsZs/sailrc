@@ -19,24 +19,20 @@ import { RaceFieldMark } from './domain/race-field-mark';
 import { RaceFieldMarkService } from './integration/race-field-mark.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NgrxAutoEntityModule.forFeature(),
-    StoreModule.forFeature( DOMAIN_NAME, raceDomainReducer )
-  ],
+  imports: [CommonModule, NgrxAutoEntityModule.forFeature(), StoreModule.forFeature(DOMAIN_NAME, raceDomainReducer)],
   providers: [
     { provide: Lap, useClass: LapService },
     { provide: Participant, useClass: ParticipantService },
     { provide: Race, useClass: RaceService },
     { provide: RaceFieldMark, useClass: RaceFieldMarkService },
-    { provide: Registration, useClass: RegistrationService }
-  ]
+    { provide: Registration, useClass: RegistrationService },
+  ],
 })
 export class RaceDomainModule {
   static forFeature(): ModuleWithProviders<RaceDomainModule> {
     return {
-      ngModule:  RaceDomainModule,
-      providers: [LapFacade, ParticipantFacade, RaceFacade, RegistrationFacade]
-    }
+      ngModule: RaceDomainModule,
+      providers: [LapFacade, ParticipantFacade, RaceFacade, RegistrationFacade],
+    };
   }
 }

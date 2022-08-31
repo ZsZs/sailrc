@@ -31,13 +31,9 @@ import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
     SharedWidgetsModule,
     FlexModule,
     NgrxFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [
-    LapResolver,
-    RaceResolver,
-    RaceFieldFeatureFacade
-  ],
-  exports: []
+  providers: [LapResolver, RaceResolver, RaceFieldFeatureFacade],
+  exports: [],
 })
 export class RaceFieldModule {}

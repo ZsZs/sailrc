@@ -79,8 +79,10 @@ export class CameraUploadComponent implements OnInit {
   }
 
   private determineWebcamSize() {
-    this.webcamHeight = window.innerHeight - window.innerHeight * 0.32;
-    this.webcamWidth = window.innerWidth - window.innerWidth * 0.20;
+    const windowHeight = this.getWindowInnerHeight();
+    const windowWidth = this.getWindowInnerWidth();
+    this.webcamHeight = windowHeight - windowHeight * 0.32;
+    this.webcamWidth = windowWidth - windowWidth * 0.20;
   }
 
   private determineVideoInputs() {
@@ -88,5 +90,9 @@ export class CameraUploadComponent implements OnInit {
       this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
     });
   }
+
+  // helper function to facilitate unit test
+  getWindowInnerHeight() { return window.innerHeight; }
+  getWindowInnerWidth() { return window.innerWidth; }
   // endregion
 }

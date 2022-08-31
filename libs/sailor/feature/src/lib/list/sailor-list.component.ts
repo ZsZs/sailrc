@@ -1,4 +1,4 @@
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { Sailor } from '@sailrc/sailor/domain';

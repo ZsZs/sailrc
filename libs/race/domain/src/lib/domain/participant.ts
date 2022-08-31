@@ -2,10 +2,10 @@ import { Entity, Key } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
 
 export const initializeParticipant = {
-  fromServer: (data: Participant): Participant => ({...INITIAL_PARTICIPANT_VALUE, ...data})
-}
+  fromServer: (data: Participant): Participant => ({ ...INITIAL_PARTICIPANT_VALUE, ...data }),
+};
 
-@Entity({modelName: 'Participant', pluralName: 'participants', uriName: 'races/:RaceId/laps/:LapId/participants', transform: [initializeParticipant]})
+@Entity({ modelName: 'Participant', pluralName: 'participants', uriName: 'races/:RaceId/laps/:LapId/participants', transform: [initializeParticipant] })
 export class Participant implements BaseEntityInterface {
   @Key id: string;
   raceId: string;
@@ -25,5 +25,5 @@ export const INITIAL_PARTICIPANT_VALUE: Participant = {
   boatName: '',
   boatType: undefined,
   sailNumber: '',
-  skipper: ''
-}
+  skipper: '',
+};

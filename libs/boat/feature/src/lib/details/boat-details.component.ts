@@ -10,7 +10,7 @@ import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { Boat } from '@sailrc/boat/domain';
 import { RouterFacade } from '@processpuzzle/shared/util';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { BoatFeatureFacade } from '../boat-feature.facade';
 import { IBoatFeatureState } from '../boat-feature.reducer';
 import { BoatClass, BoatClassFacade } from '@sailrc/boat-class/domain';

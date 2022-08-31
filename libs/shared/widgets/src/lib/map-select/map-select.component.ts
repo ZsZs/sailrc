@@ -1,19 +1,17 @@
-import { Component, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GoogleMapsService } from '../services/google-maps-service';
-import { filter } from 'rxjs/operators';
-import { GoogleMap, MapMarker } from '@angular/google-maps';
+import { GoogleMap } from '@angular/google-maps';
 import { ICoordinates } from './coordinates';
 
 @Component({
   selector: 'sailrc-map-select',
   templateUrl: './map-select.component.html',
   styleUrls: ['./map-select.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class MapSelectComponent implements OnChanges {
   apiLoaded: boolean;
-  center: ICoordinates = {lat: 49, lng: 10 };
+  center: ICoordinates = { lat: 49, lng: 10 };
   @Input() disableAddMarker = false;
   display: any;
   @ViewChild('googleMap') googleMap: GoogleMap;
@@ -24,7 +22,7 @@ export class MapSelectComponent implements OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private _onChange: (value: any) => void = () => {};
 
-  constructor( private googleMapsService: GoogleMapsService ) {}
+  constructor(private googleMapsService: GoogleMapsService) {}
 
   // region Angular lifecycle event hooks
   ngOnChanges(): void {
@@ -33,11 +31,11 @@ export class MapSelectComponent implements OnChanges {
   // endregion
 
   // region event handling methods
-  onMapClick( event: google.maps.MapMouseEvent) {
-    if( !this.disableAddMarker ) {
-      const marker = this.addMarker( event.latLng.toJSON() );
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (!this.disableAddMarker) {
+      const marker = this.addMarker(event.latLng.toJSON());
       this.calculateCenter();
-      this._onChange( marker );
+      this._onChange(marker);
     }
   }
 
@@ -47,25 +45,25 @@ export class MapSelectComponent implements OnChanges {
   // endregion
 
   // region public accessors and mutators
-  addMarker( value: ICoordinates ) {
-    if( !this.mapMarkers ) this.mapMarkers = [];
-    const marker = new google.maps.Marker({ position: { lng: value.lng, lat: value.lat }})
-    this.mapMarkers.push( marker );
+  addMarker(value: ICoordinates) {
+    if (!this.mapMarkers) this.mapMarkers = [];
+    const marker = new google.maps.Marker({ position: { lng: value.lng, lat: value.lat } });
+    this.mapMarkers.push(marker);
     return marker;
   }
 
-  public registerOnChange( fn: (value) => void ) {
+  public registerOnChange(fn: (value) => void) {
     this._onChange = fn;
   }
   // endregion
 
   // region protected, private helper methods
   private calculateCenter() {
-    if( this.googleMap && this.mapMarkers && this.mapMarkers.length > 0 ) {
+    if (this.googleMap && this.mapMarkers && this.mapMarkers.length > 0) {
       const bounds = new google.maps.LatLngBounds();
-      this.mapMarkers.forEach( markerPosition => {
-        const position = new google.maps.LatLng( markerPosition.getPosition().lat(), markerPosition.getPosition().lng() );
-        bounds.extend( position );
+      this.mapMarkers.forEach((markerPosition) => {
+        const position = new google.maps.LatLng(markerPosition.getPosition().lat(), markerPosition.getPosition().lng());
+        bounds.extend(position);
       });
       this.googleMap.fitBounds(bounds);
     }

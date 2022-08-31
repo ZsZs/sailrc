@@ -1,0 +1,18 @@
+<span fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100">
+  <mat-form-field appearance='fill' fxFlex="50">
+    <mat-label>Start Time: </mat-label>
+    <input matInput type='datetime-local' [value]='raceStartTimeText' readonly>
+  </mat-form-field>
+  <mat-form-field appearance='fill'  fxFlex="50" *ngIf="lapState == 0 || lapState == 1 || lapState == 2">
+    <mat-label>Remaining Time: </mat-label>
+    <sailrc-countdown-form-field #countdownFormFieldComponent [value]="countdownConfig" (countdownEvent)="onCountdownEvent($event)"></sailrc-countdown-form-field>
+  </mat-form-field>
+  <mat-form-field appearance='fill' fxFlex="50" *ngIf="lapState == 3 || lapState == 4">
+    <mat-label>Elapsed Time: </mat-label>
+    <sailrc-countup-form-field #countupFormFieldComponent [cdTimerOptions]='countupConfig' (countupEvent)='onCountupEvent($event)'></sailrc-countup-form-field>
+  </mat-form-field>
+  <mat-form-field appearance='fill' fxFlex="50" *ngIf="lapState == 5 || lapState == 6">
+    <mat-label>Finish Time: </mat-label>
+    <input matInput type='datetime-local' [value]='raceFinishTimeText' readonly>
+  </mat-form-field>
+</span>

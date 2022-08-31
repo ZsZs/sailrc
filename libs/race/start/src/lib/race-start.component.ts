@@ -4,7 +4,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
   selector: 'sailrc-race-start',
   templateUrl: './race-start.component.html',
   styleUrls: ['./race-start.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class RaceStartComponent {
-}
+export class RaceStartComponent {}

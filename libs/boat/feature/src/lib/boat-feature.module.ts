@@ -16,6 +16,7 @@ import { BoatComponent } from './boat.component';
 import { BoatClassDomainModule, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SharedBaseModule } from '@processpuzzle/shared/base';
     NgrxFormsModule,
     SharedBaseModule,
     SharedMaterialModule,
+    SharedWidgetsModule,
     StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer )
   ],
   exports: [],

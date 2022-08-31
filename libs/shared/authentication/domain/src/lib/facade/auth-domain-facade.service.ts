@@ -14,11 +14,15 @@ export class AuthDomainFacade {
   constructor( private authService: AuthService, private store: Store<AuthState>) {}
 
   createUserWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.authService.createUserWithEmailAndPassword( authData );
+    return this.authService.signUp( authData );
   }
 
   isAuthenticated(): Observable<boolean> {
     return this.store.select( getIsAuthenticated );
+  }
+
+  forgotPassword( passwordResetEmail ) {
+    return this.authService.forgotPassword( passwordResetEmail );
   }
 
   getAuthState(): Observable<User> {
@@ -27,6 +31,10 @@ export class AuthDomainFacade {
 
   getRedirectTo(): Observable<string> {
     return this.store.select( getRedirectTo );
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
 
   setAuthenticated( email: string, userId: string ) {
@@ -38,7 +46,7 @@ export class AuthDomainFacade {
   }
 
   signInWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.authService.signInWithEmailAndPassword( authData );
+    return this.authService.signIn( authData );
   }
 
   signOut(): Promise<any> {

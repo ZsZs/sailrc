@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { RouterFacade } from '@processpuzzle/shared/util';
-import { ActiveTabService } from '@processpuzzle/shared/widgets';
-import { BaseTabsComponent } from '@processpuzzle/shared/base';
+import { ActiveTabService,  BaseTabsComponent } from '@processpuzzle/shared/base';
 import { YachtClub } from '@sailrc/yacht-club/domain';
 import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
 

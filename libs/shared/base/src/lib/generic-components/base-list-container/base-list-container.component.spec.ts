@@ -14,9 +14,8 @@ describe('BaseListContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BaseListContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [BaseListContainerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

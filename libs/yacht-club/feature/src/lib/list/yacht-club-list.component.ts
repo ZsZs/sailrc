@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { YachtClub } from '@sailrc/yacht-club/domain';
-import { BaseListComponent } from '@processpuzzle/shared/base';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
 import { ActivatedRoute } from '@angular/router';
 import { YachtClubFeatureFacade } from '../yacht-club-feature.facade';
+import { YachtClub } from '@sailrc/yacht-club/domain';
+import { ActiveTabService, BaseListComponent, ComponentDestroyService } from '@processpuzzle/shared/base';
 
 @Component({
   selector: 'sailrc-yacht-club-list',

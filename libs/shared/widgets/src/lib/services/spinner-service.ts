@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { getIsLoading, UiState } from '../store/ui.reducer';
-import { startLoading, stopLoading } from '../store/ui.actions';
+import { getIsLoading, UiState } from '../../../../base/src/lib/store/ui.reducer';
+import { startLoading, stopLoading } from '../../../../base/src/lib/store/ui.actions';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {

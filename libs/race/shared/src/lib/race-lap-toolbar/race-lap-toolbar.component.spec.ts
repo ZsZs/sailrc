@@ -8,9 +8,8 @@ describe('RaceLapToobarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RaceLapToobarComponent ]
-    })
-    .compileComponents();
+      declarations: [RaceLapToobarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

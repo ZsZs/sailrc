@@ -8,9 +8,8 @@ describe('MarkListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MarkListComponent ]
-    })
-    .compileComponents();
+      declarations: [MarkListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

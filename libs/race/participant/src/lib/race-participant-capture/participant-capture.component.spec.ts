@@ -8,9 +8,8 @@ describe('ParticipantCaptureComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ParticipantCaptureComponent ]
-    })
-    .compileComponents();
+      declarations: [ParticipantCaptureComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

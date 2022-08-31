@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { BoatClass } from '@sailrc/boat-class/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { BoatClassFeatureFacade } from '../facade/boat-class-feature.facade';
 

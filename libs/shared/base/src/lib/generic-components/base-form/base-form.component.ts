@@ -4,13 +4,14 @@ import { map, take, tap } from 'rxjs/operators';
 import { FormGroupState, NgrxValueConverter, NgrxValueConverters } from 'ngrx-forms';
 
 import { BaseEntityInterface } from '../../auto-entity/base-entity.interface';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService } from '../../services/active-tab.service';
+import { ComponentDestroyService } from '../../services/component-destroy.service';
 import { BaseUrlSegments, RouterFacade } from '@processpuzzle/shared/util';
 import { IEntityFormFacade } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { IEntityFacade } from '@briebug/ngrx-auto-entity';
 
-@Component({template: ''})
+@Component({ template: '' })
 export abstract class BaseFormComponent<T extends BaseEntityInterface> implements OnDestroy, OnInit {
   formState$: Observable<FormGroupState<T>>;
   isLoading$: Observable<boolean>;
@@ -19,10 +20,12 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   protected entityFacade: IEntityFacade<T>;
   protected entityId: string;
   protected readonly onDestroy$ = new Subject<void>();
-  protected readonly tabName: string
+  protected readonly tabName: string;
   dateValueConverter: NgrxValueConverter<Date | null, string | null> = {
     convertViewToStateValue(value) {
-      if (value === null) { return null; }
+      if (value === null) {
+        return null;
+      }
 
       // the value provided by the date picker is in local time but we want UTC so we recreate the date as UTC
       value = new Date(Date.UTC(value.getFullYear(), value.getMonth(), value.getDate()));
@@ -49,7 +52,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   // life cycle hooks, event handling
   ngOnDestroy(): void {
     this.componentDestroyService.unsubscribeComponent$.next();
-    this.activeTabService.tabIsInActive( this.tabName );
+    this.activeTabService.tabIsInActive(this.tabName);
     this.onDestroy$.next();
   }
 
@@ -66,37 +69,39 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   onSubmit() {
-    this.formState$.pipe(
-      take(1),
-      tap( () => this.entityFacade.deselect() ),
-      map( formState => formState.value ),
-      map(entity => {
-        entity = this.adjustEntity( entity );
-        (this.entityId === BaseUrlSegments.NewEntity === undefined) || (this.entityId === BaseUrlSegments.NewEntity) ?
-          this.entityFacade.create( entity, this.defaultCriteria ) :
-          this.entityFacade.update( entity, this.defaultCriteria )
-      }),
-      tap( () => this.closeFormAndNavigateBack())
-    ).subscribe();
+    this.formState$
+      .pipe(
+        take(1),
+        tap(() => this.entityFacade.deselect()),
+        map((formState) => formState.value),
+        map((entity) => {
+          entity = this.adjustEntity(entity);
+          (this.entityId === BaseUrlSegments.NewEntity) === undefined || this.entityId === BaseUrlSegments.NewEntity
+            ? this.entityFacade.create(entity, this.defaultCriteria)
+            : this.entityFacade.update(entity, this.defaultCriteria);
+        }),
+        tap(() => this.closeFormAndNavigateBack())
+      )
+      .subscribe();
   }
 
   // region protected, private helper methods
-  protected adjustEntity( entity: T ) {
+  protected adjustEntity(entity: T) {
     return entity;
   }
 
   private closeFormAndNavigateBack() {
     const currentUrl = this.route.snapshot['_routerState'].url;
     const goToUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/')).substring(0, currentUrl.lastIndexOf('/'));
-    this.entityFormFacade.navigateBack( goToUrl );
+    this.entityFormFacade.navigateBack(goToUrl);
   }
 
   private determineEntityIdFromRoute(): void {
-    this.entityId = this.route.snapshot.paramMap.get( this.entityFormFacade.info.modelName + 'Id' );
+    this.entityId = this.route.snapshot.paramMap.get(this.entityFormFacade.info.modelName + 'Id');
   }
 
   private notifyActiveTab() {
-    this.activeTabService.tabIsActive( this.tabName );
+    this.activeTabService.tabIsActive(this.tabName);
   }
 
   protected selectFormState() {
@@ -104,7 +109,7 @@ export abstract class BaseFormComponent<T extends BaseEntityInterface> implement
   }
 
   private setCurrentEntity() {
-    this.entityFacade.selectByKey( this.entityId );
+    this.entityFacade.selectByKey(this.entityId);
   }
 
   protected subscribeToLoading() {

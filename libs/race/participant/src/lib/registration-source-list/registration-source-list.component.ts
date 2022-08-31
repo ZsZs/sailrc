@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { BaseListComponent } from '@processpuzzle/shared/base';
 import { LapFacade, Participant, ParticipantFacade, Registration } from '@sailrc/race/domain';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { RouteStateService } from '@processpuzzle/shared/util';
   selector: 'sailrc-registration-source-list',
   templateUrl: './registration-source-list.component.html',
   styleUrls: ['./registration-source-list.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegistrationSourceListComponent extends BaseListComponent<Registration> implements OnDestroy, OnInit {
   private _displayedColumns = ['sailNumber', 'boatName', 'boatType', 'skipper', 'isParticipant'];
@@ -30,16 +30,16 @@ export class RegistrationSourceListComponent extends BaseListComponent<Registrat
     private participantFacade: ParticipantFacade,
     private registrationSourceService: RegistrationSourceService,
     private subscriptionService: ComponentDestroyService
-  ){
-    super( registrationFeatureFacade, route, activeTabService, subscriptionService );
+  ) {
+    super(registrationFeatureFacade, route, activeTabService, subscriptionService);
     this.registrationFacade = registrationFeatureFacade.entityFacade;
-    this.routeState.subscribeToRouteSegments( RegistrationSourceListComponent.name, this.route );
+    this.routeState.subscribeToRouteSegments(RegistrationSourceListComponent.name, this.route);
   }
 
   // region angular lifecycle hooks
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.routeState.unsubscribeFromRouteSegments( RegistrationSourceListComponent.name );
+    this.routeState.unsubscribeFromRouteSegments(RegistrationSourceListComponent.name);
   }
 
   ngOnInit() {
@@ -54,14 +54,14 @@ export class RegistrationSourceListComponent extends BaseListComponent<Registrat
     // suppress base class behaviour
   }
 
-  onChangeIsParticipant( registration: Registration ) {
-    if( !registration.isParticipant ) this.createParticipant( registration );
-    else this.deleteParticipant( registration );
+  onChangeIsParticipant(registration: Registration) {
+    if (!registration.isParticipant) this.createParticipant(registration);
+    else this.deleteParticipant(registration);
   }
   // endregion
 
   // region protected, private helper methods
-  private createParticipant( registration: Registration ) {
+  private createParticipant(registration: Registration) {
     const participant = new Participant();
     participant.registrationId = registration.id;
     participant.raceId = registration.raceId;
@@ -71,24 +71,28 @@ export class RegistrationSourceListComponent extends BaseListComponent<Registrat
     participant.boatType = registration.boatType;
     participant.skipper = registration.skipper;
 
-    this.participantFacade.create( participant, { raceId: registration.raceId, lapId: this.lapId } );
+    this.participantFacade.create(participant, { raceId: registration.raceId, lapId: this.lapId });
   }
 
-  private deleteParticipant( registration: Registration ) {
-    this.participantFacade.all$.pipe(
-      map( participants => participants.filter( participant => participant.registrationId == registration.id )),
-      take( 1 )
-    ).subscribe( participants => {
-      const participant = participants[0];
-      this.participantFacade.delete( participant, { raceId: participant.raceId, lapId: participant.lapId });
-    });
+  private deleteParticipant(registration: Registration) {
+    this.participantFacade.all$
+      .pipe(
+        map((participants) => participants.filter((participant) => participant.registrationId == registration.id)),
+        take(1)
+      )
+      .subscribe((participants) => {
+        const participant = participants[0];
+        this.participantFacade.delete(participant, { raceId: participant.raceId, lapId: participant.lapId });
+      });
   }
 
   private determineLapId() {
-    this.lapFacade.current$.pipe(
-      first(),
-      map( lap => this.lapId = lap.id )
-    ).subscribe();
+    this.lapFacade.current$
+      .pipe(
+        first(),
+        map((lap) => (this.lapId = lap.id))
+      )
+      .subscribe();
   }
 
   protected loadAllEntities() {
@@ -97,22 +101,27 @@ export class RegistrationSourceListComponent extends BaseListComponent<Registrat
   }
 
   private loadParticipants() {
-    this.lapFacade.current$.pipe(
-      takeUntil( this.onDestroy$ ),
-      tap( lap => this.participantFacade.loadAll( { raceId: lap.raceId, lapId: lap.id } ) )
-    ).subscribe();
+    this.lapFacade.current$
+      .pipe(
+        takeUntil(this.onDestroy$),
+        tap((lap) => this.participantFacade.loadAll({ raceId: lap.raceId, lapId: lap.id }))
+      )
+      .subscribe();
   }
 
   private loadRegistrations() {
     const raceIdPathVariable = this.registrationFeatureFacade.raceIdPathVariable;
-    const raceId = this.route.snapshot.params[ raceIdPathVariable ];
-    this.entityFacade.loadAll( raceId );
+    const raceId = this.route.snapshot.params[raceIdPathVariable];
+    this.entityFacade.loadAll(raceId);
   }
 
   protected subscribeToSourceData(): Subscription {
-    return this.registrationSourceService.loadAll().pipe( takeUntil( this.onDestroy$ )).subscribe( ( data: Registration[] ) => {
-      this.dataSource.data = data;
-    });
+    return this.registrationSourceService
+      .loadAll()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data: Registration[]) => {
+        this.dataSource.data = data;
+      });
   }
   // endregion
 

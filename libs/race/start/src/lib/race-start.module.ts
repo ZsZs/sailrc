@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RaceStartComponent } from './race-start.component';
 import { RaceStartTabsComponent } from './race-start-tabs/race-start-tabs.component';
-import { RaceStartTimerComponent } from './race-start-timer/race-start-timer.component';
+import { RaceStartPreparationComponent } from './race-start-preparation/race-start-preparation.component';
 import { RaceStartCaptureComponent } from './race-start-capture/race-start-capture.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,32 +17,38 @@ import { FormsModule } from '@angular/forms';
 import { RaceResolver } from '@sailrc/race/feature';
 import { RaceStartFeatureFacade } from './race-start-feature.facade';
 import { RaceStartRoutingModule } from './race-start-routing.module';
-import { CountdownModule } from 'ngx-countdown';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { RaceStartSignsComponent } from './race-start-signs/race-start-signs.component';
+import { StartTimePickerComponent } from './race-start-time-selector/start-time-picker.component';
 
 @NgModule({
-  declarations: [RaceStartComponent, RaceStartTabsComponent, RaceStartTimerComponent, RaceStartCaptureComponent],
+  declarations: [
+    RaceStartComponent,
+    RaceStartTabsComponent,
+    RaceStartPreparationComponent,
+    RaceStartCaptureComponent,
+    RaceStartSignsComponent,
+    StartTimePickerComponent
+  ],
   imports: [
     CommonModule,
-    CountdownModule,
+    FlexModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxMaterialTimepickerModule,
+    NgxMatTimepickerModule,
+    NgrxFormsModule,
     RaceDomainModule.forFeature(),
     RaceStartRoutingModule,
     RaceSharedModule,
     SharedBaseModule,
     SharedMaterialModule,
     SharedWidgetsModule,
-    FlexModule,
-    NgrxFormsModule,
-    FormsModule
   ],
-  providers: [
-    LapResolver,
-    RaceResolver,
-    RaceStartFeatureFacade
+  providers: [LapResolver, RaceResolver, RaceStartFeatureFacade],
+  exports: [
+    RaceStartSignsComponent,
+    StartTimePickerComponent
   ],
-  exports: []
 })
 export class RaceStartModule {}

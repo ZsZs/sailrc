@@ -1,0 +1,14 @@
+<div (mouseover)='onMouseOver()' (mouseout)='onMouseOut()'>
+  <cd-timer #cdTimerComponent
+            [startTime]='startTime'
+            [endTime]='endTime'
+            [countdown]='countdown'
+            [autoStart]='autostart'
+            [maxTimeUnit]='maxTimeUnit'
+            [format]='format'
+            (onTick)='onTickEvent($event)'
+            (onStart)='onStartEvent($event)'
+            (onStop)='onStopEvent($event)'
+            (onComplete)='onCompleteEvent($event)'>
+  </cd-timer>
+</div>

@@ -8,9 +8,8 @@ describe('BaseFormContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BaseFormContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [BaseFormContainerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

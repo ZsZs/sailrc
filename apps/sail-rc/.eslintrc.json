@@ -17,7 +17,8 @@
         "@angular-eslint/component-selector": [
           "error",
           { "type": "element", "prefix": "sailrc", "style": "kebab-case" }
-        ]
+        ],
+        "max-len": ["error", {"code": 200}]
       }
     },
     {

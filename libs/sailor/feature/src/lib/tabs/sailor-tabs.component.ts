@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sailor } from '@sailrc/sailor/domain';
-import { ActiveTabService } from '@processpuzzle/shared/widgets';
-import { BaseTabsComponent } from '@processpuzzle/shared/base';
+import { ActiveTabService, BaseTabsComponent } from '@processpuzzle/shared/base';
 import { SailorFeatureFacade } from '../sailor-feature.facade';
 
 @Component({

@@ -10,7 +10,7 @@ describe('RaceAnalysisComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CommonDependenciesModule],
-      declarations: [ RaceAnalysisComponent ]
+      declarations: [RaceAnalysisComponent],
     }).compileComponents();
   }));
 

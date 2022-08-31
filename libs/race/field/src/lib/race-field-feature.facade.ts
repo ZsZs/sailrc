@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { RaceFieldMark, RaceFieldMarkFacade } from '@sailrc/race/domain';
 
 @Injectable()
-export class RaceFieldFeatureFacade extends BaseFormFacade<RaceFieldMark> implements IEntityFormFacade<RaceFieldMark>{
+export class RaceFieldFeatureFacade extends BaseFormFacade<RaceFieldMark> implements IEntityFormFacade<RaceFieldMark> {
   private readonly _lapIdPathVariable;
   private readonly _raceIdPathVariable;
 
-  constructor( protected store: Store<any>, protected router: Router, raceFieldMarkFacade: RaceFieldMarkFacade ) {
-    super( RaceFieldMark, store, router, raceFieldMarkFacade );
+  constructor(protected store: Store<any>, protected router: Router, raceFieldMarkFacade: RaceFieldMarkFacade) {
+    super(RaceFieldMark, store, router, raceFieldMarkFacade);
     this._lapIdPathVariable = raceFieldMarkFacade.lapIdPathVariable;
     this._raceIdPathVariable = raceFieldMarkFacade.raceIdPathVariable;
   }

@@ -4,12 +4,12 @@ import { Registration, RegistrationFacade } from '@sailrc/race/domain';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class RegistrationFeatureFacade extends BaseFormFacade<Registration> implements IEntityFormFacade<Registration> {
   private readonly _raceIdPathVariable;
 
-  constructor( protected store: Store<never>, protected router: Router, registrationFacade: RegistrationFacade ) {
-    super( Registration, store, router, registrationFacade );
+  constructor(protected store: Store<never>, protected router: Router, registrationFacade: RegistrationFacade) {
+    super(Registration, store, router, registrationFacade);
     this._raceIdPathVariable = registrationFacade.raceIdPathVariable;
   }
 

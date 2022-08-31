@@ -1,30 +1,26 @@
-<mat-card fxLayout='column' fxLayoutAlign='left'>
+<mat-card fxLayout="column" fxLayoutAlign="left">
   <mat-card-header>
     <mat-card-title>Race Field</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap='25px' fxLayoutAlign="left">
-      <sailrc-map-select [mapMarkers]='mapMarkers$ | async' [disableAddMarker]='true'></sailrc-map-select>
-      <sailrc-base-list-container
-        #baseListContainer
-        [displayedColumns]='displayedColumns'
-        [columnDefinitions]='columnDefinitions'
-        [entityFormFacade]='raceFieldFeatureFacade'>
+    <div fxLayout="row wrap" fxLayout.lt="row wrap" fxLayout.lt-sm="column" fxLayoutGap="25px" fxLayoutAlign="left">
+      <sailrc-map-select [mapMarkers]="mapMarkers$ | async" [disableAddMarker]="true"></sailrc-map-select>
+      <sailrc-base-list-container #baseListContainer [displayedColumns]="displayedColumns" [columnDefinitions]="columnDefinitions" [entityFormFacade]="raceFieldFeatureFacade">
       </sailrc-base-list-container>
     </div>
   </mat-card-content>
-  <mat-card-actions fxLayout='row' fyLayoutGap='40px' fxLayoutAlign='left center'>
+  <mat-card-actions fxLayout="row" fyLayoutGap="40px" fxLayoutAlign="left center">
     <form>
       <mat-form-field>
         <mat-label>Select a field mark</mat-label>
-        <mat-select [(ngModel)]="selectedMarkName" [ngModelOptions]="{standalone: true}">
-          <mat-option *ngFor="let markName of markNames" [value]='markName'>
-            {{markName}}
+        <mat-select [(ngModel)]="selectedMarkName" [ngModelOptions]="{ standalone: true }">
+          <mat-option *ngFor="let markName of markNames" [value]="markName">
+            {{ markName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button color="secondary" [disabled]='((selectedMark$ | async) === undefined) || ((selectedMark$ | async) === null)' (click)="onRemoveMark()">Remove mark.</button>
-      <button mat-raised-button color="primary" [disabled]='!selectedMarkName' (click)="onMarkRaceField()">Mark race field</button>
+      <button mat-raised-button color="secondary" [disabled]="(selectedMark$ | async) === undefined || (selectedMark$ | async) === null" (click)="onRemoveMark()">Remove mark.</button>
+      <button mat-raised-button color="primary" [disabled]="!selectedMarkName" (click)="onMarkRaceField()">Mark race field</button>
     </form>
   </mat-card-actions>
 </mat-card>

@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BoatClass } from '@sailrc/boat-class/domain';
 import { RouterFacade } from '@processpuzzle/shared/util';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
-import { BaseFormComponent } from '@processpuzzle/shared/base';
+import { ActiveTabService, BaseFormComponent, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { BoatClassFeatureFacade } from '../facade/boat-class-feature.facade';
 import { ActivatedRoute } from '@angular/router';
 import { IBoatClassFeatureState } from '../store/boat-class-feature.reducer';
 import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
-import { YachtClub } from '@sailrc/yacht-club/domain';
 
 @Component({
   selector: 'sailrc-boat-class-details',

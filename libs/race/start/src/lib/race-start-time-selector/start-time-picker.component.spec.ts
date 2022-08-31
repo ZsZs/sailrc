@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageUploadComponent } from './image-upload.component';
+import { StartTimePickerComponent } from './start-time-picker.component';
 
-describe('FileUploadComponent', () => {
-  let component: ImageUploadComponent;
-  let fixture: ComponentFixture<ImageUploadComponent>;
+describe('RaceStartTimeSelectorComponent', () => {
+  let component: StartTimePickerComponent;
+  let fixture: ComponentFixture<StartTimePickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageUploadComponent ]
+      declarations: [ StartTimePickerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageUploadComponent);
+    fixture = TestBed.createComponent(StartTimePickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

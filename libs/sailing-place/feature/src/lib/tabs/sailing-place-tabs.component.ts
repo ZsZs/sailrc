@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActiveTabService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { BaseTabsComponent } from '@processpuzzle/shared/base';
 import { SailingPlace } from '@sailrc/sailing-place/domain';

@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthFeatureFacade } from '@processpuzzle/authentication/feature';
 
-
 @Component({
   selector: 'sailrc-sidenav-list',
   templateUrl: './sidenav-list.component.html',

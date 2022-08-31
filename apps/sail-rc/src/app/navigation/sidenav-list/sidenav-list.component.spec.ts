@@ -10,8 +10,10 @@ describe('SidenavListComponent', () => {
   let fixture: ComponentFixture<SidenavListComponent>;
   const authFeatureFacadeStub = {
     isAuthenticated(): Observable<boolean> { return of( false ); },
-    logout() { console.log( "log out" )}
+    logout() { console.log( 'log out' )}
   };
+  const isAuthenticated = jest.spyOn( authFeatureFacadeStub, 'isAuthenticated' );
+  const logout = jest.spyOn( authFeatureFacadeStub, 'logout' );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,8 +29,29 @@ describe('SidenavListComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  
+  it('ngOnInit() check authentication status', () => {
+    expect( isAuthenticated ).toBeCalled();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    component.isAuth.subscribe( isAuthenticated => {
+      expect( isAuthenticated ).toBeFalsy();
+    });
+  });
+
+  it( 'onLogout() delegates call to AuthFeatureFacade', () => {
+    component.onLogout();
+    expect( logout ).toBeCalled();
+  })
+
+  it( 'onLogout() calls onCloseSidenav()', () => {
+    const onCloseSideNav = spyOn( component, 'onCloseSidenav')
+    component.onLogout();
+    expect( onCloseSideNav ).toBeCalled();
+  })
+
+  it('onCloseSidenav() emits event', () => {
+    const closeSidenav = spyOn(component.closeSidenav, 'emit' )
+    component.onCloseSidenav();
+    expect( closeSidenav ).toHaveBeenCalled();
   });
 });

@@ -2,11 +2,10 @@ import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 import { ValidateFileTypeService } from '@processpuzzle/shared/util';
-import { StorageService } from '../firestore/storage.service';
-import { Router } from '@angular/router';
+import { StorageService } from '@processpuzzle/shared/base';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CameraUploadComponent } from '@processpuzzle/shared/widgets';
+import { CameraUploadComponent } from '../camera-upload/camera-upload.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -18,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ImageUploadComponent implements OnDestroy, OnInit {
   imageForm: FormGroup;
   imageToUpload: File;
-  imageUrl: string | ArrayBuffer = "/assets/photo-placeholder.jpg";
+  imageUrl: string | ArrayBuffer = '/assets/photo-placeholder.jpg';
   imageSubmitted = false;
   imageUploadProgress$: Observable<number>;
   menuButtonColor = 'primary';
@@ -27,7 +26,7 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
   private readonly IMAGE_NAME = 'profile_picture.jpg';
   private readonly CAMERA_DIALOG_HEIGHT = '700px';
   private readonly CAMERA_DIALOG_WIDTH = '800px';
-  @Input() private readonly folder = 'image-upload';
+  private _folder = 'image-upload';
   private readonly onDestroy$ = new Subject<void>();
   private imageName: string;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -37,7 +36,6 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
     private readonly snackBar: MatSnackBar,
     private readonly formBuilder: FormBuilder,
     private readonly storageService: StorageService,
-    private readonly router: Router,
     private readonly fileTypeService: ValidateFileTypeService,
     public dialog: MatDialog
   ) { }
@@ -110,7 +108,7 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
 
   postImage() {
     this.imageSubmitted = true;
-    const mediaFolderPath = `${ this.folder }`;
+    const mediaFolderPath = `${ this._folder }`;
 
     const { downloadUrl$, uploadProgress$ } = this.storageService.uploadDataAndGetMetadata(
       mediaFolderPath,
@@ -150,4 +148,12 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
     }
     return;
   }
+
+  // region properties
+  get folder(): string { return this._folder; }
+
+  @Input() set folder( value: string ) {
+    if( value ) this._folder = value;
+  }
+  // endregion
 }

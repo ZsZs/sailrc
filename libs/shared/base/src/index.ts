@@ -1,5 +1,6 @@
 export * from './lib/shared-base.module';
-export { BaseEntityContainerComponent } from './lib/generic-components/base-entity-container.component'
+export { ActiveTabService } from './lib/services/active-tab.service';
+export { BaseEntityContainerComponent } from './lib/generic-components/base-entity-container.component';
 export { BaseEntityInterface } from './lib/auto-entity/base-entity.interface';
 export { BaseResolver } from './lib/resolver/base-resolver';
 export { IBaseEntityFacade } from './lib/auto-entity/i-base-entity.facade';
@@ -11,6 +12,7 @@ export { BaseListColumnDefinition } from './lib/generic-components/base-list-con
 export { BaseListComponent } from './lib/generic-components/base-list/base-list.component';
 export { BaseListContainerComponent } from './lib/generic-components/base-list-container/base-list-container.component';
 export { BaseTabsComponent } from './lib/generic-components/base-tabs.component';
+export { ComponentDestroyService } from './lib/services/component-destroy.service';
 export { EntityCrossReference } from './lib/auto-entity/entity-cross-reference';
 export { EntityService } from './lib/firestore/entity.service';
 export { FileUploadMetadata, StorageService } from './lib/firestore/storage.service';
@@ -19,6 +21,6 @@ export { FirestoreBaseService } from './lib/firestore/firestore-base.service';
 export { CreateEntity, DeleteEntity, EditEntity, EntityAPIError } from './lib/auto-entity-form/actions';
 export { IEntityFormFacade } from './lib/auto-entity-form/facade';
 export { IEntityFormState } from './lib/auto-entity-form/form-state';
-export * from './lib/image-upload/image-upload.component';
 export { buildAutoFormFeatureState } from './lib/auto-entity-form/state-builder';
 export { getEntityInfo } from './lib/auto-entity/base-entity-util';
+export { uiReducer, UiState } from './lib/store/ui.reducer';

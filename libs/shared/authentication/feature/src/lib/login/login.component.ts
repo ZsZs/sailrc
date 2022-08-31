@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { SpinnerService, UiState } from '@processpuzzle/shared/widgets';
+import { UiState } from '@processpuzzle/shared/base';
+import { SpinnerService } from '@processpuzzle/shared/widgets';
 import { AuthFeatureFacade } from '../facade/auth-feature-facade';
 
 @Component({

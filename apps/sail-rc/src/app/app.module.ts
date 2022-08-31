@@ -36,15 +36,9 @@ import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 import { AppInitService } from './app-init.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    HomeComponent,
-    SidenavListComponent
-  ],
+  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent, SidenavListComponent],
   imports: [
-    AngularFireModule.initializeApp( environment.firebaseConfig ),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AppRoutingModule,
     BreadcrumbModule,
@@ -58,7 +52,7 @@ import { AppInitService } from './app-init.service';
       serverLoggingUrl: environment.logger.serverLoggingUrl + '/api/logs',
       level: environment.logger.level,
       serverLogLevel: environment.logger.serverLogLevel,
-      disableConsoleLogging: environment.logger.disableConsoleLogging
+      disableConsoleLogging: environment.logger.disableConsoleLogging,
     }),
     MatCheckboxModule,
     MatProgressSpinnerModule,
@@ -66,19 +60,19 @@ import { AppInitService } from './app-init.service';
     SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
-    SharedWidgetsModule.forFeature( environment.googleCloudPlatform.apiKey ),
-    StoreModule.forRoot( { }, { metaReducers }),
+    SharedWidgetsModule.forFeature(environment.googleCloudPlatform.apiKey),
+    StoreModule.forRoot({}, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router', serializer: CustomSerializer }),
   ],
   providers: [
-    { provide : APP_INITIALIZER, multi : true, deps : [AppInitService], useFactory : (startupClass : AppInitService) => () => startupClass.init() },
+    { provide: APP_INITIALIZER, multi: true, deps: [AppInitService], useFactory: (startupClass: AppInitService) => () => startupClass.init() },
     { provide: SETTINGS, useValue: {} },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     NGXLogger,
     RouteStateService,
-    SnackBarService
+    SnackBarService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
