@@ -1,6 +1,6 @@
 import { IAutoEntityService, IEntityInfo, makeEntity } from '@briebug/ngrx-auto-entity';
 import { BaseEntityInterface } from '@processpuzzle/shared/base';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

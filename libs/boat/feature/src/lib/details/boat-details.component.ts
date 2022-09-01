@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import User = firebase.User;
 import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
 
@@ -21,9 +21,9 @@ import { BoatClassFeatureFacade } from '@sailrc/boat-class/feature';
   selector: 'sailrc-boat-detail',
   templateUrl: './boat-details.component.html',
   styleUrls: ['./boat-details.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnInit{
+export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnInit {
   boatClasses$: Observable<BoatClass[]>;
   photoFolder: string;
   showBoatPicture = false;
@@ -39,9 +39,9 @@ export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnI
     protected store: Store<IBoatFeatureState>,
     private boatClassFeatureFacade: BoatClassFeatureFacade,
     private authFacade: AuthDomainFacade
-) {
-  super( boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
-}
+  ) {
+    super(boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService);
+  }
 
   // region angular lifecycle hooks
   ngOnInit() {
@@ -55,7 +55,7 @@ export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnI
 
   // region event handling methods
   onAddBoatClass() {
-    this.boatClassFeatureFacade.jumpToDetails( 'new', this.boatFeatureFacade.currentUrl() );
+    this.boatClassFeatureFacade.jumpToDetails('new', this.boatFeatureFacade.currentUrl());
   }
 
   onAvatar() {
@@ -67,11 +67,14 @@ export class BoatDetailsComponent extends BaseFormComponent<Boat> implements OnI
   // region protected, private helper methods
   private determinePhotoFolder() {
     const email = this.user ? this.user.email : 'test@sailrc.com';
-    this.photoFolder = uriNameOfEntity( Boat ) + '/' + email;
+    this.photoFolder = uriNameOfEntity(Boat) + '/' + email;
   }
 
   private subscribeToUser() {
-    this.authFacade.getAuthState().pipe( takeUntil( this.onDestroy$ ) ).subscribe( ( user ) => ( this.user = user) );
+    this.authFacade
+      .getAuthState()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((user) => (this.user = user));
   }
   // endregion
 }

@@ -2,12 +2,13 @@ import { Participant } from './participant';
 import { Entity, Key, makeEntity } from '@briebug/ngrx-auto-entity';
 
 export const initializeLap = {
-  fromServer: (data: any): Lap => (makeEntity( Lap )({
-    ...INITIAL_LAP_VALUE,
-    ...data,
-    startTime: data.startTime && data.startTime.toDate ? data.startTime.toDate() : undefined,
-    finishTime: data.finishTime && data.finishTime.toDate ? data.finishTime.toDate() : undefined,
-  }))
+  fromServer: (data: any): Lap =>
+    makeEntity(Lap)({
+      ...INITIAL_LAP_VALUE,
+      ...data,
+      startTime: data.startTime && data.startTime.toDate ? data.startTime.toDate() : undefined,
+      finishTime: data.finishTime && data.finishTime.toDate ? data.finishTime.toDate() : undefined,
+    }),
 };
 
 export enum LapState {
@@ -55,7 +56,7 @@ export class Lap {
     else throw new Error('Not allowed state transition.');
   }
 
-  public setStartTime( startTime: Date) {
+  public setStartTime(startTime: Date) {
     if (this.state == LapState.Planned || this.state == LapState.Initialized) {
       this.startTime = startTime;
       this.state = LapState.Initialized;

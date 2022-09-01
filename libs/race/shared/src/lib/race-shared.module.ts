@@ -16,32 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
-  declarations: [
-    LapSelectorComponent,
-    RaceLapContainerComponent,
-    RaceLapToolbarComponent,
-    RaceSelectorComponent,
-    RaceStatusbarComponent,
-    RaceTimerComponent
-  ],
-  exports: [
-    LapSelectorComponent,
-    RaceLapContainerComponent,
-    RaceLapToolbarComponent,
-    RaceSelectorComponent,
-    RaceStatusbarComponent,
-    RaceTimerComponent
-  ],
-  imports: [
-    CommonModule,
-    CountdownModule,
-    FlexModule,
-    MatFormFieldModule,
-    MatInputModule,
-    RaceDomainModule.forFeature(),
-    RouterModule,
-    SharedMaterialModule,
-    SharedWidgetsModule
-  ],
+  declarations: [LapSelectorComponent, RaceLapContainerComponent, RaceLapToolbarComponent, RaceSelectorComponent, RaceStatusbarComponent, RaceTimerComponent],
+  exports: [LapSelectorComponent, RaceLapContainerComponent, RaceLapToolbarComponent, RaceSelectorComponent, RaceStatusbarComponent, RaceTimerComponent],
+  imports: [CommonModule, CountdownModule, FlexModule, MatFormFieldModule, MatInputModule, RaceDomainModule.forFeature(), RouterModule, SharedMaterialModule, SharedWidgetsModule],
 })
 export class RaceSharedModule {}

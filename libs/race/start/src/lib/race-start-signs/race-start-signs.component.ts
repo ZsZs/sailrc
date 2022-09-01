@@ -10,16 +10,16 @@ import deepEqual from 'deep-equal';
   selector: 'sailrc-race-start-signs',
   templateUrl: './race-start-signs.component.html',
   styleUrls: ['./race-start-signs.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class RaceStartSignsComponent implements OnDestroy, OnInit{
+export class RaceStartSignsComponent implements OnDestroy, OnInit {
   private currentLap: Lap;
   durationInSeconds = 5;
   private readonly onDestroy$ = new Subject<void>();
   startProgress = 0;
   startSignName: string;
 
-  constructor( private _snackBar: MatSnackBar, private logger: NGXLogger, private lapFacade: LapFacade ) {}
+  constructor(private _snackBar: MatSnackBar, private logger: NGXLogger, private lapFacade: LapFacade) {}
   // region angular lifecycle hooks
   ngOnDestroy(): void {
     this.onDestroy$.next();
@@ -35,8 +35,8 @@ export class RaceStartSignsComponent implements OnDestroy, OnInit{
     this.startProgress = 0;
   }
 
-  onStartSignalEvent( $event: StartSignals ) {
-    switch( $event ) {
+  onStartSignalEvent($event: StartSignals) {
+    switch ($event) {
       case StartSignals.WarnSignal:
         this.warnSignal();
         break;
@@ -53,7 +53,7 @@ export class RaceStartSignsComponent implements OnDestroy, OnInit{
         this.recallSignal();
         break;
       default:
-        throw new Error( `Unknown Start Signal Event: ${ $event }`);
+        throw new Error(`Unknown Start Signal Event: ${$event}`);
     }
   }
   // endregion
@@ -98,16 +98,17 @@ export class RaceStartSignsComponent implements OnDestroy, OnInit{
       .pipe(
         takeUntil(this.onDestroy$),
         map((lap) => {
-          if( !deepEqual( this.currentLap, lap )) {
+          if (!deepEqual(this.currentLap, lap)) {
             this.currentLap = lap;
             this.updateComponentFromLap(lap);
           }
         })
-      ).subscribe();
+      )
+      .subscribe();
   }
 
-  private updateComponentFromLap( lap: Lap ) {
-    this.logger.debug( `Update race-start-signs.component from lap: ${JSON.stringify( lap )}` );
+  private updateComponentFromLap(lap: Lap) {
+    this.logger.debug(`Update race-start-signs.component from lap: ${JSON.stringify(lap)}`);
   }
   // endregion
 }

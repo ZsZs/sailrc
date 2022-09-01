@@ -7,26 +7,25 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ActiveTabService {
-
-  constructor( private store: Store<UiState>) {}
+  constructor(private store: Store<UiState>) {}
 
   activeTabs(): Observable<string[]> {
-    return this.store.select( getActiveTabs );
+    return this.store.select(getActiveTabs);
   }
 
   currentTab(): Observable<string> {
-    return this.store.select( getCurrentTab );
+    return this.store.select(getCurrentTab);
   }
 
-  isTabActive( tabName: string ): Observable<boolean> {
-    return this.store.select( getIsActiveTab( tabName ));
+  isTabActive(tabName: string): Observable<boolean> {
+    return this.store.select(getIsActiveTab(tabName));
   }
 
-  tabIsActive( tabName: string ) {
-    this.store.dispatch( tabIsActive({tabName }));
+  tabIsActive(tabName: string) {
+    this.store.dispatch(tabIsActive({ tabName }));
   }
 
-  tabIsInActive( tabName: string ) {
-    this.store.dispatch( tabIsInActive({tabName }));
+  tabIsInActive(tabName: string) {
+    this.store.dispatch(tabIsInActive({ tabName }));
   }
 }

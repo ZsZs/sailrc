@@ -8,9 +8,8 @@ describe('RaceStartTimeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StartTimePickerComponent ]
-    })
-    .compileComponents();
+      declarations: [StartTimePickerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

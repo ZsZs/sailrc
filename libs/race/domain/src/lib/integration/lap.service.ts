@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseFirestoreRepository } from '@processpuzzle/shared/base';
 import { Lap } from '../domain/lap';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
 @Injectable()

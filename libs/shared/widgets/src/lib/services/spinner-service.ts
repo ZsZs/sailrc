@@ -6,18 +6,17 @@ import { startLoading, stopLoading } from '../../../../base/src/lib/store/ui.act
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
-
-  constructor( private store: Store<UiState>) {}
+  constructor(private store: Store<UiState>) {}
 
   isLoading(): Observable<boolean> {
-    return this.store.select( getIsLoading );
+    return this.store.select(getIsLoading);
   }
 
   startLoading() {
-    this.store.dispatch( startLoading() );
+    this.store.dispatch(startLoading());
   }
 
   stopLoading() {
-    this.store.dispatch( stopLoading() );
+    this.store.dispatch(stopLoading());
   }
 }

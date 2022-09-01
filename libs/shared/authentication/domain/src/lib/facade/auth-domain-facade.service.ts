@@ -5,24 +5,23 @@ import { setAuthenticated, setUnauthenticated } from '../store/auth.actions';
 import { Observable } from 'rxjs';
 import { AuthService } from '../integration/auth.service';
 import { AuthData } from '../domain/auth-data';
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import User = firebase.User;
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthDomainFacade {
+  constructor(private authService: AuthService, private store: Store<AuthState>) {}
 
-  constructor( private authService: AuthService, private store: Store<AuthState>) {}
-
-  createUserWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.authService.signUp( authData );
+  createUserWithEmailAndPassword(authData: AuthData): Promise<any> {
+    return this.authService.signUp(authData);
   }
 
   isAuthenticated(): Observable<boolean> {
-    return this.store.select( getIsAuthenticated );
+    return this.store.select(getIsAuthenticated);
   }
 
-  forgotPassword( passwordResetEmail ) {
-    return this.authService.forgotPassword( passwordResetEmail );
+  forgotPassword(passwordResetEmail) {
+    return this.authService.forgotPassword(passwordResetEmail);
   }
 
   getAuthState(): Observable<User> {
@@ -30,23 +29,23 @@ export class AuthDomainFacade {
   }
 
   getRedirectTo(): Observable<string> {
-    return this.store.select( getRedirectTo );
+    return this.store.select(getRedirectTo);
   }
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }
 
-  setAuthenticated( email: string, userId: string ) {
-    this.store.dispatch( setAuthenticated({ email, userId }));
+  setAuthenticated(email: string, userId: string) {
+    this.store.dispatch(setAuthenticated({ email, userId }));
   }
 
   setUnAuthenticated() {
-    this.store.dispatch( setUnauthenticated() );
+    this.store.dispatch(setUnauthenticated());
   }
 
-  signInWithEmailAndPassword( authData: AuthData ): Promise<any> {
-    return this.authService.signIn( authData );
+  signInWithEmailAndPassword(authData: AuthData): Promise<any> {
+    return this.authService.signIn(authData);
   }
 
   signOut(): Promise<any> {

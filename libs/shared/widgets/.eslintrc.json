@@ -9,7 +9,7 @@
       "rules": {
         "@angular-eslint/directive-selector": ["error", { "type": "attribute", "prefix": "sailrc", "style": "camelCase" }],
         "@angular-eslint/component-selector": ["error", { "type": "element", "prefix": "sailrc", "style": "kebab-case" }],
-        "max-len": ["error", {"code": 200}]
+        "max-len": ["error", { "code": 200 }]
       }
     },
     { "files": ["*.html"], "extends": ["plugin:@nrwl/nx/angular-template"], "rules": {} }

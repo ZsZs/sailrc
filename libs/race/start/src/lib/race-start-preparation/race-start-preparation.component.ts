@@ -27,20 +27,14 @@ export class RaceStartPreparationComponent implements AfterViewInit, OnDestroy, 
   lapState: LapState;
   @ViewChild('raceStartSigns', { static: false }) private raceStartSigns: RaceStartSignsComponent;
   @ViewChild('raceTimeCounter', { static: false }) private raceTimerComponent: RaceTimerComponent;
-  @ViewChild('startTimePicker', {static: false}) private startTimePicker: StartTimePickerComponent;
+  @ViewChild('startTimePicker', { static: false }) private startTimePicker: StartTimePickerComponent;
   private lastRouteSegment: Observable<string>;
   private readonly onDestroy$ = new Subject<void>();
   private readonly tabName: string;
   // endregion
 
   // region constructors
-  constructor(
-      private lapFacade: LapFacade,
-      private activeTabService: ActiveTabService,
-      private route: ActivatedRoute,
-      private routeState: RouteStateService,
-      private logger: NGXLogger
-  ) {
+  constructor(private lapFacade: LapFacade, private activeTabService: ActiveTabService, private route: ActivatedRoute, private routeState: RouteStateService, private logger: NGXLogger) {
     this.tabName = 'start-countdown';
     this.lastRouteSegment = this.routeState.subscribeToRouteSegments(RaceStartPreparationComponent.name, this.route);
   }
@@ -96,8 +90,8 @@ export class RaceStartPreparationComponent implements AfterViewInit, OnDestroy, 
     }
   }
 
-  onStartSignalEvent( $event: StartSignals ) {
-    switch( $event ) {
+  onStartSignalEvent($event: StartSignals) {
+    switch ($event) {
       case StartSignals.StartSignal:
         this.lapState = LapState.Started;
         this.updateLapFromComponent();
@@ -109,7 +103,7 @@ export class RaceStartPreparationComponent implements AfterViewInit, OnDestroy, 
     }
   }
 
-  onStartTimeEvent( $event: Date ) {
+  onStartTimeEvent($event: Date) {
     this.lapStartTime = $event;
     this.lapFinishTime = null;
     this.lapState = LapState.Countdown;
@@ -123,19 +117,20 @@ export class RaceStartPreparationComponent implements AfterViewInit, OnDestroy, 
       .pipe(
         takeUntil(this.onDestroy$),
         map((lap) => {
-          if( !deepEqual( this.currentLap, lap )) {
+          if (!deepEqual(this.currentLap, lap)) {
             this.currentLap = lap;
             this.updateComponentFromLap(lap);
           }
         })
-      ).subscribe();
+      )
+      .subscribe();
   }
 
   private updateComponentFromLap(lap: Lap) {
-    this.logger.debug( `Update race-start-preparation.component from lap: ${JSON.stringify( lap )}` );
+    this.logger.debug(`Update race-start-preparation.component from lap: ${JSON.stringify(lap)}`);
 
     const now = new Date();
-    if( lap.startTime < now && lap.state < LapState.Started ) {
+    if (lap.startTime < now && lap.state < LapState.Started) {
       this.lapStartTime = null;
       this.lapFinishTime = null;
       this.lapState = LapState.Planned;
@@ -148,11 +143,11 @@ export class RaceStartPreparationComponent implements AfterViewInit, OnDestroy, 
   }
 
   private updateLapFromComponent() {
-      const updatedLap = Object.assign( {}, this.currentLap );
-      updatedLap.finishTime = this.lapFinishTime;
-      updatedLap.startTime = this.lapStartTime;
-      updatedLap.state = this.lapState;
-      this.lapFacade.update( updatedLap, updatedLap.raceId);
+    const updatedLap = Object.assign({}, this.currentLap);
+    updatedLap.finishTime = this.lapFinishTime;
+    updatedLap.startTime = this.lapStartTime;
+    updatedLap.state = this.lapState;
+    this.lapFacade.update(updatedLap, updatedLap.raceId);
   }
   // endregion
 }

@@ -19,8 +19,8 @@ describe('HeaderComponent', () => {
       console.log('Stub logout() has been called.');
     },
   };
-  const isAuthenticated = jest.spyOn( authFeatureFacadeStub, 'isAuthenticated' );
-  const logout = jest.spyOn( authFeatureFacadeStub, 'logout' );
+  const isAuthenticated = jest.spyOn(authFeatureFacadeStub, 'isAuthenticated');
+  const logout = jest.spyOn(authFeatureFacadeStub, 'logout');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,21 +41,21 @@ describe('HeaderComponent', () => {
   });
 
   it('ngOnInit() check authentication status', () => {
-    expect( isAuthenticated ).toBeCalled();
+    expect(isAuthenticated).toBeCalled();
 
-    component.isAuth.subscribe( isAuthenticated => {
-      expect( isAuthenticated ).toBeFalsy();
+    component.isAuth.subscribe((isAuthenticated) => {
+      expect(isAuthenticated).toBeFalsy();
     });
   });
 
-  it( 'onLogout() delegates call to AuthFeatureFacade', () => {
+  it('onLogout() delegates call to AuthFeatureFacade', () => {
     component.onLogout();
-    expect( logout ).toBeCalled();
-  })
+    expect(logout).toBeCalled();
+  });
 
   it('onToggleSidenav() emits event', () => {
-    const sidenavToggle = spyOn(component.sidenavToggle, 'emit' )
+    const sidenavToggle = jest.spyOn(component.sidenavToggle, 'emit');
     component.onToggleSidenav();
-    expect( sidenavToggle ).toHaveBeenCalled();
+    expect(sidenavToggle).toHaveBeenCalled();
   });
 });

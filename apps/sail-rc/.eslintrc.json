@@ -4,21 +4,12 @@
   "overrides": [
     {
       "files": ["*.ts"],
-      "extends": [
-        "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
       "parserOptions": { "project": ["apps/sail-rc/tsconfig.*?.json"] },
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          { "type": "attribute", "prefix": "sailrc", "style": "camelCase" }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          { "type": "element", "prefix": "sailrc", "style": "kebab-case" }
-        ],
-        "max-len": ["error", {"code": 200}]
+        "@angular-eslint/directive-selector": ["error", { "type": "attribute", "prefix": "sailrc", "style": "camelCase" }],
+        "@angular-eslint/component-selector": ["error", { "type": "element", "prefix": "sailrc", "style": "kebab-case" }],
+        "max-len": ["error", { "code": 200 }]
       }
     },
     {

@@ -13,9 +13,9 @@ import { uriNameOfEntity } from '@briebug/ngrx-auto-entity';
 @Component({
   selector: 'sailrc-yacht-club-details',
   templateUrl: './yacht-club-details.component.html',
-  styleUrls: ['./yacht-club-details.component.css']
+  styleUrls: ['./yacht-club-details.component.css'],
 })
-export class YachtClubDetailsComponent extends BaseFormComponent<YachtClub> implements OnInit{
+export class YachtClubDetailsComponent extends BaseFormComponent<YachtClub> implements OnInit {
   logoFolder: string;
   showLogo = false;
 
@@ -27,7 +27,7 @@ export class YachtClubDetailsComponent extends BaseFormComponent<YachtClub> impl
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<IYachtClubFeatureState>
   ) {
-    super( yachtClubFormFacade, routerFacade, route, activeTabService, componentDestroyService );
+    super(yachtClubFormFacade, routerFacade, route, activeTabService, componentDestroyService);
   }
 
   // region angular life cycle hooks
@@ -46,7 +46,7 @@ export class YachtClubDetailsComponent extends BaseFormComponent<YachtClub> impl
 
   // region protected, private helper methods
   private determineLogoFolder() {
-    this.logoFolder = uriNameOfEntity( YachtClub );
+    this.logoFolder = uriNameOfEntity(YachtClub);
   }
   // endregion
 }

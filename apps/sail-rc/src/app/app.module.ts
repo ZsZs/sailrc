@@ -9,8 +9,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
 
 import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';

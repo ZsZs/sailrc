@@ -10,7 +10,7 @@ import { NgxMatTimepickerFieldComponent } from 'ngx-mat-timepicker';
   templateUrl: './timepicker-form-field.component.html',
   styleUrls: ['./timepicker-form-field.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [{provide: MatFormFieldControl, useExisting: TimepickerFormFieldComponent}]
+  providers: [{ provide: MatFormFieldControl, useExisting: TimepickerFormFieldComponent }],
 })
 export class TimepickerFormFieldComponent implements MatFormFieldControl<any>, OnDestroy {
   // region attributes
@@ -27,7 +27,7 @@ export class TimepickerFormFieldComponent implements MatFormFieldControl<any>, O
   readonly required: boolean;
   shouldLabelFloat = false;
   readonly stateChanges = new Subject<void>();
-  @ViewChild( NgxMatTimepickerFieldComponent, { read: ElementRef, static: true} ) timePicker: ElementRef;
+  @ViewChild(NgxMatTimepickerFieldComponent, { read: ElementRef, static: true }) timePicker: ElementRef;
   readonly userAriaDescribedBy: string;
   // endregion
 
@@ -39,11 +39,11 @@ export class TimepickerFormFieldComponent implements MatFormFieldControl<any>, O
   // endregion
 
   // region event handling methods
-  onContainerClick( event: MouseEvent ): void {
+  onContainerClick(event: MouseEvent): void {
     // no operation is needed
   }
 
-  setDescribedByIds( ids: string[] ): void {
+  setDescribedByIds(ids: string[]): void {
     // no operation is needed
   }
 
@@ -70,7 +70,7 @@ export class TimepickerFormFieldComponent implements MatFormFieldControl<any>, O
     return this._placeholder;
   }
 
-  @Input() set placeholder( placeholder) {
+  @Input() set placeholder(placeholder) {
     this._placeholder = placeholder;
     this.stateChanges.next();
   }
@@ -79,9 +79,9 @@ export class TimepickerFormFieldComponent implements MatFormFieldControl<any>, O
     return null;
   }
 
-  @Input() set value( earliestDateTime: number | null) {
-//    this.timePicker.nativeElement.min = DateTime.utc( earliestDateTime );
-//    this.stateChanges.next();
+  @Input() set value(earliestDateTime: number | null) {
+    //    this.timePicker.nativeElement.min = DateTime.utc( earliestDateTime );
+    //    this.stateChanges.next();
   }
   // endregion
 }

@@ -19,11 +19,7 @@ import { SharedBaseModule } from '@processpuzzle/shared/base';
 import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
-  declarations: [
-  BoatDetailsComponent,
-  BoatListComponent,
-  BoatTabsComponent,
-  BoatComponent],
+  declarations: [BoatDetailsComponent, BoatListComponent, BoatTabsComponent, BoatComponent],
   imports: [
     BoatDomainModule.forFeature(),
     BoatClassDomainModule.forFeature(),
@@ -34,17 +30,16 @@ import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
     SharedBaseModule,
     SharedMaterialModule,
     SharedWidgetsModule,
-    StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer )
+    StoreModule.forFeature(FEATURE_NAME, boatFeatureReducer),
   ],
   exports: [],
-  providers: [BoatClassFacade, BoatFeatureFacade, BoatResolver]
+  providers: [BoatClassFacade, BoatFeatureFacade, BoatResolver],
 })
-
 export class BoatFeatureModule {
   static forFeature(): ModuleWithProviders<BoatFeatureModule> {
     return {
       ngModule: BoatFeatureModule,
-      providers: [BoatFeatureFacade]
-    }
+      providers: [BoatFeatureFacade],
+    };
   }
 }

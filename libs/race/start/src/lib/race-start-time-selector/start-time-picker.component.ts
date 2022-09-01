@@ -14,7 +14,7 @@ enum TimeSelectOptions {
   selector: 'sailrc-start-time-picker',
   templateUrl: './start-time-picker.component.html',
   styleUrls: ['./start-time-picker.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class StartTimePickerComponent implements OnDestroy, OnInit {
   currentLap: Lap;
@@ -33,7 +33,7 @@ export class StartTimePickerComponent implements OnDestroy, OnInit {
   // endregion
 
   // region constructors
-  constructor( private logger: NGXLogger, private lapFacade: LapFacade ) {}
+  constructor(private logger: NGXLogger, private lapFacade: LapFacade) {}
   // endregion
 
   // region angular lifecycle hooks
@@ -55,15 +55,15 @@ export class StartTimePickerComponent implements OnDestroy, OnInit {
 
   onSetStartTime() {
     const now = new Date();
-    switch( this.timeSelectMode ) {
+    switch (this.timeSelectMode) {
       case TimeSelectOptions.LeftTime:
-        now.setMilliseconds( 0 );
-        now.setSeconds( 0 );
+        now.setMilliseconds(0);
+        now.setSeconds(0);
         now.setMinutes(now.getMinutes() + this.leftTime);
-        this.startTimeEvent.emit( now );
+        this.startTimeEvent.emit(now);
         break;
       case TimeSelectOptions.StopTime:
-        this.startTimeEvent.emit( new Date( this.stopTime ));
+        this.startTimeEvent.emit(new Date(this.stopTime));
         break;
     }
     this.stopTime = undefined;
@@ -87,17 +87,18 @@ export class StartTimePickerComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.onDestroy$),
         map((lap) => {
-          if( !deepEqual( this.currentLap, lap )) {
+          if (!deepEqual(this.currentLap, lap)) {
             this.currentLap = lap;
             this.updateComponentFromLap(lap);
           }
         })
-      ).subscribe();
+      )
+      .subscribe();
   }
 
-  private updateComponentFromLap( lap: Lap ) {
-    this.logger.debug( `Update start-time-picker.component from lap: ${JSON.stringify( lap )}` );
-    if( lap.startTime && lap.state == LapState.Initialized ) {
+  private updateComponentFromLap(lap: Lap) {
+    this.logger.debug(`Update start-time-picker.component from lap: ${JSON.stringify(lap)}`);
+    if (lap.startTime && lap.state == LapState.Initialized) {
       this.stopTime = lap.startTime.getMilliseconds();
       this.lapState = lap.state;
     }

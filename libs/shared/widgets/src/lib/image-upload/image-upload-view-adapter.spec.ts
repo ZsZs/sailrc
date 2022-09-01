@@ -10,8 +10,8 @@ describe('ImageUploadViewAdapter', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageUploadComponent ],
-      imports: [ReactiveFormsModule]
+      declarations: [ImageUploadComponent],
+      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 
@@ -19,7 +19,6 @@ describe('ImageUploadViewAdapter', () => {
     fixture = TestBed.createComponent(ImageUploadComponent);
     imageUploadComponent = fixture.componentInstance;
     fixture.detectChanges();
-    imageUploadViewAdapter = new ImageUploadViewAdapter( imageUploadComponent );
+    imageUploadViewAdapter = new ImageUploadViewAdapter(imageUploadComponent);
   });
-
-})
+});

@@ -6,11 +6,11 @@ import { Store } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class SnackBarService {
-   loadingStateChanged = new Subject<boolean>();
+  loadingStateChanged = new Subject<boolean>();
 
-   constructor( private snackbar: MatSnackBar, private store: Store<UiState>) {}
+  constructor(private snackbar: MatSnackBar, private store: Store<UiState>) {}
 
-   showSnackbar( message, action, duration ) {
-      this.snackbar.open( message, action, { duration });
-   }
+  showSnackbar(message, action, duration) {
+    this.snackbar.open(message, action, { duration });
+  }
 }

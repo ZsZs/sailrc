@@ -9,7 +9,7 @@ import { Component, ViewChild } from '@angular/core';
 describe('CountdownFormFieldComponent', () => {
   @Component({
     selector: `sailrc-host-component`,
-    template: `<sailrc-countdown-form-field [value]="countdownConfig" [placeholder]="placeholder"></sailrc-countdown-form-field>`
+    template: `<sailrc-countdown-form-field [value]="countdownConfig" [placeholder]="placeholder"></sailrc-countdown-form-field>`,
   })
   class TestHostComponent {
     public countdownConfig: CountdownConfig;
@@ -23,8 +23,8 @@ describe('CountdownFormFieldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CountdownFormFieldComponent, TestHostComponent ],
-      imports: [BrowserModule, CountdownModule, MatFormFieldModule]
+      declarations: [CountdownFormFieldComponent, TestHostComponent],
+      imports: [BrowserModule, CountdownModule, MatFormFieldModule],
     }).compileComponents();
   });
 
@@ -44,7 +44,7 @@ describe('CountdownFormFieldComponent', () => {
       expect(countdownFormField['countdownComponent']).toBeTruthy();
     });
 
-    it( 'defines default values for CountdownConfig', () => {
+    it('defines default values for CountdownConfig', () => {
       const defaultConfig = countdownFormField.value;
       expect(defaultConfig).toBeTruthy();
       expect(defaultConfig.demand).toBeFalsy();
@@ -79,69 +79,63 @@ describe('CountdownFormFieldComponent', () => {
 
   describe('@Inputs', () => {
     it('value is set by parent component', () => {
-      testHostComponent.countdownConfig = {...defaultCountdownConfig, leftTime: 20 };
+      testHostComponent.countdownConfig = { ...defaultCountdownConfig, leftTime: 20 };
       testHostFixture.detectChanges();
-      expect( testHostComponent.countdownFormField.value.leftTime ).toEqual( 20 );
+      expect(testHostComponent.countdownFormField.value.leftTime).toEqual(20);
     });
 
     it('placeholder is set by parent component', () => {
       testHostComponent.placeholder = 'from_parent';
       testHostFixture.detectChanges();
-      expect( testHostComponent.countdownFormField.placeholder ).toEqual( 'from_parent' );
+      expect(testHostComponent.countdownFormField.placeholder).toEqual('from_parent');
     });
 
     it('CountdownEvent(s) are emitted when configuring CountdownComponent', () => {
       const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
-      testHostComponent.countdownConfig = {...defaultCountdownConfig, demand: true, leftTime: 20 };
+      testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 20 };
       testHostFixture.detectChanges();
       expect(countdownEventSpy).toHaveBeenCalledWith(
         // expect.objectContaining({action : 'done',status: CountdownStatus.done,left: 0,text: '00:00:00'}),
         // expect.objectContaining({action : 'start',status: CountdownStatus.ing,left: 0,text: '00:00:00'}),
-        expect.objectContaining({action : 'restart',status: CountdownStatus.pause,left: 20000,text: '00:00:20'}),
+        expect.objectContaining({ action: 'restart', status: CountdownStatus.pause, left: 20000, text: '00:00:20' })
       );
     });
   });
 
   describe('@Outputs', () => {
     it('CountdownEvent emitted on countdownComponent.begin()', () => {
-      testHostComponent.countdownConfig = {...defaultCountdownConfig, demand: true, leftTime: 20 };
+      testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 20 };
       testHostFixture.detectChanges();
       const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
       testHostComponent.countdownFormField.begin();
-      expect(countdownEventSpy).toHaveBeenCalledWith(
-        expect.objectContaining({ action : 'start', status: CountdownStatus.ing, left: 20000, text: '00:00:20' } )
-      );
+      expect(countdownEventSpy).toHaveBeenCalledWith(expect.objectContaining({ action: 'start', status: CountdownStatus.ing, left: 20000, text: '00:00:20' }));
     });
   });
 
   describe('DOM events', () => {
     it('mouseOver()', () => {
       countdownFormField.onMouseOver();
-      expect( countdownFormField.focused).toBeTruthy();
-      expect( countdownFormField.shouldLabelFloat).toBeTruthy();
+      expect(countdownFormField.focused).toBeTruthy();
+      expect(countdownFormField.shouldLabelFloat).toBeTruthy();
     });
 
     it('mouseOut()', () => {
       countdownFormField.onMouseOut();
-      expect( countdownFormField.focused).toBeFalsy();
-      expect( countdownFormField.shouldLabelFloat).toBeFalsy();
+      expect(countdownFormField.focused).toBeFalsy();
+      expect(countdownFormField.shouldLabelFloat).toBeFalsy();
     });
   });
 
   describe('Public mutators', () => {
     it('begin() starts counting down, stop() stops it', () => {
-      testHostComponent.countdownConfig = {...defaultCountdownConfig, demand: true, leftTime: 10 };
+      testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 10 };
       testHostFixture.detectChanges();
       const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
       testHostComponent.countdownFormField.begin();
-      expect(countdownEventSpy).toHaveBeenCalledWith(
-        expect.objectContaining({ action : 'start', status: CountdownStatus.ing, left: 10000, text: '00:00:10' } )
-      );
+      expect(countdownEventSpy).toHaveBeenCalledWith(expect.objectContaining({ action: 'start', status: CountdownStatus.ing, left: 10000, text: '00:00:10' }));
 
       testHostComponent.countdownFormField.stop();
-      expect(countdownEventSpy).toHaveBeenCalledWith(
-        expect.objectContaining({ action : 'stop', status: CountdownStatus.stop, left: 10000, text: '00:00:10' } )
-      );
+      expect(countdownEventSpy).toHaveBeenCalledWith(expect.objectContaining({ action: 'stop', status: CountdownStatus.stop, left: 10000, text: '00:00:10' }));
     });
   });
 });

@@ -1,10 +1,5 @@
 {
   "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-
-  "defaultProject": "sail-rc",
   "projects": {
     "boat-class-domain": {
       "projectType": "library",
@@ -22,7 +17,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/boat-class/domain"],
           "options": {
-            "jestConfig": "libs/boat-class/domain/jest.config.js",
+            "jestConfig": "libs/boat-class/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -45,7 +40,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/boat-class/feature"],
           "options": {
-            "jestConfig": "libs/boat-class/feature/jest.config.js",
+            "jestConfig": "libs/boat-class/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -68,7 +63,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/boat/domain"],
           "options": {
-            "jestConfig": "libs/boat/domain/jest.config.js",
+            "jestConfig": "libs/boat/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -91,7 +86,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/boat/feature"],
           "options": {
-            "jestConfig": "libs/boat/feature/jest.config.js",
+            "jestConfig": "libs/boat/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -114,7 +109,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/domain"],
           "options": {
-            "jestConfig": "libs/race/domain/jest.config.js",
+            "jestConfig": "libs/race/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -137,7 +132,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/feature"],
           "options": {
-            "jestConfig": "libs/race/feature/jest.config.js",
+            "jestConfig": "libs/race/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -160,7 +155,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/field"],
           "options": {
-            "jestConfig": "libs/race/field/jest.config.js",
+            "jestConfig": "libs/race/field/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -183,7 +178,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/finish"],
           "options": {
-            "jestConfig": "libs/race/finish/jest.config.js",
+            "jestConfig": "libs/race/finish/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -206,7 +201,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/participant"],
           "options": {
-            "jestConfig": "libs/race/participant/jest.config.js",
+            "jestConfig": "libs/race/participant/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -229,7 +224,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/shared"],
           "options": {
-            "jestConfig": "libs/race/shared/jest.config.js",
+            "jestConfig": "libs/race/shared/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -252,7 +247,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/race/start"],
           "options": {
-            "jestConfig": "libs/race/start/jest.config.js",
+            "jestConfig": "libs/race/start/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -375,7 +370,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/sail-rc"],
           "options": {
-            "jestConfig": "apps/sail-rc/jest.config.js",
+            "jestConfig": "apps/sail-rc/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -426,7 +421,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/sailing-place/domain"],
           "options": {
-            "jestConfig": "libs/sailing-place/domain/jest.config.js",
+            "jestConfig": "libs/sailing-place/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -449,7 +444,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/sailing-place/feature"],
           "options": {
-            "jestConfig": "libs/sailing-place/feature/jest.config.js",
+            "jestConfig": "libs/sailing-place/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -472,7 +467,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/sailor/domain"],
           "options": {
-            "jestConfig": "libs/sailor/domain/jest.config.js",
+            "jestConfig": "libs/sailor/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -495,7 +490,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/sailor/feature"],
           "options": {
-            "jestConfig": "libs/sailor/feature/jest.config.js",
+            "jestConfig": "libs/sailor/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -530,7 +525,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/authentication/domain"],
           "options": {
-            "jestConfig": "libs/shared/authentication/domain/jest.config.js",
+            "jestConfig": "libs/shared/authentication/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -565,7 +560,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/authentication/feature"],
           "options": {
-            "jestConfig": "libs/shared/authentication/feature/jest.config.js",
+            "jestConfig": "libs/shared/authentication/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -600,7 +595,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/base"],
           "options": {
-            "jestConfig": "libs/shared/base/jest.config.js",
+            "jestConfig": "libs/shared/base/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -635,7 +630,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/material"],
           "options": {
-            "jestConfig": "libs/shared/material/jest.config.js",
+            "jestConfig": "libs/shared/material/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -658,7 +653,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/test-util"],
           "options": {
-            "jestConfig": "libs/shared/test-util/jest.config.js",
+            "jestConfig": "libs/shared/test-util/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -693,7 +688,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/util"],
           "options": {
-            "jestConfig": "libs/shared/util/jest.config.js",
+            "jestConfig": "libs/shared/util/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -716,7 +711,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/widgets"],
           "options": {
-            "jestConfig": "libs/shared/widgets/jest.config.js",
+            "jestConfig": "libs/shared/widgets/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -739,7 +734,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/yacht-club/domain"],
           "options": {
-            "jestConfig": "libs/yacht-club/domain/jest.config.js",
+            "jestConfig": "libs/yacht-club/domain/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -762,7 +757,7 @@
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/yacht-club/feature"],
           "options": {
-            "jestConfig": "libs/yacht-club/feature/jest.config.js",
+            "jestConfig": "libs/yacht-club/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }

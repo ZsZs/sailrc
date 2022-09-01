@@ -12,7 +12,7 @@ import deepEqual from 'deep-equal';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './race-timer.component.html',
   styleUrls: ['./race-timer.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class RaceTimerComponent implements OnDestroy, OnInit {
   // region attributes
@@ -30,8 +30,7 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
   // endregion
 
   // region constructors
-  constructor( private logger: NGXLogger, private lapFacade: LapFacade ) {
-  }
+  constructor(private logger: NGXLogger, private lapFacade: LapFacade) {}
   // endregion
 
   // region angular lifecycle hooks
@@ -64,11 +63,11 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
             this.startSignalEvent.emit(StartSignals.StartSignal);
             break;
           default:
-            throw new Error( `Unknown Countdown Event: ${ $event }`);
+            throw new Error(`Unknown Countdown Event: ${$event}`);
         }
         break;
       case 'done':
-        if ($event.left == 0 && this.countdownStatus == CountdownStatus.ing ) {
+        if ($event.left == 0 && this.countdownStatus == CountdownStatus.ing) {
           this.startSignalEvent.emit(StartSignals.StartSignal);
         }
         break;
@@ -88,8 +87,8 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
     }
   }
 
-  onCountupEvent( $event: StartSignals ) {
-    this.startSignalEvent.emit( $event );
+  onCountupEvent($event: StartSignals) {
+    this.startSignalEvent.emit($event);
   }
   // endregion
 
@@ -97,51 +96,51 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
   // endregion
 
   // region protected, private helper methods
-  private configureTimers( lap: Lap ): void {
-    const todayMorning = new Date()
+  private configureTimers(lap: Lap): void {
+    const todayMorning = new Date();
     todayMorning.setHours(0, 0, 0, 0);
 
-    switch( lap.state ) {
+    switch (lap.state) {
       case LapState.Planned:
         this.raceStartTimeText = null;
         this.initializeCountdown();
         this.initializeCountup();
         break;
       case LapState.Initialized:
-        this.configureCountdown( (lap.startTime.getTime() - todayMorning.getTime()) / 1000 );
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
+        this.configureCountdown((lap.startTime.getTime() - todayMorning.getTime()) / 1000);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
         break;
       case LapState.Countdown:
-        this.configureCountdown( (lap.startTime.getTime() - todayMorning.getTime()) / 1000 );
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
-        if ( this.countdownComponent ) this.countdownComponent.begin();
+        this.configureCountdown((lap.startTime.getTime() - todayMorning.getTime()) / 1000);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
+        if (this.countdownComponent) this.countdownComponent.begin();
         break;
       case LapState.Started:
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
         break;
       case LapState.Running:
-        this.configureCountup( (new Date().getTime() - lap.startTime.getTime()) / 1000 );
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
+        this.configureCountup((new Date().getTime() - lap.startTime.getTime()) / 1000);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
         break;
       case LapState.Cancelled:
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
-        this.raceFinishTimeText = lap.finishTime.toISOString().slice(0,16);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
+        this.raceFinishTimeText = lap.finishTime.toISOString().slice(0, 16);
         break;
       case LapState.Finished:
-        this.raceStartTimeText = lap.startTime.toISOString().slice(0,16);
-        this.raceFinishTimeText = lap.finishTime.toISOString().slice(0,16);
+        this.raceStartTimeText = lap.startTime.toISOString().slice(0, 16);
+        this.raceFinishTimeText = lap.finishTime.toISOString().slice(0, 16);
         break;
     }
 
     this.raceStartTime = lap.startTime;
   }
 
-  private configureCountdown( stopTime: number ) {
+  private configureCountdown(stopTime: number) {
     this.countdownConfig = { ...this.countdownConfig, stopTime, leftTime: undefined };
   }
 
-  private configureCountup( countUpStart: number ) {
-    this.countupConfig = { ...this.countupConfig, startTime: countUpStart }
+  private configureCountup(countUpStart: number) {
+    this.countupConfig = { ...this.countupConfig, startTime: countUpStart };
   }
 
   private initializeCountdown() {
@@ -156,11 +155,11 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
   private initializeCountup() {
     this.countupConfig = {
       autostart: false,
-      format: 'hms'
-    }
+      format: 'hms',
+    };
   }
 
-  private isStartTimeChanged( lap: Lap ) {
+  private isStartTimeChanged(lap: Lap) {
     return !(lap.startTime && this.raceStartTime && this.raceStartTime.getTime() == lap.startTime.getTime());
   }
 
@@ -169,20 +168,21 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.onDestroy$),
         map((lap) => {
-          if( !deepEqual( this.currentLap, lap )) {
+          if (!deepEqual(this.currentLap, lap)) {
             this.currentLap = lap;
             this.updateComponentFromLap(lap);
           }
         })
-      ).subscribe();
+      )
+      .subscribe();
   }
 
-  private updateComponentFromLap( lap: Lap ) {
-    this.logger.debug( `Update race-timer.component from lap: ${JSON.stringify( lap )}` );
+  private updateComponentFromLap(lap: Lap) {
+    this.logger.debug(`Update race-timer.component from lap: ${JSON.stringify(lap)}`);
 
     this.lapState = lap.state;
 
-    if ( this.isStartTimeChanged( lap ) ) this.configureTimers( lap );
+    if (this.isStartTimeChanged(lap)) this.configureTimers(lap);
   }
   // endregion
 }

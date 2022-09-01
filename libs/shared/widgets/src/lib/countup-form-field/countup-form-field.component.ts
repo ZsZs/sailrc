@@ -20,8 +20,8 @@ export const defaultCdTimerOptions: CdTimerOptions = {
   countdown: false,
   autostart: true,
   maxTimeUnit: 'day',
-  format: 'hms'
-}
+  format: 'hms',
+};
 
 @Component({
   selector: 'sailrc-countup-form-field',
@@ -29,7 +29,7 @@ export const defaultCdTimerOptions: CdTimerOptions = {
   templateUrl: './countup-form-field.component.html',
   styleUrls: ['./countup-form-field.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [{provide: MatFormFieldControl, useExisting: CountupFormFieldComponent}]
+  providers: [{ provide: MatFormFieldControl, useExisting: CountupFormFieldComponent }],
 })
 export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOptions>, OnDestroy, OnInit {
   // region attributes
@@ -67,34 +67,34 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
   }
 
   ngOnInit(): void {
-    this.mapCdTimerOptionsToAttributes( defaultCdTimerOptions );
+    this.mapCdTimerOptionsToAttributes(defaultCdTimerOptions);
   }
   // endregion
 
   // region event handling methods
-  onCompleteEvent( $event: CdTimerComponent ) {
+  onCompleteEvent($event: CdTimerComponent) {
     this.completeEVent.emit();
   }
 
-  onStartEvent( $event: CdTimerComponent ) {
+  onStartEvent($event: CdTimerComponent) {
     this.startEvent.emit();
   }
 
-  onStopEvent( $event: CdTimerComponent ) {
+  onStopEvent($event: CdTimerComponent) {
     this.stopEvent.emit();
   }
 
   onTickEvent($event: TimeInterface) {
-    if ( $event.days == 0 && $event.hours == 0 && $event.minutes == 1 && $event.seconds == 0 ) {
-      this.countupEvent.emit( StartSignals.RecallSignal );
+    if ($event.days == 0 && $event.hours == 0 && $event.minutes == 1 && $event.seconds == 0) {
+      this.countupEvent.emit(StartSignals.RecallSignal);
     }
   }
 
-  onContainerClick( event: MouseEvent ): void {
+  onContainerClick(event: MouseEvent): void {
     // no operation is needed
   }
 
-  setDescribedByIds( ids: string[] ): void {
+  setDescribedByIds(ids: string[]): void {
     // no operation is needed
   }
 
@@ -120,7 +120,7 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
   // endregion
 
   // region protected, private helper methods
-  private mapCdTimerOptionsToAttributes( cdTimerOptions: CdTimerOptions ) {
+  private mapCdTimerOptionsToAttributes(cdTimerOptions: CdTimerOptions) {
     this.startTime = cdTimerOptions.startTime;
     this.endTime = cdTimerOptions.endTime;
     this.countdown = cdTimerOptions.countdown;
@@ -139,7 +139,7 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
     return this._placeholder;
   }
 
-  @Input() set placeholder( placeholder) {
+  @Input() set placeholder(placeholder) {
     this._placeholder = placeholder;
     this.stateChanges.next();
   }
@@ -148,9 +148,9 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
     return this.cdTimerOptions;
   }
 
-  @Input() set value( cdTimerOptions: CdTimerOptions | null) {
+  @Input() set value(cdTimerOptions: CdTimerOptions | null) {
     this.cdTimerOptions = cdTimerOptions;
-    this.mapCdTimerOptionsToAttributes( cdTimerOptions );
+    this.mapCdTimerOptionsToAttributes(cdTimerOptions);
     this.stateChanges.next();
   }
   // endregion

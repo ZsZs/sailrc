@@ -22,14 +22,7 @@ import { RaceStartSignsComponent } from './race-start-signs/race-start-signs.com
 import { StartTimePickerComponent } from './race-start-time-selector/start-time-picker.component';
 
 @NgModule({
-  declarations: [
-    RaceStartComponent,
-    RaceStartTabsComponent,
-    RaceStartPreparationComponent,
-    RaceStartCaptureComponent,
-    RaceStartSignsComponent,
-    StartTimePickerComponent
-  ],
+  declarations: [RaceStartComponent, RaceStartTabsComponent, RaceStartPreparationComponent, RaceStartCaptureComponent, RaceStartSignsComponent, StartTimePickerComponent],
   imports: [
     CommonModule,
     FlexModule,
@@ -46,9 +39,6 @@ import { StartTimePickerComponent } from './race-start-time-selector/start-time-
     SharedWidgetsModule,
   ],
   providers: [LapResolver, RaceResolver, RaceStartFeatureFacade],
-  exports: [
-    RaceStartSignsComponent,
-    StartTimePickerComponent
-  ],
+  exports: [RaceStartSignsComponent, StartTimePickerComponent],
 })
 export class RaceStartModule {}

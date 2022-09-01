@@ -12,10 +12,9 @@ import { SailingPlaceFeatureFacade } from '../sailing-place-feature.facade';
   selector: 'sailrc-sailing-place-details',
   templateUrl: './sailing-place-details.component.html',
   styleUrls: ['./sailing-place-details.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SailingPlaceDetailsComponent extends BaseFormComponent<SailingPlace> {
-
   constructor(
     protected boatFeatureFacade: SailingPlaceFeatureFacade,
     protected routerFacade: RouterFacade,
@@ -24,6 +23,6 @@ export class SailingPlaceDetailsComponent extends BaseFormComponent<SailingPlace
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<ISailingPlaceFeatureState>
   ) {
-    super( boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
+    super(boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService);
   }
 }

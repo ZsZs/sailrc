@@ -7,18 +7,18 @@ import { ActiveTabService, BaseListComponent, ComponentDestroyService } from '@p
 @Component({
   selector: 'sailrc-yacht-club-list',
   templateUrl: './yacht-club-list.component.html',
-  styleUrls: ['./yacht-club-list.component.css']
+  styleUrls: ['./yacht-club-list.component.css'],
 })
-
-export class YachtClubListComponent extends BaseListComponent<YachtClub>{
+export class YachtClubListComponent extends BaseListComponent<YachtClub> {
   displayedColumns = ['select', 'name'];
 
   constructor(
     protected yachtClubFeatureFacade: YachtClubFeatureFacade,
     protected activeTabService: ActiveTabService,
     protected route: ActivatedRoute,
-    private subscriptionService: ComponentDestroyService ) {
-    super( yachtClubFeatureFacade, route, activeTabService, subscriptionService );
+    private subscriptionService: ComponentDestroyService
+  ) {
+    super(yachtClubFeatureFacade, route, activeTabService, subscriptionService);
   }
 
   // event handling methods

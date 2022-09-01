@@ -56,7 +56,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    NgxMatFileInputModule
+    NgxMatFileInputModule,
   ],
   declarations: [NgrxMatSelectViewAdapter, CustomErrorStateMatcherDirective, MatListOptionFixDirective],
   exports: [

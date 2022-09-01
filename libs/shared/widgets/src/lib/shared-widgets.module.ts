@@ -39,16 +39,9 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
     MapSelectComponent,
     MapSelectViewAdapter,
     TimepickerFormFieldComponent,
-    VarDirective
+    VarDirective,
   ],
-  exports: [
-    CountdownFormFieldComponent,
-    CountupFormFieldComponent,
-    ImageUploadComponent,
-    ImageUploadViewAdapter,
-    MapSelectComponent,
-    MapSelectViewAdapter,
-    TimepickerFormFieldComponent],
+  exports: [CountdownFormFieldComponent, CountupFormFieldComponent, ImageUploadComponent, ImageUploadViewAdapter, MapSelectComponent, MapSelectViewAdapter, TimepickerFormFieldComponent],
   imports: [
     CdTimerModule,
     CountdownModule,
@@ -63,7 +56,7 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
     MatFormFieldModule,
     NgxMatTimepickerModule,
     SharedMaterialModule,
-    StoreModule.forFeature( 'ui', UI_REDUCER_TOKEN ),
+    StoreModule.forFeature('ui', UI_REDUCER_TOKEN),
     ReactiveFormsModule,
     WebcamModule,
   ],

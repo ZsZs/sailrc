@@ -16,24 +16,20 @@ describe('BoatClassDetailsComponent', () => {
   const initialState = {};
   const boatClassFacadeStub = {
     all$: of([]),
-    isLoading$: of( false ),
-    delete( boat: BoatClass ) {},
+    isLoading$: of(false),
+    delete(boat: BoatClass) {},
     loadAll() {},
-    selectMany( boats: BoatClass[] ) {}
+    selectMany(boats: BoatClass[]) {},
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoatClassDetailsComponent ],
+      declarations: [BoatClassDetailsComponent],
       imports: [BrowserAnimationsModule, FormsModule, ReactiveFormsModule, RouterTestingModule, SharedMaterialModule],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: BoatClassFacade, useValue: boatClassFacadeStub }
-      ]
-    })
-    .compileComponents();
+      providers: [provideMockStore({ initialState }), { provide: BoatClassFacade, useValue: boatClassFacadeStub }],
+    }).compileComponents();
 
-    store = TestBed.inject( MockStore );
+    store = TestBed.inject(MockStore);
   }));
 
   beforeEach(() => {

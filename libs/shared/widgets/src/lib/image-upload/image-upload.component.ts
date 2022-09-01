@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'sailrc-image-upload:not([ngrxFormsAction])',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ImageUploadComponent implements OnDestroy, OnInit {
   imageForm: FormGroup;
@@ -38,7 +38,7 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
     private readonly storageService: StorageService,
     private readonly fileTypeService: ValidateFileTypeService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   // region angular life cycle hooks
   ngOnDestroy(): void {
@@ -47,12 +47,12 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.imageForm = this.formBuilder.group({
-      image: [null, [Validators.required, this.image.bind(this)]]
+      image: [null, [Validators.required, this.image.bind(this)]],
     });
 
     this.imageForm
       .get('image')
-      .valueChanges.pipe(takeUntil( this.onDestroy$ ))
+      .valueChanges.pipe(takeUntil(this.onDestroy$))
       .subscribe((newValue) => {
         this.handleFileChange(newValue.files);
       });
@@ -66,8 +66,8 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
     this.imageName = image.name;
     const reader = new FileReader();
     reader.onload = (loadEvent) => {
-      (this.imageUrl = loadEvent.target.result);
-    }
+      this.imageUrl = loadEvent.target.result;
+    };
     reader.readAsDataURL(image);
   }
 
@@ -79,19 +79,20 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
       data: {
         titleText: 'Take a photo of yourself.',
         height: this.CAMERA_DIALOG_HEIGHT,
-        width: this.CAMERA_DIALOG_WIDTH
-      }
+        width: this.CAMERA_DIALOG_WIDTH,
+      },
     });
 
-    dialogRef.afterClosed().pipe(takeUntil( this.onDestroy$ )).subscribe(
-      data => {
-        this.imageToUpload = new File( [data.imageData], this.IMAGE_NAME, {
-          type: data.imageData.type
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data) => {
+        this.imageToUpload = new File([data.imageData], this.IMAGE_NAME, {
+          type: data.imageData.type,
         });
         this.imageUrl = data.imageUrl;
         this.postImage();
-      }
-    );
+      });
   }
 
   public onFileUpload() {
@@ -99,21 +100,18 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
   }
 
   onMenuButtonMouseOut() {
-    this.menuButtonColor='primary';
+    this.menuButtonColor = 'primary';
   }
 
   onMenuButtonMouseOver() {
-    this.menuButtonColor='accent';
+    this.menuButtonColor = 'accent';
   }
 
   postImage() {
     this.imageSubmitted = true;
-    const mediaFolderPath = `${ this._folder }`;
+    const mediaFolderPath = `${this._folder}`;
 
-    const { downloadUrl$, uploadProgress$ } = this.storageService.uploadDataAndGetMetadata(
-      mediaFolderPath,
-      this.imageToUpload,
-    );
+    const { downloadUrl$, uploadProgress$ } = this.storageService.uploadDataAndGetMetadata(mediaFolderPath, this.imageToUpload);
 
     this.imageUploadProgress$ = uploadProgress$;
 
@@ -121,21 +119,22 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this.onDestroy$),
         catchError((error) => {
-          this.snackBar.open(`${ error.message } 😢`, 'Close', {
+          this.snackBar.open(`${error.message} 😢`, 'Close', {
             duration: 4000,
           });
           return EMPTY;
-        }),
-      ).subscribe((downloadUrl) => {
+        })
+      )
+      .subscribe((downloadUrl) => {
         this.imageSubmitted = false;
         this.showFileUpload = false;
-        this._onChange( downloadUrl );
+        this._onChange(downloadUrl);
       });
   }
   // endregion
 
   // region public accessors and mutators
-  public registerOnChange( fn: (value) => void ) {
+  public registerOnChange(fn: (value) => void) {
     this._onChange = fn;
   }
   // endregion
@@ -150,10 +149,12 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
   }
 
   // region properties
-  get folder(): string { return this._folder; }
+  get folder(): string {
+    return this._folder;
+  }
 
-  @Input() set folder( value: string ) {
-    if( value ) this._folder = value;
+  @Input() set folder(value: string) {
+    if (value) this._folder = value;
   }
   // endregion
 }

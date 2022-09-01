@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "sailrc",
   "affected": {
     "defaultBase": "master"
@@ -51,31 +52,5 @@
       "style": "css"
     }
   },
-  "projects": {
-    "sail-rc": { "tags": ["type:app"] },
-    "sail-rc-e2e": { "tags": [], "implicitDependencies": ["sail-rc"] },
-    "boat-class-feature": { "tags": ["type:feature", ""] },
-    "boat-class-domain": { "tags": ["type:domain", ""] },
-    "boat-domain": { "tags": ["type:domain", ""] },
-    "boat-feature": { "tags": ["type:feature", ""] },
-    "yacht-club-domain": { "tags": ["type:domain"] },
-    "yacht-club-feature": { "tags": ["type:feature"] },
-    "race-feature": { "tags": ["type:feature"] },
-    "race-domain": { "tags": ["type:domain"] },
-    "shared-authentication-feature": { "tags": ["type:feature", "scope:shared"] },
-    "shared-authentication-domain": { "tags": ["type:domain", "scope:shared"] },
-    "shared-material": { "tags": ["type:util", "scope:shared"] },
-    "shared-base": { "tags": ["type:util", "scope:shared"] },
-    "shared-util": { "tags": ["type:util", "scope:shared"] },
-    "shared-widgets": { "tags": ["type:ui", "scope:shared"] },
-    "sailor-domain": { "tags": ["type:domain"] },
-    "sailor-feature": { "tags": ["type:feature"] },
-    "sailing-place-domain": { "tags": ["type:domain", "scope:shared"] },
-    "sailing-place-feature": { "tags": ["type:feature"] },
-    "race-participant": { "tags": ["type:feature"] },
-    "race-shared": { "tags": [] },
-    "race-field": { "tags": [] },
-    "shared-test-util": { "tags": [] },
-    "race-start": { "tags": [] },
-    "race-finish": { "tags": [] }
-  }}
+  "defaultProject": "sail-rc"
+}

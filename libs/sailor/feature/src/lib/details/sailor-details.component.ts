@@ -107,13 +107,16 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
     this.authFacade
       .getAuthState()
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe((user) => ( this.user = {
-        userId: user.uid,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        displayName: user.displayName,
-        photoURL: user.photoURL
-      }));
+      .subscribe(
+        (user) =>
+          (this.user = {
+            userId: user.uid,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          })
+      );
   }
   // endregion
 }

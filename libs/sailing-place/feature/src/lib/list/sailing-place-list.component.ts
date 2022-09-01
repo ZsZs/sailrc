@@ -9,16 +9,17 @@ import { SailingPlaceFeatureFacade } from '../sailing-place-feature.facade';
   selector: 'sailrc-sailing-place-list',
   templateUrl: './sailing-place-list.component.html',
   styleUrls: ['./sailing-place-list.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class SailingPlaceListComponent extends BaseListComponent<SailingPlace>{
+export class SailingPlaceListComponent extends BaseListComponent<SailingPlace> {
   displayedColumns = ['select', 'name'];
 
   constructor(
     protected sailingPlaceFeatureFacade: SailingPlaceFeatureFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
-    protected componentDestroyService: ComponentDestroyService ) {
-    super( sailingPlaceFeatureFacade, route, activeTabService, componentDestroyService );
+    protected componentDestroyService: ComponentDestroyService
+  ) {
+    super(sailingPlaceFeatureFacade, route, activeTabService, componentDestroyService);
   }
 }

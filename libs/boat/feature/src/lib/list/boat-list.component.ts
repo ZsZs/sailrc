@@ -9,17 +9,18 @@ import { BoatFeatureFacade } from '../boat-feature.facade';
   selector: 'sailrc-boat-list',
   templateUrl: './boat-list.component.html',
   styleUrls: ['./boat-list.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class BoatListComponent extends BaseListComponent<Boat>{
+export class BoatListComponent extends BaseListComponent<Boat> {
   displayedColumns = ['select', 'sailNumber', 'boatClass', 'name'];
 
   constructor(
     protected boatFeatureFacade: BoatFeatureFacade,
     protected route: ActivatedRoute,
     protected activeTabService: ActiveTabService,
-    protected componentDestroyService: ComponentDestroyService ) {
-    super( boatFeatureFacade, route, activeTabService, componentDestroyService );
+    protected componentDestroyService: ComponentDestroyService
+  ) {
+    super(boatFeatureFacade, route, activeTabService, componentDestroyService);
   }
 
   // event handling methods

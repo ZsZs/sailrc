@@ -3,7 +3,7 @@ import { RaceParticipantFeatureFacade } from '../race-participant-feature.facade
 import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from '@processpuzzle/shared/base';
-import { LapFacade, Participant, ParticipantFacade} from '@sailrc/race/domain';
+import { LapFacade, Participant, ParticipantFacade } from '@sailrc/race/domain';
 import { Observable } from 'rxjs';
 import { RouteStateService } from '@processpuzzle/shared/util';
 import { takeUntil, tap } from 'rxjs/operators';
