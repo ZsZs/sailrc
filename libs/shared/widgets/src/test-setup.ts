@@ -1,6 +1,7 @@
-import 'jest-preset-angular';
+import 'jest-preset-angular/setup-jest';
 import { of } from 'rxjs';
 import { FileUploadMetadata } from '@processpuzzle/shared/base';
+import fetchMock from 'jest-fetch-mock';
 
 export class MatSnackBarStub {
   open() {
@@ -18,3 +19,5 @@ export class StorageServiceStub {
     };
   }
 }
+
+fetchMock.enableMocks();

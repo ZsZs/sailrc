@@ -70,7 +70,7 @@ export class CameraUploadComponent implements OnInit {
   // endregion
 
   // region protected, private helper methods
-  private async convertBase64ToBlob(base64Data: string) {
+  private async convertBase64ToBlob(base64Data: string): Promise<Blob> {
     const base64Response = await fetch(base64Data);
     return await base64Response.blob();
   }

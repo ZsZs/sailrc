@@ -5,6 +5,7 @@ import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { FlexModule } from '@angular/flex-layout';
 import { WebcamImage, WebcamModule, WebcamUtil } from 'ngx-webcam';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+//import fetch from 'jest-fetch-mock'
 
 describe('CameraUploadComponent', () => {
   let component: CameraUploadComponent;
@@ -20,35 +21,11 @@ describe('CameraUploadComponent', () => {
   const getAvailableVideoInputsSpy = jest.spyOn(WebcamUtil, 'getAvailableVideoInputs').mockReturnValue(
     new Promise((resolve, reject) => {
       resolve([
-        {
-          deviceId: 'a',
-          groupId: 'b',
-          kind: 'videoinput',
-          label: '',
-          toJSON() {
-            this.kind;
-          },
-        },
-        {
-          deviceId: 'a',
-          groupId: 'b',
-          kind: 'videoinput',
-          label: '',
-          toJSON() {
-            this.kind;
-          },
-        },
+        { deviceId: 'a', groupId: 'b', kind: 'videoinput', label: '', toJSON() { this.kind; }},
+        { deviceId: 'a', groupId: 'b', kind: 'videoinput', label: '', toJSON() { this.kind; }},
       ]);
       reject();
     })
-  );
-  //  const okResponse = new Response(JSON.stringify({}), { status: 200, statusText: 'OK', });
-  global.fetch = jest.fn().mockImplementation(
-    () =>
-      new Promise((resolve, reject) => {
-        resolve(new Response('hello', { status: 200, statusText: 'OK' }));
-        reject();
-      })
   );
 
   beforeEach(async () => {
@@ -65,10 +42,14 @@ describe('CameraUploadComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CameraUploadComponent);
     component = fixture.componentInstance;
-    spyOn(component, 'getWindowInnerHeight').and.returnValue(1000);
-    spyOn(component, 'getWindowInnerWidth').and.returnValue(1000);
+    jest.spyOn(component, 'getWindowInnerHeight').mockReturnValue(1000);
+    jest.spyOn(component, 'getWindowInnerWidth').mockReturnValue(1000);
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   afterAll(() => {
@@ -98,13 +79,31 @@ describe('CameraUploadComponent', () => {
     expect(closeSpy).toHaveBeenCalled();
   });
 
-  it('onSave() closes the dialog with the images data and url', () => {
-    const imageData: ImageData = { data: new Uint8ClampedArray(100), height: 100, width: 100 };
-    const webcamImage = new WebcamImage('http://localhost/image', 'jpeg', imageData);
+  it('onSave() closes the dialog with the images data and url', async() => {
+    const arr = new Uint8ClampedArray( 400 );
+    for( let i = 0; i < arr.length; i += 4 ) {
+      arr[ i ] = 0;    // R value
+      arr[ i + 1 ] = 190;  // G value
+      arr[ i + 2 ] = 0;    // B value
+      arr[ i + 3 ] = 255;  // A value
+    }
+    const imageData = new ImageData( arr, 20 );
+    const imageDataBlob = new Blob([JSON.stringify(imageData)], { type: 'application/json'});
+    const webcamImage = new WebcamImage( 'http://localhost/image', 'jpeg', imageData );
+    const response: Response = new Response( JSON.stringify( imageData ));
 
-    component.handleImage(webcamImage);
-    component.onSave();
+    jest.spyOn( response, 'blob').mockReturnValue( new Promise( (resolve, reject ) => {
+      resolve( imageDataBlob );
+      reject();
+    }));
 
-    expect(closeSpy).toHaveBeenCalledWith(imageData, 'http://localhost/image');
+    global.fetch = jest.fn(() =>
+      Promise.resolve( response )
+    );
+
+    component.handleImage( webcamImage );
+    await component.onSave();
+
+    expect( closeSpy ).toHaveBeenCalledWith( { imageData: imageDataBlob, imageUrl: 'http://localhost/image' } );
   });
 });
