@@ -40,6 +40,7 @@ testem.log
 /typings
 /apps/sail-rc/src/environments
 .env
+.nx
 
 # System Files
 .DS_Store
