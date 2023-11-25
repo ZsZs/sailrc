@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SnackBarService } from './services/snack-bar.service';
 import { VarDirective } from './directive/var.directive';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
-import { uiReducer, UiState } from '@processpuzzle/shared/base';
+import { SharedBaseModule, uiReducer, UiState } from "@processpuzzle/shared/base";
 import { CameraUploadComponent } from './camera-upload/camera-upload.component';
 import { MatCardModule } from '@angular/material/card';
 import { WebcamModule } from 'ngx-webcam';
@@ -23,7 +23,6 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { CountupFormFieldComponent } from './countup-form-field/countup-form-field.component';
 import { CdTimerModule } from 'angular-cd-timer';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
-import { ImageUploadViewAdapter } from './image-upload/image-upload-view-adapter';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -35,13 +34,21 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
     CountdownFormFieldComponent,
     CountupFormFieldComponent,
     ImageUploadComponent,
-    ImageUploadViewAdapter,
+//    ImageUploadViewAdapter,
     MapSelectComponent,
     MapSelectViewAdapter,
     TimepickerFormFieldComponent,
     VarDirective,
   ],
-  exports: [CountdownFormFieldComponent, CountupFormFieldComponent, ImageUploadComponent, ImageUploadViewAdapter, MapSelectComponent, MapSelectViewAdapter, TimepickerFormFieldComponent],
+  exports: [
+    CountdownFormFieldComponent,
+    CountupFormFieldComponent,
+    ImageUploadComponent,
+//    ImageUploadViewAdapter,
+    MapSelectComponent,
+    MapSelectViewAdapter,
+    TimepickerFormFieldComponent
+  ],
   imports: [
     CdTimerModule,
     CountdownModule,
@@ -55,6 +62,7 @@ export const UI_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<UiState>>('u
     MatDialogModule,
     MatFormFieldModule,
     NgxMatTimepickerModule,
+    SharedBaseModule,
     SharedMaterialModule,
     StoreModule.forFeature('ui', UI_REDUCER_TOKEN),
     ReactiveFormsModule,

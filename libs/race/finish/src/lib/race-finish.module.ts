@@ -12,6 +12,5 @@ import { RaceFinishComponent } from './race-finish.component';
     ]),
   ],
   declarations: [RaceFinishComponent],
-  entryComponents: [RaceFinishComponent],
 })
 export class RaceFinishModule {}

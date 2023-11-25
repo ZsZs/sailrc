@@ -18,6 +18,7 @@ import { FlexModule } from '@angular/flex-layout';
 import { BoatDomainModule, BoatFacade } from '@sailrc/boat/domain';
 import { YachtClubFeatureFacade, YachtClubFeatureModule } from '@sailrc/yacht-club/feature';
 import { BoatFeatureFacade } from '@sailrc/boat/feature';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
   declarations: [SailorDetailsComponent, SailorFeatureComponent, SailorListComponent, SailorTabsComponent],
@@ -29,6 +30,7 @@ import { BoatFeatureFacade } from '@sailrc/boat/feature';
     SailorDomainModule.forFeature(),
     SailorFeatureRoutingModule,
     SharedBaseModule,
+    SharedWidgetsModule,
     SharedMaterialModule,
     StoreModule.forFeature(FEATURE_NAME, sailorFeatureReducer),
     YachtClubDomainModule.forFeature(),

@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -42,6 +42,7 @@
       "@sailrc/shared/test-util": ["libs/shared/test-util/src/index.ts"],
       "@sailrc/yacht-club/domain": ["libs/yacht-club/domain/src/index.ts"],
       "@sailrc/yacht-club/feature": ["libs/yacht-club/feature/src/index.ts"],
+      "custom-tools": ["custom-tools/src/index.ts"],
       "tslib": ["path/to/node_modules/tslib/tslib.d.ts"]
     }
   },

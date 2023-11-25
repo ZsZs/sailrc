@@ -1,9 +1,8 @@
-import { CountdownFormFieldComponent } from '@processpuzzle/shared/widgets';
+import { CountdownFormFieldComponent, defaultCountdownConfig } from './countdown-form-field.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CountdownConfig, CountdownModule, CountdownStatus } from 'ngx-countdown';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
-import { defaultCountdownConfig } from './countdown-form-field.component';
 import { Component, ViewChild } from '@angular/core';
 
 describe('CountdownFormFieldComponent', () => {
@@ -91,7 +90,7 @@ describe('CountdownFormFieldComponent', () => {
     });
 
     it('CountdownEvent(s) are emitted when configuring CountdownComponent', () => {
-      const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
+      const countdownEventSpy = jest.spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
       testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 20 };
       testHostFixture.detectChanges();
       expect(countdownEventSpy).toHaveBeenCalledWith(
@@ -106,7 +105,7 @@ describe('CountdownFormFieldComponent', () => {
     it('CountdownEvent emitted on countdownComponent.begin()', () => {
       testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 20 };
       testHostFixture.detectChanges();
-      const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
+      const countdownEventSpy = jest.spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
       testHostComponent.countdownFormField.begin();
       expect(countdownEventSpy).toHaveBeenCalledWith(expect.objectContaining({ action: 'start', status: CountdownStatus.ing, left: 20000, text: '00:00:20' }));
     });
@@ -130,7 +129,7 @@ describe('CountdownFormFieldComponent', () => {
     it('begin() starts counting down, stop() stops it', () => {
       testHostComponent.countdownConfig = { ...defaultCountdownConfig, demand: true, leftTime: 10 };
       testHostFixture.detectChanges();
-      const countdownEventSpy = spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
+      const countdownEventSpy = jest.spyOn(testHostComponent.countdownFormField.countdownEvent, 'emit');
       testHostComponent.countdownFormField.begin();
       expect(countdownEventSpy).toHaveBeenCalledWith(expect.objectContaining({ action: 'start', status: CountdownStatus.ing, left: 10000, text: '00:00:10' }));
 

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RaceLapToobarComponent } from './race-lap-toobar.component';
+import { RaceLapToolbarComponent } from './race-lap-toolbar.component';
 
 describe('RaceLapToobarComponent', () => {
-  let component: RaceLapToobarComponent;
-  let fixture: ComponentFixture<RaceLapToobarComponent>;
+  let component: RaceLapToolbarComponent;
+  let fixture: ComponentFixture<RaceLapToolbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RaceLapToobarComponent],
+      declarations: [RaceLapToolbarComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RaceLapToobarComponent);
+    fixture = TestBed.createComponent(RaceLapToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

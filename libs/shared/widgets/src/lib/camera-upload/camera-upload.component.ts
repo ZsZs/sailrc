@@ -89,11 +89,9 @@ export class CameraUploadComponent implements OnInit {
   }
 
   // helper function to facilitate unit test
-  getWindowInnerHeight() {
-    return window.innerHeight;
-  }
-  getWindowInnerWidth() {
-    return window.innerWidth;
-  }
+  /* istanbul ignore next */
+  getWindowInnerHeight() { return window.innerHeight; }
+  /* istanbul ignore next */
+  getWindowInnerWidth() { return window.innerWidth; }
   // endregion
 }

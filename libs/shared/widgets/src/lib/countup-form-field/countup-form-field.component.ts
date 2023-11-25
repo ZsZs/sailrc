@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CdTimerComponent, TimeInterface } from 'angular-cd-timer';
-import { StartSignals } from '@sailrc/race/domain';
 
 export interface CdTimerOptions {
   startTime?: number;
@@ -37,7 +36,7 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
   private cdTimerOptions = defaultCdTimerOptions;
   private _placeholder: string;
   @ViewChild('cdTimerComponent', { static: false }) private cdTimerComponent: CdTimerComponent;
-  @Output() countupEvent = new EventEmitter<StartSignals>();
+  @Output() countupEvent = new EventEmitter<number>();
   @Output() completeEVent = new EventEmitter<void>();
   @Output() startEvent = new EventEmitter<void>();
   @Output() stopEvent = new EventEmitter<void>();
@@ -72,28 +71,33 @@ export class CountupFormFieldComponent implements MatFormFieldControl<CdTimerOpt
   // endregion
 
   // region event handling methods
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onCompleteEvent($event: CdTimerComponent) {
     this.completeEVent.emit();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onStartEvent($event: CdTimerComponent) {
     this.startEvent.emit();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onStopEvent($event: CdTimerComponent) {
     this.stopEvent.emit();
   }
 
   onTickEvent($event: TimeInterface) {
     if ($event.days == 0 && $event.hours == 0 && $event.minutes == 1 && $event.seconds == 0) {
-      this.countupEvent.emit(StartSignals.RecallSignal);
+      this.countupEvent.emit($event.tick_count);
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onContainerClick(event: MouseEvent): void {
     // no operation is needed
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setDescribedByIds(ids: string[]): void {
     // no operation is needed
   }

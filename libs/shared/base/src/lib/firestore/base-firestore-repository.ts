@@ -1,26 +1,25 @@
 import { IAutoEntityService, IEntityInfo, makeEntity } from '@briebug/ngrx-auto-entity';
-import { BaseEntityInterface } from '@processpuzzle/shared/base';
+import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> implements IAutoEntityService<T> {
-  protected collection: AngularFirestoreCollection<any>;
+  protected collection: AngularFirestoreCollection<T>;
 
   protected constructor(protected firestore: AngularFirestore) {}
 
   load(entityInfo: IEntityInfo, keys: any, criteria?: any): Observable<T> {
     this.determineCollection(entityInfo, criteria);
 
-    const document = this.collection.doc<any>(keys.id);
+    const document = this.collection.doc<T>(keys.id);
     return document.snapshotChanges().pipe(
       map((doc) => {
         if (doc.payload.exists) {
           const data = doc.payload.data() as T;
           const docId = doc.payload.id;
-          const entity = makeEntity(entityInfo.modelType)({ id: docId, ...data });
-          return entity;
-        }
+          return makeEntity( entityInfo.modelType )( { id: docId, ...data } );
+        } else return undefined;
       })
     );
   }
@@ -33,8 +32,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
         return changes.map((a) => {
           const data = a.payload.doc.data() as T;
           const docId = a.payload.doc.id;
-          const entity = makeEntity(entityInfo.modelType)({ id: docId, ...data });
-          return entity;
+          return makeEntity( entityInfo.modelType )( { id: docId, ...data } );
         });
       })
     );
@@ -43,7 +41,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
   create(entityInfo: IEntityInfo, entity: T, criteria?: any): Observable<T> {
     this.determineCollection(entityInfo, criteria);
     delete entity.id;
-    const promise = new Promise<any>((resolve) => {
+    const promise = new Promise<T>((resolve) => {
       this.collection.add(entity).then((ref) => {
         const newEntity = {
           id: ref.id,
@@ -57,8 +55,8 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
 
   update(entityInfo: IEntityInfo, entity: T, criteria?: any): Observable<T> {
     this.determineCollection(entityInfo, criteria);
-    const promise = new Promise<any>((resolve) => {
-      const docRef = this.collection
+    const promise = new Promise<T>((resolve) => {
+      this.collection
         .doc<T>(String(entity.id))
         .set(entity)
         .then(() => {
@@ -88,6 +86,7 @@ export abstract class BaseFirestoreRepository<T extends BaseEntityInterface> imp
 
   // protected, private helper methods
   protected determineCollection(entityInfo: IEntityInfo, criteria?: any) {
-    this.collection = this.firestore.collection(entityInfo.uriName);
+    const path = entityInfo.uriName ? entityInfo.uriName : entityInfo.modelName;
+    this.collection = this.firestore.collection( path );
   }
 }

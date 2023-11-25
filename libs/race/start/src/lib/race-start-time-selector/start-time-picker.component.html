@@ -6,10 +6,10 @@
   </mat-radio-group>
   <span fxLayout="column" fxLayoutGap="10px grid">
     <span class="counterOption">
-      <input matInput [disabled]="timeSelectMode == 'StopTime' || lapState == 2" (change)="onLeftTimeSet($event)" type="number" step="10" placeholder="10" />
+      <input matInput [disabled]="timeSelectMode === 'StopTime' || !showControls" (change)="onLeftTimeSet($event)" type="number" step="10" placeholder="10" />
     </span>
     <span class="counterOption" fxLayout="row">
-      <input [ngxMatTimepicker]="picker" [disabled]="timeSelectMode == 'LeftTime' || lapState == 2" [format]="24" [min]="currentTime" />
+      <input [ngxMatTimepicker]="picker" [disabled]="timeSelectMode === 'LeftTime' || !showControls" [format]="24" [min]="currentTime" />
       <mat-icon matSuffix (click)="picker.open()">watch_later</mat-icon>
       <ngx-mat-timepicker #picker (timeSet)="onTimePicked($event)"></ngx-mat-timepicker>
     </span>

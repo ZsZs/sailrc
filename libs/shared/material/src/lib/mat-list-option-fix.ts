@@ -21,13 +21,14 @@ import { MatListOption } from '@angular/material/list';
  * no guarantee that this workaround will continue to work).
  */
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'mat-list-option',
 })
-export class MatListOptionFixDirective implements OnDestroy {
+export class MatListOptionFixDirective {
   constructor(@Host() private matDirective: MatListOption) { }
 
-  ngOnDestroy() {
-    this.matDirective.selectionList = { _reportValueChange: () => void 0 } as any;
-  }
+  // TODO: verify if theis workaround is still needed
+  // ngOnDestroy() {
+  // this.matDirective.selectionList = { _reportValueChange: () => void 0 } as any;
+  //}
 }

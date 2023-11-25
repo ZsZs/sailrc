@@ -1,7 +1,7 @@
 <form [formGroup]="imageForm" class="post-form">
   <div class="photo-actions">
     <img *ngIf="imageUrl" [src]="imageUrl" alt="Image" class="preview-image" />
-    <button mat-icon-button [color]="menuButtonColor" (mouseover)="onMenuButtonMouseOver()" (mouseout)="onMenuButtonMouseOut()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button mat-icon-button [style.color]="menuButtonColor" (mouseover)="onMenuButtonMouseOver()" (mouseout)="onMenuButtonMouseOut()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

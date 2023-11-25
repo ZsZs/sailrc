@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { RaceStartComponent } from './race-start.component';
 import { RaceStartTabsComponent } from './race-start-tabs/race-start-tabs.component';
 import { RaceStartPreparationComponent } from './race-start-preparation/race-start-preparation.component';
@@ -20,6 +20,7 @@ import { RaceStartRoutingModule } from './race-start-routing.module';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { RaceStartSignsComponent } from './race-start-signs/race-start-signs.component';
 import { StartTimePickerComponent } from './race-start-time-selector/start-time-picker.component';
+import { MatSliderModule } from "@angular/material/slider";
 
 @NgModule({
   declarations: [RaceStartComponent, RaceStartTabsComponent, RaceStartPreparationComponent, RaceStartCaptureComponent, RaceStartSignsComponent, StartTimePickerComponent],
@@ -29,6 +30,8 @@ import { StartTimePickerComponent } from './race-start-time-selector/start-time-
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSliderModule,
+    NgOptimizedImage,
     NgxMatTimepickerModule,
     NgrxFormsModule,
     RaceDomainModule.forFeature(),

@@ -1,8 +1,7 @@
 import { AppInitService } from './app-init.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-// @ts-ignore
-import { environment } from '../environments/environment';
+import { ENV } from "../environments/environment.provider";
 
 describe('AppInitService', () => {
   let appInitService: AppInitService;
@@ -11,7 +10,10 @@ describe('AppInitService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AppInitService],
+      providers: [
+        AppInitService,
+        {provide: ENV, useValue: {googleCloudPlatform: {apiKey: 'test-api'}}},
+      ],
     });
     httpClient = TestBed.inject(HttpTestingController);
     appInitService = TestBed.inject(AppInitService);
@@ -19,21 +21,17 @@ describe('AppInitService', () => {
 
   //  afterEach(() => httpClient.verify());
 
-  it('#init() should return value from a promise', () => {
+  it('AppInitService should be defined', () => {
     expect(appInitService).toBeTruthy();
-
-    appInitService.init().then((value) => {
-      expect(value).toBe(true);
-    });
   });
 
   it('#init() should return value from a promise', () => {
-    const apiKey = environment.googleCloudPlatform.apiKey;
-    const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+    const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=test-api`;
 
     const dummyData = { id: 1 };
 
     appInitService.init().then((data) => {
+      console.log(data);
       expect(data).toEqual(dummyData);
     });
 

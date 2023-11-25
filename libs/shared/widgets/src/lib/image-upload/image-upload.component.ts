@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CameraUploadComponent } from '../camera-upload/camera-upload.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ThemePalette } from "@angular/material/core";
 
 @Component({
   selector: 'sailrc-image-upload:not([ngrxFormsAction])',
@@ -20,7 +21,7 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
   imageUrl: string | ArrayBuffer = '/assets/photo-placeholder.jpg';
   imageSubmitted = false;
   imageUploadProgress$: Observable<number>;
-  menuButtonColor = 'primary';
+  menuButtonColor: ThemePalette = 'primary';
   showCameraUpload = false;
   showFileUpload = false;
   private readonly IMAGE_NAME = 'profile_picture.jpg';
@@ -29,8 +30,7 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
   private _folder = 'image-upload';
   private readonly onDestroy$ = new Subject<void>();
   private imageName: string;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private _onChange: (value: any) => void = () => {};
+  private _onChange: (value: string) => void = () => {};
 
   constructor(
     private readonly snackBar: MatSnackBar,
@@ -57,7 +57,6 @@ export class ImageUploadComponent implements OnDestroy, OnInit {
         this.handleFileChange(newValue.files);
       });
   }
-
   // endregion
 
   // region event handling methods

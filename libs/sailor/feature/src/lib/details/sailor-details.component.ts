@@ -1,4 +1,4 @@
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, filter, Observable } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
@@ -105,9 +105,10 @@ export class SailorDetailsComponent extends BaseFormComponent<Sailor> implements
 
   private subscribeToUser() {
     this.authFacade
-      .getAuthState()
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(
+      .getAuthState().pipe(
+        takeUntil(this.onDestroy$),
+        filter(val => val !== null)
+      ).subscribe(
         (user) =>
           (this.user = {
             userId: user.uid,

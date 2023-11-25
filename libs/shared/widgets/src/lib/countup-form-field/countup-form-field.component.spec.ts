@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { CdTimerOptions, CountupFormFieldComponent } from '@processpuzzle/shared/widgets';
+import { CountupFormFieldComponent, defaultCdTimerOptions } from './countup-form-field.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CdTimerModule } from 'angular-cd-timer';
-import { defaultCdTimerOptions } from './countup-form-field.component';
-import { StartSignals } from '@sailrc/race/domain';
 
 describe('CountupFormFieldComponent', () => {
   @Component({
@@ -68,7 +66,7 @@ describe('CountupFormFieldComponent', () => {
 
   describe('@Input', () => {
     it('value is set by parent component', () => {
-      const changedOptions: CdTimerOptions = {
+      testHostComponent.cdTimerOptions = {
         startTime: 10,
         endTime: 20,
         countdown: true,
@@ -76,8 +74,6 @@ describe('CountupFormFieldComponent', () => {
         maxTimeUnit: 'minute',
         format: 'default',
       };
-
-      testHostComponent.cdTimerOptions = changedOptions;
       testHostFixture.detectChanges();
 
       // mapped from cdTimerOptions
@@ -100,16 +96,16 @@ describe('CountupFormFieldComponent', () => {
     it('StartSignals.RecallSignal emitted at 1 minute.', async () => {
       testHostComponent.cdTimerOptions = { ...defaultCdTimerOptions, startTime: 60, endTime: 61, autostart: false };
       testHostFixture.detectChanges();
-      const countupEventSpy = spyOn(testHostComponent.countupFormField.countupEvent, 'emit');
+      const countupEventSpy = jest.spyOn(testHostComponent.countupFormField.countupEvent, 'emit');
       testHostComponent.countupFormField.start();
       await new Promise((r) => setTimeout(r, 1000));
-      expect(countupEventSpy).toHaveBeenCalledWith(StartSignals.RecallSignal);
+      expect(countupEventSpy).toHaveBeenCalledWith(60);
     });
 
     it('StartEvent emitted countupFormField.start().', async () => {
       testHostComponent.cdTimerOptions = { ...defaultCdTimerOptions, startTime: 0, endTime: 1, autostart: false };
       testHostFixture.detectChanges();
-      const startEventSpy = spyOn(testHostComponent.countupFormField.startEvent, 'emit');
+      const startEventSpy = jest.spyOn(testHostComponent.countupFormField.startEvent, 'emit');
       testHostComponent.countupFormField.start();
       await new Promise((r) => setTimeout(r, 1000));
       expect(startEventSpy).toHaveBeenCalledTimes(1);
@@ -118,7 +114,7 @@ describe('CountupFormFieldComponent', () => {
     it('StopEvent emitted countupFormField.stop().', async () => {
       testHostComponent.cdTimerOptions = { ...defaultCdTimerOptions, startTime: 0, endTime: 1, autostart: false };
       testHostFixture.detectChanges();
-      const stopEventSpy = spyOn(testHostComponent.countupFormField.stopEvent, 'emit');
+      const stopEventSpy = jest.spyOn(testHostComponent.countupFormField.stopEvent, 'emit');
       testHostComponent.countupFormField.start();
       testHostComponent.countupFormField.stop();
       await new Promise((r) => setTimeout(r, 1000));
@@ -128,7 +124,7 @@ describe('CountupFormFieldComponent', () => {
     it('CompleteEvent emitted when endTime reached.', async () => {
       testHostComponent.cdTimerOptions = { ...defaultCdTimerOptions, startTime: 1, endTime: 2, autostart: false };
       testHostFixture.detectChanges();
-      const completeEventSpy = spyOn(testHostComponent.countupFormField.completeEVent, 'emit');
+      const completeEventSpy = jest.spyOn(testHostComponent.countupFormField.completeEVent, 'emit');
       testHostComponent.countupFormField.start();
       await new Promise((r) => setTimeout(r, 3000));
       expect(completeEventSpy).toHaveBeenCalledTimes(1);

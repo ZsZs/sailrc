@@ -16,7 +16,7 @@ import { ImageUploadComponent } from './image-upload.component';
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ImageUploadViewAdapter implements FormViewAdapter, AfterViewInit, OnDestroy {
-  private value: any;
+  private value: string;
   private subscriptions: Subscription[] = [];
 
   constructor(private imageUpload: ImageUploadComponent) {}
@@ -29,24 +29,24 @@ export class ImageUploadViewAdapter implements FormViewAdapter, AfterViewInit, O
     this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
-  setViewValue(value: any) {
+  setViewValue(value: string) {
     this.value = value;
 
     Promise.resolve().then(() => (this.imageUpload.imageUrl = value));
   }
 
-  setOnChangeCallback(fn: any) {
+  setOnChangeCallback(fn: ( value: string) => void ) {
     this.imageUpload.registerOnChange((value) => {
       this.value = value;
       fn(value);
     });
   }
 
-  setOnTouchedCallback(fn: any) {
+  setOnTouchedCallback(fn: never) {
     console.log('image-upload: setOnTouchedCallback = ' + fn);
   }
 
   setIsDisabled(isDisabled: boolean) {
-    console.log('image-upload: setIsDisabled');
+    console.log('image-upload: setIsDisabled: ' + isDisabled);
   }
 }

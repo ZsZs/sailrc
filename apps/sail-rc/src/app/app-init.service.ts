@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
+import { Environment } from "../environments/ienvironment";
+import { ENV } from "../environments/environment.provider";
 
 @Injectable({ providedIn: 'root' })
 export class AppInitService {
-  constructor(private httpClient: HttpClient) {}
+  constructor( private httpClient: HttpClient, @Inject(ENV) private environment: Environment ) {}
 
   init(): Promise<boolean | void> {
-    const apiKey = environment.googleCloudPlatform.apiKey;
+    const apiKey = this.environment.googleCloudPlatform.apiKey;
     const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
 
     return this.httpClient

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Ou
 import { CountdownConfig, CountdownEvent, CountdownStatus } from 'ngx-countdown';
 import { Lap, LapFacade, LapState, StartSignals } from '@sailrc/race/domain';
 import { CdTimerOptions, CountdownFormFieldComponent } from '@processpuzzle/shared/widgets';
-import { NGXLogger } from 'ngx-logger';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import deepEqual from 'deep-equal';
@@ -30,7 +29,7 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
   // endregion
 
   // region constructors
-  constructor(private logger: NGXLogger, private lapFacade: LapFacade) {}
+  constructor(private lapFacade: LapFacade) {}
   // endregion
 
   // region angular lifecycle hooks
@@ -178,8 +177,6 @@ export class RaceTimerComponent implements OnDestroy, OnInit {
   }
 
   private updateComponentFromLap(lap: Lap) {
-    this.logger.debug(`Update race-timer.component from lap: ${JSON.stringify(lap)}`);
-
     this.lapState = lap.state;
 
     if (this.isStartTimeChanged(lap)) this.configureTimers(lap);

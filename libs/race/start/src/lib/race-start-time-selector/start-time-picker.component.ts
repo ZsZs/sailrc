@@ -1,9 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { Lap, LapFacade, LapState } from '@sailrc/race/domain';
-import { NGXLogger } from 'ngx-logger';
-import { map, takeUntil } from 'rxjs/operators';
-import deepEqual from 'deep-equal';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 enum TimeSelectOptions {
   LeftTime = 'LeftTime',
@@ -16,14 +11,12 @@ enum TimeSelectOptions {
   styleUrls: ['./start-time-picker.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class StartTimePickerComponent implements OnDestroy, OnInit {
-  currentLap: Lap;
+export class StartTimePickerComponent implements OnInit {
   currentTime: string;
-  lapState: LapState;
+  @Input() showControls = true;
   leftTime: number;
   @Output() startTimeEvent = new EventEmitter<Date>();
-  private readonly onDestroy$ = new Subject<void>();
-  stopTime: number;
+  @Input() stopTime: number;
   timeSelectMode: TimeSelectOptions = TimeSelectOptions.LeftTime;
 
   // region static methods
@@ -33,17 +26,11 @@ export class StartTimePickerComponent implements OnDestroy, OnInit {
   // endregion
 
   // region constructors
-  constructor(private logger: NGXLogger, private lapFacade: LapFacade) {}
   // endregion
 
   // region angular lifecycle hooks
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-  }
-
   ngOnInit(): void {
     this.currentTime = StartTimePickerComponent.calculateCurrentTime();
-    this.subscribeToCurrentLapChanges();
   }
   // endregion
 
@@ -81,27 +68,18 @@ export class StartTimePickerComponent implements OnDestroy, OnInit {
   }
   // endregion
 
-  // region protected, private methods
-  private subscribeToCurrentLapChanges() {
-    this.lapFacade.current$
-      .pipe(
-        takeUntil(this.onDestroy$),
-        map((lap) => {
-          if (!deepEqual(this.currentLap, lap)) {
-            this.currentLap = lap;
-            this.updateComponentFromLap(lap);
-          }
-        })
-      )
-      .subscribe();
-  }
-
-  private updateComponentFromLap(lap: Lap) {
+  // region public accessors and mutators
+  /*
+  @Input() public updateComponentFromLap(lap: Lap) {
     this.logger.debug(`Update start-time-picker.component from lap: ${JSON.stringify(lap)}`);
     if (lap.startTime && lap.state == LapState.Initialized) {
       this.stopTime = lap.startTime.getMilliseconds();
-      this.lapState = lap.state;
+      this.showControls = lap.state;
     }
   }
+  */
+  // endregion
+
+  // region protected, private methods
   // endregion
 }

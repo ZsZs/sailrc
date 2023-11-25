@@ -9,9 +9,9 @@
     <sailrc-start-time-picker #startTimePicker (startTimeEvent)="onStartTimeEvent($event)"></sailrc-start-time-picker>
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="start stretch">
-    <button mat-raised-button color="warn" [disabled]="lapState != 2" (click)="onAbortCountdown()">Abort countdown</button>
-    <button mat-raised-button color="accent" [disabled]="lapState != 3" (click)="onRecall()">Recall</button>
-    <button mat-raised-button color="primary" [disabled]="lapState != 4" (click)="onCancelRace()">Cancel race</button>
-    <button mat-raised-button color="primary" [disabled]="lapState != 4" (click)="onFinishRace()">Finish race</button>
+    <button mat-raised-button color="warn" [disabled]="lapState !== 2" (click)="onAbortCountdown()">Abort countdown</button>
+    <button mat-raised-button color="accent" [disabled]="lapState !== 3" (click)="onRecall()">Recall</button>
+    <button mat-raised-button color="primary" [disabled]="lapState !== 4" (click)="onCancelRace()">Cancel race</button>
+    <button mat-raised-button color="primary" [disabled]="lapState !== 4" (click)="onFinishRace()">Finish race</button>
   </mat-card-actions>
 </mat-card>

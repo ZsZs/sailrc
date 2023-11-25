@@ -1,14 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ImageUploadComponent } from './image-upload.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
-import { SharedMaterialModule } from '@processpuzzle/shared/material';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarStub, StorageServiceStub } from '../../test-setup';
+import { MatDialogMock, MatSnackBarStub, StorageServiceStub } from "../../test-setup";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { StorageService } from '@processpuzzle/shared/base';
+import { StorageService } from "@processpuzzle/shared/base";
 import { ValidateFileTypeService } from '@processpuzzle/shared/util';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+
 
 describe('ImageUploadComponent', () => {
   @Component({
@@ -26,22 +28,27 @@ describe('ImageUploadComponent', () => {
   let imageUploadComponent: ImageUploadComponent;
   let imageUploadElement: HTMLElement;
 
-  beforeEach(async () => {
+  beforeEach( async () => {
     await TestBed.configureTestingModule({
       declarations: [ImageUploadComponent, TestHostComponent],
-      imports: [MatDialogModule, ReactiveFormsModule, SharedMaterialModule],
-      providers: [{ provide: MatSnackBar, useClass: MatSnackBarStub }, { provide: StorageService, useClass: StorageServiceStub }, ValidateFileTypeService],
+      imports: [ FormsModule, MatIconModule, MatMenuModule, ReactiveFormsModule ],
+      providers: [
+        { provide: MatDialog, useClass: MatDialogMock },
+        { provide: MatSnackBar, useClass: MatSnackBarStub },
+        { provide: StorageService, useClass: StorageServiceStub },
+        ValidateFileTypeService
+      ]
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach( () => {
     testHostFixture = TestBed.createComponent(TestHostComponent);
-    testHostComponent = testHostFixture.componentInstance;
+    testHostComponent = testHostFixture.componentInstance
     testHostFixture.detectChanges();
 
     imageUploadComponent = testHostComponent.imageUploadComponent;
     imageUploadElement = testHostFixture.debugElement.nativeElement.querySelector('sailrc-image-upload');
-  });
+  })
 
   describe('initializations', () => {
     it('should create', () => expect(imageUploadComponent).toBeTruthy());

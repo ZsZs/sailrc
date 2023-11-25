@@ -13,11 +13,11 @@ export class GoogleMapsService {
     const mapsAPIUrl = `https://maps.googleapis.com/maps/api/js?key=${this.googleAPIKey}`;
 
     return this.httpClient
-      .jsonp(mapsAPIUrl, 'callback')
+      .jsonp( mapsAPIUrl, 'callback')
       .toPromise()
-      .then(async (x) => {
+      .then( async (x) => {
         await new Promise((resolve) => setTimeout(resolve, 5000));
-        console.log('Google Maps API loaded.');
+        console.log('Google Maps API loaded');
         this.isLoaded = true;
         return true;
       });

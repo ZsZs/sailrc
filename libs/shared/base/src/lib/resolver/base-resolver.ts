@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { from, Observable } from 'rxjs';
 import { BaseEntityInterface } from '../auto-entity/base-entity.interface';
 import { EditEntity } from '../auto-entity-form/actions';
-import { IBaseEntityFacade } from '../auto-entity/i-base-entity.facade';
+import { IBaseEntityFacade } from '../auto-entity/base-entity.facade';
 import { filter, first, tap } from 'rxjs/operators';
 import { makeEntity } from '@briebug/ngrx-auto-entity';
 

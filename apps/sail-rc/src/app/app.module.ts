@@ -15,10 +15,6 @@ import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore
 import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { environment } from '../environments/environment';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -34,6 +30,8 @@ import { CommonDependenciesModule } from './common-dependencies.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 import { AppInitService } from './app-init.service';
+import {ENV, getEnv} from '../environments/environment.provider';
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent, SidenavListComponent],
@@ -67,8 +65,9 @@ import { AppInitService } from './app-init.service';
   ],
   providers: [
     { provide: APP_INITIALIZER, multi: true, deps: [AppInitService], useFactory: (startupClass: AppInitService) => () => startupClass.init() },
+    { provide: ENV, useFactory: getEnv },
     { provide: SETTINGS, useValue: {} },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},
     NGXLogger,
     RouteStateService,
     SnackBarService,
