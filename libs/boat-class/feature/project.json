@@ -1,0 +1,24 @@
+{
+  "name": "boat-class-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/boat-class/feature/src",
+  "prefix": "sailrc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/boat-class/feature/src/**/*.ts", "libs/boat-class/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/boat-class/feature"],
+      "options": {
+        "jestConfig": "libs/boat-class/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:feature", ""]
+}

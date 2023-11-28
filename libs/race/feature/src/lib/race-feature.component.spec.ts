@@ -8,9 +8,8 @@ describe('RaceManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RaceFeatureComponent ]
-    })
-    .compileComponents();
+      declarations: [RaceFeatureComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

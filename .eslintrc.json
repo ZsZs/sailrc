@@ -4,6 +4,11 @@
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
+      "rules": {}
+    },
+    {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "excludedFiles": ["jest.test.js", "package.json", "apps/sail-rc/jest.config.js"],
       "rules": {
@@ -13,8 +18,17 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
-              { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
             ]
+          }
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 200
           }
         ]
       }
@@ -22,12 +36,21 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
       "rules": {}
     }
   ]

@@ -1,17 +1,12 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "sailrc",
-  "affected": { "defaultBase": "master" },
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
+  "affected": {
+    "defaultBase": "master"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "accessToken": "M2YwZWViNGItMGI5Ni00OTk0LTgyNGUtNmY3YzBmYTQzNzRmfHJlYWQtd3JpdGU=",
         "cacheableOperations": ["build", "test", "lint", "e2e"],
@@ -20,28 +15,58 @@
       }
     }
   },
-  "projects": {
-    "sail-rc": { "tags": ["type:app"] },
-    "sail-rc-e2e": { "tags": [], "implicitDependencies": ["sail-rc"] },
-    "boat-class-feature": { "tags": ["type:feature", ""] },
-    "boat-class-domain": { "tags": ["type:domain", ""] },
-    "boat-domain": { "tags": ["type:domain", ""] },
-    "boat-feature": { "tags": ["type:feature", ""] },
-    "yacht-club-domain": { "tags": ["type:domain"] },
-    "yacht-club-feature": { "tags": ["type:feature"] },
-    "race-feature": { "tags": ["type:feature"] },
-    "race-domain": { "tags": ["type:domain"] },
-    "shared-authentication-feature": { "tags": ["type:feature", "scope:shared"] },
-    "shared-authentication-domain": { "tags": ["type:domain", "scope:shared"] },
-    "shared-material": { "tags": ["type:util", "scope:shared"] },
-    "shared-base": { "tags": ["type:util", "scope:shared"] },
-    "shared-util": { "tags": ["type:util", "scope:shared"] },
-    "shared-widgets": { "tags": ["type:ui", "scope:shared"] },
-    "sailor-domain": { "tags": ["type:domain"] },
-    "sailor-feature": { "tags": ["type:feature"] },
-    "sailing-place-domain": { "tags": ["type:domain", "scope:shared"] },
-    "sailing-place-feature": { "tags": ["type:feature"] },
-    "race-participant": { "tags": ["type:feature"] },
-    "race-shared": { "tags": [] }
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "defaultProject": "sail-rc",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/angular.json", "{workspaceRoot}/tsconfig.base.json", "{workspaceRoot}/tslint.json", "{workspaceRoot}/nx.json"],
+    "production": ["default"]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": ["production", "^production"]
+    },
+    "@nx/jest:jest": {
+      "cache": true,
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "options": {
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
   }
 }

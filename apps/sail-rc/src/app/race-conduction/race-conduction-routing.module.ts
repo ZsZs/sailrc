@@ -4,11 +4,14 @@ import { RaceConductionComponent } from './race-conduction.component';
 
 const routes: Routes = [
   { path: '', component: RaceConductionComponent },
-  { path: 'participant', loadChildren: () => import( '@sailrc/race/participant/feature').then( m => m.RaceParticipantModule )},
+  { path: 'participant', loadChildren: () => import('@sailrc/race/participant/feature').then((m) => m.RaceParticipantModule) },
+  { path: 'field', loadChildren: () => import('@sailrc/race/field').then((m) => m.RaceFieldModule) },
+  { path: 'start', loadChildren: () => import('@sailrc/race/start').then((m) => m.RaceStartModule) },
+  { path: 'finish', loadChildren: () => import('@sailrc/race/finish').then((m) => m.RaceFinishModule) },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild( routes )],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class RaceConductionRoutingModule { }
+export class RaceConductionRoutingModule {}

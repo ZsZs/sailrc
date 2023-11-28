@@ -9,28 +9,15 @@ import { LapSelectorComponent } from './lap-selector/lap-selector.component';
 import { RaceDomainModule } from '@sailrc/race/domain';
 import { RaceLapContainerComponent } from './race-lap-container/race-lap-container.component';
 import { RouterModule } from '@angular/router';
+import { RaceTimerComponent } from './race-timer/race-timer.component';
+import { CountdownModule } from 'ngx-countdown';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
-  declarations: [
-    LapSelectorComponent,
-    RaceLapContainerComponent,
-    RaceLapToolbarComponent,
-    RaceSelectorComponent,
-    RaceStatusbarComponent
-  ],
-  exports: [
-    LapSelectorComponent,
-    RaceLapContainerComponent,
-    RaceLapToolbarComponent,
-    RaceSelectorComponent,
-    RaceStatusbarComponent
-  ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    RaceDomainModule.forFeature(),
-    RouterModule,
-    SharedMaterialModule,
-  ]
+  declarations: [LapSelectorComponent, RaceLapContainerComponent, RaceLapToolbarComponent, RaceSelectorComponent, RaceStatusbarComponent, RaceTimerComponent],
+  exports: [LapSelectorComponent, RaceLapContainerComponent, RaceLapToolbarComponent, RaceSelectorComponent, RaceStatusbarComponent, RaceTimerComponent],
+  imports: [CommonModule, CountdownModule, FlexModule, MatFormFieldModule, MatInputModule, RaceDomainModule.forFeature(), RouterModule, SharedMaterialModule, SharedWidgetsModule],
 })
 export class RaceSharedModule {}

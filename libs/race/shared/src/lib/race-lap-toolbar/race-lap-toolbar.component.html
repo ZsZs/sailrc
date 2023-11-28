@@ -1,8 +1,8 @@
-<div *ngIf="mediaObserver.isActive( 'gt-sm' )" fxShow="true" fxHide.lt-md="true" fxFlex fxLayout fxLayoutAlign="flex-left" fxLayoutGap="0px">
+<div *ngIf="mediaObserver.isActive('gt-sm')" fxShow="true" fxHide.lt-md="true" fxFlex fxLayout fxLayoutAlign="flex-left" fxLayoutGap="0px">
   <sailrc-race-statusbar (sidenavToggle)="showRaceSelect()"></sailrc-race-statusbar>
   <sailrc-lap-selector [lastUrlSegment]="lastUrlSegment"></sailrc-lap-selector>
 </div>
-<div *ngIf="mediaObserver.isActive( 'lt-md' )" fxShow="true" fxHide.gt-sm="true" fxLayout="column" fxLayoutAlign="end start">
+<div *ngIf="mediaObserver.isActive('lt-md')" fxShow="true" fxHide.gt-sm="true" fxLayout="column" fxLayoutAlign="end start">
   <sailrc-race-statusbar (sidenavToggle)="showRaceSelect()"></sailrc-race-statusbar>
   <sailrc-lap-selector [lastUrlSegment]="lastUrlSegment"></sailrc-lap-selector>
 </div>

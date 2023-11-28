@@ -1,15 +1,15 @@
 import { Directive, Host, Input, Optional } from '@angular/core';
-import { MatChipList } from '@angular/material/chips';
+import { MatChipListbox } from '@angular/material/chips';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { FormControlState } from 'ngrx-forms';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[ngrxFormControlState]',
 })
 export class CustomErrorStateMatcherDirective {
-  @Input() set ngrxFormControlState(state: FormControlState<any>) {
+  @Input() set ngrxFormControlState(state: FormControlState<never>) {
     const errorsAreShown = state.isInvalid && (state.isTouched || state.isSubmitted);
 
     if (this.input) {
@@ -23,15 +23,16 @@ export class CustomErrorStateMatcherDirective {
     }
 
     if (this.chipList) {
-      this.chipList.errorState = errorsAreShown;
-      this.chipList.stateChanges.next();
+      // TODO: verify if this directive still needed
+      // this.chipList.errorState = errorsAreShown;
+      // this.chipList.stateChanges.next();
     }
   }
 
   constructor(
     @Host() @Optional() private input: MatInput,
     @Host() @Optional() private select: MatSelect,
-    @Host() @Optional() private chipList: MatChipList,
+    @Host() @Optional() private chipList: MatChipListbox,
   ) { }
 }
 

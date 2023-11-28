@@ -16,13 +16,10 @@ import { BoatComponent } from './boat.component';
 import { BoatClassDomainModule, BoatClassFacade } from '@sailrc/boat-class/domain';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
-  declarations: [
-  BoatDetailsComponent,
-  BoatListComponent,
-  BoatTabsComponent,
-  BoatComponent],
+  declarations: [BoatDetailsComponent, BoatListComponent, BoatTabsComponent, BoatComponent],
   imports: [
     BoatDomainModule.forFeature(),
     BoatClassDomainModule.forFeature(),
@@ -32,17 +29,17 @@ import { SharedBaseModule } from '@processpuzzle/shared/base';
     NgrxFormsModule,
     SharedBaseModule,
     SharedMaterialModule,
-    StoreModule.forFeature( FEATURE_NAME, boatFeatureReducer )
+    SharedWidgetsModule,
+    StoreModule.forFeature(FEATURE_NAME, boatFeatureReducer),
   ],
   exports: [],
-  providers: [BoatClassFacade, BoatFeatureFacade, BoatResolver]
+  providers: [BoatClassFacade, BoatFeatureFacade, BoatResolver],
 })
-
 export class BoatFeatureModule {
   static forFeature(): ModuleWithProviders<BoatFeatureModule> {
     return {
       ngModule: BoatFeatureModule,
-      providers: [BoatFeatureFacade]
-    }
+      providers: [BoatFeatureFacade],
+    };
   }
 }

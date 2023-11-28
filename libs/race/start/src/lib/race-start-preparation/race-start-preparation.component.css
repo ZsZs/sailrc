@@ -1,0 +1,23 @@
+.counterOption {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+countdown {
+  margin: 0;
+}
+
+.sign-container {
+  display: inline-block;
+  width: auto;
+}
+
+.sign-container img {
+  height: 60px;
+  width: auto;
+  padding: 30px;
+}
+
+mat-card-title {
+  padding-right: 10px;
+}

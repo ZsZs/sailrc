@@ -5,7 +5,7 @@ import { SailorDetailsComponent } from './details/sailor-details.component';
 import { SailorListComponent } from './list/sailor-list.component';
 import { SailorTabsComponent } from './tabs/sailor-tabs.component';
 import { SailorDomainModule, SailorFacade } from '@sailrc/sailor/domain';
-import { YachtClubDomainModule } from '@sailrc/yacht-club/domain';
+import { YachtClubDomainModule, YachtClubFacade } from '@sailrc/yacht-club/domain';
 import { SharedMaterialModule } from '@processpuzzle/shared/material';
 import { StoreModule } from '@ngrx/store';
 import { NgrxFormsModule } from 'ngrx-forms';
@@ -16,16 +16,12 @@ import { SailorResolver } from './sailor.resolver';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
 import { FlexModule } from '@angular/flex-layout';
 import { BoatDomainModule, BoatFacade } from '@sailrc/boat/domain';
-import { YachtClubFeatureFacade } from '@sailrc/yacht-club/feature';
+import { YachtClubFeatureFacade, YachtClubFeatureModule } from '@sailrc/yacht-club/feature';
 import { BoatFeatureFacade } from '@sailrc/boat/feature';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 @NgModule({
-  declarations: [
-    SailorDetailsComponent,
-    SailorFeatureComponent,
-    SailorListComponent,
-    SailorTabsComponent
-  ],
+  declarations: [SailorDetailsComponent, SailorFeatureComponent, SailorListComponent, SailorTabsComponent],
   imports: [
     BoatDomainModule.forFeature(),
     CommonModule,
@@ -34,24 +30,19 @@ import { BoatFeatureFacade } from '@sailrc/boat/feature';
     SailorDomainModule.forFeature(),
     SailorFeatureRoutingModule,
     SharedBaseModule,
+    SharedWidgetsModule,
     SharedMaterialModule,
-    StoreModule.forFeature( FEATURE_NAME, sailorFeatureReducer ),
-    YachtClubDomainModule.forFeature()
+    StoreModule.forFeature(FEATURE_NAME, sailorFeatureReducer),
+    YachtClubDomainModule.forFeature(),
+    YachtClubFeatureModule.forFeature(),
   ],
-  providers: [
-    BoatFacade,
-    BoatFeatureFacade,
-    SailorFacade,
-    SailorFeatureFacade,
-    SailorResolver,
-    YachtClubFeatureFacade
-  ]
+  providers: [BoatFacade, BoatFeatureFacade, SailorFacade, SailorFeatureFacade, SailorResolver, YachtClubFacade, YachtClubFeatureFacade],
 })
 export class SailorFeatureModule {
   static forFeature(): ModuleWithProviders<SailorFeatureModule> {
     return {
       ngModule: SailorFeatureModule,
-      providers: [SailorFeatureFacade]
-    }
+      providers: [SailorFeatureFacade],
+    };
   }
 }

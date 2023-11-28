@@ -22,10 +22,12 @@ import { CustomErrorStateMatcherDirective } from './error-state-matcher';
 import { MatListOptionFixDirective } from './mat-list-option-fix';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   imports: [
@@ -34,7 +36,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MaterialFileInputModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -44,20 +45,20 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMatFileInputModule,
   ],
-  declarations: [
-    NgrxMatSelectViewAdapter,
-    CustomErrorStateMatcherDirective,
-    MatListOptionFixDirective,
-  ],
+  declarations: [NgrxMatSelectViewAdapter, CustomErrorStateMatcherDirective, MatListOptionFixDirective],
   exports: [
     CustomErrorStateMatcherDirective,
     MatButtonModule,
@@ -65,7 +66,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MaterialFileInputModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -75,16 +75,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    NgrxMatSelectViewAdapter
-  ]
+    NgxMatFileInputModule,
+    NgrxMatSelectViewAdapter,
+  ],
 })
 export class SharedMaterialModule {}

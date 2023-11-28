@@ -1,0 +1,24 @@
+{
+  "name": "boat-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/boat/domain/src",
+  "prefix": "sailrc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/boat/domain/src/**/*.ts", "libs/boat/domain/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/boat/domain"],
+      "options": {
+        "jestConfig": "libs/boat/domain/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:domain", ""]
+}

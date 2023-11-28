@@ -16,6 +16,7 @@ import { YachtClubFeatureFacade } from './yacht-club-feature.facade';
 import { YachtClubResolver } from './yacht-club.resolver';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { SharedBaseModule } from '@processpuzzle/shared/base';
     NgrxFormsModule,
     SharedBaseModule,
     SharedMaterialModule,
+    SharedWidgetsModule,
     StoreModule.forFeature( FEATURE_NAME, yachtClubFeatureReducer ),
     YachtClubDomainModule.forFeature(),
     YachtClubFeatureRoutingModule

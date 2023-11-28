@@ -8,9 +8,8 @@ describe('RoundSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LapSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [LapSelectorComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

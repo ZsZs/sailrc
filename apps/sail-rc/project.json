@@ -1,0 +1,161 @@
+{
+  "name": "sail-rc",
+  "$schema": "{workspaceRoot}/node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/sail-rc/src",
+  "prefix": "sailrc",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/sail-rc",
+        "index": "apps/sail-rc/src/index.html",
+        "main": "apps/sail-rc/src/main.ts",
+        "polyfills": "apps/sail-rc/src/polyfills.ts",
+        "tsConfig": "apps/sail-rc/tsconfig.app.json",
+        "aot": true,
+        "assets": ["apps/sail-rc/src/favicon.ico", "apps/sail-rc/src/assets"],
+        "styles": ["apps/sail-rc/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "buildOptimizer": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "namedChunks": true,
+          "vendorChunk": true
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "apps/sail-rc/src/environments/environment.ts",
+              "with": "apps/sail-rc/src/environments/environment.test.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/sail-rc/src/environments/environment.ts",
+              "with": "apps/sail-rc/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "apps/sail-rc/src/proxy.conf.json",
+        "buildTarget": "sail-rc:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "sail-rc:build:production"
+        },
+        "development": {
+          "buildTarget": "sail-rc:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "sail-rc:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/sail-rc/src/**/*.ts", "apps/sail-rc/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/sail-rc"],
+      "options": {
+        "jestConfig": "apps/sail-rc/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "{workspaceRoot}/apps/sail-rc/src/environments/environment.ts",
+              "with": "{workspaceRoot}/apps/sail-rc/src/environments/environment.test.ts"
+            }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/sail-rc/src/environments/environment.ts",
+              "with": "apps/sail-rc/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "tags": ["type:app"]
+}

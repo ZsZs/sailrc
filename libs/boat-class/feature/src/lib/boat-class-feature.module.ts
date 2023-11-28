@@ -14,6 +14,7 @@ import { BoatClassResolver } from './boat-class.resolver';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedBaseModule } from '@processpuzzle/shared/base';
 import { boatClassFeatureReducer, FEATURE_NAME } from './store/boat-class-feature.reducer';
+import { SharedWidgetsModule } from '@processpuzzle/shared/widgets';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { boatClassFeatureReducer, FEATURE_NAME } from './store/boat-class-featur
     NgrxFormsModule,
     SharedBaseModule,
     SharedMaterialModule,
+    SharedWidgetsModule,
     StoreModule.forFeature( FEATURE_NAME, boatClassFeatureReducer )
   ],
   exports: [],

@@ -13,7 +13,7 @@ export class VarDirective {
 
   context: any = {};
 
-  constructor(private vcRef: ViewContainerRef, private templateRef: TemplateRef<any>) {}
+  constructor(private vcRef: ViewContainerRef, private templateRef: TemplateRef<unknown>) {}
 
   updateView() {
     this.vcRef.clear();

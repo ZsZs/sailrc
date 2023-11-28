@@ -22,14 +22,7 @@ import { BoatDomainModule } from '@sailrc/boat/domain';
 import { SailorFeatureModule } from '@sailrc/sailor/feature';
 
 @NgModule({
-  declarations: [
-    RaceDetailsComponent,
-    RaceFeatureComponent,
-    RaceListComponent,
-    RaceTabsComponent,
-    RegistrationDetailsComponent,
-    RegistrationListComponent
-  ],
+  declarations: [RaceDetailsComponent, RaceFeatureComponent, RaceListComponent, RaceTabsComponent, RegistrationDetailsComponent, RegistrationListComponent],
   imports: [
     BoatDomainModule.forFeature(),
     CommonModule,
@@ -41,12 +34,9 @@ import { SailorFeatureModule } from '@sailrc/sailor/feature';
     SailorDomainModule.forFeature(),
     SailorFeatureModule.forFeature(),
     SharedMaterialModule,
-    StoreModule.forFeature( FEATURE_NAME, raceFeatureReducer ),
-    YachtClubDomainModule.forFeature()
+    StoreModule.forFeature(FEATURE_NAME, raceFeatureReducer),
+    YachtClubDomainModule.forFeature(),
   ],
-  providers: [
-    RaceResolver,
-    RegistrationResolver
-  ]
+  providers: [RaceResolver, RegistrationResolver],
 })
 export class RaceFeatureModule {}

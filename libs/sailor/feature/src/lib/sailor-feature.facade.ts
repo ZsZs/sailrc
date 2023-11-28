@@ -4,14 +4,13 @@ import { Sailor, SailorFacade } from '@sailrc/sailor/domain';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SailorFeatureFacade extends BaseFormFacade<Sailor> implements IEntityFormFacade<Sailor> {
-  constructor( protected store: Store<never>, protected router: Router, sailorFacade: SailorFacade ) {
-    super( Sailor, store, router, sailorFacade );
+  constructor(protected store: Store<never>, protected router: Router, sailorFacade: SailorFacade) {
+    super(Sailor, store, router, sailorFacade);
   }
 
-
-  jumpToDetails( id: string, returnTo: string ) {
-    this.navigateToDetails( `/race-planning/sailor/${id}/details`, returnTo )
+  jumpToDetails(id: string, returnTo: string) {
+    this.navigateToDetails(`/race-planning/sailor/${id}/details`, returnTo);
   }
 }

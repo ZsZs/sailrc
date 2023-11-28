@@ -1,0 +1,147 @@
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ActiveTabService } from '../../services/active-tab.service';
+import { ComponentDestroyService } from '../../services/component-destroy.service';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { BaseEntityInterface, IEntityFormFacade } from '@processpuzzle/shared/base';
+import { IEntityFacade } from '@briebug/ngrx-auto-entity';
+
+import { BaseUrlSegments } from '@processpuzzle/shared/util';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  templateUrl: 'base-list.component.html',
+  styleUrls: ['./base-list.component.css'],
+})
+export abstract class BaseListComponent<T extends BaseEntityInterface> implements AfterViewInit, OnDestroy, OnInit {
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  dataSource = new MatTableDataSource<T>();
+  dataSourceSubscription: Subscription;
+  selection = new SelectionModel<T>(true, []);
+  isLoading$: Observable<boolean>;
+  protected entityFacade: IEntityFacade<T>;
+  protected readonly onDestroy$ = new Subject<void>();
+  protected readonly tabName: string;
+
+  protected constructor(
+    @Inject('entityFormFacade') protected entityFormFacade: IEntityFormFacade<T>,
+    protected route: ActivatedRoute,
+    protected activeTabService: ActiveTabService,
+    protected componentDestroyService: ComponentDestroyService
+  ) {
+    this.entityFacade = this.entityFormFacade.entityFacade;
+    this.tabName = this.entityFormFacade.info.modelName + '-list';
+  }
+
+  // region public accessors and mutators
+  addEntity() {
+    this.navigateToDetailsForm(BaseUrlSegments.NewEntity);
+  }
+
+  checkboxLabel(row?: T): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
+  }
+
+  deleteEntities() {
+    if (this.selection.selected.length > 0) {
+      for (let i = 0, len = this.selection.selected.length; i < len; i++) {
+        this.entityFacade.delete(this.selection.selected[i]);
+      }
+
+      this.selection.clear();
+    }
+  }
+
+  doFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  isSelected(row: T) {
+    return this.selection.isSelected(row);
+  }
+  // endregion
+
+  // region angular life cycle hooks, event handling
+  masterToggle() {
+    this.isAllSelected() ? this.cancelSelections() : this.dataSource.data.forEach((row) => this.selection.select(row));
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    this.dataSourceSubscription.unsubscribe();
+    this.componentDestroyService.unsubscribeComponent$.next();
+    this.activeTabService.tabIsInActive(this.tabName);
+    this.onDestroy$.next();
+  }
+
+  ngOnInit() {
+    this.activeTabService.tabIsActive(this.tabName);
+    this.loadAllEntities();
+    this.dataSourceSubscription = this.subscribeToSourceData();
+    this.subscribeToLoading();
+  }
+
+  onChangeSelection(row?: T) {
+    if (this.isSelected(row)) {
+      this.entityFacade.selectMore([row]);
+    } else {
+      this.entityFacade.deselectMany([row]);
+    }
+    if (this.selection.selected.length === 1) {
+      this.entityFacade.select(this.selection.selected[0]);
+    } else {
+      this.entityFacade.deselect();
+    }
+  }
+
+  onRowClick(row: T) {
+    this.entityFacade.select(row);
+    this.navigateToDetailsForm(row.id);
+  }
+  // endregion
+
+  // region protected, private helper methods
+  private cancelSelections() {
+    this.selection.clear();
+  }
+
+  protected loadAllEntities() {
+    this.entityFacade.loadAll();
+  }
+
+  protected navigateToDetailsForm(entityId: string) {
+    const currentUrl = this.route.snapshot['_routerState'].url;
+    const detailsFormPath = currentUrl.substring(0, currentUrl.lastIndexOf('/')) + '/' + entityId + '/details';
+    this.entityFormFacade.navigateToDetails(detailsFormPath, currentUrl);
+  }
+
+  private subscribeToLoading() {
+    this.isLoading$ = this.entityFacade.isLoading$;
+  }
+
+  protected subscribeToSourceData(): Subscription {
+    return this.entityFacade.all$.pipe(takeUntil(this.onDestroy$)).subscribe((data: T[]) => {
+      this.dataSource.data = data;
+    });
+  }
+  // endregion
+}

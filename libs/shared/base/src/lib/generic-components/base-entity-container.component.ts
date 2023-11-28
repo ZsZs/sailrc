@@ -13,9 +13,9 @@ export abstract class BaseEntityContainerComponent<T extends BaseEntityInterface
   protected entityId: string;
   private readonly onDestroy = new Subject<void>();
 
-  constructor( @Inject('entityFacade') protected entityFacade: IBaseEntityFacade<T>,
-               protected routerFacade: RouterFacade,
-               protected route: ActivatedRoute ) {
+  protected constructor( @Inject('entityFacade') protected entityFacade: IBaseEntityFacade<T>,
+                         protected routerFacade: RouterFacade,
+                         protected route: ActivatedRoute ) {
   }
 
   // public event handlers
@@ -31,7 +31,7 @@ export abstract class BaseEntityContainerComponent<T extends BaseEntityInterface
   // protected, private helper methods
   protected detailsRoute( entityId: string ): string {
     return '../' + entityId + '/' + BaseUrlSegments.DetailsForm;
-  };
+  }
 
   private navigateToDetailsForm( entity: T ) {
     this.routerFacade.routerGo( [this.detailsRoute( entity.id )], {}, { relativeTo: this.route } )
