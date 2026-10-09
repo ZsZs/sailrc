@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ActivationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs/operators';
@@ -9,25 +9,31 @@ import { routeChange, routerGo } from './router.actions';
 @Injectable()
 export class RouterEffects {
 
-  constructor( private actions$: Actions, private router: Router, private location: Location, private store: Store<any> ) {
+  constructor( private actions$: Actions, private router: Router, private location: Location, private store: Store<never> ) {
     this.listenToRouter();
   }
 
-  @Effect({ dispatch: false })
-  navigate$ = this.actions$.pipe(
-    ofType( routerGo ),
-    tap(({ path, queryParams, extras }) => {
-      this.router.navigate( path, { queryParams, ...extras })
-    })
+  navigate$ = createEffect( () => this.actions$.pipe(
+      ofType( routerGo ),
+      tap(({ path, queryParams, extras }) => {
+        return this.router.navigate( path, { queryParams, ...extras })
+      })
+    ),
+  { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  navigateBack$ = this.actions$.pipe(ofType('[Router] Back'), tap(() => this.location.back() ));
+  navigateBack$ = createEffect( () => this.actions$.pipe(
+      ofType('[Router] Back'),
+      tap(() => this.location.back() )
+    ),
+    { dispatch: false }
+  );
 
-  @Effect({ dispatch: false })
-  navigateForward$ = this.actions$.pipe(
-    ofType('[Router] Forward'),
-    tap(() => this.location.forward() )
+  navigateForward$ = createEffect( () => this.actions$.pipe(
+      ofType('[Router] Forward'),
+      tap(() => this.location.forward() )
+    ),
+   { dispatch: false }
   );
 
   private listenToRouter() {

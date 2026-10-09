@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   selector: 'sailrc-race-lap-container',
   templateUrl: './race-lap-container.component.html',
   styleUrls: ['./race-lap-container.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class RaceLapContainerComponent implements OnDestroy, OnInit {
   @ViewChild('raceSelect') raceSelector: MatSidenav;
@@ -18,7 +18,7 @@ export class RaceLapContainerComponent implements OnDestroy, OnInit {
   lastUrlSegment$: Observable<string>;
   private lastUrlSegmentSubscription: Subscription;
 
-  constructor( private raceFacade: RaceFacade, private lapFacade: LapFacade, private routeState: RouteStateService ) {}
+  constructor(private raceFacade: RaceFacade, private lapFacade: LapFacade, private routeState: RouteStateService) {}
 
   // region angular lifecycle hooks
   ngOnDestroy() {
@@ -40,15 +40,15 @@ export class RaceLapContainerComponent implements OnDestroy, OnInit {
 
   // protected, private helper methods
   private subscribeToLastUrlSegment() {
-    this.lastUrlSegmentSubscription = this.routeState.urlSegment.pipe(
-      filter( urlSegment => {
-        return !!urlSegment;
-      } )
-    ).subscribe(
-      urlSegment => {
-        return this.lastUrlSegment$ = of( urlSegment );
-      }
-    );
+    this.lastUrlSegmentSubscription = this.routeState.urlSegment
+      .pipe(
+        filter((urlSegment) => {
+          return !!urlSegment;
+        })
+      )
+      .subscribe((urlSegment) => {
+        return (this.lastUrlSegment$ = of(urlSegment));
+      });
   }
   // endregion
 }

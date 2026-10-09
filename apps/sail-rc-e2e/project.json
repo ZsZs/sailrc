@@ -1,0 +1,29 @@
+{
+  "name": "sail-rc-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/sail-rc-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/sail-rc-e2e/cypress.json",
+        "tsConfig": "apps/sail-rc-e2e/tsconfig.e2e.json",
+        "devServerTarget": "sail-rc:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "sail-rc:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/sail-rc-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["sail-rc"]
+}

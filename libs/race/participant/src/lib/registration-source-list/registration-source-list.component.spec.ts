@@ -8,9 +8,8 @@ describe('RegistrationSourceListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistrationSourceListComponent ]
-    })
-    .compileComponents();
+      declarations: [RegistrationSourceListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

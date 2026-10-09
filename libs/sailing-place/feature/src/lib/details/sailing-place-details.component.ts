@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { SailingPlace } from '@sailrc/sailing-place/domain';
 import { RouterFacade } from '@processpuzzle/shared/util';
 import { ActivatedRoute } from '@angular/router';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { Store } from '@ngrx/store';
 import { ISailingPlaceFeatureState } from '../sailing-place-feature.reducer';
 import { SailingPlaceFeatureFacade } from '../sailing-place-feature.facade';
@@ -12,10 +12,9 @@ import { SailingPlaceFeatureFacade } from '../sailing-place-feature.facade';
   selector: 'sailrc-sailing-place-details',
   templateUrl: './sailing-place-details.component.html',
   styleUrls: ['./sailing-place-details.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SailingPlaceDetailsComponent extends BaseFormComponent<SailingPlace> {
-
   constructor(
     protected boatFeatureFacade: SailingPlaceFeatureFacade,
     protected routerFacade: RouterFacade,
@@ -24,6 +23,6 @@ export class SailingPlaceDetailsComponent extends BaseFormComponent<SailingPlace
     protected componentDestroyService: ComponentDestroyService,
     protected store: Store<ISailingPlaceFeatureState>
   ) {
-    super( boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
+    super(boatFeatureFacade, routerFacade, route, activeTabService, componentDestroyService);
   }
 }

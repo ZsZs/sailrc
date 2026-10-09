@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Registration } from '@sailrc/race/domain';
 import { RouterFacade } from '@processpuzzle/shared/util';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { BaseFormComponent } from '@processpuzzle/shared/base';
 import { IRaceFeatureState } from '../../store/race-feature.reducer';
 import { RegistrationFeatureFacade } from '../registration-feature.facade';
@@ -17,9 +17,8 @@ import { SailorFeatureFacade } from '@sailrc/sailor/feature';
 @Component({
   selector: 'sailrc-registration-details',
   templateUrl: './registration-details.component.html',
-  styleUrls: ['./registration-details.component.css']
+  styleUrls: ['./registration-details.component.css'],
 })
-
 export class RegistrationDetailsComponent extends BaseFormComponent<Registration> {
   boats$: Observable<Boat[]>;
   sailors$: Observable<Sailor[]>;
@@ -41,7 +40,7 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
     private sailorFacade: SailorFacade,
     private sailorFeatureFacade: SailorFeatureFacade
   ) {
-    super( registrationFeatureFacade, routerFacade, route, activeTabService, componentDestroyService );
+    super(registrationFeatureFacade, routerFacade, route, activeTabService, componentDestroyService);
   }
 
   // region life cycle hooks
@@ -57,22 +56,20 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
   // endregion
 
   // region event handling methods
-  protected adjustEntity( entity: Registration ) {
-    return {...entity, boatName: this.boatName, boatType: this.boatType, sailNumber: this.sailNumber, skipper: this.skipperName };
+  protected adjustEntity(entity: Registration) {
+    return { ...entity, boatName: this.boatName, boatType: this.boatType, sailNumber: this.sailNumber, skipper: this.skipperName };
   }
 
   onAddBoat() {
-    this.boatFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+    this.boatFeatureFacade.jumpToDetails('new', this.sailorFeatureFacade.currentUrl());
   }
 
   onAddSailor() {
-    this.sailorFeatureFacade.jumpToDetails( 'new', this.sailorFeatureFacade.currentUrl() );
+    this.sailorFeatureFacade.jumpToDetails('new', this.sailorFeatureFacade.currentUrl());
   }
 
-  onBoatSelected( boatId: string ) {
-    this.boats$.pipe(
-      map( boats => boats.filter( boat => boat.id == boatId ))
-    ).subscribe( boats => {
+  onBoatSelected(boatId: string) {
+    this.boats$.pipe(map((boats) => boats.filter((boat) => boat.id == boatId))).subscribe((boats) => {
       this.boatName = boats[0].name;
       this.sailNumber = boats[0].sailNumber;
       this.boatType = boats[0].boatClass;
@@ -80,27 +77,29 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
   }
 
   onGoToBoat() {
-    this.formState$.pipe(
-      map( formState => formState.controls.boatId.value ),
-      take( 1 )
-    ).subscribe( boatId => {
-      this.boatFeatureFacade.jumpToDetails( boatId, this.boatFeatureFacade.currentUrl() );
-    })
+    this.formState$
+      .pipe(
+        map((formState) => formState.controls.boatId.value),
+        take(1)
+      )
+      .subscribe((boatId) => {
+        this.boatFeatureFacade.jumpToDetails(boatId, this.boatFeatureFacade.currentUrl());
+      });
   }
 
   onGoToSailor() {
-    this.formState$.pipe(
-      map( formState => formState.controls.sailorId.value ),
-      take( 1 )
-    ).subscribe( sailorId => {
-      this.sailorFeatureFacade.jumpToDetails( sailorId, this.sailorFeatureFacade.currentUrl() );
-    })
+    this.formState$
+      .pipe(
+        map((formState) => formState.controls.sailorId.value),
+        take(1)
+      )
+      .subscribe((sailorId) => {
+        this.sailorFeatureFacade.jumpToDetails(sailorId, this.sailorFeatureFacade.currentUrl());
+      });
   }
 
-  onSailorSelected( sailorId: string ) {
-    this.sailors$.pipe(
-      map( sailors => sailors.filter( sailor => sailor.id == sailorId ))
-    ).subscribe( sailors => {
+  onSailorSelected(sailorId: string) {
+    this.sailors$.pipe(map((sailors) => sailors.filter((sailor) => sailor.id == sailorId))).subscribe((sailors) => {
       this.skipperName = sailors[0].lastName + ', ' + sailors[0].firstName;
     });
   }
@@ -110,7 +109,7 @@ export class RegistrationDetailsComponent extends BaseFormComponent<Registration
 
   // region protected, private helper methods
   protected determineRaceId() {
-    this.raceId = this.route.snapshot.data[ 'race' ].id;
+    this.raceId = this.route.snapshot.data['race'].id;
   }
   // endregion
 }

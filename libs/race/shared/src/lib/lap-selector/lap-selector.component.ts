@@ -7,9 +7,8 @@ import { Lap, LapFacade, RaceFacade } from '@sailrc/race/domain';
 @Component({
   selector: 'sailrc-lap-selector',
   templateUrl: './lap-selector.component.html',
-  styleUrls: ['./lap-selector.component.css']
+  styleUrls: ['./lap-selector.component.css'],
 })
-
 export class LapSelectorComponent implements OnDestroy, OnInit {
   @Input() lastUrlSegment: string;
   numberOfLaps = 0;
@@ -17,7 +16,7 @@ export class LapSelectorComponent implements OnDestroy, OnInit {
   selectedLap: Lap;
   selectedLapSubscription: Subscription;
 
-  constructor( private raceFacade: RaceFacade, private lapFacade: LapFacade, private router: Router, private route: ActivatedRoute ) { }
+  constructor(private raceFacade: RaceFacade, private lapFacade: LapFacade, private router: Router, private route: ActivatedRoute) {}
 
   // region component lifecycle handling methods
   ngOnDestroy(): void {
@@ -35,15 +34,17 @@ export class LapSelectorComponent implements OnDestroy, OnInit {
   // region event handling methods
   addLap() {
     const newLap = new Lap();
-    this.raceFacade.current$.pipe(
-      first(),
-      map( race => {
-        newLap.raceId = race.id;
-        newLap.index = this.numberOfLaps + 1;
-        this.lapFacade.create( newLap, race.id );
-        this.changeSelectedLap( newLap.index );
-      })
-    ).subscribe();
+    this.raceFacade.current$
+      .pipe(
+        first(),
+        map((race) => {
+          newLap.raceId = race.id;
+          newLap.index = this.numberOfLaps + 1;
+          this.lapFacade.create(newLap, race.id);
+          this.changeSelectedLap(newLap.index);
+        })
+      )
+      .subscribe();
   }
 
   canNext() {
@@ -55,55 +56,59 @@ export class LapSelectorComponent implements OnDestroy, OnInit {
   }
 
   nextLap() {
-    if ( this.canNext() ) {
+    if (this.canNext()) {
       const newLapIndex = this.selectedLap.index + 1;
-      this.changeSelectedLap( newLapIndex );
+      this.changeSelectedLap(newLapIndex);
     }
   }
 
   previousLap() {
-    if ( this.canPrevious() ) {
+    if (this.canPrevious()) {
       const newLapIndex = this.selectedLap.index - 1;
-      this.changeSelectedLap( newLapIndex );
+      this.changeSelectedLap(newLapIndex);
     }
   }
 
   deleteLap() {
-    console.log( 'should delete lap' );
+    console.log('should delete lap');
   }
   // endregion
 
   // protected, private helper methods
-  private changeSelectedLap( index: number ) {
-    this.lapFacade.all$.pipe(
-      map( laps => laps.filter( lap => lap.index == index )),
-      take( 1 )
-    ).subscribe( laps => {
-      this.lapFacade.select( laps[0] );
-    });
+  private changeSelectedLap(index: number) {
+    this.lapFacade.all$
+      .pipe(
+        map((laps) => laps.filter((lap) => lap.index == index)),
+        take(1)
+      )
+      .subscribe((laps) => {
+        this.lapFacade.select(laps[0]);
+      });
   }
 
   private loadLaps() {
-    this.raceFacade.current$.pipe(
-      first(),
-      tap( race => {
-        this.lapFacade.loadAll( race.id );
-      })
-    ).subscribe();
+    this.raceFacade.current$
+      .pipe(
+        first(),
+        tap((race) => {
+          this.lapFacade.loadAll(race.id);
+        })
+      )
+      .subscribe();
   }
 
   private subscribeToNumberOfLaps() {
-    this.numberOfLapsSubscription = this.lapFacade.total$.subscribe( count => {
+    this.numberOfLapsSubscription = this.lapFacade.total$.subscribe((count) => {
       this.numberOfLaps = count;
-      if ( this.numberOfLaps > 0 ) {
-        this.changeSelectedLap( 1 );
+      if (this.numberOfLaps > 0) {
+        this.changeSelectedLap(1);
       }
     });
   }
 
   private subscribeToSelectedLap() {
-    this.selectedLapSubscription = this.lapFacade.current$.subscribe( lap => {
-      if ( lap ) {
+    this.selectedLapSubscription = this.lapFacade.current$.subscribe((lap) => {
+      if (lap) {
         this.selectedLap = lap;
         this.updateLapIndexInRoute();
       }
@@ -112,8 +117,8 @@ export class LapSelectorComponent implements OnDestroy, OnInit {
 
   private updateLapIndexInRoute() {
     const urlFragment = this.lastUrlSegment ? '/' + this.lastUrlSegment : '';
-    if ( this.selectedLap ) {
-      this.router.navigate( ['race/' + this.selectedLap.raceId + '/lap/' + this.selectedLap.index + urlFragment], {relativeTo: this.route } );
+    if (this.selectedLap) {
+      this.router.navigate(['race/' + this.selectedLap.raceId + '/lap/' + this.selectedLap.index + urlFragment], { relativeTo: this.route });
     }
   }
 }

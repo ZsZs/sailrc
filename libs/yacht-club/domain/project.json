@@ -1,0 +1,24 @@
+{
+  "name": "yacht-club-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/yacht-club/domain/src",
+  "prefix": "sailrc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/yacht-club/domain/src/**/*.ts", "libs/yacht-club/domain/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/yacht-club/domain"],
+      "options": {
+        "jestConfig": "libs/yacht-club/domain/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:domain"]
+}

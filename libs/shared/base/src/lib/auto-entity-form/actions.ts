@@ -1,4 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { pascalCase } from './case';
 
 export enum EntityFormActionTypes {

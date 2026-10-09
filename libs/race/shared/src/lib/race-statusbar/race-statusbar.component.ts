@@ -5,13 +5,13 @@ import { Race, RaceFacade } from '@sailrc/race/domain';
 @Component({
   selector: 'sailrc-race-statusbar',
   templateUrl: './race-statusbar.component.html',
-  styleUrls: ['./race-statusbar.component.css']
+  styleUrls: ['./race-statusbar.component.css'],
 })
 export class RaceStatusbarComponent implements OnInit {
   selectedRace: Observable<Race>;
   @Output() sidenavToggle = new EventEmitter<void>();
 
-  constructor( private raceFacade: RaceFacade ) { }
+  constructor(private raceFacade: RaceFacade) {}
 
   // region angular lifecycle hooks
   ngOnInit() {

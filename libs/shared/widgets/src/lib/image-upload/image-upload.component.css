@@ -1,0 +1,21 @@
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  object-fit: cover;
+}
+
+.photo-actions {
+  display: inline-block;
+  position: relative;
+}
+
+.photo-actions .mat-icon-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

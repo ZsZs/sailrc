@@ -20,7 +20,7 @@ export const FEATURE_AFFINITY = '__ngrxae_feature_form_affinity';
  * @param selectParentState a selector for the entity's parent state
  * @param extraInitialState the (optional) initial feature state
  */
-export const buildAutoFormFeatureState = <TState extends IEntityFormState<TModel>, TParentState extends any, TModel, TExtra>(
+export const buildAutoFormFeatureState = <TState extends IEntityFormState<TModel>, TParentState, TModel, TExtra>(
   type: IModelClass<TModel>,
   featureStateName: NonNullable<string>,
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -38,7 +38,8 @@ export const buildAutoFormFeatureState = <TState extends IEntityFormState<TModel
     selectParentState,
     (state: TParentState) => {
       if (!state) {
-        const message = `Could not retrieve feature state ${featureStateName} for model ${opts.modelName}! Make sure you add your entity state to the feature state with a property named exactly '${stateName}'.`;
+        const message =
+          `Could not retrieve feature state ${featureStateName} for model ${opts.modelName}! Make sure you add your entity state to the feature state with a property named exactly '${stateName}'.`;
         const example = ` Example app state:
 
 export interface FeatureState {

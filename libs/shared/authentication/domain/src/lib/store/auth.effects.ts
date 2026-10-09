@@ -1,4 +1,4 @@
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { authenticateUser, setAuthenticated } from './auth.actions';
@@ -8,21 +8,23 @@ import { AuthState, getRedirectTo } from './auth.reducer';
 
 @Injectable()
 export class AuthEffects {
-  @Effect({dispatch: false}) authenticateUser = this.actions$.pipe(
-    ofType( authenticateUser ),
-    tap( action => {
-        this.router.navigate( ['/login'] );
-    }));
+  authenticateUser$ = createEffect( () => this.actions$.pipe(
+      ofType( authenticateUser ),
+      tap( () => this.router.navigate( ['/login'] ))
+    ),
+    { dispatch: false }
+  );
 
-  @Effect({dispatch: false}) setAuthenticated = this.actions$.pipe(
-    ofType( setAuthenticated ),
-    tap( action => {
-      this.store.select( getRedirectTo ).pipe( take( 1 )).subscribe( redirectTo => {
-        if ( redirectTo ) {
-          this.router.navigateByUrl( redirectTo );
-        }
-      });
-    }));
+  setAuthenticated$ = createEffect( () => this.actions$.pipe(
+      ofType( setAuthenticated ),
+      tap( () => {
+        this.store.select( getRedirectTo ).pipe( take( 1 )).subscribe( redirectTo => {
+            if ( redirectTo ) return this.router.navigateByUrl( redirectTo );
+          })
+      })
+    ),
+    { dispatch: false }
+  );
 
   constructor(
     private actions$: Actions,

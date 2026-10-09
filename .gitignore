@@ -29,10 +29,10 @@
 !.vscode/extensions.json
 
 # misc
+.angular
 .firebase
 /.sass-cache
 /connect.lock
-/coverage
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
@@ -40,6 +40,7 @@ testem.log
 /typings
 /apps/sail-rc/src/environments
 .env
+.nx
 
 # System Files
 .DS_Store

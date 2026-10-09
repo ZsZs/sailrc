@@ -1,0 +1,25 @@
+//import { ImageUploadViewAdapter } from './image-upload-view-adapter';
+import { ngMocks } from 'ng-mocks';
+import { ImageUploadComponent } from './image-upload.component';
+import { TestBed } from "@angular/core/testing";
+
+describe('ImageUploadViewAdapter', () => {
+  let imageUploadViewAdapter;
+
+  beforeEach( async () => {
+    await TestBed.configureTestingModule({
+      declarations: [],
+      imports: [],
+      providers: []
+    }).compileComponents();
+  });
+
+  beforeEach( () => {
+
+  });
+
+  it( 'creates', () => {
+    imageUploadViewAdapter = ngMocks.find( ImageUploadViewAdapter );
+    expect( imageUploadViewAdapter ).toBeTruthy();
+  })
+});

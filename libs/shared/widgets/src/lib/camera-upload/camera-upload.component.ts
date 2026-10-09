@@ -18,7 +18,7 @@ export interface DialogResult {
   selector: 'sailrc-camera-upload',
   templateUrl: './camera-upload.component.html',
   styleUrls: ['./camera-upload.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class CameraUploadComponent implements OnInit {
   public errors: WebcamInitError[] = [];
@@ -29,10 +29,7 @@ export class CameraUploadComponent implements OnInit {
   public webcamWidth: any;
   private trigger: Subject<void> = new Subject<void>();
 
-  constructor(
-    public dialogRef: MatDialogRef<CameraUploadComponent>,
-    @Inject( MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  constructor(public dialogRef: MatDialogRef<CameraUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   // region angular life cycle events
   ngOnInit(): void {
@@ -49,11 +46,11 @@ export class CameraUploadComponent implements OnInit {
 
   async onSave() {
     const imageUrl = this.webcamImage.imageAsDataUrl;
-    const imageData = <Blob> await this.convertBase64ToBlob( imageUrl );
-    this.dialogRef.close( { imageData, imageUrl } );
+    const imageData = <Blob>await this.convertBase64ToBlob(imageUrl);
+    this.dialogRef.close({ imageData, imageUrl });
   }
 
-  handleImage( webcamImage: WebcamImage ) {
+  handleImage(webcamImage: WebcamImage) {
     this.webcamImage = webcamImage;
   }
 
@@ -73,14 +70,16 @@ export class CameraUploadComponent implements OnInit {
   // endregion
 
   // region protected, private helper methods
-  private async convertBase64ToBlob( base64Data: string ) {
-    const base64Response = await fetch( base64Data );
+  private async convertBase64ToBlob(base64Data: string): Promise<Blob> {
+    const base64Response = await fetch(base64Data);
     return await base64Response.blob();
   }
 
   private determineWebcamSize() {
-    this.webcamHeight = window.innerHeight - window.innerHeight * 0.32;
-    this.webcamWidth = window.innerWidth - window.innerWidth * 0.20;
+    const windowHeight = this.getWindowInnerHeight();
+    const windowWidth = this.getWindowInnerWidth();
+    this.webcamHeight = windowHeight - windowHeight * 0.32;
+    this.webcamWidth = windowWidth - windowWidth * 0.2;
   }
 
   private determineVideoInputs() {
@@ -88,5 +87,11 @@ export class CameraUploadComponent implements OnInit {
       this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
     });
   }
+
+  // helper function to facilitate unit test
+  /* istanbul ignore next */
+  getWindowInnerHeight() { return window.innerHeight; }
+  /* istanbul ignore next */
+  getWindowInnerWidth() { return window.innerWidth; }
   // endregion
 }

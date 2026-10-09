@@ -2,10 +2,10 @@ import { BaseEntityInterface } from '@processpuzzle/shared/base';
 import { Entity, Key } from '@briebug/ngrx-auto-entity';
 
 export const initializeRegistration = {
-  fromServer: (data: any): Registration => ({...INITIAL_REGISTRATION_VALUE, ...data})
-}
+  fromServer: (data: any): Registration => ({ ...INITIAL_REGISTRATION_VALUE, ...data }),
+};
 
-@Entity({modelName: 'Registration', pluralName: 'registrations', uriName: 'races/:RaceId/registrations', transform: [initializeRegistration]})
+@Entity({ modelName: 'Registration', pluralName: 'registrations', uriName: 'races/:RaceId/registrations', transform: [initializeRegistration] })
 export class Registration implements BaseEntityInterface {
   @Key id: string;
   raceId: string;
@@ -26,5 +26,5 @@ export const INITIAL_REGISTRATION_VALUE: Registration = {
   boatType: undefined,
   sailNumber: '',
   sailorId: undefined,
-  skipper: ''
+  skipper: '',
 };

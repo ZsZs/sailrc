@@ -2,16 +2,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Race } from '@sailrc/race/domain';
 import { BaseListComponent } from '@processpuzzle/shared/base';
-import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/widgets';
+import { ActiveTabService, ComponentDestroyService } from '@processpuzzle/shared/base';
 import { RaceFeatureFacade } from '../race-feature.facade';
 
 @Component({
-  selector: 'sailrc-race-select',
+  selector: 'sailrc-race-selector',
   templateUrl: './race-selector.component.html',
-  styleUrls: ['./race-selector.component.css']
+  styleUrls: ['./race-selector.component.css'],
 })
-
-export class RaceSelectorComponent extends BaseListComponent<Race> implements OnInit{
+export class RaceSelectorComponent extends BaseListComponent<Race> implements OnInit {
   @Output() closeRaceSelect = new EventEmitter<void>();
   displayedColumns = ['title', 'date', 'country', 'place'];
 
@@ -22,17 +21,17 @@ export class RaceSelectorComponent extends BaseListComponent<Race> implements On
     private router: Router,
     private subscriptionService: ComponentDestroyService
   ) {
-    super( raceFeatureFacade, route, activeTabService, subscriptionService );
+    super(raceFeatureFacade, route, activeTabService, subscriptionService);
   }
 
-  private static determineExecutionTabUri( raceId: string ): string {
+  private static determineExecutionTabUri(raceId: string): string {
     return 'race/' + raceId + '/lap/unknown/list';
   }
 
   // region life cycle hooks
   ngOnInit() {
     super.ngOnInit();
-    this.activeTabService.tabIsInActive( this.tabName );
+    this.activeTabService.tabIsInActive(this.tabName);
   }
   // endregion
 
@@ -43,14 +42,14 @@ export class RaceSelectorComponent extends BaseListComponent<Race> implements On
   // endregion
 
   // region protected, private helper methods
-  protected detailsRoute( entityId: string ): string {
+  protected detailsRoute(entityId: string): string {
     this.onCloseRaceSelect();
-    return RaceSelectorComponent.determineExecutionTabUri( entityId );
+    return RaceSelectorComponent.determineExecutionTabUri(entityId);
   }
 
-  protected navigateToDetailsForm( raceId: string ) {
+  protected navigateToDetailsForm(raceId: string) {
     this.onCloseRaceSelect();
-    this.router.navigate( [RaceSelectorComponent.determineExecutionTabUri( raceId )], {relativeTo: this.route });
+    this.router.navigate([RaceSelectorComponent.determineExecutionTabUri(raceId)], { relativeTo: this.route });
   }
   // endregion
 }

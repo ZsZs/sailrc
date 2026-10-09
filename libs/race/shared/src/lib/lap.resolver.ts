@@ -5,47 +5,48 @@ import { filter, first, map, tap } from 'rxjs/operators';
 
 import { Lap, LapFacade } from '@sailrc/race/domain';
 
-@Injectable() export class LapResolver implements Resolve<Lap>{
+@Injectable()
+export class LapResolver implements Resolve<Lap> {
   private readonly parameterName: string;
 
-  constructor( private lapFacade: LapFacade ) {
+  constructor(private lapFacade: LapFacade) {
     this.parameterName = this.lapFacade.entityIdPathVariable;
   }
 
-  private static resolveParameter( route: ActivatedRouteSnapshot, parameterName: string ) {
+  private static resolveParameter(route: ActivatedRouteSnapshot, parameterName: string) {
     return route.params[parameterName];
   }
 
-  resolve( route: ActivatedRouteSnapshot ): Observable<Lap> | Promise<Lap> | Lap {
-    this.loadAllLaps( route );
-    const lapIndex = LapResolver.resolveParameter( route, this.parameterName );
+  resolve(route: ActivatedRouteSnapshot): Observable<Lap> | Promise<Lap> | Lap {
+    this.loadAllLaps(route);
+    const lapIndex = LapResolver.resolveParameter(route, this.parameterName);
     let entity$: Observable<Lap>;
-    if ( lapIndex === 'unknown' ) {
+    if (lapIndex === 'unknown') {
       entity$ = this.resolveUnknownEntity();
     } else {
-      entity$ = this.resolveEntity( lapIndex );
+      entity$ = this.resolveEntity(lapIndex);
     }
     return entity$;
   }
 
-// region protected, private helper methods
-  private loadAllLaps( route: ActivatedRouteSnapshot ) {
-    const raceId = LapResolver.resolveParameter( route, 'RaceId' );
-    this.lapFacade.loadAll( raceId );
+  // region protected, private helper methods
+  private loadAllLaps(route: ActivatedRouteSnapshot) {
+    const raceId = LapResolver.resolveParameter(route, 'RaceId');
+    this.lapFacade.loadAll(raceId);
   }
 
-  private resolveEntity( lapIndex: number ): Observable<Lap> {
+  private resolveEntity(lapIndex: number): Observable<Lap> {
     return this.lapFacade.all$.pipe(
-      map( laps => laps.filter( lap => lap.index == lapIndex )),
-      filter( laps => !!laps && laps.length > 0 ),
+      map((laps) => laps.filter((lap) => lap.index == lapIndex)),
+      filter((laps) => !!laps && laps.length > 0),
       first(),
-      map( laps => laps[0]),
-      tap( lap => this.lapFacade.select( lap ))
+      map((laps) => laps[0]),
+      tap((lap) => this.lapFacade.select(lap))
     );
   }
 
   private resolveUnknownEntity(): Observable<Lap> {
-    return this.resolveEntity( 1 );
+    return this.resolveEntity(1);
   }
   // endregion
 }

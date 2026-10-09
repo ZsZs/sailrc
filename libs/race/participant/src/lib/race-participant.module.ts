@@ -13,26 +13,9 @@ import { RegistrationSourceListComponent } from './registration-source-list/regi
 import { RegistrationSourceService } from './registration-source-list/registration-source.service';
 
 @NgModule({
-  declarations: [
-    RaceParticipantCaptureComponent,
-    RaceParticipantComponent,
-    RaceParticipantListComponent,
-    RaceParticipantTabsComponent,
-    RegistrationSourceListComponent
-  ],
-  imports: [
-    CommonModule,
-    RaceDomainModule.forFeature(),
-    RaceParticipantRoutingModule,
-    RaceSharedModule,
-    SharedMaterialModule
-  ],
-  providers: [
-    LapResolver,
-    RaceResolver,
-    RegistrationResolver,
-    RegistrationSourceService
-  ],
-  exports: []
+  declarations: [RaceParticipantCaptureComponent, RaceParticipantComponent, RaceParticipantListComponent, RaceParticipantTabsComponent, RegistrationSourceListComponent],
+  imports: [CommonModule, RaceDomainModule.forFeature(), RaceParticipantRoutingModule, RaceSharedModule, SharedMaterialModule],
+  providers: [LapResolver, RaceResolver, RegistrationResolver, RegistrationSourceService],
+  exports: [],
 })
 export class RaceParticipantModule {}

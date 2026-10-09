@@ -1,0 +1,14 @@
+::ng-deep.mat-dialog-container {
+  resize: both;
+  overflow: auto;
+  background: #fff;
+}
+
+[mat-dialog-header] {
+  margin: -25px -25px 0px -25px !important;
+  padding: 0px 0px;
+  background: transparent;
+  color: darkblue;
+  cursor: move;
+  text-align: center;
+}

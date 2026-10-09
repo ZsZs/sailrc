@@ -1,73 +1,77 @@
-<mat-toolbar fxLayout='row wrap' fxLayoutAlign='flex-start'>
-    <div fxLayoutAlign="center center">
-        <mat-form-field fxFlex="70%">
-            <input matInput type="text" (keyup)="doFilter( $event )" placeholder="Filter">
-        </mat-form-field>
-    </div>
+<mat-toolbar fxLayout="row wrap" fxLayoutAlign="flex-start">
+  <div fxLayoutAlign="center center">
+    <mat-form-field fxFlex="70%">
+      <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filter" />
+    </mat-form-field>
+  </div>
 
-    <div fxShow="true" fxHide.lt-md="true" fxFlex>
-        <button mat-button (click)="addEntity()"><mat-icon>add</mat-icon> New</button>
-        <button mat-button [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete</button>
-    </div>
+  <div fxShow="true" fxHide.lt-md="true" fxFlex>
+    <button mat-button (click)="addEntity()"><mat-icon>add</mat-icon> New</button>
+    <button mat-button [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete</button>
+  </div>
 
-    <div fxShow="true" fxHide.gt-sm="true" fxFlex>
-        <button mat-button [matMenuTriggerFor]="beforeMenu"><mat-icon>menu</mat-icon> Choose action</button>
-        <mat-menu #beforeMenu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="addEntity()"><mat-icon>add</mat-icon> New sailor</button>
-            <button mat-menu-item [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete sailor</button>
-        </mat-menu>
-    </div>
+  <div fxShow="true" fxHide.gt-sm="true" fxFlex>
+    <button mat-button [matMenuTriggerFor]="beforeMenu"><mat-icon>menu</mat-icon> Choose action</button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="addEntity()"><mat-icon>add</mat-icon> New sailor</button>
+      <button mat-menu-item [disabled]="selection.selected.length == 0" (click)="deleteEntities()"><mat-icon>delete</mat-icon> Delete sailor</button>
+    </mat-menu>
+  </div>
 </mat-toolbar>
 
 <div class="sailor-list-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" matSort>
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="($event ? selection.toggle(row) : null); onChangeSelection(row)" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"></mat-checkbox>
-            </td>
-        </ng-container>
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null; onChangeSelection(row)"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        ></mat-checkbox>
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="firstName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">First name:</span>
-                {{element.firstName }}
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">First name:</span>
+        {{ element.firstName }}
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="lastName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">Last name:</span>
-                {{element.lastName }}
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Last name:</span>
+        {{ element.lastName }}
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="yachtClub">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Yacht Club</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">Yacht club:</span>
-                {{element.yachtClub }}
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="yachtClub">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Yacht Club</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Yacht club:</span>
+        {{ element.yachtClub }}
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="boat">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Boat</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">Boat:</span>
-                {{element.boat }}
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="boat">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Boat</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Boat:</span>
+        {{ element.boat }}
+      </mat-cell>
+    </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick( row )" class="row-link"></mat-row>
-    </mat-table>
-    <mat-spinner *ngIf="( isLoading$ | async )" style="margin:0 auto;"></mat-spinner>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)" class="row-link"></mat-row>
+  </mat-table>
+  <mat-spinner *ngIf="isLoading$ | async" style="margin: 0 auto"></mat-spinner>
 </div>
-
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

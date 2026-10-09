@@ -1,0 +1,44 @@
+{
+  "name": "shared-authentication-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/authentication/feature/src",
+  "prefix": "sailrc",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/shared/authentication/feature/tsconfig.lib.json",
+        "project": "libs/shared/authentication/feature/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/shared/authentication/feature/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/authentication/feature/src/**/*.ts",
+          "libs/shared/authentication/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/shared/authentication/feature"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/authentication/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [
+    "type:feature",
+    "scope:shared"
+  ]
+}

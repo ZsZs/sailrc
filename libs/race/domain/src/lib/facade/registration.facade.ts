@@ -6,21 +6,21 @@ import { getRegistrationById, IRaceDomainState, RegistrationFacadeBase } from '.
 import { IEntityInfo } from '@briebug/ngrx-auto-entity';
 
 @Injectable({ providedIn: 'root' })
-export class RegistrationFacade extends RegistrationFacadeBase implements IBaseEntityFacade<Registration>{
+export class RegistrationFacade extends RegistrationFacadeBase implements IBaseEntityFacade<Registration> {
   readonly entityIdPathVariable: string;
   readonly raceIdPathVariable: string;
   readonly entityInfo: IEntityInfo;
   readonly initialEntityState: Registration;
 
-  constructor( protected store: Store<IRaceDomainState> ) {
-    super( Registration, store );
-    this.entityInfo = getEntityInfo( Registration );
+  constructor(protected store: Store<IRaceDomainState>) {
+    super(Registration, store);
+    this.entityInfo = getEntityInfo(Registration);
     this.entityIdPathVariable = this.entityInfo.modelName + 'Id';
     this.raceIdPathVariable = 'RaceId';
     this.initialEntityState = INITIAL_REGISTRATION_VALUE;
   }
 
-  getEntityById( id: string ): MemoizedSelector<object | Registration, Registration> {
-    return getRegistrationById( id );
+  getEntityById(id: string): MemoizedSelector<object | Registration, Registration> {
+    return getRegistrationById(id);
   }
 }

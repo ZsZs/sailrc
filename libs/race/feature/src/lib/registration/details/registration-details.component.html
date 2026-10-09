@@ -1,42 +1,42 @@
 <div class="basic-container">
-    <mat-card>
-        <form novalidate [ngrxFormState]="(formState$ | async)">
-            <mat-card-title>Registration</mat-card-title>
-            <mat-card-content fxLayout='column'>
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-                    <mat-form-field fxFlex>
-                        <mat-label>Boat</mat-label>
-                        <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.boatId" (selectionChange)='onBoatSelected($event.value)'>
-                            <mat-option *ngFor="let boat of boats$ | async" [value]="boat.id">{{boat.sailNumber}} {{boat.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button mat-icon-button matTooltip='Go to the boat...' (click)='onGoToBoat()'>
-                        <mat-icon>link</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip='Add new boat...' (click)='onAddBoat()'>
-                        <mat-icon>add_link</mat-icon>
-                    </button>
-                </div>
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left" >
-                    <mat-form-field fxFlex>
-                        <mat-label>Skipper</mat-label>
-                        <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.sailorId" (selectionChange)='onSailorSelected($event.value)'>
-                            <mat-option *ngFor="let sailor of sailors$ | async" [value]="sailor.id">{{sailor.firstName}} {{sailor.lastName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button mat-icon-button matTooltip='Go to the sailor...' (click)='onGoToSailor()'>
-                        <mat-icon>link</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip='Add new sailor...' (click)='onAddSailor()'>
-                        <mat-icon>add_link</mat-icon>
-                    </button>
-                </div>
-            </mat-card-content>
-            <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" >
-                <button *ngIf="( isLoading$ | async ) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
-                <button *ngIf="( isLoading$ | async ) === false" type="submit" mat-raised-button color="primary" [disabled]="!(formState$ | async).isValid" (click)="onSubmit()">Save</button>
-                <mat-spinner *ngIf="( isLoading$ | async )"></mat-spinner>
-            </mat-card-actions>
-        </form>
-    </mat-card>
+  <mat-card>
+    <form novalidate [ngrxFormState]="formState$ | async">
+      <mat-card-title>Registration</mat-card-title>
+      <mat-card-content fxLayout="column">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left">
+          <mat-form-field fxFlex>
+            <mat-label>Boat</mat-label>
+            <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.boatId" (selectionChange)="onBoatSelected($event.value)">
+              <mat-option *ngFor="let boat of boats$ | async" [value]="boat.id">{{ boat.sailNumber }} {{ boat.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Go to the boat..." (click)="onGoToBoat()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Add new boat..." (click)="onAddBoat()">
+            <mat-icon>add_link</mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="left">
+          <mat-form-field fxFlex>
+            <mat-label>Skipper</mat-label>
+            <mat-select placeholder="Boat" [ngrxFormControlState]="(formState$ | async).controls.sailorId" (selectionChange)="onSailorSelected($event.value)">
+              <mat-option *ngFor="let sailor of sailors$ | async" [value]="sailor.id">{{ sailor.firstName }} {{ sailor.lastName }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Go to the sailor..." (click)="onGoToSailor()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Add new sailor..." (click)="onAddSailor()">
+            <mat-icon>add_link</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+        <button *ngIf="(isLoading$ | async) === false" mat-raised-button color="secondary" (click)="onCancel()">Cancel</button>
+        <button *ngIf="(isLoading$ | async) === false" type="submit" mat-raised-button color="primary" [disabled]="!(formState$ | async).isValid" (click)="onSubmit()">Save</button>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </mat-card-actions>
+    </form>
+  </mat-card>
 </div>

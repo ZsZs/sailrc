@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "temporary-build-target": {
+      "factory": "./src/generators/temporary-build-target/generator",
+      "schema": "./src/generators/temporary-build-target/schema.json",
+      "description": "Solves the bug involved in nx migrate --run-migrations"
+    }
+  }
+}

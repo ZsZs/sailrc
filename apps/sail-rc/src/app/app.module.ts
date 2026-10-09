@@ -9,15 +9,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
 
 import { SharedWidgetsModule, SnackBarService } from '@processpuzzle/shared/widgets';
 import { CustomSerializer, RouteStateService, SharedUtilModule } from '@processpuzzle/shared/util';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,17 +30,13 @@ import { CommonDependenciesModule } from './common-dependencies.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 import { AppInitService } from './app-init.service';
+import {ENV, getEnv} from '../environments/environment.provider';
+import { environment } from "../environments/environment";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    HomeComponent,
-    SidenavListComponent
-  ],
+  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent, SidenavListComponent],
   imports: [
-    AngularFireModule.initializeApp( environment.firebaseConfig ),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AppRoutingModule,
     BreadcrumbModule,
@@ -58,7 +50,7 @@ import { AppInitService } from './app-init.service';
       serverLoggingUrl: environment.logger.serverLoggingUrl + '/api/logs',
       level: environment.logger.level,
       serverLogLevel: environment.logger.serverLogLevel,
-      disableConsoleLogging: environment.logger.disableConsoleLogging
+      disableConsoleLogging: environment.logger.disableConsoleLogging,
     }),
     MatCheckboxModule,
     MatProgressSpinnerModule,
@@ -66,19 +58,20 @@ import { AppInitService } from './app-init.service';
     SharedAuthenticationDomainModule.forRoot(),
     SharedAuthenticationFeatureModule,
     SharedUtilModule,
-    SharedWidgetsModule.forRoot( environment.googleCloudPlatform.apiKey ),
-    StoreModule.forRoot( { }, { metaReducers }),
+    SharedWidgetsModule.forFeature(environment.googleCloudPlatform.apiKey),
+    StoreModule.forRoot({}, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot( { stateKey: 'router', serializer: CustomSerializer } )
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router', serializer: CustomSerializer }),
   ],
   providers: [
-    { provide : APP_INITIALIZER, multi : true, deps : [AppInitService], useFactory : (startupClass : AppInitService) => () => startupClass.init() },
+    { provide: APP_INITIALIZER, multi: true, deps: [AppInitService], useFactory: (startupClass: AppInitService) => () => startupClass.init() },
+    { provide: ENV, useFactory: getEnv },
     { provide: SETTINGS, useValue: {} },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},
     NGXLogger,
     RouteStateService,
-    SnackBarService
+    SnackBarService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

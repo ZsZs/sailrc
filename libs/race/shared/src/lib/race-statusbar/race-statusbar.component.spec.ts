@@ -8,9 +8,8 @@ describe('RaceStatusbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RaceStatusbarComponent ]
-    })
-    .compileComponents();
+      declarations: [RaceStatusbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
